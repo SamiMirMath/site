@@ -6,9 +6,11 @@ La saisie est lue par equations.analyser (messages du § 4 et du § 13.5), puis 
 construite uniquement à partir des étapes (§ 5) : une carte par étape (R1, question 36 de suivi.md), « Étape k » avec un badge court
 (comme Exp-log et Factorisation ; noms du rappel de la page), dévoilées une à une par « Étape suivante » : les cartes de
 `second_degre.cartes` (la chaîne du corrigé coupée aux étapes, le pivot en membre de gauche), puis la carte « Solution » (S encadré,
-D29 ; la ligne ≈, E14 ; carte normale, § 13.3). Quand le chemin du cours n'utilise pas la formule, une seconde résolution « Par la
-formule » (E12), découpée de même, est proposée par le sélecteur de méthode de la page (`sortie_ok_variantes`, « Méthodes du cours »
-par défaut). Une équation non résolue (bicarrée, hors du cours, forme non traitée par l'outil, bornes, garde-fou
+D29 ; la ligne ≈, E14 ; carte normale, § 13.3). Quand l'équation se ramène à un trinôme du 2e degré et que le chemin du cours
+n'utilise pas la formule (R3, questions 25 et 37 de suivi.md : « les deux boutons, ainsi ils peuvent comparer » ;
+`second_degre.resoudre_equation` en décide), une seconde résolution « Par la formule » (ramener et développer, puis Δ et les valeurs
+de x), découpée de même, est proposée par le sélecteur de méthode de la page (`sortie_ok_variantes`, « Méthodes du cours » par
+défaut). Une équation non résolue (bicarrée, hors du cours, forme non traitée par l'outil, bornes, garde-fou
 en échec) donne une erreur au message du § 4 : jamais une étape fausse ni une valeur donnée comme solution. L'énoncé est écrit par
 `second_degre.ecrire_enonce` (ses produits côte à côte, comme le corrigé : question 26 de suivi.md).
 

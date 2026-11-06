@@ -1553,6 +1553,148 @@ Aucune hausse de plus de 50 % au-dessus de 0,1 s ; tout sous 0,1 s par équation
   2(x + 1)(x + 3) = 5 (énoncé juxtaposé : « 2(x + 1)(x + 3) = 5 » au lieu de « 2(x + 1) · (x + 3) = 5 »).
 - xfail stricts : aucun ajouté, aucun retiré.
 
+## R3 — les deux boutons pour comparer
+
+Correction de relecture (questions 37 et 25 de suivi.md, tranchées par l'enseignant le 06.11.2026 : « les deux boutons, ainsi ils
+peuvent comparer »). Remplace la règle E12 de decisions.md pour ces cas (decisions.md non modifié). Seul le nouvel outil change
+(`moteur/second_degre.py`, `equations-2e-degre/`).
+
+### Plan
+
+1. **Règle** (`second_degre.resoudre_equation`, chemin du cours) : la variante « Par la formule » est proposée si et seulement si la
+   résolution du cours est résolue, l'équation ramenée P = 0 (P = gauche − droite) est un **trinôme de degré 2** (degré 2, pas un
+   monôme ax² : 3x² = 0 ⇔ x = 0 n'a rien à comparer, option qui affiche le moins) et **aucune étape du cours n'utilise la formule**
+   (sinon un seul bouton : les deux résolutions seraient presque identiques). Vaut pour toutes les formes : développées, structurées
+   (question 25 : 2.9 k, 2.12 e, 2.12 h…), celles de R2, et 3x² − 12x = 0 (c = 0). Aucune variante en degré 1 ou ≥ 3, ni pour un
+   statut non résolu (message).
+2. **Rédaction de la variante** (la plus simple et juste) : `ORDRE_PAR_LA_FORMULE = ("FORMULE",)` ; la forme structurée n'est pas
+   écrite par `_rediger_structure` : on ramène / développe jusqu'à ax² + bx + c = 0 (`ramener(…, structure=False)`, E1, E2 et R2 :
+   les mêmes lignes que pour une forme développée), puis Δ (E10, valeur encadrée D29), puis les valeurs de x (E10, E11, E14) ; plus
+   de mise en évidence de la puissance de x (l'ancienne E12 : inutile, la variante n'existant plus qu'en degré 2 ; c = 0 : la formule
+   directe, Δ = b² sans « − 0 », comme b = 0 sans « 0 − 16 »). a < 0 : inchangé (pas de −1 en évidence, x₁ avec −√Δ, S croissant,
+   § 13.4). `ME_PUISSANCE` reste une méthode d'`appliquer` / `s_applique` (futur quiz), hors de toute résolution affichée. Appelée
+   seule, la variante ne rédige qu'un trinôme de degré 2 (sinon « forme_non_traitee », jamais affiché).
+3. **Garde-fou** : la variante est calculée par la résolution du cours elle-même ; elle n'est proposée que si elle est résolue et que
+   ses solutions sont **exactement** celles du cours ; des solutions différentes donnent « ne_conclut_pas » pour toute l'équation
+   (on ne sait pas laquelle est fausse) ; une variante non résolue : pas de variante (le cours seul). Chaque ligne de la variante
+   est déjà contrôlée (lignes ramenées et développées relues, Δ, x₁, x₂ recalculés, garde-fou de `chemin`).
+4. **Adaptateur** : inchangé (il suit `variantes`) ; docstring. Cartes (R1) : les mêmes pour la variante.
+5. **Tests** : nouvelle classe `TestR3` (règle sur tout le corpus : `RESOLUES`, `NON_RESOLUES`, `FORMES_NON_ECRITES`, polynômes
+   générés, `cas.entrees_equations` par l'adaptateur ; variante présente ⇔ trinôme de degré 2 (degré lu par SymPy, indépendant de la
+   brique) et cours sans formule ; mêmes solutions, `oracle.racines` ; garde-fou forcé ; textes de 3x² − 12x = 0 et 2.12 e) ; tests
+   d'E12 et de P4a adaptés (liste avant / après) ; invariants du § 5 et des cartes sur les nouvelles variantes (par `TOUTES`).
+   Instantanés et références de pages régénérés, recoupés entrée par entrée (chemin du cours inchangé). Test de pages : les deux
+   boutons pour 3x² − 12x = 0, un seul pour 2.12 c.
+6. Captures à 390 px (2.12 e, 3x² − 12x = 0, « Par la formule »), temps natif, suite complète, dump, commit.
+
+### Réalisé
+
+- **`moteur/second_degre.py`** : `ORDRE_PAR_LA_FORMULE = ("FORMULE",)` ; `resoudre_equation` = `_resoudre` (la résolution, sans
+  variante) puis, sur le chemin du cours, `_variante` (règle et garde-fou du plan, points 1 et 3) ; `_trinome(P)` (degré 2, pas un
+  monôme). En mode « formule », `_resoudre` n'écrit pas la forme structurée : il la ramène et la développe (`ramener(…,
+  structure=False)`, les lignes de R2), puis `chemin(P, ("FORMULE",))` et `_rediger(…, cours=False)` (formule choisie d'emblée, sans
+  phrase de choix) ; tout autre P : « forme_non_traitee » (jamais affiché : la variante n'est proposée que pour un trinôme). Aucune
+  ligne écrite nouvelle : c = 0 donne déjà « Δ = (−12)² − 4 · 3 · 0 = ⟦144⟧ » (`_delta_tex` omet le calcul quand 4ac = 0, comme quand
+  b = 0). `ME_PUISSANCE` reste pour `appliquer` / `s_applique` (docstrings mises à jour).
+- **`equations-2e-degre/resoudre_eq.py`** : docstring seulement (l'adaptateur suit `variantes`, et n'offre jamais une variante qui ne
+  conclut pas, comme avant). Page inchangée.
+- **Choix notés** (question 42 de suivi.md) : pas de variante pour un monôme ax² = 0 (3x² = 0 ⇔ x = 0 ; (x + 1)² + 3 = 3, lui, est
+  un trinôme et l'a) ; solutions différentes entre la variante et le cours → « ne_conclut_pas » pour toute l'équation (aucun cas du
+  corpus ni des polynômes générés) ; la variante d'une forme structurée reprend le développement de R2 (2.12 e : double
+  distribution des deux membres, puis E1, qui ramène du côté où x² reste positif : 2x² − x − 1 = 0 ; le cours, lui, ramène à
+  gauche).
+- **Tests** :
+  - nouvelle classe `test_redaction_second_degre.TestR3` (6 tests) : `test_regle_sur_tout_le_corpus` (les 225 entrées de
+    `cas.entrees_equations` par l'adaptateur : deux boutons ⇔ résolue, trinôme de degré 2 lu par SymPy depuis la saisie et aucune
+    carte « Formule », « Discriminant » ou « Valeurs de … » dans le cours ; libellés, défaut « cours », même S ; puis les 196
+    polynômes générés), `test_memes_solutions_et_oracle` (188 variantes du corpus et des polynômes générés : mêmes solutions et même S
+    que le cours, `oracle.racines`, substitution exacte), `test_la_variante_ramene_puis_la_formule` (étapes « ramener », puis la formule
+    seule, aucune phrase de choix ; (a, b, c) proportionnels aux coefficients de P, Δ = b² − 4ac encadré, x₁, x₂ ou x recalculés),
+    `test_un_seul_bouton`, `test_formes_structurees_2_12_e` (textes de la variante, 2.9 k, 2.9 l, 2.12 h), `test_garde_fou_de_la_variante`
+    (solutions faussées → « ne_conclut_pas » ; variante qui ne conclut pas → le cours seul, inchangé).
+  - adaptés (avant → après) : `TestRedaction.test_variante_par_la_formule` (3x² − 12x : [] → ["formule"], textes de la formule
+    directe) ; `TestStructures.test_2_9_k_car` (variantes [] → ["formule"]) ; `TestDegres.test_2_12_c_comme_le_corrige`
+    (["formule"] → [], degré 3) ; `TestInvariants.test_carte_d_une_etape_sans_rangee` (la carte « Δ = 0, puis ⇔ » vient maintenant
+    du chemin du cours, (x + 1)(2x² + 2x + 1/2) = 0, au lieu de la variante de 2x³ − 4x² + 2x = 0, qui n'existe plus) ;
+    `TestStructures.test_aucune_variante_ni_developpement` **renommé** `test_aucun_developpement` (le cours ne développe toujours
+    rien ; la variante suit maintenant la règle de R3 et développe ; suivi.md, « Tests renommés ») ;
+    `test_second_degre.TestOrdreDuCours.test_variante_par_la_formule` (c = 0 : la formule directe, Δ = 144 ; le calcul de
+    `ME_PUISSANCE` gardé, avec l'ordre écrit en clair). Les invariants du § 5 et des cartes, l'oracle, D29, R12 et le vocabulaire
+    passent sur les nouvelles variantes sans changement (`TOUTES` les prend).
+  - test de pages : `test_comportement.test_equations_2e_degre_deux_boutons_pour_comparer` (3x² − 12x = 0 et 2.12 e : les deux
+    boutons, « Méthodes du cours » pressé, badges de la variante ; 2.12 c et Javet 2.17 c : pas de sélecteur).
+    `test_largeurs.test_equations_2e_degre_chaque_exemple` (il clique chaque variante) couvre la nouvelle variante de 2.12 e : vert.
+
+**Avant / après (instantanés ; `S/tmp/R3/comparer.py`, entrée par entrée)** : 225 entrées (aucune ajoutée ni retirée). **Chemin du
+cours identique pour les 225** (rédaction : tout sauf le champ `variantes` ; page : énoncé, cartes du cours, erreur ; vérifié par
+assertion). Variante :
+- **gagnée : 37** — formes structurées (33) : `(1/4)(x+1)^2=1`, `(2x-1/3)(x+1)=0`, `(t+10)^2=0`, `(x+1)^2+3=19`, `(x+1)^2+3=3`,
+  `(x+1)^2-16=0`, `(x+1)^2=(2x-3)^2`, `(x+1)^2=1`, `(x+1)^2=16` (2.9 l), `(x+1)^2=4(x+1)^2`, `(x+1)^2=5`, `(x+1)^2=x+1`,
+  `(x+2)^2=3(x+2)`, `(x-1)(2-x)=(x-1)(x+3)` (2.12 e), `(x-1)(x+2)=-(x-1)(x+3)`, `(x-1)(x+2)=2x-2`, `(x-1)(x+2)=3(x-1)(x+2)`,
+  `(x-1)(x+2)=x-1`, `-(x+1)^2+4=0`, `-(x-1)(x+2)=0`, `0,25(x+1)^2=1`, `0,5(x-1)(x+2)=0`, `0=(x-3)(2x+1)`, `16-(3x+2)^2=0` (2.12 h),
+  `2x(x-3)=0`, `3(x+1)=(x+1)(x-2)`, `3(x+1)^2=0`, `3(x^2-4)=0`, `4(x+1)^2=9(x-2)^2`, `4(x-2)^2=1` (2.9 k), `4(x-2)^2=3`,
+  `x(x+1)=0`, `x(x-3)=2(x-3)` ; formes développées avec c = 0 (4 ; l'ancienne E12 mettait x en évidence et n'avait plus de
+  formule) : `3x^2-12x=0`, `-x^2+5x=0`, `-x^2/2+x=0`, `x^3-(x-1)^3=1` (R2, 3x² − 3x = 0 une fois développé).
+- **perdue : 8** (degré ≥ 3, l'ancienne ME de xʲ) : `-x^3+x=0`, `2x^3-4x^2+2x=0`, `2x^4+x^3-28x^2=0`, `x(x+1)^2=4x`, `x^3-5x=0`,
+  `x^3-5x^2+6x=0`, `x^3-x=0` (2.12 c), `x^3=4x`.
+- **gardée, identique : 73** (degré 2, c ≠ 0 : la même formule qu'avant) ; **sans variante avant et après : 107** (entrées identiques
+  à l'octet).
+- Références de pages (`capturer_references.py equations-2e-degre`, 57 entrées) : **5 changées**, seulement par les boutons et la
+  variante (champs `au_depart`, `cartes`, `progression_finale` identiques) : `(x+1)^2=16`, `(x-1)(2-x)=(x-1)(x+3)`,
+  `16-(3x+2)^2=0`, `4(x-2)^2=1` (gagnent le sélecteur ; la variante « cours » = les cartes d'avant), `x^3-x=0` (le perd).
+
+**Texte rendu** (sortie de la page, carte par carte, « lien | expr | étiquette ») :
+
+    3x² − 12x = 0, avant : une seule résolution (ME, produit nul) ; après, « Par la formule » :
+      Étape 1 Discriminant    | \Delta = b^{2} - 4ac = (-12)^{2} - 4 \cdot 3 \cdot 0 = \fbox{$144$}
+      Étape 2 Valeurs de x    | \Delta > 0 \text{ : deux solutions.} \quad \sqrt{\Delta} = 12
+                              | x_{1} = \frac{-b - \sqrt{\Delta}}{2a} = \frac{12 - 12}{6} = 0
+                              | x_{2} = \frac{-b + \sqrt{\Delta}}{2a} = \frac{12 + 12}{6} = 4
+      Solution                S = \{0\,;\,4\}
+    2.12 e (x − 1)(2 − x) = (x − 1)(x + 3), avant : une seule résolution ; après, « Par la formule » :
+      Étape 1 Développer      (x - 1)(2 - x) = (x - 1)(x + 3) \iff | 2x - x^{2} - 2 + x = x^{2} + 3x - x - 3 | double distribution
+                              \iff | -x^{2} + 3x - 2 = x^{2} + 2x - 3
+      Étape 2 Ramener à 0     -x^{2} + 3x - 2 = x^{2} + 2x - 3 \iff | 2x^{2} - x - 1 = 0
+      Étape 3 Discriminant    | \Delta = b^{2} - 4ac = (-1)^{2} - 4 \cdot 2 \cdot (-1) = 1 + 8 = \fbox{$9$}
+      Étape 4 Valeurs de x    | \Delta > 0 : deux solutions. \sqrt{\Delta} = 3 / x_{1} = \frac{1 - 3}{4} = -\frac{1}{2} /
+                              x_{2} = \frac{1 + 3}{4} = 1
+      Solution                S = \{-\frac{1}{2}\,;\,1\}
+    2.12 h 16 − (3x + 2)² = 0, « Par la formule » (a < 0 : pas de −1 en évidence, x₁ avec −√Δ, S croissant) :
+      Développer (Id. rem. (A + B)² avec A = 3x, B = 2 ; ⇔ 16 − 9x² − 12x − 4 = 0 ; ⇔ −9x² − 12x + 12 = 0), Discriminant
+      (144 + 432 = ⟦576⟧), Valeurs de x (√Δ = 24, x₁ = (12 − 24)/(−18) = 2/3, x₂ = (12 + 24)/(−18) = −2), S = {−2 ; 2/3}.
+    2.12 c x³ − x = 0 : avant, « Par la formule » (ME de x, puis la formule sur x² − 1) ; après, une seule résolution (le cours).
+
+### Captures à 390 px (`S/captures/R3/`, clair ; `S/tmp/R3/captures_r3.py`)
+
+`2.12-e-par-la-formule-tout-390-clair.png` (« Étape 5 / 5 »), `3x2-moins-12x-par-la-formule-tout-390-clair.png` (« Étape 3 / 3 ») :
+« Par la formule » pressé, « Tout afficher » ; aucun défilement horizontal à 320, 360 et 390 px (seuls les éléments MathML cachés et
+les SVG de KaTeX, rognés, sortent du cadre, comme en R1 et R2) ; dans chaque carte, les ⇔ ont le même bord droit. Regardées : la ligne
+de Δ de 2.12 e passe à la ligne après « (−1) = » à 390 px (rien ne déborde) ; Δ = ⟦144⟧ et S encadrés.
+
+### Temps (`S/tmp/R3/temps_r3.py`, même mesure que P5, R1 et R2, python3 natif 3.14.4, 3e de trois tours)
+
+`resoudre_eq.resoudre_json` sur le corpus complet de l'outil (225 entrées) **475,2 ms** (R2 : 369,7 ms, + 29 %), la plus longue
+**7,1 ms** (x³ − (x − 1)³ = 1 ; R2 : 5,2 ms) ; § 8 et § 6 (56) 127,8 ms (R2 : 106,2 ms) ; `resoudre_equation` seule (avec la
+variante calculée pour son garde-fou) 88,5 ms (R2 : 69,0 ms, + 28 %) ; `apercu_json` 41,9 ms ; pire cas des bornes 88 ms (R2 : 91 ms).
+Hausse due au garde-fou (la variante est rédigée une fois par `resoudre_equation` pour comparer ses solutions, une fois par
+l'adaptateur pour l'afficher) et aux 37 variantes gagnées ; aucune hausse de plus de 50 % ; tout sous 0,1 s par équation.
+
+### Suite d'avant commit et dump
+
+- `PROCESSUS_PAGES=4 python3 tests/lancer.py complet --rapport S/rapports/R3` : **code 0** (console `S/rapports/R3-console.log`).
+  Python 1 684 collectés, 1 683 passés + 1 xfail (celui d'avant le chantier), 132 509 sous-tests, 97 s ; pages 157 passés, 2 529
+  sous-tests, 336 s. Aucun échec instable.
+- `comparer_listes.py S/rapports/R2 S/rapports/R3` : 7 tests Python nouveaux (`TestR3`, 6 ; `test_aucun_developpement`), 1 disparu
+  (`test_aucune_variante_ni_developpement`, renommé, suivi.md « Tests renommés ») ; 1 de pages
+  (`test_equations_2e_degre_deux_boutons_pour_comparer`). Sous-tests : **aucune baisse** ; hausses : variantes du corpus 82 → 111
+  (invariants 475 → 504, oracle 279 → 308, vouvoiement 8 258 → 8 750, `test_sorties_conformes` 277 → 306,
+  `test_litteraux_des_moteurs` 9 884 → 9 890, `test_equations_2e_degre_r2` 8 → 9 : x³ − (x − 1)³ = 1 a maintenant sa variante).
+- **Dump** : `dump_sorties.py S/dumps/R3 --processus 6` (19 fichiers, 4 598 sorties, 4 s) ; `diff -r --exclude=temps S/dumps/depart
+  S/dumps/R3` : seulement `Only in …/R3/apercu: equations-2e-degre.txt`, `Only in …/R3/resoudre: equations-2e-degre.txt` et les deux
+  lignes d'`index.txt` (225 entrées chacun) ; **aucune autre différence** (outils existants identiques à l'octet). Par rapport à R2 :
+  seul `resoudre/equations-2e-degre.txt` change (les 45 entrées qui gagnent ou perdent la variante) ; l'aperçu est identique.
+- xfail stricts : aucun ajouté, aucun retiré.
+
 ## Contrôles du chef d'orchestre
 
 - P0 `0fd0060` : verifier ACCEPTÉ (Python 1 494 / 106 768 sous-tests, pages 145 / 2 421, identiques à la nouvelle référence) ; rapide --depuis HEAD~1 : 23 passés, 245 sous-tests, 3 s (fumée + docs). Échec instable de `test_comportement::test_soc04_parametre_f` (ensemble-definition, `#cartes` absent : page pas encore chargée) au 1er lancement de référence : accepté par le chef comme instabilité de chargement (relancé seul vert, deux suites complètes vertes ensuite, aucune sortie en cause, Python vert) ; question 8 de suivi.md. Branche poussée.
@@ -1565,6 +1707,7 @@ Aucune hausse de plus de 50 % au-dessus de 0,1 s ; tout sous 0,1 s par équation
 - P5 `f65131b` : verifier ACCEPTÉ (Python 1 667 collectés, 1 666 passés + 1 xfail, 128 686 sous-tests ; pages 154 / 2 520 ; 3 tests provisoires de test_instantanes_second_degre retirés, hors référence, justifiés) ; rapide --depuis HEAD~1 : 1666 passed, 1 xfailed, 128686 subtests passed in 112.83s (0:01:52) ; 154 passed, 1301 subtests passed in 328.82s (0:05:28) (code=0 mur=445s) ; dump : seuls les fichiers du nouvel outil s'ajoutent. Adaptation de test_acc03 (outil sans filière exclu des cartes) acceptée par le chef : couverture des outils existants inchangée, imposée par l'option A. Capture 2.11 h à 390 px regardée. Branche poussée.
 - Fin, sur `f65131b` : `complet --rapport …/rapports/FIN` code 0 (Python 1 666 passés + 1 xfail, 128 686 sous-tests, 113 s ; pages 154 passés, 2 520 sous-tests, 332 s ; mur 7 min 28) ; verifier ACCEPTÉ ; `comparer_listes tests/reference FIN` : seulement des ajouts (173 tests Python, 9 de pages), des hausses de sous-tests et la baisse justifiée de `test_exp_log::…::test_aucun_texte_du_fichier_ne_tutoie` (960 → 955) ; `comparer_listes P5 FIN` : identique. Même suite avec `MEMO=0` (`…/rapports/FIN-memo0`) : code 0, verifier ACCEPTÉ, listes identiques à FIN nom par nom (Python 140 s, pages 331 s, mur 7 min 54). Dump FIN identique à P5 ; par rapport au départ, seuls `apercu/equations-2e-degre.txt`, `resoudre/equations-2e-degre.txt` et leurs deux lignes d'`index.txt` s'ajoutent.
 - R1 `ee52a47` : verifier ACCEPTÉ (Python 1 670 collectés, 1 669 passés + 1 xfail, 129 187 sous-tests ; pages 155 / 2 520) ; rapide --depuis HEAD~1 : 410 passed, 61727 subtests passed in 29.25s ; 155 passed, 1301 subtests passed in 332.36s (0:05:32) (code=0 mur=363s) ; dump : seul le nouvel outil diffère du départ. Capture 2.11 h « tout afficher » regardée par le chef : 5 cartes, rien ne déborde. Branche poussée.
+- R2 `88f44ee` : verifier ACCEPTÉ (Python 1 677 passés + 1 xfail, 130 986 sous-tests ; pages 156 / 2 528 ; 2 baisses justifiées, 1 renommage justifié) ; rapide --depuis HEAD~1 : 725 passed, 75315 subtests passed in 56.00s ; 156 passed, 1309 subtests passed in 331.07s (0:05:31) (code=0 mur=388s) ; dump : seul le nouvel outil diffère du départ. Branche poussée.
 
 ## Temps
 

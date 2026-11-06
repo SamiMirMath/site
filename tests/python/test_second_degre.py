@@ -518,11 +518,16 @@ class TestOrdreDuCours(unittest.TestCase):
         self.assertEqual(r["etapes"][1]["resultat"]["delta"], -16)
 
     def test_variante_par_la_formule(self):
-        """E12 : seulement xʲ en évidence, puis la formule ; Δ = 0 avec des coefficients entiers."""
+        """R3 (questions 25 et 37 du chantier) : la formule directement sur le trinôme, Δ = 0 avec des coefficients entiers, c = 0
+        compris (3x² − 12x : Δ = 144, plus de mise en évidence de x) ; ME_PUISSANCE (l'ancienne E12, gardée pour `appliquer`) : seulement
+        xʲ en évidence, puis la formule."""
         r = sd.chemin(Polynome([9, -12, 4]), sd.ORDRE_PAR_LA_FORMULE)
         self.assertEqual([e["methode"] for e in r["etapes"]], ["FORMULE"])
         self.assertEqual(r["etapes"][0]["resultat"]["delta"], 0)
-        r = sd.chemin(Polynome([0, 6, -2, 4]), sd.ORDRE_PAR_LA_FORMULE)
+        r = sd.chemin(Polynome([0, -12, 3]), sd.ORDRE_PAR_LA_FORMULE)
+        self.assertEqual([e["methode"] for e in r["etapes"]], ["FORMULE"])
+        self.assertEqual((r["etapes"][0]["resultat"]["delta"], r["solutions"]), (144, [Nombre(0), Nombre(4)]))
+        r = sd.chemin(Polynome([0, 6, -2, 4]), ("ME_PUISSANCE", "FORMULE"))
         self.assertEqual([e["methode"] for e in r["etapes"]], ["ME", "FORMULE"])
         self.assertEqual(r["etapes"][0]["resultat"]["k"], 1)
 

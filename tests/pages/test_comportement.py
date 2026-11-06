@@ -111,6 +111,26 @@ class TestComportement(unittest.TestCase):
         self.assertEqual(self.titres_et_badges(page), ["Ramener à 0", "Discriminant", "Valeurs de x", "Solution"])
         page.evaluer("document.querySelector('#variantes button[data-variante=\"cours\"]').click()")
 
+    def test_equations_2e_degre_deux_boutons_pour_comparer(self):
+        """R3 (questions 25 et 37 du chantier equations-2e-degre) : 3x² − 12x = 0 (c = 0) et 2.12 e (forme structurée) ont les deux
+        boutons « Méthodes du cours » (pressé) et « Par la formule » ; la formule directe (Discriminant, Valeurs de x), ou développer
+        d'abord ; 2.12 c (degré 3) et Javet 2.17 c (la formule est sur le chemin du cours) n'ont qu'une résolution."""
+        page = self.ouvrir("equations-2e-degre")
+        boutons = "[...document.querySelectorAll('#variantes button')].map(b => [b.textContent, b.getAttribute('aria-pressed')])"
+        visible = "!!document.querySelector('#variantes') && !document.querySelector('#variantes').hidden"
+        for entree, formule in (("3x^2-12x=0", ["Discriminant", "Valeurs de x", "Solution"]),
+                                ("(x-1)(2-x)=(x-1)(x+3)", ["Développer", "Ramener à 0", "Discriminant", "Valeurs de x", "Solution"])):
+            self.calculer(page, entree)
+            self.assertTrue(page.evaluer(visible), entree)
+            self.assertEqual(page.evaluer(boutons), [["Méthodes du cours", "true"], ["Par la formule", "false"]], entree)
+            page.evaluer("document.querySelector('#variantes button[data-variante=\"formule\"]').click()")
+            page.evaluer("document.querySelector('#tout').click()")
+            self.assertEqual(self.titres_et_badges(page), formule, entree)
+            page.evaluer("document.querySelector('#variantes button[data-variante=\"cours\"]').click()")
+        for entree in ("x^3-x=0", "2x^2-4x-4=0"):
+            self.calculer(page, entree)
+            self.assertFalse(page.evaluer(visible), entree)
+
     def test_t33_el_exercice_tire_en_python(self):
         """Exponentielles et logarithmes : « Nouvelle équation » tire un exercice en Python (énoncé « Résoudre : … ») de chacun des niveaux
         du pool, et « Afficher le corrigé » donne la carte finale « Solution » (ou une erreur de lecture : jamais)."""

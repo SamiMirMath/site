@@ -156,7 +156,193 @@
   ],
   "enonce_tex": "\\frac{1}{4}(x + 1)^{2} = 1",
   "erreur": null,
-  "ok": true
+  "ok": true,
+  "variante_defaut": "cours",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Ramener à 0",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\frac{1}{4}(x + 1)^{2} - 1 = 0",
+          "gauche": "\\frac{1}{4}(x + 1)^{2} = 1",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Identité remarquable",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "texte": "Id. rem. \\(A^{2} - B^{2}\\) avec \\(\\fbox{$A = \\frac{1}{2}(x + 1),\\ B = 1$}\\) (car \\(A^{2} = \\frac{1}{4}(x + 1)^{2}\\))."
+         },
+         {
+          "expr": "\\left(\\frac{1}{2}(x + 1) + 1\\right)\\left(\\frac{1}{2}(x + 1) - 1\\right) = 0",
+          "gauche": "\\frac{1}{4}(x + 1)^{2} - 1 = 0",
+          "lien": "\\iff"
+         },
+         {
+          "expr": "\\left(\\frac{1}{2}x + \\frac{1}{2} + 1\\right)\\left(\\frac{1}{2}x + \\frac{1}{2} - 1\\right) = 0",
+          "lien": "\\iff"
+         },
+         {
+          "expr": "\\left(\\frac{1}{2}x + \\frac{3}{2}\\right)\\left(\\frac{1}{2}x - \\frac{1}{2}\\right) = 0",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Produit nul",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "{\\frac{1}{2}x + \\frac{3}{2} = 0} \\text{ ou } \\allowbreak {\\frac{1}{2}x - \\frac{1}{2} = 0}",
+          "gauche": "\\left(\\frac{1}{2}x + \\frac{3}{2}\\right)\\left(\\frac{1}{2}x - \\frac{1}{2}\\right) = 0",
+          "lien": "\\iff",
+          "prop": "produit nul"
+         },
+         {
+          "expr": "{\\frac{1}{2}x = -\\frac{3}{2}} \\text{ ou } \\allowbreak {\\frac{1}{2}x = \\frac{1}{2}}",
+          "lien": "\\iff"
+         },
+         {
+          "expr": "{x = -3} \\text{ ou } \\allowbreak {x = 1}",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{-3\\,;\\,1\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "cours",
+    "libelle": "Méthodes du cours"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Développer",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\frac{1}{4}(x^{2} + 2x + 1) = 1",
+          "gauche": "\\frac{1}{4}(x + 1)^{2} = 1",
+          "lien": "\\iff",
+          "prop": "Id. rem. \\((A + B)^{2}\\) avec \\(A = x,\\ B = 1\\)"
+         },
+         {
+          "expr": "\\frac{1}{4}x^{2} + \\frac{1}{2}x + \\frac{1}{4} = 1",
+          "lien": "\\iff",
+          "prop": "distribution"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Ramener à 0",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\frac{1}{4}x^{2} + \\frac{1}{2}x - \\frac{3}{4} = 0",
+          "gauche": "\\frac{1}{4}x^{2} + \\frac{1}{2}x + \\frac{1}{4} = 1",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Discriminant",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta = b^{2} - 4ac = \\left(\\frac{1}{2}\\right)^{2} - 4 \\cdot \\frac{1}{4} \\cdot \\left(-\\frac{3}{4}\\right) = \\frac{1}{4} + \\frac{3}{4} = \\fbox{$1$}",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "badge": "Valeurs de x",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 1",
+          "lien": ""
+         },
+         {
+          "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-\\frac{1}{2} - 1}{\\frac{1}{2}} = -3",
+          "lien": ""
+         },
+         {
+          "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-\\frac{1}{2} + 1}{\\frac{1}{2}} = 1",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 4"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{-3\\,;\\,1\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "formule",
+    "libelle": "Par la formule"
+   }
+  ]
  },
  "(2x-1)^2-4x(x-1)=1": {
   "cartes": [
@@ -245,7 +431,130 @@
   ],
   "enonce_tex": "\\left(2x - \\frac{1}{3}\\right)(x + 1) = 0",
   "erreur": null,
-  "ok": true
+  "ok": true,
+  "variante_defaut": "cours",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Produit nul",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "{2x - \\frac{1}{3} = 0} \\text{ ou } \\allowbreak {x + 1 = 0}",
+          "gauche": "\\left(2x - \\frac{1}{3}\\right)(x + 1) = 0",
+          "lien": "\\iff",
+          "prop": "produit nul"
+         },
+         {
+          "expr": "{2x = \\frac{1}{3}} \\text{ ou } \\allowbreak {x = -1}",
+          "lien": "\\iff"
+         },
+         {
+          "expr": "{x = \\frac{1}{6}} \\text{ ou } \\allowbreak {x = -1}",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{-1\\,;\\,\\frac{1}{6}\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "cours",
+    "libelle": "Méthodes du cours"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Développer",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "2x^{2} + 2x - \\frac{1}{3}x - \\frac{1}{3} = 0",
+          "gauche": "\\left(2x - \\frac{1}{3}\\right)(x + 1) = 0",
+          "lien": "\\iff",
+          "prop": "double distribution"
+         },
+         {
+          "expr": "2x^{2} + \\frac{5}{3}x - \\frac{1}{3} = 0",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Discriminant",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta = b^{2} - 4ac = \\left(\\frac{5}{3}\\right)^{2} - 4 \\cdot 2 \\cdot \\left(-\\frac{1}{3}\\right) = \\frac{25}{9} + \\frac{8}{3} = \\fbox{$\\frac{49}{9}$}",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Valeurs de x",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = \\frac{7}{3}",
+          "lien": ""
+         },
+         {
+          "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-\\frac{5}{3} - \\frac{7}{3}}{4} = -1",
+          "lien": ""
+         },
+         {
+          "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-\\frac{5}{3} + \\frac{7}{3}}{4} = \\frac{1}{6}",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{-1\\,;\\,\\frac{1}{6}\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "formule",
+    "libelle": "Par la formule"
+   }
+  ]
  },
  "(3-x)^2=1+x": {
   "cartes": [
@@ -836,7 +1145,121 @@
   ],
   "enonce_tex": "(t + 10)^{2} = 0",
   "erreur": null,
-  "ok": true
+  "ok": true,
+  "variante_defaut": "cours",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Produit nul",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "(t + 10)(t + 10) = 0",
+          "gauche": "(t + 10)^{2} = 0",
+          "lien": "\\iff"
+         },
+         {
+          "expr": "t + 10 = 0",
+          "lien": "\\iff",
+          "prop": "produit nul"
+         },
+         {
+          "expr": "t = -10",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{-10\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "cours",
+    "libelle": "Méthodes du cours"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Développer",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "t^{2} + 20t + 100 = 0",
+          "gauche": "(t + 10)^{2} = 0",
+          "lien": "\\iff",
+          "prop": "Id. rem. \\((A + B)^{2}\\) avec \\(A = t,\\ B = 10\\)"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Discriminant",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta = b^{2} - 4ac = 20^{2} - 4 \\cdot 1 \\cdot 100 = 400 - 400 = \\fbox{$0$}",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Valeurs de t",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "texte": "\\(\\Delta = 0\\) : une seule solution."
+         },
+         {
+          "expr": "t = \\frac{-b}{2a} = \\frac{-20}{2} = -10",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{-10\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "formule",
+    "libelle": "Par la formule"
+   }
+  ]
  },
  "(x+1)(x+3)=15": {
   "cartes": [
@@ -1580,7 +2003,186 @@
   ],
   "enonce_tex": "(x + 1)^{2} + 3 = 19",
   "erreur": null,
-  "ok": true
+  "ok": true,
+  "variante_defaut": "cours",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Ramener à 0",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "(x + 1)^{2} + 3 - 19 = 0",
+          "gauche": "(x + 1)^{2} + 3 = 19",
+          "lien": "\\iff"
+         },
+         {
+          "expr": "(x + 1)^{2} - 16 = 0",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Identité remarquable",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "((x + 1) + 4)((x + 1) - 4) = 0",
+          "gauche": "(x + 1)^{2} - 16 = 0",
+          "lien": "\\iff",
+          "prop": "Id. rem. \\(A^{2} - B^{2}\\) avec \\(\\fbox{$A = x + 1,\\ B = 4$}\\)"
+         },
+         {
+          "expr": "(x + 5)(x - 3) = 0",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Produit nul",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "{x + 5 = 0} \\text{ ou } \\allowbreak {x - 3 = 0}",
+          "gauche": "(x + 5)(x - 3) = 0",
+          "lien": "\\iff",
+          "prop": "produit nul"
+         },
+         {
+          "expr": "{x = -5} \\text{ ou } \\allowbreak {x = 3}",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{-5\\,;\\,3\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "cours",
+    "libelle": "Méthodes du cours"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Développer",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "x^{2} + 2x + 1 + 3 = 19",
+          "gauche": "(x + 1)^{2} + 3 = 19",
+          "lien": "\\iff",
+          "prop": "Id. rem. \\((A + B)^{2}\\) avec \\(A = x,\\ B = 1\\)"
+         },
+         {
+          "expr": "x^{2} + 2x + 4 = 19",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Ramener à 0",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "x^{2} + 2x - 15 = 0",
+          "gauche": "x^{2} + 2x + 4 = 19",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Discriminant",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta = b^{2} - 4ac = 2^{2} - 4 \\cdot 1 \\cdot (-15) = 4 + 60 = \\fbox{$64$}",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "badge": "Valeurs de x",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 8",
+          "lien": ""
+         },
+         {
+          "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-2 - 8}{2} = -5",
+          "lien": ""
+         },
+         {
+          "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-2 + 8}{2} = 3",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 4"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{-5\\,;\\,3\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "formule",
+    "libelle": "Par la formule"
+   }
+  ]
  },
  "(x+1)^2+3=3": {
   "cartes": [
@@ -1644,7 +2246,163 @@
   ],
   "enonce_tex": "(x + 1)^{2} + 3 = 3",
   "erreur": null,
-  "ok": true
+  "ok": true,
+  "variante_defaut": "cours",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Ramener à 0",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "(x + 1)^{2} + 3 - 3 = 0",
+          "gauche": "(x + 1)^{2} + 3 = 3",
+          "lien": "\\iff"
+         },
+         {
+          "expr": "(x + 1)^{2} = 0",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Produit nul",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "(x + 1)(x + 1) = 0",
+          "gauche": "(x + 1)^{2} = 0",
+          "lien": "\\iff"
+         },
+         {
+          "expr": "x + 1 = 0",
+          "lien": "\\iff",
+          "prop": "produit nul"
+         },
+         {
+          "expr": "x = -1",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{-1\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "cours",
+    "libelle": "Méthodes du cours"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Développer",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "x^{2} + 2x + 1 + 3 = 3",
+          "gauche": "(x + 1)^{2} + 3 = 3",
+          "lien": "\\iff",
+          "prop": "Id. rem. \\((A + B)^{2}\\) avec \\(A = x,\\ B = 1\\)"
+         },
+         {
+          "expr": "x^{2} + 2x + 4 = 3",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Ramener à 0",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "x^{2} + 2x + 1 = 0",
+          "gauche": "x^{2} + 2x + 4 = 3",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Discriminant",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta = b^{2} - 4ac = 2^{2} - 4 \\cdot 1 \\cdot 1 = 4 - 4 = \\fbox{$0$}",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "badge": "Valeurs de x",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "texte": "\\(\\Delta = 0\\) : une seule solution."
+         },
+         {
+          "expr": "x = \\frac{-b}{2a} = \\frac{-2}{2} = -1",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 4"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{-1\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "formule",
+    "libelle": "Par la formule"
+   }
+  ]
  },
  "(x+1)^2-16=0": {
   "cartes": [
@@ -1705,7 +2463,148 @@
   ],
   "enonce_tex": "(x + 1)^{2} - 16 = 0",
   "erreur": null,
-  "ok": true
+  "ok": true,
+  "variante_defaut": "cours",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Identité remarquable",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "((x + 1) + 4)((x + 1) - 4) = 0",
+          "gauche": "(x + 1)^{2} - 16 = 0",
+          "lien": "\\iff",
+          "prop": "Id. rem. \\(A^{2} - B^{2}\\) avec \\(\\fbox{$A = x + 1,\\ B = 4$}\\)"
+         },
+         {
+          "expr": "(x + 5)(x - 3) = 0",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Produit nul",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "{x + 5 = 0} \\text{ ou } \\allowbreak {x - 3 = 0}",
+          "gauche": "(x + 5)(x - 3) = 0",
+          "lien": "\\iff",
+          "prop": "produit nul"
+         },
+         {
+          "expr": "{x = -5} \\text{ ou } \\allowbreak {x = 3}",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{-5\\,;\\,3\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "cours",
+    "libelle": "Méthodes du cours"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Développer",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "x^{2} + 2x + 1 - 16 = 0",
+          "gauche": "(x + 1)^{2} - 16 = 0",
+          "lien": "\\iff",
+          "prop": "Id. rem. \\((A + B)^{2}\\) avec \\(A = x,\\ B = 1\\)"
+         },
+         {
+          "expr": "x^{2} + 2x - 15 = 0",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Discriminant",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta = b^{2} - 4ac = 2^{2} - 4 \\cdot 1 \\cdot (-15) = 4 + 60 = \\fbox{$64$}",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Valeurs de x",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 8",
+          "lien": ""
+         },
+         {
+          "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-2 - 8}{2} = -5",
+          "lien": ""
+         },
+         {
+          "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-2 + 8}{2} = 3",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{-5\\,;\\,3\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "formule",
+    "libelle": "Par la formule"
+   }
+  ]
  },
  "(x+1)^2/4=1": {
   "cartes": [
@@ -2184,7 +3083,182 @@
   ],
   "enonce_tex": "(x + 1)^{2} = (2x - 3)^{2}",
   "erreur": null,
-  "ok": true
+  "ok": true,
+  "variante_defaut": "cours",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Ramener à 0",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "(x + 1)^{2} - (2x - 3)^{2} = 0",
+          "gauche": "(x + 1)^{2} = (2x - 3)^{2}",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Identité remarquable",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "((x + 1) + (2x - 3))((x + 1) - (2x - 3)) = 0",
+          "gauche": "(x + 1)^{2} - (2x - 3)^{2} = 0",
+          "lien": "\\iff",
+          "prop": "Id. rem. \\(A^{2} - B^{2}\\) avec \\(\\fbox{$A = x + 1,\\ B = 2x - 3$}\\)"
+         },
+         {
+          "expr": "(x + 1 + 2x - 3)(x + 1 - 2x + 3) = 0",
+          "lien": "\\iff"
+         },
+         {
+          "expr": "(3x - 2)(4 - x) = 0",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Produit nul",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "{3x - 2 = 0} \\text{ ou } \\allowbreak {4 - x = 0}",
+          "gauche": "(3x - 2)(4 - x) = 0",
+          "lien": "\\iff",
+          "prop": "produit nul"
+         },
+         {
+          "expr": "{x = \\frac{2}{3}} \\text{ ou } \\allowbreak {x = 4}",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{\\frac{2}{3}\\,;\\,4\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "cours",
+    "libelle": "Méthodes du cours"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Développer",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "x^{2} + 2x + 1 = 4x^{2} - 12x + 9",
+          "gauche": "(x + 1)^{2} = (2x - 3)^{2}",
+          "lien": "\\iff",
+          "prop": "Id. rem. \\((A + B)^{2}\\) avec \\(A = x,\\ B = 1\\) ; Id. rem. \\((A - B)^{2}\\) avec \\(A = 2x,\\ B = 3\\)"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Ramener à 0",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "3x^{2} - 14x + 8 = 0",
+          "gauche": "x^{2} + 2x + 1 = 4x^{2} - 12x + 9",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Discriminant",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta = b^{2} - 4ac = (-14)^{2} - 4 \\cdot 3 \\cdot 8 = 196 - 96 = \\fbox{$100$}",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "badge": "Valeurs de x",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 10",
+          "lien": ""
+         },
+         {
+          "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{14 - 10}{6} = \\frac{2}{3}",
+          "lien": ""
+         },
+         {
+          "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{14 + 10}{6} = 4",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 4"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{\\frac{2}{3}\\,;\\,4\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "formule",
+    "libelle": "Par la formule"
+   }
+  ]
  },
  "(x+1)^2=(x+1)^2": {
   "cartes": [
@@ -2508,7 +3582,178 @@
   ],
   "enonce_tex": "(x + 1)^{2} = 1",
   "erreur": null,
-  "ok": true
+  "ok": true,
+  "variante_defaut": "cours",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Ramener à 0",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "(x + 1)^{2} - 1 = 0",
+          "gauche": "(x + 1)^{2} = 1",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Identité remarquable",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "((x + 1) + 1)((x + 1) - 1) = 0",
+          "gauche": "(x + 1)^{2} - 1 = 0",
+          "lien": "\\iff",
+          "prop": "Id. rem. \\(A^{2} - B^{2}\\) avec \\(\\fbox{$A = x + 1,\\ B = 1$}\\)"
+         },
+         {
+          "expr": "x(x + 2) = 0",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Produit nul",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "{x = 0} \\text{ ou } \\allowbreak {x + 2 = 0}",
+          "gauche": "x(x + 2) = 0",
+          "lien": "\\iff",
+          "prop": "produit nul"
+         },
+         {
+          "expr": "{x = 0} \\text{ ou } \\allowbreak {x = -2}",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{-2\\,;\\,0\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "cours",
+    "libelle": "Méthodes du cours"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Développer",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "x^{2} + 2x + 1 = 1",
+          "gauche": "(x + 1)^{2} = 1",
+          "lien": "\\iff",
+          "prop": "Id. rem. \\((A + B)^{2}\\) avec \\(A = x,\\ B = 1\\)"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Ramener à 0",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "x^{2} + 2x = 0",
+          "gauche": "x^{2} + 2x + 1 = 1",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Discriminant",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta = b^{2} - 4ac = 2^{2} - 4 \\cdot 1 \\cdot 0 = \\fbox{$4$}",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "badge": "Valeurs de x",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 2",
+          "lien": ""
+         },
+         {
+          "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-2 - 2}{2} = -2",
+          "lien": ""
+         },
+         {
+          "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-2 + 2}{2} = 0",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 4"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{-2\\,;\\,0\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "formule",
+    "libelle": "Par la formule"
+   }
+  ]
  },
  "(x+1)^2=16": {
   "cartes": [
@@ -2586,7 +3831,178 @@
   ],
   "enonce_tex": "(x + 1)^{2} = 16",
   "erreur": null,
-  "ok": true
+  "ok": true,
+  "variante_defaut": "cours",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Ramener à 0",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "(x + 1)^{2} - 16 = 0",
+          "gauche": "(x + 1)^{2} = 16",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Identité remarquable",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "((x + 1) + 4)((x + 1) - 4) = 0",
+          "gauche": "(x + 1)^{2} - 16 = 0",
+          "lien": "\\iff",
+          "prop": "Id. rem. \\(A^{2} - B^{2}\\) avec \\(\\fbox{$A = x + 1,\\ B = 4$}\\)"
+         },
+         {
+          "expr": "(x + 5)(x - 3) = 0",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Produit nul",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "{x + 5 = 0} \\text{ ou } \\allowbreak {x - 3 = 0}",
+          "gauche": "(x + 5)(x - 3) = 0",
+          "lien": "\\iff",
+          "prop": "produit nul"
+         },
+         {
+          "expr": "{x = -5} \\text{ ou } \\allowbreak {x = 3}",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{-5\\,;\\,3\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "cours",
+    "libelle": "Méthodes du cours"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Développer",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "x^{2} + 2x + 1 = 16",
+          "gauche": "(x + 1)^{2} = 16",
+          "lien": "\\iff",
+          "prop": "Id. rem. \\((A + B)^{2}\\) avec \\(A = x,\\ B = 1\\)"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Ramener à 0",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "x^{2} + 2x - 15 = 0",
+          "gauche": "x^{2} + 2x + 1 = 16",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Discriminant",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta = b^{2} - 4ac = 2^{2} - 4 \\cdot 1 \\cdot (-15) = 4 + 60 = \\fbox{$64$}",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "badge": "Valeurs de x",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 8",
+          "lien": ""
+         },
+         {
+          "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-2 - 8}{2} = -5",
+          "lien": ""
+         },
+         {
+          "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-2 + 8}{2} = 3",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 4"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{-5\\,;\\,3\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "formule",
+    "libelle": "Par la formule"
+   }
+  ]
  },
  "(x+1)^2=4(x+1)^2": {
   "cartes": [
@@ -2671,7 +4087,185 @@
   ],
   "enonce_tex": "(x + 1)^{2} = 4(x + 1)^{2}",
   "erreur": null,
-  "ok": true
+  "ok": true,
+  "variante_defaut": "cours",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Ramener à 0",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "texte": "Attention : on ne divise pas par \\((x + 1)\\), car ce facteur peut être nul ! On ramène tout dans le membre de gauche, puis on met \\((x + 1)\\) en évidence."
+         },
+         {
+          "expr": "(x + 1)^{2} - 4(x + 1)^{2} = 0",
+          "gauche": "(x + 1)^{2} = 4(x + 1)^{2}",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Mise en évidence",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "(x + 1)[(x + 1) - 4(x + 1)] = 0",
+          "gauche": "(x + 1)^{2} - 4(x + 1)^{2} = 0",
+          "lien": "\\iff",
+          "prop": "ME"
+         },
+         {
+          "expr": "(x + 1)(x + 1 - 4x - 4) = 0",
+          "lien": "\\iff"
+         },
+         {
+          "expr": "(x + 1)(-3x - 3) = 0",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Produit nul",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "{x + 1 = 0} \\text{ ou } \\allowbreak {-3x - 3 = 0}",
+          "gauche": "(x + 1)(-3x - 3) = 0",
+          "lien": "\\iff",
+          "prop": "produit nul"
+         },
+         {
+          "expr": "x = -1",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{-1\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "cours",
+    "libelle": "Méthodes du cours"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Développer",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "(x + 1)^{2} = 4(x^{2} + 2x + 1)",
+          "gauche": "(x + 1)^{2} = 4(x + 1)^{2}",
+          "lien": "\\iff",
+          "prop": "Id. rem. \\((A + B)^{2}\\) avec \\(A = x,\\ B = 1\\)"
+         },
+         {
+          "expr": "x^{2} + 2x + 1 = 4x^{2} + 8x + 4",
+          "lien": "\\iff",
+          "prop": "Id. rem. \\((A + B)^{2}\\) avec \\(A = x,\\ B = 1\\) ; distribution"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Ramener à 0",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "3x^{2} + 6x + 3 = 0",
+          "gauche": "x^{2} + 2x + 1 = 4x^{2} + 8x + 4",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Discriminant",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta = b^{2} - 4ac = 6^{2} - 4 \\cdot 3 \\cdot 3 = 36 - 36 = \\fbox{$0$}",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "badge": "Valeurs de x",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "texte": "\\(\\Delta = 0\\) : une seule solution."
+         },
+         {
+          "expr": "x = \\frac{-b}{2a} = \\frac{-6}{6} = -1",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 4"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{-1\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "formule",
+    "libelle": "Par la formule"
+   }
+  ]
  },
  "(x+1)^2=5": {
   "cartes": [
@@ -2753,7 +4347,186 @@
   ],
   "enonce_tex": "(x + 1)^{2} = 5",
   "erreur": null,
-  "ok": true
+  "ok": true,
+  "variante_defaut": "cours",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Ramener à 0",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "(x + 1)^{2} - 5 = 0",
+          "gauche": "(x + 1)^{2} = 5",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Identité remarquable",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "((x + 1) + \\sqrt{5})((x + 1) - \\sqrt{5}) = 0",
+          "gauche": "(x + 1)^{2} - 5 = 0",
+          "lien": "\\iff",
+          "prop": "Id. rem. \\(A^{2} - B^{2}\\) avec \\(\\fbox{$A = x + 1,\\ B = \\sqrt{5}$}\\)"
+         },
+         {
+          "expr": "(x + 1 + \\sqrt{5})(x + 1 - \\sqrt{5}) = 0",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Produit nul",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "{x + 1 + \\sqrt{5} = 0} \\text{ ou } \\allowbreak {x + 1 - \\sqrt{5} = 0}",
+          "gauche": "(x + 1 + \\sqrt{5})(x + 1 - \\sqrt{5}) = 0",
+          "lien": "\\iff",
+          "prop": "produit nul"
+         },
+         {
+          "expr": "{x = -1 - \\sqrt{5}} \\text{ ou } \\allowbreak {x = -1 + \\sqrt{5}}",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{-1 - \\sqrt{5}\\,;\\,-1 + \\sqrt{5}\\}",
+        "type": "resultat_lim"
+       },
+       {
+        "html": "soit \\(x \\approx -3{,}236\\) ou \\(x \\approx 1{,}236\\)",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "cours",
+    "libelle": "Méthodes du cours"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Développer",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "x^{2} + 2x + 1 = 5",
+          "gauche": "(x + 1)^{2} = 5",
+          "lien": "\\iff",
+          "prop": "Id. rem. \\((A + B)^{2}\\) avec \\(A = x,\\ B = 1\\)"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Ramener à 0",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "x^{2} + 2x - 4 = 0",
+          "gauche": "x^{2} + 2x + 1 = 5",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Discriminant",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta = b^{2} - 4ac = 2^{2} - 4 \\cdot 1 \\cdot (-4) = 4 + 16 = \\fbox{$20$}",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "badge": "Valeurs de x",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = \\sqrt{20} = 2\\sqrt{5}",
+          "lien": ""
+         },
+         {
+          "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-2 - 2\\sqrt{5}}{2} = -1 - \\sqrt{5}",
+          "lien": ""
+         },
+         {
+          "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-2 + 2\\sqrt{5}}{2} = -1 + \\sqrt{5}",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 4"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{-1 - \\sqrt{5}\\,;\\,-1 + \\sqrt{5}\\}",
+        "type": "resultat_lim"
+       },
+       {
+        "html": "soit \\(x_{1} \\approx -3{,}236\\) et \\(x_{2} \\approx 1{,}236\\)",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "formule",
+    "libelle": "Par la formule"
+   }
+  ]
  },
  "(x+1)^2=x+1": {
   "cartes": [
@@ -2838,7 +4611,185 @@
   ],
   "enonce_tex": "(x + 1)^{2} = x + 1",
   "erreur": null,
-  "ok": true
+  "ok": true,
+  "variante_defaut": "cours",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Ramener à 0",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "texte": "Attention : on ne divise pas par \\((x + 1)\\), car ce facteur peut être nul ! On ramène tout dans le membre de gauche, puis on met \\((x + 1)\\) en évidence."
+         },
+         {
+          "expr": "(x + 1)^{2} - (x + 1) = 0",
+          "gauche": "(x + 1)^{2} = x + 1",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Mise en évidence",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "(x + 1)[(x + 1) - 1] = 0",
+          "gauche": "(x + 1)^{2} - (x + 1) = 0",
+          "lien": "\\iff",
+          "prop": "ME"
+         },
+         {
+          "expr": "(x + 1)(x + 1 - 1) = 0",
+          "lien": "\\iff"
+         },
+         {
+          "expr": "x(x + 1) = 0",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Produit nul",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "{x = 0} \\text{ ou } \\allowbreak {x + 1 = 0}",
+          "gauche": "x(x + 1) = 0",
+          "lien": "\\iff",
+          "prop": "produit nul"
+         },
+         {
+          "expr": "{x = 0} \\text{ ou } \\allowbreak {x = -1}",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{-1\\,;\\,0\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "cours",
+    "libelle": "Méthodes du cours"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Développer",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "x^{2} + 2x + 1 = x + 1",
+          "gauche": "(x + 1)^{2} = x + 1",
+          "lien": "\\iff",
+          "prop": "Id. rem. \\((A + B)^{2}\\) avec \\(A = x,\\ B = 1\\)"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Ramener à 0",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "x^{2} + x = 0",
+          "gauche": "x^{2} + 2x + 1 = x + 1",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Discriminant",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta = b^{2} - 4ac = 1^{2} - 4 \\cdot 1 \\cdot 0 = \\fbox{$1$}",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "badge": "Valeurs de x",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 1",
+          "lien": ""
+         },
+         {
+          "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-1 - 1}{2} = -1",
+          "lien": ""
+         },
+         {
+          "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-1 + 1}{2} = 0",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 4"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{-1\\,;\\,0\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "formule",
+    "libelle": "Par la formule"
+   }
+  ]
  },
  "(x+1)^3*(x^2-1)=0": {
   "cartes": [
@@ -3394,7 +5345,185 @@
   ],
   "enonce_tex": "(x + 2)^{2} = 3(x + 2)",
   "erreur": null,
-  "ok": true
+  "ok": true,
+  "variante_defaut": "cours",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Ramener à 0",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "texte": "Attention : on ne divise pas par \\((x + 2)\\), car ce facteur peut être nul ! On ramène tout dans le membre de gauche, puis on met \\((x + 2)\\) en évidence."
+         },
+         {
+          "expr": "(x + 2)^{2} - 3(x + 2) = 0",
+          "gauche": "(x + 2)^{2} = 3(x + 2)",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Mise en évidence",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "(x + 2)[(x + 2) - 3] = 0",
+          "gauche": "(x + 2)^{2} - 3(x + 2) = 0",
+          "lien": "\\iff",
+          "prop": "ME"
+         },
+         {
+          "expr": "(x + 2)(x + 2 - 3) = 0",
+          "lien": "\\iff"
+         },
+         {
+          "expr": "(x + 2)(x - 1) = 0",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Produit nul",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "{x + 2 = 0} \\text{ ou } \\allowbreak {x - 1 = 0}",
+          "gauche": "(x + 2)(x - 1) = 0",
+          "lien": "\\iff",
+          "prop": "produit nul"
+         },
+         {
+          "expr": "{x = -2} \\text{ ou } \\allowbreak {x = 1}",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{-2\\,;\\,1\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "cours",
+    "libelle": "Méthodes du cours"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Développer",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "x^{2} + 4x + 4 = 3x + 6",
+          "gauche": "(x + 2)^{2} = 3(x + 2)",
+          "lien": "\\iff",
+          "prop": "Id. rem. \\((A + B)^{2}\\) avec \\(A = x,\\ B = 2\\) ; distribution"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Ramener à 0",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "x^{2} + x - 2 = 0",
+          "gauche": "x^{2} + 4x + 4 = 3x + 6",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Discriminant",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta = b^{2} - 4ac = 1^{2} - 4 \\cdot 1 \\cdot (-2) = 1 + 8 = \\fbox{$9$}",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "badge": "Valeurs de x",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 3",
+          "lien": ""
+         },
+         {
+          "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-1 - 3}{2} = -2",
+          "lien": ""
+         },
+         {
+          "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-1 + 3}{2} = 1",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 4"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{-2\\,;\\,1\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "formule",
+    "libelle": "Par la formule"
+   }
+  ]
  },
  "(x+3)^2=2x+14": {
   "cartes": [
@@ -3861,7 +5990,189 @@
   ],
   "enonce_tex": "(x - 1)(2 - x) = (x - 1)(x + 3)",
   "erreur": null,
-  "ok": true
+  "ok": true,
+  "variante_defaut": "cours",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Ramener à 0",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "texte": "Attention : on ne divise pas par \\((x - 1)\\), car ce facteur peut être nul ! On ramène tout dans le membre de gauche, puis on met \\((x - 1)\\) en évidence."
+         },
+         {
+          "expr": "(x - 1)(2 - x) - (x - 1)(x + 3) = 0",
+          "gauche": "(x - 1)(2 - x) = (x - 1)(x + 3)",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Mise en évidence",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "(x - 1)[(2 - x) - (x + 3)] = 0",
+          "gauche": "(x - 1)(2 - x) - (x - 1)(x + 3) = 0",
+          "lien": "\\iff",
+          "prop": "ME"
+         },
+         {
+          "expr": "(x - 1)(2 - x - x - 3) = 0",
+          "lien": "\\iff"
+         },
+         {
+          "expr": "(x - 1)(-2x - 1) = 0",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Produit nul",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "{x - 1 = 0} \\text{ ou } \\allowbreak {-2x - 1 = 0}",
+          "gauche": "(x - 1)(-2x - 1) = 0",
+          "lien": "\\iff",
+          "prop": "produit nul"
+         },
+         {
+          "expr": "{x = 1} \\text{ ou } \\allowbreak {x = -\\frac{1}{2}}",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{-\\frac{1}{2}\\,;\\,1\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "cours",
+    "libelle": "Méthodes du cours"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Développer",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "2x - x^{2} - 2 + x = x^{2} + 3x - x - 3",
+          "gauche": "(x - 1)(2 - x) = (x - 1)(x + 3)",
+          "lien": "\\iff",
+          "prop": "double distribution"
+         },
+         {
+          "expr": "-x^{2} + 3x - 2 = x^{2} + 2x - 3",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Ramener à 0",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "2x^{2} - x - 1 = 0",
+          "gauche": "-x^{2} + 3x - 2 = x^{2} + 2x - 3",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Discriminant",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta = b^{2} - 4ac = (-1)^{2} - 4 \\cdot 2 \\cdot (-1) = 1 + 8 = \\fbox{$9$}",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "badge": "Valeurs de x",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 3",
+          "lien": ""
+         },
+         {
+          "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{1 - 3}{4} = -\\frac{1}{2}",
+          "lien": ""
+         },
+         {
+          "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{1 + 3}{4} = 1",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 4"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{-\\frac{1}{2}\\,;\\,1\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "formule",
+    "libelle": "Par la formule"
+   }
+  ]
  },
  "(x-1)(x+2)(x+3)=1": {
   "erreur": "Cette équation ne se résout pas avec les méthodes du cours.",
@@ -4207,7 +6518,193 @@
   ],
   "enonce_tex": "(x - 1)(x + 2) = -(x - 1)(x + 3)",
   "erreur": null,
-  "ok": true
+  "ok": true,
+  "variante_defaut": "cours",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Ramener à 0",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "texte": "Attention : on ne divise pas par \\((x - 1)\\), car ce facteur peut être nul ! On ramène tout dans le membre de gauche, puis on met \\((x - 1)\\) en évidence."
+         },
+         {
+          "expr": "(x - 1)(x + 2) + (x - 1)(x + 3) = 0",
+          "gauche": "(x - 1)(x + 2) = -(x - 1)(x + 3)",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Mise en évidence",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "(x - 1)[(x + 2) + (x + 3)] = 0",
+          "gauche": "(x - 1)(x + 2) + (x - 1)(x + 3) = 0",
+          "lien": "\\iff",
+          "prop": "ME"
+         },
+         {
+          "expr": "(x - 1)(x + 2 + x + 3) = 0",
+          "lien": "\\iff"
+         },
+         {
+          "expr": "(x - 1)(2x + 5) = 0",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Produit nul",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "{x - 1 = 0} \\text{ ou } \\allowbreak {2x + 5 = 0}",
+          "gauche": "(x - 1)(2x + 5) = 0",
+          "lien": "\\iff",
+          "prop": "produit nul"
+         },
+         {
+          "expr": "{x = 1} \\text{ ou } \\allowbreak {x = -\\frac{5}{2}}",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{-\\frac{5}{2}\\,;\\,1\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "cours",
+    "libelle": "Méthodes du cours"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Développer",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "x^{2} + 2x - x - 2 = -(x^{2} + 3x - x - 3)",
+          "gauche": "(x - 1)(x + 2) = -(x - 1)(x + 3)",
+          "lien": "\\iff",
+          "prop": "double distribution"
+         },
+         {
+          "expr": "x^{2} + 2x - x - 2 = -x^{2} - 3x + x + 3",
+          "lien": "\\iff"
+         },
+         {
+          "expr": "x^{2} + x - 2 = -x^{2} - 2x + 3",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Ramener à 0",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "2x^{2} + 3x - 5 = 0",
+          "gauche": "x^{2} + x - 2 = -x^{2} - 2x + 3",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Discriminant",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta = b^{2} - 4ac = 3^{2} - 4 \\cdot 2 \\cdot (-5) = 9 + 40 = \\fbox{$49$}",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "badge": "Valeurs de x",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 7",
+          "lien": ""
+         },
+         {
+          "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-3 - 7}{4} = -\\frac{5}{2}",
+          "lien": ""
+         },
+         {
+          "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-3 + 7}{4} = 1",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 4"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{-\\frac{5}{2}\\,;\\,1\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "formule",
+    "libelle": "Par la formule"
+   }
+  ]
  },
  "(x-1)(x+2)=2x-2": {
   "cartes": [
@@ -4303,7 +6800,200 @@
   ],
   "enonce_tex": "(x - 1)(x + 2) = 2x - 2",
   "erreur": null,
-  "ok": true
+  "ok": true,
+  "variante_defaut": "cours",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Développer",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "x^{2} + 2x - x - 2 = 2x - 2",
+          "gauche": "(x - 1)(x + 2) = 2x - 2",
+          "lien": "\\iff",
+          "prop": "double distribution"
+         },
+         {
+          "expr": "x^{2} + x - 2 = 2x - 2",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Ramener à 0",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "x^{2} - x = 0",
+          "gauche": "x^{2} + x - 2 = 2x - 2",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Mise en évidence",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "x(x - 1) = 0",
+          "gauche": "x^{2} - x = 0",
+          "lien": "\\iff",
+          "prop": "ME"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "badge": "Produit nul",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "{x = 0} \\text{ ou } \\allowbreak {x - 1 = 0}",
+          "gauche": "x(x - 1) = 0",
+          "lien": "\\iff",
+          "prop": "produit nul"
+         },
+         {
+          "expr": "{x = 0} \\text{ ou } \\allowbreak {x = 1}",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 4"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{0\\,;\\,1\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "cours",
+    "libelle": "Méthodes du cours"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Développer",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "x^{2} + 2x - x - 2 = 2x - 2",
+          "gauche": "(x - 1)(x + 2) = 2x - 2",
+          "lien": "\\iff",
+          "prop": "double distribution"
+         },
+         {
+          "expr": "x^{2} + x - 2 = 2x - 2",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Ramener à 0",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "x^{2} - x = 0",
+          "gauche": "x^{2} + x - 2 = 2x - 2",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Discriminant",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta = b^{2} - 4ac = (-1)^{2} - 4 \\cdot 1 \\cdot 0 = \\fbox{$1$}",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "badge": "Valeurs de x",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 1",
+          "lien": ""
+         },
+         {
+          "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{1 - 1}{2} = 0",
+          "lien": ""
+         },
+         {
+          "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{1 + 1}{2} = 1",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 4"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{0\\,;\\,1\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "formule",
+    "libelle": "Par la formule"
+   }
+  ]
  },
  "(x-1)(x+2)=3(x-1)(x+2)": {
   "cartes": [
@@ -4388,7 +7078,198 @@
   ],
   "enonce_tex": "(x - 1)(x + 2) = 3(x - 1)(x + 2)",
   "erreur": null,
-  "ok": true
+  "ok": true,
+  "variante_defaut": "cours",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Ramener à 0",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "texte": "Attention : on ne divise pas par \\((x - 1)\\), car ce facteur peut être nul ! On ramène tout dans le membre de gauche, puis on met \\((x - 1)\\) en évidence."
+         },
+         {
+          "expr": "(x - 1)(x + 2) - 3(x - 1)(x + 2) = 0",
+          "gauche": "(x - 1)(x + 2) = 3(x - 1)(x + 2)",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Mise en évidence",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "(x - 1)[(x + 2) - 3(x + 2)] = 0",
+          "gauche": "(x - 1)(x + 2) - 3(x - 1)(x + 2) = 0",
+          "lien": "\\iff",
+          "prop": "ME"
+         },
+         {
+          "expr": "(x - 1)(x + 2 - 3x - 6) = 0",
+          "lien": "\\iff"
+         },
+         {
+          "expr": "(x - 1)(-2x - 4) = 0",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Produit nul",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "{x - 1 = 0} \\text{ ou } \\allowbreak {-2x - 4 = 0}",
+          "gauche": "(x - 1)(-2x - 4) = 0",
+          "lien": "\\iff",
+          "prop": "produit nul"
+         },
+         {
+          "expr": "{x = 1} \\text{ ou } \\allowbreak {x = -2}",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{-2\\,;\\,1\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "cours",
+    "libelle": "Méthodes du cours"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Développer",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "(x - 1)(x + 2) = 3(x^{2} + 2x - x - 2)",
+          "gauche": "(x - 1)(x + 2) = 3(x - 1)(x + 2)",
+          "lien": "\\iff",
+          "prop": "double distribution"
+         },
+         {
+          "expr": "(x - 1)(x + 2) = 3(x^{2} + x - 2)",
+          "lien": "\\iff"
+         },
+         {
+          "expr": "x^{2} + 2x - x - 2 = 3x^{2} + 3x - 6",
+          "lien": "\\iff",
+          "prop": "double distribution ; distribution"
+         },
+         {
+          "expr": "x^{2} + x - 2 = 3x^{2} + 3x - 6",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Ramener à 0",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "2x^{2} + 2x - 4 = 0",
+          "gauche": "x^{2} + x - 2 = 3x^{2} + 3x - 6",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Discriminant",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta = b^{2} - 4ac = 2^{2} - 4 \\cdot 2 \\cdot (-4) = 4 + 32 = \\fbox{$36$}",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "badge": "Valeurs de x",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 6",
+          "lien": ""
+         },
+         {
+          "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-2 - 6}{4} = -2",
+          "lien": ""
+         },
+         {
+          "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-2 + 6}{4} = 1",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 4"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{-2\\,;\\,1\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "formule",
+    "libelle": "Par la formule"
+   }
+  ]
  },
  "(x-1)(x+2)=x-1": {
   "cartes": [
@@ -4473,7 +7354,189 @@
   ],
   "enonce_tex": "(x - 1)(x + 2) = x - 1",
   "erreur": null,
-  "ok": true
+  "ok": true,
+  "variante_defaut": "cours",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Ramener à 0",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "texte": "Attention : on ne divise pas par \\((x - 1)\\), car ce facteur peut être nul ! On ramène tout dans le membre de gauche, puis on met \\((x - 1)\\) en évidence."
+         },
+         {
+          "expr": "(x - 1)(x + 2) - (x - 1) = 0",
+          "gauche": "(x - 1)(x + 2) = x - 1",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Mise en évidence",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "(x - 1)[(x + 2) - 1] = 0",
+          "gauche": "(x - 1)(x + 2) - (x - 1) = 0",
+          "lien": "\\iff",
+          "prop": "ME"
+         },
+         {
+          "expr": "(x - 1)(x + 2 - 1) = 0",
+          "lien": "\\iff"
+         },
+         {
+          "expr": "(x - 1)(x + 1) = 0",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Produit nul",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "{x - 1 = 0} \\text{ ou } \\allowbreak {x + 1 = 0}",
+          "gauche": "(x - 1)(x + 1) = 0",
+          "lien": "\\iff",
+          "prop": "produit nul"
+         },
+         {
+          "expr": "{x = 1} \\text{ ou } \\allowbreak {x = -1}",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{-1\\,;\\,1\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "cours",
+    "libelle": "Méthodes du cours"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Développer",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "x^{2} + 2x - x - 2 = x - 1",
+          "gauche": "(x - 1)(x + 2) = x - 1",
+          "lien": "\\iff",
+          "prop": "double distribution"
+         },
+         {
+          "expr": "x^{2} + x - 2 = x - 1",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Ramener à 0",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "x^{2} - 1 = 0",
+          "gauche": "x^{2} + x - 2 = x - 1",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Discriminant",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta = b^{2} - 4ac = 0^{2} - 4 \\cdot 1 \\cdot (-1) = \\fbox{$4$}",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "badge": "Valeurs de x",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 2",
+          "lien": ""
+         },
+         {
+          "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-2}{2} = -1",
+          "lien": ""
+         },
+         {
+          "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{2}{2} = 1",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 4"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{-1\\,;\\,1\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "formule",
+    "libelle": "Par la formule"
+   }
+  ]
  },
  "(x-1)/3=x^2/6": {
   "cartes": [
@@ -5400,7 +8463,156 @@
   ],
   "enonce_tex": "-(x + 1)^{2} + 4 = 0",
   "erreur": null,
-  "ok": true
+  "ok": true,
+  "variante_defaut": "cours",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Identité remarquable",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "(2 + (x + 1))(2 - (x + 1)) = 0",
+          "gauche": "-(x + 1)^{2} + 4 = 0",
+          "lien": "\\iff",
+          "prop": "Id. rem. \\(A^{2} - B^{2}\\) avec \\(\\fbox{$A = 2,\\ B = x + 1$}\\)"
+         },
+         {
+          "expr": "(2 + x + 1)(2 - x - 1) = 0",
+          "lien": "\\iff"
+         },
+         {
+          "expr": "(x + 3)(1 - x) = 0",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Produit nul",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "{x + 3 = 0} \\text{ ou } \\allowbreak {1 - x = 0}",
+          "gauche": "(x + 3)(1 - x) = 0",
+          "lien": "\\iff",
+          "prop": "produit nul"
+         },
+         {
+          "expr": "{x = -3} \\text{ ou } \\allowbreak {x = 1}",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{-3\\,;\\,1\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "cours",
+    "libelle": "Méthodes du cours"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Développer",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "-(x^{2} + 2x + 1) + 4 = 0",
+          "gauche": "-(x + 1)^{2} + 4 = 0",
+          "lien": "\\iff",
+          "prop": "Id. rem. \\((A + B)^{2}\\) avec \\(A = x,\\ B = 1\\)"
+         },
+         {
+          "expr": "-x^{2} - 2x - 1 + 4 = 0",
+          "lien": "\\iff"
+         },
+         {
+          "expr": "-x^{2} - 2x + 3 = 0",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Discriminant",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta = b^{2} - 4ac = (-2)^{2} - 4 \\cdot (-1) \\cdot 3 = 4 + 12 = \\fbox{$16$}",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Valeurs de x",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 4",
+          "lien": ""
+         },
+         {
+          "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{2 - 4}{-2} = 1",
+          "lien": ""
+         },
+         {
+          "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{2 + 4}{-2} = -3",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{-3\\,;\\,1\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "formule",
+    "libelle": "Par la formule"
+   }
+  ]
  },
  "-(x+1)^2+5=0": {
   "cartes": [
@@ -5617,7 +8829,130 @@
   ],
   "enonce_tex": "-(x - 1)(x + 2) = 0",
   "erreur": null,
-  "ok": true
+  "ok": true,
+  "variante_defaut": "cours",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Produit nul",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "{\\underbrace{-1 = 0}_{\\text{impossible}}} \\text{ ou } \\allowbreak {x - 1 = 0} \\text{ ou } \\allowbreak {x + 2 = 0}",
+          "gauche": "-(x - 1)(x + 2) = 0",
+          "lien": "\\iff",
+          "prop": "produit nul"
+         },
+         {
+          "expr": "{x = 1} \\text{ ou } \\allowbreak {x = -2}",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{-2\\,;\\,1\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "cours",
+    "libelle": "Méthodes du cours"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Développer",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "-(x^{2} + 2x - x - 2) = 0",
+          "gauche": "-(x - 1)(x + 2) = 0",
+          "lien": "\\iff",
+          "prop": "double distribution"
+         },
+         {
+          "expr": "-x^{2} - 2x + x + 2 = 0",
+          "lien": "\\iff"
+         },
+         {
+          "expr": "-x^{2} - x + 2 = 0",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Discriminant",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta = b^{2} - 4ac = (-1)^{2} - 4 \\cdot (-1) \\cdot 2 = 1 + 8 = \\fbox{$9$}",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Valeurs de x",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 3",
+          "lien": ""
+         },
+         {
+          "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{1 - 3}{-2} = 1",
+          "lien": ""
+         },
+         {
+          "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{1 + 3}{-2} = -2",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{-2\\,;\\,1\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "formule",
+    "libelle": "Par la formule"
+   }
+  ]
  },
  "-0,5x^2+x+1=0": {
   "cartes": [
@@ -6722,7 +10057,125 @@
   ],
   "enonce_tex": "-x^{2} + 5x = 0",
   "erreur": null,
-  "ok": true
+  "ok": true,
+  "variante_defaut": "cours",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Mise en évidence",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "texte": "Le trinôme n'est pas unitaire (\\(a = -1\\)) : on met d'abord \\(-x\\) en évidence."
+         },
+         {
+          "expr": "-x(x - 5) = 0",
+          "gauche": "-x^{2} + 5x = 0",
+          "lien": "\\iff",
+          "prop": "ME"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Produit nul",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "{-x = 0} \\text{ ou } \\allowbreak {x - 5 = 0}",
+          "gauche": "-x(x - 5) = 0",
+          "lien": "\\iff",
+          "prop": "produit nul"
+         },
+         {
+          "expr": "{x = 0} \\text{ ou } \\allowbreak {x = 5}",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{0\\,;\\,5\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "cours",
+    "libelle": "Méthodes du cours"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Discriminant",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta = b^{2} - 4ac = 5^{2} - 4 \\cdot (-1) \\cdot 0 = \\fbox{$25$}",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Valeurs de x",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 5",
+          "lien": ""
+         },
+         {
+          "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-5 - 5}{-2} = 5",
+          "lien": ""
+         },
+         {
+          "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-5 + 5}{-2} = 0",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{0\\,;\\,5\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "formule",
+    "libelle": "Par la formule"
+   }
+  ]
  },
  "-x^2/2+x=0": {
   "cartes": [
@@ -6800,7 +10253,161 @@
   ],
   "enonce_tex": "-\\frac{x^{2}}{2} + x = 0",
   "erreur": null,
-  "ok": true
+  "ok": true,
+  "variante_defaut": "cours",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Supprimer les fractions",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "-x^{2} + 2x = 0",
+          "gauche": "-\\frac{x^{2}}{2} + x = 0",
+          "lien": "\\iff",
+          "prop": "on multiplie par 2"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Mise en évidence",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "texte": "Le trinôme n'est pas unitaire (\\(a = -1\\)) : on met d'abord \\(-x\\) en évidence."
+         },
+         {
+          "expr": "-x(x - 2) = 0",
+          "gauche": "-x^{2} + 2x = 0",
+          "lien": "\\iff",
+          "prop": "ME"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Produit nul",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "{-x = 0} \\text{ ou } \\allowbreak {x - 2 = 0}",
+          "gauche": "-x(x - 2) = 0",
+          "lien": "\\iff",
+          "prop": "produit nul"
+         },
+         {
+          "expr": "{x = 0} \\text{ ou } \\allowbreak {x = 2}",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{0\\,;\\,2\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "cours",
+    "libelle": "Méthodes du cours"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Supprimer les fractions",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "-x^{2} + 2x = 0",
+          "gauche": "-\\frac{x^{2}}{2} + x = 0",
+          "lien": "\\iff",
+          "prop": "on multiplie par 2"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Discriminant",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta = b^{2} - 4ac = 2^{2} - 4 \\cdot (-1) \\cdot 0 = \\fbox{$4$}",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Valeurs de x",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 2",
+          "lien": ""
+         },
+         {
+          "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-2 - 2}{-2} = 2",
+          "lien": ""
+         },
+         {
+          "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-2 + 2}{-2} = 0",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{0\\,;\\,2\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "formule",
+    "libelle": "Par la formule"
+   }
+  ]
  },
  "-x^3+x=0": {
   "cartes": [
@@ -6878,183 +10485,7 @@
   ],
   "enonce_tex": "-x^{3} + x = 0",
   "erreur": null,
-  "ok": true,
-  "variante_defaut": "cours",
-  "variantes": [
-   {
-    "cartes": [
-     {
-      "badge": "Mise en évidence",
-      "blocs": [
-       {
-        "rangees": [
-         {
-          "texte": "Le coefficient de \\(x^{3}\\) est négatif : on met d'abord \\(-x\\) en évidence."
-         },
-         {
-          "expr": "-x(x^{2} - 1) = 0",
-          "gauche": "-x^{3} + x = 0",
-          "lien": "\\iff",
-          "prop": "ME"
-         }
-        ],
-        "type": "chaine"
-       }
-      ],
-      "style": "normal",
-      "titre": "Étape 1"
-     },
-     {
-      "badge": "Identité remarquable",
-      "blocs": [
-       {
-        "rangees": [
-         {
-          "expr": "-x(x + 1)(x - 1) = 0",
-          "gauche": "-x(x^{2} - 1) = 0",
-          "lien": "\\iff",
-          "prop": "Id. rem. \\(A^{2} - B^{2}\\) avec \\(\\fbox{$A = x,\\ B = 1$}\\)"
-         }
-        ],
-        "type": "chaine"
-       }
-      ],
-      "style": "normal",
-      "titre": "Étape 2"
-     },
-     {
-      "badge": "Produit nul",
-      "blocs": [
-       {
-        "rangees": [
-         {
-          "expr": "{-x = 0} \\text{ ou } \\allowbreak {x + 1 = 0} \\text{ ou } \\allowbreak {x - 1 = 0}",
-          "gauche": "-x(x + 1)(x - 1) = 0",
-          "lien": "\\iff",
-          "prop": "produit nul"
-         },
-         {
-          "expr": "{x = 0} \\text{ ou } \\allowbreak {x = -1} \\text{ ou } \\allowbreak {x = 1}",
-          "lien": "\\iff"
-         }
-        ],
-        "type": "chaine"
-       }
-      ],
-      "style": "normal",
-      "titre": "Étape 3"
-     },
-     {
-      "blocs": [
-       {
-        "tex": "S = \\{-1\\,;\\,0\\,;\\,1\\}",
-        "type": "resultat_lim"
-       }
-      ],
-      "style": "normal",
-      "titre": "Solution"
-     }
-    ],
-    "cle": "cours",
-    "libelle": "Méthodes du cours"
-   },
-   {
-    "cartes": [
-     {
-      "badge": "Mise en évidence",
-      "blocs": [
-       {
-        "rangees": [
-         {
-          "expr": "x(-x^{2} + 1) = 0",
-          "gauche": "-x^{3} + x = 0",
-          "lien": "\\iff",
-          "prop": "ME"
-         }
-        ],
-        "type": "chaine"
-       }
-      ],
-      "style": "normal",
-      "titre": "Étape 1"
-     },
-     {
-      "badge": "Produit nul",
-      "blocs": [
-       {
-        "rangees": [
-         {
-          "expr": "{x = 0} \\text{ ou } \\allowbreak {-x^{2} + 1 = 0}",
-          "gauche": "x(-x^{2} + 1) = 0",
-          "lien": "\\iff",
-          "prop": "produit nul"
-         }
-        ],
-        "type": "chaine"
-       }
-      ],
-      "style": "normal",
-      "titre": "Étape 2"
-     },
-     {
-      "badge": "Discriminant",
-      "blocs": [
-       {
-        "rangees": [
-         {
-          "expr": "\\Delta = b^{2} - 4ac = 0^{2} - 4 \\cdot (-1) \\cdot 1 = \\fbox{$4$}",
-          "lien": ""
-         }
-        ],
-        "type": "chaine"
-       }
-      ],
-      "style": "normal",
-      "titre": "Étape 3"
-     },
-     {
-      "badge": "Valeurs de x",
-      "blocs": [
-       {
-        "rangees": [
-         {
-          "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 2",
-          "lien": ""
-         },
-         {
-          "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-2}{-2} = 1",
-          "lien": ""
-         },
-         {
-          "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{2}{-2} = -1",
-          "lien": ""
-         },
-         {
-          "expr": "{x = 0} \\text{ ou } \\allowbreak {x = 1} \\text{ ou } \\allowbreak {x = -1}",
-          "lien": "\\iff"
-         }
-        ],
-        "type": "chaine"
-       }
-      ],
-      "style": "normal",
-      "titre": "Étape 4"
-     },
-     {
-      "blocs": [
-       {
-        "tex": "S = \\{-1\\,;\\,0\\,;\\,1\\}",
-        "type": "resultat_lim"
-       }
-      ],
-      "style": "normal",
-      "titre": "Solution"
-     }
-    ],
-    "cle": "formule",
-    "libelle": "Par la formule"
-   }
-  ]
+  "ok": true
  },
  "-y^2+10y-9=0": {
   "cartes": [
@@ -7416,7 +10847,193 @@
   ],
   "enonce_tex": "0{,}25(x + 1)^{2} = 1",
   "erreur": null,
-  "ok": true
+  "ok": true,
+  "variante_defaut": "cours",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Ramener à 0",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "0{,}25(x + 1)^{2} - 1 = 0",
+          "gauche": "0{,}25(x + 1)^{2} = 1",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Identité remarquable",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "texte": "Id. rem. \\(A^{2} - B^{2}\\) avec \\(\\fbox{$A = 0{,}5(x + 1),\\ B = 1$}\\) (car \\(A^{2} = 0{,}25(x + 1)^{2}\\))."
+         },
+         {
+          "expr": "(0{,}5(x + 1) + 1)(0{,}5(x + 1) - 1) = 0",
+          "gauche": "0{,}25(x + 1)^{2} - 1 = 0",
+          "lien": "\\iff"
+         },
+         {
+          "expr": "(0{,}5x + 0{,}5 + 1)(0{,}5x + 0{,}5 - 1) = 0",
+          "lien": "\\iff"
+         },
+         {
+          "expr": "(0{,}5x + 1{,}5)(0{,}5x - 0{,}5) = 0",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Produit nul",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "{0{,}5x + 1{,}5 = 0} \\text{ ou } \\allowbreak {0{,}5x - 0{,}5 = 0}",
+          "gauche": "(0{,}5x + 1{,}5)(0{,}5x - 0{,}5) = 0",
+          "lien": "\\iff",
+          "prop": "produit nul"
+         },
+         {
+          "expr": "{0{,}5x = -1{,}5} \\text{ ou } \\allowbreak {0{,}5x = 0{,}5}",
+          "lien": "\\iff"
+         },
+         {
+          "expr": "{x = -3} \\text{ ou } \\allowbreak {x = 1}",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{-3\\,;\\,1\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "cours",
+    "libelle": "Méthodes du cours"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Développer",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "0{,}25(x^{2} + 2x + 1) = 1",
+          "gauche": "0{,}25(x + 1)^{2} = 1",
+          "lien": "\\iff",
+          "prop": "Id. rem. \\((A + B)^{2}\\) avec \\(A = x,\\ B = 1\\)"
+         },
+         {
+          "expr": "0{,}25x^{2} + 0{,}5x + 0{,}25 = 1",
+          "lien": "\\iff",
+          "prop": "distribution"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Ramener à 0",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "0{,}25x^{2} + 0{,}5x - 0{,}75 = 0",
+          "gauche": "0{,}25x^{2} + 0{,}5x + 0{,}25 = 1",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Discriminant",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta = b^{2} - 4ac = 0{,}5^{2} - 4 \\cdot 0{,}25 \\cdot (-0{,}75) = 0{,}25 + 0{,}75 = \\fbox{$1$}",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "badge": "Valeurs de x",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 1",
+          "lien": ""
+         },
+         {
+          "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-0{,}5 - 1}{0{,}5} = -3",
+          "lien": ""
+         },
+         {
+          "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-0{,}5 + 1}{0{,}5} = 1",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 4"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{-3\\,;\\,1\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "formule",
+    "libelle": "Par la formule"
+   }
+  ]
  },
  "0,25x^2-1=0": {
   "cartes": [
@@ -7920,7 +11537,131 @@
   ],
   "enonce_tex": "0{,}5(x - 1)(x + 2) = 0",
   "erreur": null,
-  "ok": true
+  "ok": true,
+  "variante_defaut": "cours",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Produit nul",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "{\\underbrace{0{,}5 = 0}_{\\text{impossible}}} \\text{ ou } \\allowbreak {x - 1 = 0} \\text{ ou } \\allowbreak {x + 2 = 0}",
+          "gauche": "0{,}5(x - 1)(x + 2) = 0",
+          "lien": "\\iff",
+          "prop": "produit nul"
+         },
+         {
+          "expr": "{x = 1} \\text{ ou } \\allowbreak {x = -2}",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{-2\\,;\\,1\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "cours",
+    "libelle": "Méthodes du cours"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Développer",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "0{,}5(x^{2} + 2x - x - 2) = 0",
+          "gauche": "0{,}5(x - 1)(x + 2) = 0",
+          "lien": "\\iff",
+          "prop": "double distribution"
+         },
+         {
+          "expr": "0{,}5(x^{2} + x - 2) = 0",
+          "lien": "\\iff"
+         },
+         {
+          "expr": "0{,}5x^{2} + 0{,}5x - 1 = 0",
+          "lien": "\\iff",
+          "prop": "distribution"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Discriminant",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta = b^{2} - 4ac = 0{,}5^{2} - 4 \\cdot 0{,}5 \\cdot (-1) = 0{,}25 + 2 = \\fbox{$2{,}25$}",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Valeurs de x",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 1{,}5",
+          "lien": ""
+         },
+         {
+          "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-0{,}5 - 1{,}5}{1} = -2",
+          "lien": ""
+         },
+         {
+          "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-0{,}5 + 1{,}5}{1} = 1",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{-2\\,;\\,1\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "formule",
+    "libelle": "Par la formule"
+   }
+  ]
  },
  "0,5x+x^2/3=1": {
   "cartes": [
@@ -8284,7 +12025,160 @@
   ],
   "enonce_tex": "0 = (x - 3)(2x + 1)",
   "erreur": null,
-  "ok": true
+  "ok": true,
+  "variante_defaut": "cours",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Ramener à 0",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "(x - 3)(2x + 1) = 0",
+          "gauche": "0 = (x - 3)(2x + 1)",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Produit nul",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "{x - 3 = 0} \\text{ ou } \\allowbreak {2x + 1 = 0}",
+          "gauche": "(x - 3)(2x + 1) = 0",
+          "lien": "\\iff",
+          "prop": "produit nul"
+         },
+         {
+          "expr": "{x = 3} \\text{ ou } \\allowbreak {x = -\\frac{1}{2}}",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{-\\frac{1}{2}\\,;\\,3\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "cours",
+    "libelle": "Méthodes du cours"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Développer",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "0 = 2x^{2} + x - 6x - 3",
+          "gauche": "0 = (x - 3)(2x + 1)",
+          "lien": "\\iff",
+          "prop": "double distribution"
+         },
+         {
+          "expr": "0 = 2x^{2} - 5x - 3",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Ramener à 0",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "2x^{2} - 5x - 3 = 0",
+          "gauche": "0 = 2x^{2} - 5x - 3",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Discriminant",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta = b^{2} - 4ac = (-5)^{2} - 4 \\cdot 2 \\cdot (-3) = 25 + 24 = \\fbox{$49$}",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "badge": "Valeurs de x",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 7",
+          "lien": ""
+         },
+         {
+          "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{5 - 7}{4} = -\\frac{1}{2}",
+          "lien": ""
+         },
+         {
+          "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{5 + 7}{4} = 3",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 4"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{-\\frac{1}{2}\\,;\\,3\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "formule",
+    "libelle": "Par la formule"
+   }
+  ]
  },
  "0=(x^2-4)x": {
   "cartes": [
@@ -9456,7 +13350,156 @@
   ],
   "enonce_tex": "16 - (3x + 2)^{2} = 0",
   "erreur": null,
-  "ok": true
+  "ok": true,
+  "variante_defaut": "cours",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Identité remarquable",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "(4 + (3x + 2))(4 - (3x + 2)) = 0",
+          "gauche": "16 - (3x + 2)^{2} = 0",
+          "lien": "\\iff",
+          "prop": "Id. rem. \\(A^{2} - B^{2}\\) avec \\(\\fbox{$A = 4,\\ B = 3x + 2$}\\)"
+         },
+         {
+          "expr": "(4 + 3x + 2)(4 - 3x - 2) = 0",
+          "lien": "\\iff"
+         },
+         {
+          "expr": "(3x + 6)(2 - 3x) = 0",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Produit nul",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "{3x + 6 = 0} \\text{ ou } \\allowbreak {2 - 3x = 0}",
+          "gauche": "(3x + 6)(2 - 3x) = 0",
+          "lien": "\\iff",
+          "prop": "produit nul"
+         },
+         {
+          "expr": "{x = -2} \\text{ ou } \\allowbreak {x = \\frac{2}{3}}",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{-2\\,;\\,\\frac{2}{3}\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "cours",
+    "libelle": "Méthodes du cours"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Développer",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "16 - (9x^{2} + 12x + 4) = 0",
+          "gauche": "16 - (3x + 2)^{2} = 0",
+          "lien": "\\iff",
+          "prop": "Id. rem. \\((A + B)^{2}\\) avec \\(A = 3x,\\ B = 2\\)"
+         },
+         {
+          "expr": "16 - 9x^{2} - 12x - 4 = 0",
+          "lien": "\\iff"
+         },
+         {
+          "expr": "-9x^{2} - 12x + 12 = 0",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Discriminant",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta = b^{2} - 4ac = (-12)^{2} - 4 \\cdot (-9) \\cdot 12 = 144 + 432 = \\fbox{$576$}",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Valeurs de x",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 24",
+          "lien": ""
+         },
+         {
+          "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{12 - 24}{-18} = \\frac{2}{3}",
+          "lien": ""
+         },
+         {
+          "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{12 + 24}{-18} = -2",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{-2\\,;\\,\\frac{2}{3}\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "formule",
+    "libelle": "Par la formule"
+   }
+  ]
  },
  "17x^2+288x-17=0": {
   "cartes": [
@@ -11567,7 +15610,122 @@
   ],
   "enonce_tex": "2x(x - 3) = 0",
   "erreur": null,
-  "ok": true
+  "ok": true,
+  "variante_defaut": "cours",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Produit nul",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "{2x = 0} \\text{ ou } \\allowbreak {x - 3 = 0}",
+          "gauche": "2x(x - 3) = 0",
+          "lien": "\\iff",
+          "prop": "produit nul"
+         },
+         {
+          "expr": "{x = 0} \\text{ ou } \\allowbreak {x = 3}",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{0\\,;\\,3\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "cours",
+    "libelle": "Méthodes du cours"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Développer",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "2x^{2} - 6x = 0",
+          "gauche": "2x(x - 3) = 0",
+          "lien": "\\iff",
+          "prop": "distribution"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Discriminant",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta = b^{2} - 4ac = (-6)^{2} - 4 \\cdot 2 \\cdot 0 = \\fbox{$36$}",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Valeurs de x",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 6",
+          "lien": ""
+         },
+         {
+          "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{6 - 6}{4} = 0",
+          "lien": ""
+         },
+         {
+          "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{6 + 6}{4} = 3",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{0\\,;\\,3\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "formule",
+    "libelle": "Par la formule"
+   }
+  ]
  },
  "2x+3-2x=0": {
   "cartes": [
@@ -12296,181 +16454,7 @@
   ],
   "enonce_tex": "2x^{3} - 4x^{2} + 2x = 0",
   "erreur": null,
-  "ok": true,
-  "variante_defaut": "cours",
-  "variantes": [
-   {
-    "cartes": [
-     {
-      "badge": "Mise en évidence",
-      "blocs": [
-       {
-        "rangees": [
-         {
-          "expr": "2x(x^{2} - 2x + 1) = 0",
-          "gauche": "2x^{3} - 4x^{2} + 2x = 0",
-          "lien": "\\iff",
-          "prop": "ME"
-         }
-        ],
-        "type": "chaine"
-       }
-      ],
-      "style": "normal",
-      "titre": "Étape 1"
-     },
-     {
-      "badge": "Identité remarquable",
-      "blocs": [
-       {
-        "rangees": [
-         {
-          "texte": "Id. rem. \\(A^{2} - 2AB + B^{2}\\) avec \\(\\fbox{$A = x,\\ B = 1$}\\). Vérification : \\(2AB = 2 \\cdot x \\cdot 1 = 2x\\) \\(\\checkmark\\)"
-         },
-         {
-          "expr": "2x(x - 1)^{2} = 0",
-          "gauche": "2x(x^{2} - 2x + 1) = 0",
-          "lien": "\\iff"
-         },
-         {
-          "expr": "2x(x - 1)(x - 1) = 0",
-          "lien": "\\iff"
-         }
-        ],
-        "type": "chaine"
-       }
-      ],
-      "style": "normal",
-      "titre": "Étape 2"
-     },
-     {
-      "badge": "Produit nul",
-      "blocs": [
-       {
-        "rangees": [
-         {
-          "expr": "{2x = 0} \\text{ ou } \\allowbreak {x - 1 = 0}",
-          "gauche": "2x(x - 1)(x - 1) = 0",
-          "lien": "\\iff",
-          "prop": "produit nul"
-         },
-         {
-          "expr": "{x = 0} \\text{ ou } \\allowbreak {x = 1}",
-          "lien": "\\iff"
-         }
-        ],
-        "type": "chaine"
-       }
-      ],
-      "style": "normal",
-      "titre": "Étape 3"
-     },
-     {
-      "blocs": [
-       {
-        "tex": "S = \\{0\\,;\\,1\\}",
-        "type": "resultat_lim"
-       }
-      ],
-      "style": "normal",
-      "titre": "Solution"
-     }
-    ],
-    "cle": "cours",
-    "libelle": "Méthodes du cours"
-   },
-   {
-    "cartes": [
-     {
-      "badge": "Mise en évidence",
-      "blocs": [
-       {
-        "rangees": [
-         {
-          "expr": "x(2x^{2} - 4x + 2) = 0",
-          "gauche": "2x^{3} - 4x^{2} + 2x = 0",
-          "lien": "\\iff",
-          "prop": "ME"
-         }
-        ],
-        "type": "chaine"
-       }
-      ],
-      "style": "normal",
-      "titre": "Étape 1"
-     },
-     {
-      "badge": "Produit nul",
-      "blocs": [
-       {
-        "rangees": [
-         {
-          "expr": "{x = 0} \\text{ ou } \\allowbreak {2x^{2} - 4x + 2 = 0}",
-          "gauche": "x(2x^{2} - 4x + 2) = 0",
-          "lien": "\\iff",
-          "prop": "produit nul"
-         }
-        ],
-        "type": "chaine"
-       }
-      ],
-      "style": "normal",
-      "titre": "Étape 2"
-     },
-     {
-      "badge": "Discriminant",
-      "blocs": [
-       {
-        "rangees": [
-         {
-          "expr": "\\Delta = b^{2} - 4ac = (-4)^{2} - 4 \\cdot 2 \\cdot 2 = 16 - 16 = \\fbox{$0$}",
-          "lien": ""
-         }
-        ],
-        "type": "chaine"
-       }
-      ],
-      "style": "normal",
-      "titre": "Étape 3"
-     },
-     {
-      "badge": "Valeurs de x",
-      "blocs": [
-       {
-        "rangees": [
-         {
-          "texte": "\\(\\Delta = 0\\) : une seule solution."
-         },
-         {
-          "expr": "x = \\frac{-b}{2a} = \\frac{4}{4} = 1",
-          "lien": ""
-         },
-         {
-          "expr": "{x = 0} \\text{ ou } \\allowbreak {x = 1}",
-          "lien": "\\iff"
-         }
-        ],
-        "type": "chaine"
-       }
-      ],
-      "style": "normal",
-      "titre": "Étape 4"
-     },
-     {
-      "blocs": [
-       {
-        "tex": "S = \\{0\\,;\\,1\\}",
-        "type": "resultat_lim"
-       }
-      ],
-      "style": "normal",
-      "titre": "Solution"
-     }
-    ],
-    "cle": "formule",
-    "libelle": "Par la formule"
-   }
-  ]
+  "ok": true
  },
  "2x^4+x^3-28x^2=0": {
   "cartes": [
@@ -12553,188 +16537,7 @@
   ],
   "enonce_tex": "2x^{4} + x^{3} - 28x^{2} = 0",
   "erreur": null,
-  "ok": true,
-  "variante_defaut": "cours",
-  "variantes": [
-   {
-    "cartes": [
-     {
-      "badge": "Mise en évidence",
-      "blocs": [
-       {
-        "rangees": [
-         {
-          "expr": "x^{2}(2x^{2} + x - 28) = 0",
-          "gauche": "2x^{4} + x^{3} - 28x^{2} = 0",
-          "lien": "\\iff",
-          "prop": "ME"
-         }
-        ],
-        "type": "chaine"
-       }
-      ],
-      "style": "normal",
-      "titre": "Étape 1"
-     },
-     {
-      "badge": "Tâtonnement",
-      "blocs": [
-       {
-        "rangees": [
-         {
-          "texte": "Le trinôme \\(2x^{2} + x - 28\\) n'est pas unitaire : tâtonnement."
-         },
-         {
-          "texte": "\\(\\fbox{$x = -4$}\\) est solution de \\(2x^{2} + x - 28 = 0\\), car \\(2 \\cdot (-4)^{2} - 4 - 28 = 32 - 4 - 28 = 0\\)."
-         },
-         {
-          "texte": "Donc \\(2x^{2} + x - 28 = (x + 4)(2x + \\triangle)\\) avec \\(4 \\cdot \\triangle = -28\\), donc \\(\\fbox{$\\triangle = -7$}\\)."
-         },
-         {
-          "expr": "x^{2}(x + 4)(2x - 7) = 0",
-          "gauche": "x^{2}(2x^{2} + x - 28) = 0",
-          "lien": "\\iff"
-         }
-        ],
-        "type": "chaine"
-       }
-      ],
-      "style": "normal",
-      "titre": "Étape 2"
-     },
-     {
-      "badge": "Produit nul",
-      "blocs": [
-       {
-        "rangees": [
-         {
-          "expr": "{x^{2} = 0} \\text{ ou } \\allowbreak {x + 4 = 0} \\text{ ou } \\allowbreak {2x - 7 = 0}",
-          "gauche": "x^{2}(x + 4)(2x - 7) = 0",
-          "lien": "\\iff",
-          "prop": "produit nul"
-         },
-         {
-          "expr": "{x = 0} \\text{ ou } \\allowbreak {x = -4} \\text{ ou } \\allowbreak {x = \\frac{7}{2}}",
-          "lien": "\\iff"
-         }
-        ],
-        "type": "chaine"
-       }
-      ],
-      "style": "normal",
-      "titre": "Étape 3"
-     },
-     {
-      "blocs": [
-       {
-        "tex": "S = \\{-4\\,;\\,0\\,;\\,\\frac{7}{2}\\}",
-        "type": "resultat_lim"
-       }
-      ],
-      "style": "normal",
-      "titre": "Solution"
-     }
-    ],
-    "cle": "cours",
-    "libelle": "Méthodes du cours"
-   },
-   {
-    "cartes": [
-     {
-      "badge": "Mise en évidence",
-      "blocs": [
-       {
-        "rangees": [
-         {
-          "expr": "x^{2}(2x^{2} + x - 28) = 0",
-          "gauche": "2x^{4} + x^{3} - 28x^{2} = 0",
-          "lien": "\\iff",
-          "prop": "ME"
-         }
-        ],
-        "type": "chaine"
-       }
-      ],
-      "style": "normal",
-      "titre": "Étape 1"
-     },
-     {
-      "badge": "Produit nul",
-      "blocs": [
-       {
-        "rangees": [
-         {
-          "expr": "{x^{2} = 0} \\text{ ou } \\allowbreak {2x^{2} + x - 28 = 0}",
-          "gauche": "x^{2}(2x^{2} + x - 28) = 0",
-          "lien": "\\iff",
-          "prop": "produit nul"
-         }
-        ],
-        "type": "chaine"
-       }
-      ],
-      "style": "normal",
-      "titre": "Étape 2"
-     },
-     {
-      "badge": "Discriminant",
-      "blocs": [
-       {
-        "rangees": [
-         {
-          "expr": "\\Delta = b^{2} - 4ac = 1^{2} - 4 \\cdot 2 \\cdot (-28) = 1 + 224 = \\fbox{$225$}",
-          "lien": ""
-         }
-        ],
-        "type": "chaine"
-       }
-      ],
-      "style": "normal",
-      "titre": "Étape 3"
-     },
-     {
-      "badge": "Valeurs de x",
-      "blocs": [
-       {
-        "rangees": [
-         {
-          "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 15",
-          "lien": ""
-         },
-         {
-          "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-1 - 15}{4} = -4",
-          "lien": ""
-         },
-         {
-          "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-1 + 15}{4} = \\frac{7}{2}",
-          "lien": ""
-         },
-         {
-          "expr": "{x = 0} \\text{ ou } \\allowbreak {x = -4} \\text{ ou } \\allowbreak {x = \\frac{7}{2}}",
-          "lien": "\\iff"
-         }
-        ],
-        "type": "chaine"
-       }
-      ],
-      "style": "normal",
-      "titre": "Étape 4"
-     },
-     {
-      "blocs": [
-       {
-        "tex": "S = \\{-4\\,;\\,0\\,;\\,\\frac{7}{2}\\}",
-        "type": "resultat_lim"
-       }
-      ],
-      "style": "normal",
-      "titre": "Solution"
-     }
-    ],
-    "cle": "formule",
-    "libelle": "Par la formule"
-   }
-  ]
+  "ok": true
  },
  "2x^4-10x^2+8=0": {
   "erreur": "Cette forme d'équation n'est pas traitée par l'outil.",
@@ -13119,7 +16922,189 @@
   ],
   "enonce_tex": "3(x + 1) = (x + 1)(x - 2)",
   "erreur": null,
-  "ok": true
+  "ok": true,
+  "variante_defaut": "cours",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Ramener à 0",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "texte": "Attention : on ne divise pas par \\((x + 1)\\), car ce facteur peut être nul ! On ramène tout dans le membre de gauche, puis on met \\((x + 1)\\) en évidence."
+         },
+         {
+          "expr": "3(x + 1) - (x + 1)(x - 2) = 0",
+          "gauche": "3(x + 1) = (x + 1)(x - 2)",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Mise en évidence",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "(x + 1)[3 - (x - 2)] = 0",
+          "gauche": "3(x + 1) - (x + 1)(x - 2) = 0",
+          "lien": "\\iff",
+          "prop": "ME"
+         },
+         {
+          "expr": "(x + 1)(3 - x + 2) = 0",
+          "lien": "\\iff"
+         },
+         {
+          "expr": "(x + 1)(5 - x) = 0",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Produit nul",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "{x + 1 = 0} \\text{ ou } \\allowbreak {5 - x = 0}",
+          "gauche": "(x + 1)(5 - x) = 0",
+          "lien": "\\iff",
+          "prop": "produit nul"
+         },
+         {
+          "expr": "{x = -1} \\text{ ou } \\allowbreak {x = 5}",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{-1\\,;\\,5\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "cours",
+    "libelle": "Méthodes du cours"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Développer",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "3x + 3 = x^{2} - 2x + x - 2",
+          "gauche": "3(x + 1) = (x + 1)(x - 2)",
+          "lien": "\\iff",
+          "prop": "distribution ; double distribution"
+         },
+         {
+          "expr": "3x + 3 = x^{2} - x - 2",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Ramener à 0",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "x^{2} - 4x - 5 = 0",
+          "gauche": "3x + 3 = x^{2} - x - 2",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Discriminant",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta = b^{2} - 4ac = (-4)^{2} - 4 \\cdot 1 \\cdot (-5) = 16 + 20 = \\fbox{$36$}",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "badge": "Valeurs de x",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 6",
+          "lien": ""
+         },
+         {
+          "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{4 - 6}{2} = -1",
+          "lien": ""
+         },
+         {
+          "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{4 + 6}{2} = 5",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 4"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{-1\\,;\\,5\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "formule",
+    "libelle": "Par la formule"
+   }
+  ]
  },
  "3(x+1)^2=0": {
   "cartes": [
@@ -13162,7 +17147,126 @@
   ],
   "enonce_tex": "3(x + 1)^{2} = 0",
   "erreur": null,
-  "ok": true
+  "ok": true,
+  "variante_defaut": "cours",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Produit nul",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "3(x + 1)(x + 1) = 0",
+          "gauche": "3(x + 1)^{2} = 0",
+          "lien": "\\iff"
+         },
+         {
+          "expr": "{\\underbrace{3 = 0}_{\\text{impossible}}} \\text{ ou } \\allowbreak {x + 1 = 0}",
+          "lien": "\\iff",
+          "prop": "produit nul"
+         },
+         {
+          "expr": "x = -1",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{-1\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "cours",
+    "libelle": "Méthodes du cours"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Développer",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "3(x^{2} + 2x + 1) = 0",
+          "gauche": "3(x + 1)^{2} = 0",
+          "lien": "\\iff",
+          "prop": "Id. rem. \\((A + B)^{2}\\) avec \\(A = x,\\ B = 1\\)"
+         },
+         {
+          "expr": "3x^{2} + 6x + 3 = 0",
+          "lien": "\\iff",
+          "prop": "distribution"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Discriminant",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta = b^{2} - 4ac = 6^{2} - 4 \\cdot 3 \\cdot 3 = 36 - 36 = \\fbox{$0$}",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Valeurs de x",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "texte": "\\(\\Delta = 0\\) : une seule solution."
+         },
+         {
+          "expr": "x = \\frac{-b}{2a} = \\frac{-6}{6} = -1",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{-1\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "formule",
+    "libelle": "Par la formule"
+   }
+  ]
  },
  "3(x^2+x-1)=0": {
   "cartes": [
@@ -13343,7 +17447,140 @@
   ],
   "enonce_tex": "3(x^{2} - 4) = 0",
   "erreur": null,
-  "ok": true
+  "ok": true,
+  "variante_defaut": "cours",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Identité remarquable",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "3(x + 2)(x - 2) = 0",
+          "gauche": "3(x^{2} - 4) = 0",
+          "lien": "\\iff",
+          "prop": "Id. rem. \\(A^{2} - B^{2}\\) avec \\(\\fbox{$A = x,\\ B = 2$}\\)"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Produit nul",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "{\\underbrace{3 = 0}_{\\text{impossible}}} \\text{ ou } \\allowbreak {x + 2 = 0} \\text{ ou } \\allowbreak {x - 2 = 0}",
+          "gauche": "3(x + 2)(x - 2) = 0",
+          "lien": "\\iff",
+          "prop": "produit nul"
+         },
+         {
+          "expr": "{x = -2} \\text{ ou } \\allowbreak {x = 2}",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{-2\\,;\\,2\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "cours",
+    "libelle": "Méthodes du cours"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Développer",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "3x^{2} - 12 = 0",
+          "gauche": "3(x^{2} - 4) = 0",
+          "lien": "\\iff",
+          "prop": "distribution"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Discriminant",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta = b^{2} - 4ac = 0^{2} - 4 \\cdot 3 \\cdot (-12) = \\fbox{$144$}",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Valeurs de x",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 12",
+          "lien": ""
+         },
+         {
+          "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-12}{6} = -2",
+          "lien": ""
+         },
+         {
+          "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{12}{6} = 2",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{-2\\,;\\,2\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "formule",
+    "libelle": "Par la formule"
+   }
+  ]
  },
  "3t^2+5t+12=0": {
   "cartes": [
@@ -13988,7 +18225,122 @@
   ],
   "enonce_tex": "3x^{2} - 12x = 0",
   "erreur": null,
-  "ok": true
+  "ok": true,
+  "variante_defaut": "cours",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Mise en évidence",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "3x(x - 4) = 0",
+          "gauche": "3x^{2} - 12x = 0",
+          "lien": "\\iff",
+          "prop": "ME"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Produit nul",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "{3x = 0} \\text{ ou } \\allowbreak {x - 4 = 0}",
+          "gauche": "3x(x - 4) = 0",
+          "lien": "\\iff",
+          "prop": "produit nul"
+         },
+         {
+          "expr": "{x = 0} \\text{ ou } \\allowbreak {x = 4}",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{0\\,;\\,4\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "cours",
+    "libelle": "Méthodes du cours"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Discriminant",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta = b^{2} - 4ac = (-12)^{2} - 4 \\cdot 3 \\cdot 0 = \\fbox{$144$}",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Valeurs de x",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 12",
+          "lien": ""
+         },
+         {
+          "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{12 - 12}{6} = 0",
+          "lien": ""
+         },
+         {
+          "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{12 + 12}{6} = 4",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{0\\,;\\,4\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "formule",
+    "libelle": "Par la formule"
+   }
+  ]
  },
  "3x^2-8x-35=0": {
   "cartes": [
@@ -14294,7 +18646,189 @@
   ],
   "enonce_tex": "4(x + 1)^{2} = 9(x - 2)^{2}",
   "erreur": null,
-  "ok": true
+  "ok": true,
+  "variante_defaut": "cours",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Ramener à 0",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "4(x + 1)^{2} - 9(x - 2)^{2} = 0",
+          "gauche": "4(x + 1)^{2} = 9(x - 2)^{2}",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Identité remarquable",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "texte": "Id. rem. \\(A^{2} - B^{2}\\) avec \\(\\fbox{$A = 2(x + 1),\\ B = 3(x - 2)$}\\) (car \\(A^{2} = 4(x + 1)^{2}\\) et \\(B^{2} = 9(x - 2)^{2}\\))."
+         },
+         {
+          "expr": "(2(x + 1) + 3(x - 2))(2(x + 1) - 3(x - 2)) = 0",
+          "gauche": "4(x + 1)^{2} - 9(x - 2)^{2} = 0",
+          "lien": "\\iff"
+         },
+         {
+          "expr": "(2x + 2 + 3x - 6)(2x + 2 - 3x + 6) = 0",
+          "lien": "\\iff"
+         },
+         {
+          "expr": "(5x - 4)(8 - x) = 0",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Produit nul",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "{5x - 4 = 0} \\text{ ou } \\allowbreak {8 - x = 0}",
+          "gauche": "(5x - 4)(8 - x) = 0",
+          "lien": "\\iff",
+          "prop": "produit nul"
+         },
+         {
+          "expr": "{x = \\frac{4}{5}} \\text{ ou } \\allowbreak {x = 8}",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{\\frac{4}{5}\\,;\\,8\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "cours",
+    "libelle": "Méthodes du cours"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Développer",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "4(x^{2} + 2x + 1) = 9(x^{2} - 4x + 4)",
+          "gauche": "4(x + 1)^{2} = 9(x - 2)^{2}",
+          "lien": "\\iff",
+          "prop": "Id. rem. \\((A + B)^{2}\\) avec \\(A = x,\\ B = 1\\) ; Id. rem. \\((A - B)^{2}\\) avec \\(A = x,\\ B = 2\\)"
+         },
+         {
+          "expr": "4x^{2} + 8x + 4 = 9x^{2} - 36x + 36",
+          "lien": "\\iff",
+          "prop": "distribution"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Ramener à 0",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "5x^{2} - 44x + 32 = 0",
+          "gauche": "4x^{2} + 8x + 4 = 9x^{2} - 36x + 36",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Discriminant",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta = b^{2} - 4ac = (-44)^{2} - 4 \\cdot 5 \\cdot 32 = 1\\text{’}936 - 640 = \\fbox{$1\\text{’}296$}",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "badge": "Valeurs de x",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 36",
+          "lien": ""
+         },
+         {
+          "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{44 - 36}{10} = \\frac{4}{5}",
+          "lien": ""
+         },
+         {
+          "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{44 + 36}{10} = 8",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 4"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{\\frac{4}{5}\\,;\\,8\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "formule",
+    "libelle": "Par la formule"
+   }
+  ]
  },
  "4(x-2)^2=1": {
   "cartes": [
@@ -14378,7 +18912,189 @@
   ],
   "enonce_tex": "4(x - 2)^{2} = 1",
   "erreur": null,
-  "ok": true
+  "ok": true,
+  "variante_defaut": "cours",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Ramener à 0",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "4(x - 2)^{2} - 1 = 0",
+          "gauche": "4(x - 2)^{2} = 1",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Identité remarquable",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "texte": "Id. rem. \\(A^{2} - B^{2}\\) avec \\(\\fbox{$A = 2(x - 2),\\ B = 1$}\\) (car \\(A^{2} = 4(x - 2)^{2}\\))."
+         },
+         {
+          "expr": "(2(x - 2) + 1)(2(x - 2) - 1) = 0",
+          "gauche": "4(x - 2)^{2} - 1 = 0",
+          "lien": "\\iff"
+         },
+         {
+          "expr": "(2x - 4 + 1)(2x - 4 - 1) = 0",
+          "lien": "\\iff"
+         },
+         {
+          "expr": "(2x - 3)(2x - 5) = 0",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Produit nul",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "{2x - 3 = 0} \\text{ ou } \\allowbreak {2x - 5 = 0}",
+          "gauche": "(2x - 3)(2x - 5) = 0",
+          "lien": "\\iff",
+          "prop": "produit nul"
+         },
+         {
+          "expr": "{x = \\frac{3}{2}} \\text{ ou } \\allowbreak {x = \\frac{5}{2}}",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{\\frac{3}{2}\\,;\\,\\frac{5}{2}\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "cours",
+    "libelle": "Méthodes du cours"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Développer",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "4(x^{2} - 4x + 4) = 1",
+          "gauche": "4(x - 2)^{2} = 1",
+          "lien": "\\iff",
+          "prop": "Id. rem. \\((A - B)^{2}\\) avec \\(A = x,\\ B = 2\\)"
+         },
+         {
+          "expr": "4x^{2} - 16x + 16 = 1",
+          "lien": "\\iff",
+          "prop": "distribution"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Ramener à 0",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "4x^{2} - 16x + 15 = 0",
+          "gauche": "4x^{2} - 16x + 16 = 1",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Discriminant",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta = b^{2} - 4ac = (-16)^{2} - 4 \\cdot 4 \\cdot 15 = 256 - 240 = \\fbox{$16$}",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "badge": "Valeurs de x",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 4",
+          "lien": ""
+         },
+         {
+          "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{16 - 4}{8} = \\frac{3}{2}",
+          "lien": ""
+         },
+         {
+          "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{16 + 4}{8} = \\frac{5}{2}",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 4"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{\\frac{3}{2}\\,;\\,\\frac{5}{2}\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "formule",
+    "libelle": "Par la formule"
+   }
+  ]
  },
  "4(x-2)^2=3": {
   "cartes": [
@@ -14466,7 +19182,197 @@
   ],
   "enonce_tex": "4(x - 2)^{2} = 3",
   "erreur": null,
-  "ok": true
+  "ok": true,
+  "variante_defaut": "cours",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Ramener à 0",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "4(x - 2)^{2} - 3 = 0",
+          "gauche": "4(x - 2)^{2} = 3",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Identité remarquable",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "texte": "Id. rem. \\(A^{2} - B^{2}\\) avec \\(\\fbox{$A = 2(x - 2),\\ B = \\sqrt{3}$}\\) (car \\(A^{2} = 4(x - 2)^{2}\\))."
+         },
+         {
+          "expr": "(2(x - 2) + \\sqrt{3})(2(x - 2) - \\sqrt{3}) = 0",
+          "gauche": "4(x - 2)^{2} - 3 = 0",
+          "lien": "\\iff"
+         },
+         {
+          "expr": "(2x - 4 + \\sqrt{3})(2x - 4 - \\sqrt{3}) = 0",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Produit nul",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "{2x - 4 + \\sqrt{3} = 0} \\text{ ou } \\allowbreak {2x - 4 - \\sqrt{3} = 0}",
+          "gauche": "(2x - 4 + \\sqrt{3})(2x - 4 - \\sqrt{3}) = 0",
+          "lien": "\\iff",
+          "prop": "produit nul"
+         },
+         {
+          "expr": "{2x = 4 - \\sqrt{3}} \\text{ ou } \\allowbreak {2x = 4 + \\sqrt{3}}",
+          "lien": "\\iff"
+         },
+         {
+          "expr": "{x = \\frac{4 - \\sqrt{3}}{2}} \\text{ ou } \\allowbreak {x = \\frac{4 + \\sqrt{3}}{2}}",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{\\frac{4 - \\sqrt{3}}{2}\\,;\\,\\frac{4 + \\sqrt{3}}{2}\\}",
+        "type": "resultat_lim"
+       },
+       {
+        "html": "soit \\(x \\approx 1{,}134\\) ou \\(x \\approx 2{,}866\\)",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "cours",
+    "libelle": "Méthodes du cours"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Développer",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "4(x^{2} - 4x + 4) = 3",
+          "gauche": "4(x - 2)^{2} = 3",
+          "lien": "\\iff",
+          "prop": "Id. rem. \\((A - B)^{2}\\) avec \\(A = x,\\ B = 2\\)"
+         },
+         {
+          "expr": "4x^{2} - 16x + 16 = 3",
+          "lien": "\\iff",
+          "prop": "distribution"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Ramener à 0",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "4x^{2} - 16x + 13 = 0",
+          "gauche": "4x^{2} - 16x + 16 = 3",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Discriminant",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta = b^{2} - 4ac = (-16)^{2} - 4 \\cdot 4 \\cdot 13 = 256 - 208 = \\fbox{$48$}",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "badge": "Valeurs de x",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = \\sqrt{48} = 4\\sqrt{3}",
+          "lien": ""
+         },
+         {
+          "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{16 - 4\\sqrt{3}}{8} = \\frac{4 - \\sqrt{3}}{2}",
+          "lien": ""
+         },
+         {
+          "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{16 + 4\\sqrt{3}}{8} = \\frac{4 + \\sqrt{3}}{2}",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 4"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{\\frac{4 - \\sqrt{3}}{2}\\,;\\,\\frac{4 + \\sqrt{3}}{2}\\}",
+        "type": "resultat_lim"
+       },
+       {
+        "html": "soit \\(x_{1} \\approx 1{,}134\\) et \\(x_{2} \\approx 2{,}866\\)",
+        "type": "texte"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "formule",
+    "libelle": "Par la formule"
+   }
+  ]
  },
  "45u+12=12u^2": {
   "cartes": [
@@ -19792,7 +24698,122 @@
   ],
   "enonce_tex": "x(x + 1) = 0",
   "erreur": null,
-  "ok": true
+  "ok": true,
+  "variante_defaut": "cours",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Produit nul",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "{x = 0} \\text{ ou } \\allowbreak {x + 1 = 0}",
+          "gauche": "x(x + 1) = 0",
+          "lien": "\\iff",
+          "prop": "produit nul"
+         },
+         {
+          "expr": "{x = 0} \\text{ ou } \\allowbreak {x = -1}",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{-1\\,;\\,0\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "cours",
+    "libelle": "Méthodes du cours"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Développer",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "x^{2} + x = 0",
+          "gauche": "x(x + 1) = 0",
+          "lien": "\\iff",
+          "prop": "distribution"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Discriminant",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta = b^{2} - 4ac = 1^{2} - 4 \\cdot 1 \\cdot 0 = \\fbox{$1$}",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Valeurs de x",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 1",
+          "lien": ""
+         },
+         {
+          "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-1 - 1}{2} = -1",
+          "lien": ""
+         },
+         {
+          "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-1 + 1}{2} = 0",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{-1\\,;\\,0\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "formule",
+    "libelle": "Par la formule"
+   }
+  ]
  },
  "x(x+1)^2=4x": {
   "cartes": [
@@ -19937,290 +24958,7 @@
   ],
   "enonce_tex": "x(x + 1)^{2} = 4x",
   "erreur": null,
-  "ok": true,
-  "variante_defaut": "cours",
-  "variantes": [
-   {
-    "cartes": [
-     {
-      "badge": "Développer",
-      "blocs": [
-       {
-        "rangees": [
-         {
-          "expr": "x(x^{2} + 2x + 1) = 4x",
-          "gauche": "x(x + 1)^{2} = 4x",
-          "lien": "\\iff",
-          "prop": "Id. rem. \\((A + B)^{2}\\) avec \\(A = x,\\ B = 1\\)"
-         },
-         {
-          "expr": "x^{3} + 2x^{2} + x = 4x",
-          "lien": "\\iff",
-          "prop": "distribution"
-         }
-        ],
-        "type": "chaine"
-       }
-      ],
-      "style": "normal",
-      "titre": "Étape 1"
-     },
-     {
-      "badge": "Ramener à 0",
-      "blocs": [
-       {
-        "rangees": [
-         {
-          "expr": "x^{3} + 2x^{2} - 3x = 0",
-          "gauche": "x^{3} + 2x^{2} + x = 4x",
-          "lien": "\\iff"
-         }
-        ],
-        "type": "chaine"
-       }
-      ],
-      "style": "normal",
-      "titre": "Étape 2"
-     },
-     {
-      "badge": "Mise en évidence",
-      "blocs": [
-       {
-        "rangees": [
-         {
-          "expr": "x(x^{2} + 2x - 3) = 0",
-          "gauche": "x^{3} + 2x^{2} - 3x = 0",
-          "lien": "\\iff",
-          "prop": "ME"
-         }
-        ],
-        "type": "chaine"
-       }
-      ],
-      "style": "normal",
-      "titre": "Étape 3"
-     },
-     {
-      "badge": "Somme-Produit",
-      "blocs": [
-       {
-        "rangees": [
-         {
-          "texte": "Le trinôme \\(x^{2} + 2x - 3\\) est unitaire : S-P."
-         },
-         {
-          "texte": "On cherche deux nombres dont le produit vaut \\(-3\\) et la somme vaut \\(2\\) :"
-         },
-         {
-          "bloc": {
-           "groupes": [
-            {
-             "colonnes": 2,
-             "titre": "produit \\(= -3\\)"
-            },
-            {
-             "colonnes": 1,
-             "titre": "somme"
-            }
-           ],
-           "lignes": [
-            {
-             "cases": [
-              "-1",
-              "3",
-              "2"
-             ],
-             "ok": true
-            }
-           ],
-           "type": "tableau_essais"
-          }
-         },
-         {
-          "expr": "x(x - 1)(x + 3) = 0",
-          "gauche": "x(x^{2} + 2x - 3) = 0",
-          "lien": "\\iff"
-         }
-        ],
-        "type": "chaine"
-       }
-      ],
-      "style": "normal",
-      "titre": "Étape 4"
-     },
-     {
-      "badge": "Produit nul",
-      "blocs": [
-       {
-        "rangees": [
-         {
-          "expr": "{x = 0} \\text{ ou } \\allowbreak {x - 1 = 0} \\text{ ou } \\allowbreak {x + 3 = 0}",
-          "gauche": "x(x - 1)(x + 3) = 0",
-          "lien": "\\iff",
-          "prop": "produit nul"
-         },
-         {
-          "expr": "{x = 0} \\text{ ou } \\allowbreak {x = 1} \\text{ ou } \\allowbreak {x = -3}",
-          "lien": "\\iff"
-         }
-        ],
-        "type": "chaine"
-       }
-      ],
-      "style": "normal",
-      "titre": "Étape 5"
-     },
-     {
-      "blocs": [
-       {
-        "tex": "S = \\{-3\\,;\\,0\\,;\\,1\\}",
-        "type": "resultat_lim"
-       }
-      ],
-      "style": "normal",
-      "titre": "Solution"
-     }
-    ],
-    "cle": "cours",
-    "libelle": "Méthodes du cours"
-   },
-   {
-    "cartes": [
-     {
-      "badge": "Développer",
-      "blocs": [
-       {
-        "rangees": [
-         {
-          "expr": "x(x^{2} + 2x + 1) = 4x",
-          "gauche": "x(x + 1)^{2} = 4x",
-          "lien": "\\iff",
-          "prop": "Id. rem. \\((A + B)^{2}\\) avec \\(A = x,\\ B = 1\\)"
-         },
-         {
-          "expr": "x^{3} + 2x^{2} + x = 4x",
-          "lien": "\\iff",
-          "prop": "distribution"
-         }
-        ],
-        "type": "chaine"
-       }
-      ],
-      "style": "normal",
-      "titre": "Étape 1"
-     },
-     {
-      "badge": "Ramener à 0",
-      "blocs": [
-       {
-        "rangees": [
-         {
-          "expr": "x^{3} + 2x^{2} - 3x = 0",
-          "gauche": "x^{3} + 2x^{2} + x = 4x",
-          "lien": "\\iff"
-         }
-        ],
-        "type": "chaine"
-       }
-      ],
-      "style": "normal",
-      "titre": "Étape 2"
-     },
-     {
-      "badge": "Mise en évidence",
-      "blocs": [
-       {
-        "rangees": [
-         {
-          "expr": "x(x^{2} + 2x - 3) = 0",
-          "gauche": "x^{3} + 2x^{2} - 3x = 0",
-          "lien": "\\iff",
-          "prop": "ME"
-         }
-        ],
-        "type": "chaine"
-       }
-      ],
-      "style": "normal",
-      "titre": "Étape 3"
-     },
-     {
-      "badge": "Produit nul",
-      "blocs": [
-       {
-        "rangees": [
-         {
-          "expr": "{x = 0} \\text{ ou } \\allowbreak {x^{2} + 2x - 3 = 0}",
-          "gauche": "x(x^{2} + 2x - 3) = 0",
-          "lien": "\\iff",
-          "prop": "produit nul"
-         }
-        ],
-        "type": "chaine"
-       }
-      ],
-      "style": "normal",
-      "titre": "Étape 4"
-     },
-     {
-      "badge": "Discriminant",
-      "blocs": [
-       {
-        "rangees": [
-         {
-          "expr": "\\Delta = b^{2} - 4ac = 2^{2} - 4 \\cdot 1 \\cdot (-3) = 4 + 12 = \\fbox{$16$}",
-          "lien": ""
-         }
-        ],
-        "type": "chaine"
-       }
-      ],
-      "style": "normal",
-      "titre": "Étape 5"
-     },
-     {
-      "badge": "Valeurs de x",
-      "blocs": [
-       {
-        "rangees": [
-         {
-          "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 4",
-          "lien": ""
-         },
-         {
-          "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-2 - 4}{2} = -3",
-          "lien": ""
-         },
-         {
-          "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-2 + 4}{2} = 1",
-          "lien": ""
-         },
-         {
-          "expr": "{x = 0} \\text{ ou } \\allowbreak {x = -3} \\text{ ou } \\allowbreak {x = 1}",
-          "lien": "\\iff"
-         }
-        ],
-        "type": "chaine"
-       }
-      ],
-      "style": "normal",
-      "titre": "Étape 6"
-     },
-     {
-      "blocs": [
-       {
-        "tex": "S = \\{-3\\,;\\,0\\,;\\,1\\}",
-        "type": "resultat_lim"
-       }
-      ],
-      "style": "normal",
-      "titre": "Solution"
-     }
-    ],
-    "cle": "formule",
-    "libelle": "Par la formule"
-   }
-  ]
+  "ok": true
  },
  "x(x-3)=2(x-3)": {
   "cartes": [
@@ -20301,7 +25039,181 @@
   ],
   "enonce_tex": "x(x - 3) = 2(x - 3)",
   "erreur": null,
-  "ok": true
+  "ok": true,
+  "variante_defaut": "cours",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Ramener à 0",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "texte": "Attention : on ne divise pas par \\((x - 3)\\), car ce facteur peut être nul ! On ramène tout dans le membre de gauche, puis on met \\((x - 3)\\) en évidence."
+         },
+         {
+          "expr": "x(x - 3) - 2(x - 3) = 0",
+          "gauche": "x(x - 3) = 2(x - 3)",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Mise en évidence",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "(x - 3)[x - 2] = 0",
+          "gauche": "x(x - 3) - 2(x - 3) = 0",
+          "lien": "\\iff",
+          "prop": "ME"
+         },
+         {
+          "expr": "(x - 3)(x - 2) = 0",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Produit nul",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "{x - 3 = 0} \\text{ ou } \\allowbreak {x - 2 = 0}",
+          "gauche": "(x - 3)(x - 2) = 0",
+          "lien": "\\iff",
+          "prop": "produit nul"
+         },
+         {
+          "expr": "{x = 3} \\text{ ou } \\allowbreak {x = 2}",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{2\\,;\\,3\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "cours",
+    "libelle": "Méthodes du cours"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Développer",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "x^{2} - 3x = 2x - 6",
+          "gauche": "x(x - 3) = 2(x - 3)",
+          "lien": "\\iff",
+          "prop": "distribution"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Ramener à 0",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "x^{2} - 5x + 6 = 0",
+          "gauche": "x^{2} - 3x = 2x - 6",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Discriminant",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta = b^{2} - 4ac = (-5)^{2} - 4 \\cdot 1 \\cdot 6 = 25 - 24 = \\fbox{$1$}",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "badge": "Valeurs de x",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 1",
+          "lien": ""
+         },
+         {
+          "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{5 - 1}{2} = 2",
+          "lien": ""
+         },
+         {
+          "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{5 + 1}{2} = 3",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 4"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{2\\,;\\,3\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "formule",
+    "libelle": "Par la formule"
+   }
+  ]
  },
  "x(x-4)=5": {
   "cartes": [
@@ -28190,7 +33102,226 @@
   ],
   "enonce_tex": "x^{3} - (x - 1)^{3} = 1",
   "erreur": null,
-  "ok": true
+  "ok": true,
+  "variante_defaut": "cours",
+  "variantes": [
+   {
+    "cartes": [
+     {
+      "badge": "Développer",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "x^{3} - (x - 1)^{2}(x - 1) = 1",
+          "gauche": "x^{3} - (x - 1)^{3} = 1",
+          "lien": "\\iff"
+         },
+         {
+          "expr": "x^{3} - (x^{2} - 2x + 1)(x - 1) = 1",
+          "lien": "\\iff",
+          "prop": "Id. rem. \\((A - B)^{2}\\) avec \\(A = x,\\ B = 1\\)"
+         },
+         {
+          "expr": "x^{3} - (x^{3} - x^{2} - 2x^{2} + 2x + x - 1) = 1",
+          "lien": "\\iff",
+          "prop": "double distribution"
+         },
+         {
+          "expr": "x^{3} - x^{3} + x^{2} + 2x^{2} - 2x - x + 1 = 1",
+          "lien": "\\iff"
+         },
+         {
+          "expr": "3x^{2} - 3x + 1 = 1",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Ramener à 0",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "3x^{2} - 3x = 0",
+          "gauche": "3x^{2} - 3x + 1 = 1",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Mise en évidence",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "3x(x - 1) = 0",
+          "gauche": "3x^{2} - 3x = 0",
+          "lien": "\\iff",
+          "prop": "ME"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "badge": "Produit nul",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "{3x = 0} \\text{ ou } \\allowbreak {x - 1 = 0}",
+          "gauche": "3x(x - 1) = 0",
+          "lien": "\\iff",
+          "prop": "produit nul"
+         },
+         {
+          "expr": "{x = 0} \\text{ ou } \\allowbreak {x = 1}",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 4"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{0\\,;\\,1\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "cours",
+    "libelle": "Méthodes du cours"
+   },
+   {
+    "cartes": [
+     {
+      "badge": "Développer",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "x^{3} - (x - 1)^{2}(x - 1) = 1",
+          "gauche": "x^{3} - (x - 1)^{3} = 1",
+          "lien": "\\iff"
+         },
+         {
+          "expr": "x^{3} - (x^{2} - 2x + 1)(x - 1) = 1",
+          "lien": "\\iff",
+          "prop": "Id. rem. \\((A - B)^{2}\\) avec \\(A = x,\\ B = 1\\)"
+         },
+         {
+          "expr": "x^{3} - (x^{3} - x^{2} - 2x^{2} + 2x + x - 1) = 1",
+          "lien": "\\iff",
+          "prop": "double distribution"
+         },
+         {
+          "expr": "x^{3} - x^{3} + x^{2} + 2x^{2} - 2x - x + 1 = 1",
+          "lien": "\\iff"
+         },
+         {
+          "expr": "3x^{2} - 3x + 1 = 1",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 1"
+     },
+     {
+      "badge": "Ramener à 0",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "3x^{2} - 3x = 0",
+          "gauche": "3x^{2} - 3x + 1 = 1",
+          "lien": "\\iff"
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 2"
+     },
+     {
+      "badge": "Discriminant",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta = b^{2} - 4ac = (-3)^{2} - 4 \\cdot 3 \\cdot 0 = \\fbox{$9$}",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 3"
+     },
+     {
+      "badge": "Valeurs de x",
+      "blocs": [
+       {
+        "rangees": [
+         {
+          "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 3",
+          "lien": ""
+         },
+         {
+          "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{3 - 3}{6} = 0",
+          "lien": ""
+         },
+         {
+          "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{3 + 3}{6} = 1",
+          "lien": ""
+         }
+        ],
+        "type": "chaine"
+       }
+      ],
+      "style": "normal",
+      "titre": "Étape 4"
+     },
+     {
+      "blocs": [
+       {
+        "tex": "S = \\{0\\,;\\,1\\}",
+        "type": "resultat_lim"
+       }
+      ],
+      "style": "normal",
+      "titre": "Solution"
+     }
+    ],
+    "cle": "formule",
+    "libelle": "Par la formule"
+   }
+  ]
  },
  "x^3-2x^2-2x=0": {
   "cartes": [
@@ -28411,188 +33542,7 @@
   ],
   "enonce_tex": "x^{3} - 5x = 0",
   "erreur": null,
-  "ok": true,
-  "variante_defaut": "cours",
-  "variantes": [
-   {
-    "cartes": [
-     {
-      "badge": "Mise en évidence",
-      "blocs": [
-       {
-        "rangees": [
-         {
-          "expr": "x(x^{2} - 5) = 0",
-          "gauche": "x^{3} - 5x = 0",
-          "lien": "\\iff",
-          "prop": "ME"
-         }
-        ],
-        "type": "chaine"
-       }
-      ],
-      "style": "normal",
-      "titre": "Étape 1"
-     },
-     {
-      "badge": "Identité remarquable",
-      "blocs": [
-       {
-        "rangees": [
-         {
-          "expr": "x(x + \\sqrt{5})(x - \\sqrt{5}) = 0",
-          "gauche": "x(x^{2} - 5) = 0",
-          "lien": "\\iff",
-          "prop": "Id. rem. \\(A^{2} - B^{2}\\) avec \\(\\fbox{$A = x,\\ B = \\sqrt{5}$}\\)"
-         }
-        ],
-        "type": "chaine"
-       }
-      ],
-      "style": "normal",
-      "titre": "Étape 2"
-     },
-     {
-      "badge": "Produit nul",
-      "blocs": [
-       {
-        "rangees": [
-         {
-          "expr": "{x = 0} \\text{ ou } \\allowbreak {x + \\sqrt{5} = 0} \\text{ ou } \\allowbreak {x - \\sqrt{5} = 0}",
-          "gauche": "x(x + \\sqrt{5})(x - \\sqrt{5}) = 0",
-          "lien": "\\iff",
-          "prop": "produit nul"
-         },
-         {
-          "expr": "{x = 0} \\text{ ou } \\allowbreak {x = -\\sqrt{5}} \\text{ ou } \\allowbreak {x = \\sqrt{5}}",
-          "lien": "\\iff"
-         }
-        ],
-        "type": "chaine"
-       }
-      ],
-      "style": "normal",
-      "titre": "Étape 3"
-     },
-     {
-      "blocs": [
-       {
-        "tex": "S = \\{-\\sqrt{5}\\,;\\,0\\,;\\,\\sqrt{5}\\}",
-        "type": "resultat_lim"
-       },
-       {
-        "html": "soit \\(x \\approx -2{,}236\\) ou \\(x = 0\\) ou \\(x \\approx 2{,}236\\)",
-        "type": "texte"
-       }
-      ],
-      "style": "normal",
-      "titre": "Solution"
-     }
-    ],
-    "cle": "cours",
-    "libelle": "Méthodes du cours"
-   },
-   {
-    "cartes": [
-     {
-      "badge": "Mise en évidence",
-      "blocs": [
-       {
-        "rangees": [
-         {
-          "expr": "x(x^{2} - 5) = 0",
-          "gauche": "x^{3} - 5x = 0",
-          "lien": "\\iff",
-          "prop": "ME"
-         }
-        ],
-        "type": "chaine"
-       }
-      ],
-      "style": "normal",
-      "titre": "Étape 1"
-     },
-     {
-      "badge": "Produit nul",
-      "blocs": [
-       {
-        "rangees": [
-         {
-          "expr": "{x = 0} \\text{ ou } \\allowbreak {x^{2} - 5 = 0}",
-          "gauche": "x(x^{2} - 5) = 0",
-          "lien": "\\iff",
-          "prop": "produit nul"
-         }
-        ],
-        "type": "chaine"
-       }
-      ],
-      "style": "normal",
-      "titre": "Étape 2"
-     },
-     {
-      "badge": "Discriminant",
-      "blocs": [
-       {
-        "rangees": [
-         {
-          "expr": "\\Delta = b^{2} - 4ac = 0^{2} - 4 \\cdot 1 \\cdot (-5) = \\fbox{$20$}",
-          "lien": ""
-         }
-        ],
-        "type": "chaine"
-       }
-      ],
-      "style": "normal",
-      "titre": "Étape 3"
-     },
-     {
-      "badge": "Valeurs de x",
-      "blocs": [
-       {
-        "rangees": [
-         {
-          "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = \\sqrt{20} = 2\\sqrt{5}",
-          "lien": ""
-         },
-         {
-          "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-2\\sqrt{5}}{2} = -\\sqrt{5}",
-          "lien": ""
-         },
-         {
-          "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{2\\sqrt{5}}{2} = \\sqrt{5}",
-          "lien": ""
-         },
-         {
-          "expr": "{x = 0} \\text{ ou } \\allowbreak {x = -\\sqrt{5}} \\text{ ou } \\allowbreak {x = \\sqrt{5}}",
-          "lien": "\\iff"
-         }
-        ],
-        "type": "chaine"
-       }
-      ],
-      "style": "normal",
-      "titre": "Étape 4"
-     },
-     {
-      "blocs": [
-       {
-        "tex": "S = \\{-\\sqrt{5}\\,;\\,0\\,;\\,\\sqrt{5}\\}",
-        "type": "resultat_lim"
-       },
-       {
-        "html": "soit \\(x \\approx -2{,}236\\) ou \\(x = 0\\) ou \\(x \\approx 2{,}236\\)",
-        "type": "texte"
-       }
-      ],
-      "style": "normal",
-      "titre": "Solution"
-     }
-    ],
-    "cle": "formule",
-    "libelle": "Par la formule"
-   }
-  ]
+  "ok": true
  },
  "x^3-5x^2+6x=0": {
   "cartes": [
@@ -28704,217 +33654,7 @@
   ],
   "enonce_tex": "x^{3} - 5x^{2} + 6x = 0",
   "erreur": null,
-  "ok": true,
-  "variante_defaut": "cours",
-  "variantes": [
-   {
-    "cartes": [
-     {
-      "badge": "Mise en évidence",
-      "blocs": [
-       {
-        "rangees": [
-         {
-          "expr": "x(x^{2} - 5x + 6) = 0",
-          "gauche": "x^{3} - 5x^{2} + 6x = 0",
-          "lien": "\\iff",
-          "prop": "ME"
-         }
-        ],
-        "type": "chaine"
-       }
-      ],
-      "style": "normal",
-      "titre": "Étape 1"
-     },
-     {
-      "badge": "Somme-Produit",
-      "blocs": [
-       {
-        "rangees": [
-         {
-          "texte": "Le trinôme \\(x^{2} - 5x + 6\\) est unitaire : S-P."
-         },
-         {
-          "texte": "On cherche deux nombres dont le produit vaut \\(6\\) et la somme vaut \\(-5\\) :"
-         },
-         {
-          "bloc": {
-           "groupes": [
-            {
-             "colonnes": 2,
-             "titre": "produit \\(= 6\\)"
-            },
-            {
-             "colonnes": 1,
-             "titre": "somme"
-            }
-           ],
-           "lignes": [
-            {
-             "cases": [
-              "-1",
-              "-6",
-              "-7"
-             ]
-            },
-            {
-             "cases": [
-              "-2",
-              "-3",
-              "-5"
-             ],
-             "ok": true
-            }
-           ],
-           "type": "tableau_essais"
-          }
-         },
-         {
-          "expr": "x(x - 2)(x - 3) = 0",
-          "gauche": "x(x^{2} - 5x + 6) = 0",
-          "lien": "\\iff"
-         }
-        ],
-        "type": "chaine"
-       }
-      ],
-      "style": "normal",
-      "titre": "Étape 2"
-     },
-     {
-      "badge": "Produit nul",
-      "blocs": [
-       {
-        "rangees": [
-         {
-          "expr": "{x = 0} \\text{ ou } \\allowbreak {x - 2 = 0} \\text{ ou } \\allowbreak {x - 3 = 0}",
-          "gauche": "x(x - 2)(x - 3) = 0",
-          "lien": "\\iff",
-          "prop": "produit nul"
-         },
-         {
-          "expr": "{x = 0} \\text{ ou } \\allowbreak {x = 2} \\text{ ou } \\allowbreak {x = 3}",
-          "lien": "\\iff"
-         }
-        ],
-        "type": "chaine"
-       }
-      ],
-      "style": "normal",
-      "titre": "Étape 3"
-     },
-     {
-      "blocs": [
-       {
-        "tex": "S = \\{0\\,;\\,2\\,;\\,3\\}",
-        "type": "resultat_lim"
-       }
-      ],
-      "style": "normal",
-      "titre": "Solution"
-     }
-    ],
-    "cle": "cours",
-    "libelle": "Méthodes du cours"
-   },
-   {
-    "cartes": [
-     {
-      "badge": "Mise en évidence",
-      "blocs": [
-       {
-        "rangees": [
-         {
-          "expr": "x(x^{2} - 5x + 6) = 0",
-          "gauche": "x^{3} - 5x^{2} + 6x = 0",
-          "lien": "\\iff",
-          "prop": "ME"
-         }
-        ],
-        "type": "chaine"
-       }
-      ],
-      "style": "normal",
-      "titre": "Étape 1"
-     },
-     {
-      "badge": "Produit nul",
-      "blocs": [
-       {
-        "rangees": [
-         {
-          "expr": "{x = 0} \\text{ ou } \\allowbreak {x^{2} - 5x + 6 = 0}",
-          "gauche": "x(x^{2} - 5x + 6) = 0",
-          "lien": "\\iff",
-          "prop": "produit nul"
-         }
-        ],
-        "type": "chaine"
-       }
-      ],
-      "style": "normal",
-      "titre": "Étape 2"
-     },
-     {
-      "badge": "Discriminant",
-      "blocs": [
-       {
-        "rangees": [
-         {
-          "expr": "\\Delta = b^{2} - 4ac = (-5)^{2} - 4 \\cdot 1 \\cdot 6 = 25 - 24 = \\fbox{$1$}",
-          "lien": ""
-         }
-        ],
-        "type": "chaine"
-       }
-      ],
-      "style": "normal",
-      "titre": "Étape 3"
-     },
-     {
-      "badge": "Valeurs de x",
-      "blocs": [
-       {
-        "rangees": [
-         {
-          "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 1",
-          "lien": ""
-         },
-         {
-          "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{5 - 1}{2} = 2",
-          "lien": ""
-         },
-         {
-          "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{5 + 1}{2} = 3",
-          "lien": ""
-         },
-         {
-          "expr": "{x = 0} \\text{ ou } \\allowbreak {x = 2} \\text{ ou } \\allowbreak {x = 3}",
-          "lien": "\\iff"
-         }
-        ],
-        "type": "chaine"
-       }
-      ],
-      "style": "normal",
-      "titre": "Étape 4"
-     },
-     {
-      "blocs": [
-       {
-        "tex": "S = \\{0\\,;\\,2\\,;\\,3\\}",
-        "type": "resultat_lim"
-       }
-      ],
-      "style": "normal",
-      "titre": "Solution"
-     }
-    ],
-    "cle": "formule",
-    "libelle": "Par la formule"
-   }
-  ]
+  "ok": true
  },
  "x^3-x=0": {
   "cartes": [
@@ -28989,180 +33729,7 @@
   ],
   "enonce_tex": "x^{3} - x = 0",
   "erreur": null,
-  "ok": true,
-  "variante_defaut": "cours",
-  "variantes": [
-   {
-    "cartes": [
-     {
-      "badge": "Mise en évidence",
-      "blocs": [
-       {
-        "rangees": [
-         {
-          "expr": "x(x^{2} - 1) = 0",
-          "gauche": "x^{3} - x = 0",
-          "lien": "\\iff",
-          "prop": "ME"
-         }
-        ],
-        "type": "chaine"
-       }
-      ],
-      "style": "normal",
-      "titre": "Étape 1"
-     },
-     {
-      "badge": "Identité remarquable",
-      "blocs": [
-       {
-        "rangees": [
-         {
-          "expr": "x(x + 1)(x - 1) = 0",
-          "gauche": "x(x^{2} - 1) = 0",
-          "lien": "\\iff",
-          "prop": "Id. rem. \\(A^{2} - B^{2}\\) avec \\(\\fbox{$A = x,\\ B = 1$}\\)"
-         }
-        ],
-        "type": "chaine"
-       }
-      ],
-      "style": "normal",
-      "titre": "Étape 2"
-     },
-     {
-      "badge": "Produit nul",
-      "blocs": [
-       {
-        "rangees": [
-         {
-          "expr": "{x = 0} \\text{ ou } \\allowbreak {x + 1 = 0} \\text{ ou } \\allowbreak {x - 1 = 0}",
-          "gauche": "x(x + 1)(x - 1) = 0",
-          "lien": "\\iff",
-          "prop": "produit nul"
-         },
-         {
-          "expr": "{x = 0} \\text{ ou } \\allowbreak {x = -1} \\text{ ou } \\allowbreak {x = 1}",
-          "lien": "\\iff"
-         }
-        ],
-        "type": "chaine"
-       }
-      ],
-      "style": "normal",
-      "titre": "Étape 3"
-     },
-     {
-      "blocs": [
-       {
-        "tex": "S = \\{-1\\,;\\,0\\,;\\,1\\}",
-        "type": "resultat_lim"
-       }
-      ],
-      "style": "normal",
-      "titre": "Solution"
-     }
-    ],
-    "cle": "cours",
-    "libelle": "Méthodes du cours"
-   },
-   {
-    "cartes": [
-     {
-      "badge": "Mise en évidence",
-      "blocs": [
-       {
-        "rangees": [
-         {
-          "expr": "x(x^{2} - 1) = 0",
-          "gauche": "x^{3} - x = 0",
-          "lien": "\\iff",
-          "prop": "ME"
-         }
-        ],
-        "type": "chaine"
-       }
-      ],
-      "style": "normal",
-      "titre": "Étape 1"
-     },
-     {
-      "badge": "Produit nul",
-      "blocs": [
-       {
-        "rangees": [
-         {
-          "expr": "{x = 0} \\text{ ou } \\allowbreak {x^{2} - 1 = 0}",
-          "gauche": "x(x^{2} - 1) = 0",
-          "lien": "\\iff",
-          "prop": "produit nul"
-         }
-        ],
-        "type": "chaine"
-       }
-      ],
-      "style": "normal",
-      "titre": "Étape 2"
-     },
-     {
-      "badge": "Discriminant",
-      "blocs": [
-       {
-        "rangees": [
-         {
-          "expr": "\\Delta = b^{2} - 4ac = 0^{2} - 4 \\cdot 1 \\cdot (-1) = \\fbox{$4$}",
-          "lien": ""
-         }
-        ],
-        "type": "chaine"
-       }
-      ],
-      "style": "normal",
-      "titre": "Étape 3"
-     },
-     {
-      "badge": "Valeurs de x",
-      "blocs": [
-       {
-        "rangees": [
-         {
-          "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 2",
-          "lien": ""
-         },
-         {
-          "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-2}{2} = -1",
-          "lien": ""
-         },
-         {
-          "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{2}{2} = 1",
-          "lien": ""
-         },
-         {
-          "expr": "{x = 0} \\text{ ou } \\allowbreak {x = -1} \\text{ ou } \\allowbreak {x = 1}",
-          "lien": "\\iff"
-         }
-        ],
-        "type": "chaine"
-       }
-      ],
-      "style": "normal",
-      "titre": "Étape 4"
-     },
-     {
-      "blocs": [
-       {
-        "tex": "S = \\{-1\\,;\\,0\\,;\\,1\\}",
-        "type": "resultat_lim"
-       }
-      ],
-      "style": "normal",
-      "titre": "Solution"
-     }
-    ],
-    "cle": "formule",
-    "libelle": "Par la formule"
-   }
-  ]
+  "ok": true
  },
  "x^3=4x": {
   "cartes": [
@@ -29254,214 +33821,7 @@
   ],
   "enonce_tex": "x^{3} = 4x",
   "erreur": null,
-  "ok": true,
-  "variante_defaut": "cours",
-  "variantes": [
-   {
-    "cartes": [
-     {
-      "badge": "Ramener à 0",
-      "blocs": [
-       {
-        "rangees": [
-         {
-          "expr": "x^{3} - 4x = 0",
-          "gauche": "x^{3} = 4x",
-          "lien": "\\iff"
-         }
-        ],
-        "type": "chaine"
-       }
-      ],
-      "style": "normal",
-      "titre": "Étape 1"
-     },
-     {
-      "badge": "Mise en évidence",
-      "blocs": [
-       {
-        "rangees": [
-         {
-          "expr": "x(x^{2} - 4) = 0",
-          "gauche": "x^{3} - 4x = 0",
-          "lien": "\\iff",
-          "prop": "ME"
-         }
-        ],
-        "type": "chaine"
-       }
-      ],
-      "style": "normal",
-      "titre": "Étape 2"
-     },
-     {
-      "badge": "Identité remarquable",
-      "blocs": [
-       {
-        "rangees": [
-         {
-          "expr": "x(x + 2)(x - 2) = 0",
-          "gauche": "x(x^{2} - 4) = 0",
-          "lien": "\\iff",
-          "prop": "Id. rem. \\(A^{2} - B^{2}\\) avec \\(\\fbox{$A = x,\\ B = 2$}\\)"
-         }
-        ],
-        "type": "chaine"
-       }
-      ],
-      "style": "normal",
-      "titre": "Étape 3"
-     },
-     {
-      "badge": "Produit nul",
-      "blocs": [
-       {
-        "rangees": [
-         {
-          "expr": "{x = 0} \\text{ ou } \\allowbreak {x + 2 = 0} \\text{ ou } \\allowbreak {x - 2 = 0}",
-          "gauche": "x(x + 2)(x - 2) = 0",
-          "lien": "\\iff",
-          "prop": "produit nul"
-         },
-         {
-          "expr": "{x = 0} \\text{ ou } \\allowbreak {x = -2} \\text{ ou } \\allowbreak {x = 2}",
-          "lien": "\\iff"
-         }
-        ],
-        "type": "chaine"
-       }
-      ],
-      "style": "normal",
-      "titre": "Étape 4"
-     },
-     {
-      "blocs": [
-       {
-        "tex": "S = \\{-2\\,;\\,0\\,;\\,2\\}",
-        "type": "resultat_lim"
-       }
-      ],
-      "style": "normal",
-      "titre": "Solution"
-     }
-    ],
-    "cle": "cours",
-    "libelle": "Méthodes du cours"
-   },
-   {
-    "cartes": [
-     {
-      "badge": "Ramener à 0",
-      "blocs": [
-       {
-        "rangees": [
-         {
-          "expr": "x^{3} - 4x = 0",
-          "gauche": "x^{3} = 4x",
-          "lien": "\\iff"
-         }
-        ],
-        "type": "chaine"
-       }
-      ],
-      "style": "normal",
-      "titre": "Étape 1"
-     },
-     {
-      "badge": "Mise en évidence",
-      "blocs": [
-       {
-        "rangees": [
-         {
-          "expr": "x(x^{2} - 4) = 0",
-          "gauche": "x^{3} - 4x = 0",
-          "lien": "\\iff",
-          "prop": "ME"
-         }
-        ],
-        "type": "chaine"
-       }
-      ],
-      "style": "normal",
-      "titre": "Étape 2"
-     },
-     {
-      "badge": "Produit nul",
-      "blocs": [
-       {
-        "rangees": [
-         {
-          "expr": "{x = 0} \\text{ ou } \\allowbreak {x^{2} - 4 = 0}",
-          "gauche": "x(x^{2} - 4) = 0",
-          "lien": "\\iff",
-          "prop": "produit nul"
-         }
-        ],
-        "type": "chaine"
-       }
-      ],
-      "style": "normal",
-      "titre": "Étape 3"
-     },
-     {
-      "badge": "Discriminant",
-      "blocs": [
-       {
-        "rangees": [
-         {
-          "expr": "\\Delta = b^{2} - 4ac = 0^{2} - 4 \\cdot 1 \\cdot (-4) = \\fbox{$16$}",
-          "lien": ""
-         }
-        ],
-        "type": "chaine"
-       }
-      ],
-      "style": "normal",
-      "titre": "Étape 4"
-     },
-     {
-      "badge": "Valeurs de x",
-      "blocs": [
-       {
-        "rangees": [
-         {
-          "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 4",
-          "lien": ""
-         },
-         {
-          "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-4}{2} = -2",
-          "lien": ""
-         },
-         {
-          "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{4}{2} = 2",
-          "lien": ""
-         },
-         {
-          "expr": "{x = 0} \\text{ ou } \\allowbreak {x = -2} \\text{ ou } \\allowbreak {x = 2}",
-          "lien": "\\iff"
-         }
-        ],
-        "type": "chaine"
-       }
-      ],
-      "style": "normal",
-      "titre": "Étape 5"
-     },
-     {
-      "blocs": [
-       {
-        "tex": "S = \\{-2\\,;\\,0\\,;\\,2\\}",
-        "type": "resultat_lim"
-       }
-      ],
-      "style": "normal",
-      "titre": "Solution"
-     }
-    ],
-    "cle": "formule",
-    "libelle": "Par la formule"
-   }
-  ]
+  "ok": true
  },
  "x^3=x+1": {
   "erreur": "Cette équation ne se résout pas avec les méthodes du cours.",

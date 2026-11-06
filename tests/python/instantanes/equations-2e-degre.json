@@ -191,6 +191,131 @@
     }
    ],
    "statut": "resolu",
+   "variantes": [
+    "formule"
+   ]
+  },
+  "formule": {
+   "S": "S = \\{-3\\,;\\,1\\}",
+   "approx": null,
+   "cartes": [
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\frac{1}{4}(x^{2} + 2x + 1) = 1",
+         "gauche": "\\frac{1}{4}(x + 1)^{2} = 1",
+         "lien": "\\iff",
+         "prop": "Id. rem. \\((A + B)^{2}\\) avec \\(A = x,\\ B = 1\\)"
+        },
+        {
+         "expr": "\\frac{1}{4}x^{2} + \\frac{1}{2}x + \\frac{1}{4} = 1",
+         "lien": "\\iff",
+         "prop": "distribution"
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      0
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\frac{1}{4}x^{2} + \\frac{1}{2}x - \\frac{3}{4} = 0",
+         "gauche": "\\frac{1}{4}x^{2} + \\frac{1}{2}x + \\frac{1}{4} = 1",
+         "lien": "\\iff"
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      1
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\Delta = b^{2} - 4ac = \\left(\\frac{1}{2}\\right)^{2} - 4 \\cdot \\frac{1}{4} \\cdot \\left(-\\frac{3}{4}\\right) = \\frac{1}{4} + \\frac{3}{4} = \\fbox{$1$}",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      2,
+      3
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 1",
+         "lien": ""
+        },
+        {
+         "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-\\frac{1}{2} - 1}{\\frac{1}{2}} = -3",
+         "lien": ""
+        },
+        {
+         "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-\\frac{1}{2} + 1}{\\frac{1}{2}} = 1",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      4
+     ]
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "DEVELOPPER",
+     "\\frac{1}{4}(x + 1)^{2} = 1"
+    ],
+    [
+     "ramener",
+     "RAMENER",
+     "\\frac{1}{4}x^{2} + \\frac{1}{2}x + \\frac{1}{4} = 1"
+    ],
+    [
+     "factoriser",
+     "FORMULE",
+     "\\frac{1}{4}x^{2} + \\frac{1}{2}x - \\frac{3}{4}"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "\\frac{1}{4}x^{2} + \\frac{1}{2}x - \\frac{3}{4}"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "\\frac{1}{4}x^{2} + \\frac{1}{2}x - \\frac{3}{4}"
+    ]
+   ],
+   "message": null,
+   "solution": [
+    {
+     "tex": "S = \\{-3\\,;\\,1\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "statut": "resolu",
    "variantes": []
   }
  },
@@ -284,6 +409,108 @@
      "produit_nul",
      "PRODUIT_NUL",
      "\\left(2x - \\frac{1}{3}\\right)(x + 1)"
+    ]
+   ],
+   "message": null,
+   "solution": [
+    {
+     "tex": "S = \\{-1\\,;\\,\\frac{1}{6}\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "statut": "resolu",
+   "variantes": [
+    "formule"
+   ]
+  },
+  "formule": {
+   "S": "S = \\{-1\\,;\\,\\frac{1}{6}\\}",
+   "approx": null,
+   "cartes": [
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "2x^{2} + 2x - \\frac{1}{3}x - \\frac{1}{3} = 0",
+         "gauche": "\\left(2x - \\frac{1}{3}\\right)(x + 1) = 0",
+         "lien": "\\iff",
+         "prop": "double distribution"
+        },
+        {
+         "expr": "2x^{2} + \\frac{5}{3}x - \\frac{1}{3} = 0",
+         "lien": "\\iff"
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      0
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\Delta = b^{2} - 4ac = \\left(\\frac{5}{3}\\right)^{2} - 4 \\cdot 2 \\cdot \\left(-\\frac{1}{3}\\right) = \\frac{25}{9} + \\frac{8}{3} = \\fbox{$\\frac{49}{9}$}",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      1,
+      2
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = \\frac{7}{3}",
+         "lien": ""
+        },
+        {
+         "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-\\frac{5}{3} - \\frac{7}{3}}{4} = -1",
+         "lien": ""
+        },
+        {
+         "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-\\frac{5}{3} + \\frac{7}{3}}{4} = \\frac{1}{6}",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      3
+     ]
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "DEVELOPPER",
+     "\\left(2x - \\frac{1}{3}\\right)(x + 1) = 0"
+    ],
+    [
+     "factoriser",
+     "FORMULE",
+     "2x^{2} + \\frac{5}{3}x - \\frac{1}{3}"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "2x^{2} + \\frac{5}{3}x - \\frac{1}{3}"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "2x^{2} + \\frac{5}{3}x - \\frac{1}{3}"
     ]
    ],
    "message": null,
@@ -1004,6 +1231,99 @@
      "produit_nul",
      "PRODUIT_NUL",
      "(t + 10)^{2}"
+    ]
+   ],
+   "message": null,
+   "solution": [
+    {
+     "tex": "S = \\{-10\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "statut": "resolu",
+   "variantes": [
+    "formule"
+   ]
+  },
+  "formule": {
+   "S": "S = \\{-10\\}",
+   "approx": null,
+   "cartes": [
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "t^{2} + 20t + 100 = 0",
+         "gauche": "(t + 10)^{2} = 0",
+         "lien": "\\iff",
+         "prop": "Id. rem. \\((A + B)^{2}\\) avec \\(A = t,\\ B = 10\\)"
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      0
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\Delta = b^{2} - 4ac = 20^{2} - 4 \\cdot 1 \\cdot 100 = 400 - 400 = \\fbox{$0$}",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      1,
+      2
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "texte": "\\(\\Delta = 0\\) : une seule solution."
+        },
+        {
+         "expr": "t = \\frac{-b}{2a} = \\frac{-20}{2} = -10",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      3
+     ]
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "DEVELOPPER",
+     "(t + 10)^{2} = 0"
+    ],
+    [
+     "factoriser",
+     "FORMULE",
+     "t^{2} + 20t + 100"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "t^{2} + 20t + 100"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "t^{2} + 20t + 100"
     ]
    ],
    "message": null,
@@ -1746,6 +2066,130 @@
     }
    ],
    "statut": "resolu",
+   "variantes": [
+    "formule"
+   ]
+  },
+  "formule": {
+   "S": "S = \\{-5\\,;\\,3\\}",
+   "approx": null,
+   "cartes": [
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "x^{2} + 2x + 1 + 3 = 19",
+         "gauche": "(x + 1)^{2} + 3 = 19",
+         "lien": "\\iff",
+         "prop": "Id. rem. \\((A + B)^{2}\\) avec \\(A = x,\\ B = 1\\)"
+        },
+        {
+         "expr": "x^{2} + 2x + 4 = 19",
+         "lien": "\\iff"
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      0
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "x^{2} + 2x - 15 = 0",
+         "gauche": "x^{2} + 2x + 4 = 19",
+         "lien": "\\iff"
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      1
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\Delta = b^{2} - 4ac = 2^{2} - 4 \\cdot 1 \\cdot (-15) = 4 + 60 = \\fbox{$64$}",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      2,
+      3
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 8",
+         "lien": ""
+        },
+        {
+         "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-2 - 8}{2} = -5",
+         "lien": ""
+        },
+        {
+         "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-2 + 8}{2} = 3",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      4
+     ]
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "DEVELOPPER",
+     "(x + 1)^{2} + 3 = 19"
+    ],
+    [
+     "ramener",
+     "RAMENER",
+     "x^{2} + 2x + 4 = 19"
+    ],
+    [
+     "factoriser",
+     "FORMULE",
+     "x^{2} + 2x - 15"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "x^{2} + 2x - 15"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "x^{2} + 2x - 15"
+    ]
+   ],
+   "message": null,
+   "solution": [
+    {
+     "tex": "S = \\{-5\\,;\\,3\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "statut": "resolu",
    "variantes": []
   }
  },
@@ -1822,6 +2266,125 @@
     }
    ],
    "statut": "resolu",
+   "variantes": [
+    "formule"
+   ]
+  },
+  "formule": {
+   "S": "S = \\{-1\\}",
+   "approx": null,
+   "cartes": [
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "x^{2} + 2x + 1 + 3 = 3",
+         "gauche": "(x + 1)^{2} + 3 = 3",
+         "lien": "\\iff",
+         "prop": "Id. rem. \\((A + B)^{2}\\) avec \\(A = x,\\ B = 1\\)"
+        },
+        {
+         "expr": "x^{2} + 2x + 4 = 3",
+         "lien": "\\iff"
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      0
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "x^{2} + 2x + 1 = 0",
+         "gauche": "x^{2} + 2x + 4 = 3",
+         "lien": "\\iff"
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      1
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\Delta = b^{2} - 4ac = 2^{2} - 4 \\cdot 1 \\cdot 1 = 4 - 4 = \\fbox{$0$}",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      2,
+      3
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "texte": "\\(\\Delta = 0\\) : une seule solution."
+        },
+        {
+         "expr": "x = \\frac{-b}{2a} = \\frac{-2}{2} = -1",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      4
+     ]
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "DEVELOPPER",
+     "(x + 1)^{2} + 3 = 3"
+    ],
+    [
+     "ramener",
+     "RAMENER",
+     "x^{2} + 2x + 4 = 3"
+    ],
+    [
+     "factoriser",
+     "FORMULE",
+     "x^{2} + 2x + 1"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "x^{2} + 2x + 1"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "x^{2} + 2x + 1"
+    ]
+   ],
+   "message": null,
+   "solution": [
+    {
+     "tex": "S = \\{-1\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "statut": "resolu",
    "variantes": []
   }
  },
@@ -1885,6 +2448,108 @@
      "produit_nul",
      "PRODUIT_NUL",
      "(x + 5)(x - 3)"
+    ]
+   ],
+   "message": null,
+   "solution": [
+    {
+     "tex": "S = \\{-5\\,;\\,3\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "statut": "resolu",
+   "variantes": [
+    "formule"
+   ]
+  },
+  "formule": {
+   "S": "S = \\{-5\\,;\\,3\\}",
+   "approx": null,
+   "cartes": [
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "x^{2} + 2x + 1 - 16 = 0",
+         "gauche": "(x + 1)^{2} - 16 = 0",
+         "lien": "\\iff",
+         "prop": "Id. rem. \\((A + B)^{2}\\) avec \\(A = x,\\ B = 1\\)"
+        },
+        {
+         "expr": "x^{2} + 2x - 15 = 0",
+         "lien": "\\iff"
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      0
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\Delta = b^{2} - 4ac = 2^{2} - 4 \\cdot 1 \\cdot (-15) = 4 + 60 = \\fbox{$64$}",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      1,
+      2
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 8",
+         "lien": ""
+        },
+        {
+         "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-2 - 8}{2} = -5",
+         "lien": ""
+        },
+        {
+         "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-2 + 8}{2} = 3",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      3
+     ]
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "DEVELOPPER",
+     "(x + 1)^{2} - 16 = 0"
+    ],
+    [
+     "factoriser",
+     "FORMULE",
+     "x^{2} + 2x - 15"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "x^{2} + 2x - 15"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "x^{2} + 2x - 15"
     ]
    ],
    "message": null,
@@ -2307,6 +2972,126 @@
     }
    ],
    "statut": "resolu",
+   "variantes": [
+    "formule"
+   ]
+  },
+  "formule": {
+   "S": "S = \\{\\frac{2}{3}\\,;\\,4\\}",
+   "approx": null,
+   "cartes": [
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "x^{2} + 2x + 1 = 4x^{2} - 12x + 9",
+         "gauche": "(x + 1)^{2} = (2x - 3)^{2}",
+         "lien": "\\iff",
+         "prop": "Id. rem. \\((A + B)^{2}\\) avec \\(A = x,\\ B = 1\\) ; Id. rem. \\((A - B)^{2}\\) avec \\(A = 2x,\\ B = 3\\)"
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      0
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "3x^{2} - 14x + 8 = 0",
+         "gauche": "x^{2} + 2x + 1 = 4x^{2} - 12x + 9",
+         "lien": "\\iff"
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      1
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\Delta = b^{2} - 4ac = (-14)^{2} - 4 \\cdot 3 \\cdot 8 = 196 - 96 = \\fbox{$100$}",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      2,
+      3
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 10",
+         "lien": ""
+        },
+        {
+         "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{14 - 10}{6} = \\frac{2}{3}",
+         "lien": ""
+        },
+        {
+         "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{14 + 10}{6} = 4",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      4
+     ]
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "DEVELOPPER",
+     "(x + 1)^{2} = (2x - 3)^{2}"
+    ],
+    [
+     "ramener",
+     "RAMENER",
+     "x^{2} + 2x + 1 = 4x^{2} - 12x + 9"
+    ],
+    [
+     "factoriser",
+     "FORMULE",
+     "3x^{2} - 14x + 8"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "3x^{2} - 14x + 8"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "3x^{2} - 14x + 8"
+    ]
+   ],
+   "message": null,
+   "solution": [
+    {
+     "tex": "S = \\{\\frac{2}{3}\\,;\\,4\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "statut": "resolu",
    "variantes": []
   }
  },
@@ -2699,6 +3484,126 @@
     }
    ],
    "statut": "resolu",
+   "variantes": [
+    "formule"
+   ]
+  },
+  "formule": {
+   "S": "S = \\{-2\\,;\\,0\\}",
+   "approx": null,
+   "cartes": [
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "x^{2} + 2x + 1 = 1",
+         "gauche": "(x + 1)^{2} = 1",
+         "lien": "\\iff",
+         "prop": "Id. rem. \\((A + B)^{2}\\) avec \\(A = x,\\ B = 1\\)"
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      0
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "x^{2} + 2x = 0",
+         "gauche": "x^{2} + 2x + 1 = 1",
+         "lien": "\\iff"
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      1
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\Delta = b^{2} - 4ac = 2^{2} - 4 \\cdot 1 \\cdot 0 = \\fbox{$4$}",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      2,
+      3
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 2",
+         "lien": ""
+        },
+        {
+         "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-2 - 2}{2} = -2",
+         "lien": ""
+        },
+        {
+         "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-2 + 2}{2} = 0",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      4
+     ]
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "DEVELOPPER",
+     "(x + 1)^{2} = 1"
+    ],
+    [
+     "ramener",
+     "RAMENER",
+     "x^{2} + 2x + 1 = 1"
+    ],
+    [
+     "factoriser",
+     "FORMULE",
+     "x^{2} + 2x"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "x^{2} + 2x"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "x^{2} + 2x"
+    ]
+   ],
+   "message": null,
+   "solution": [
+    {
+     "tex": "S = \\{-2\\,;\\,0\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "statut": "resolu",
    "variantes": []
   }
  },
@@ -2784,6 +3689,126 @@
      "produit_nul",
      "PRODUIT_NUL",
      "(x + 5)(x - 3)"
+    ]
+   ],
+   "message": null,
+   "solution": [
+    {
+     "tex": "S = \\{-5\\,;\\,3\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "statut": "resolu",
+   "variantes": [
+    "formule"
+   ]
+  },
+  "formule": {
+   "S": "S = \\{-5\\,;\\,3\\}",
+   "approx": null,
+   "cartes": [
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "x^{2} + 2x + 1 = 16",
+         "gauche": "(x + 1)^{2} = 16",
+         "lien": "\\iff",
+         "prop": "Id. rem. \\((A + B)^{2}\\) avec \\(A = x,\\ B = 1\\)"
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      0
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "x^{2} + 2x - 15 = 0",
+         "gauche": "x^{2} + 2x + 1 = 16",
+         "lien": "\\iff"
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      1
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\Delta = b^{2} - 4ac = 2^{2} - 4 \\cdot 1 \\cdot (-15) = 4 + 60 = \\fbox{$64$}",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      2,
+      3
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 8",
+         "lien": ""
+        },
+        {
+         "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-2 - 8}{2} = -5",
+         "lien": ""
+        },
+        {
+         "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-2 + 8}{2} = 3",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      4
+     ]
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "DEVELOPPER",
+     "(x + 1)^{2} = 16"
+    ],
+    [
+     "ramener",
+     "RAMENER",
+     "x^{2} + 2x + 1 = 16"
+    ],
+    [
+     "factoriser",
+     "FORMULE",
+     "x^{2} + 2x - 15"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "x^{2} + 2x - 15"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "x^{2} + 2x - 15"
     ]
    ],
    "message": null,
@@ -2896,6 +3921,126 @@
     }
    ],
    "statut": "resolu",
+   "variantes": [
+    "formule"
+   ]
+  },
+  "formule": {
+   "S": "S = \\{-1\\}",
+   "approx": null,
+   "cartes": [
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "(x + 1)^{2} = 4(x^{2} + 2x + 1)",
+         "gauche": "(x + 1)^{2} = 4(x + 1)^{2}",
+         "lien": "\\iff",
+         "prop": "Id. rem. \\((A + B)^{2}\\) avec \\(A = x,\\ B = 1\\)"
+        },
+        {
+         "expr": "x^{2} + 2x + 1 = 4x^{2} + 8x + 4",
+         "lien": "\\iff",
+         "prop": "Id. rem. \\((A + B)^{2}\\) avec \\(A = x,\\ B = 1\\) ; distribution"
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      0
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "3x^{2} + 6x + 3 = 0",
+         "gauche": "x^{2} + 2x + 1 = 4x^{2} + 8x + 4",
+         "lien": "\\iff"
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      1
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\Delta = b^{2} - 4ac = 6^{2} - 4 \\cdot 3 \\cdot 3 = 36 - 36 = \\fbox{$0$}",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      2,
+      3
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "texte": "\\(\\Delta = 0\\) : une seule solution."
+        },
+        {
+         "expr": "x = \\frac{-b}{2a} = \\frac{-6}{6} = -1",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      4
+     ]
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "DEVELOPPER",
+     "(x + 1)^{2} = 4(x + 1)^{2}"
+    ],
+    [
+     "ramener",
+     "RAMENER",
+     "x^{2} + 2x + 1 = 4x^{2} + 8x + 4"
+    ],
+    [
+     "factoriser",
+     "FORMULE",
+     "3x^{2} + 6x + 3"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "3x^{2} + 6x + 3"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "3x^{2} + 6x + 3"
+    ]
+   ],
+   "message": null,
+   "solution": [
+    {
+     "tex": "S = \\{-1\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "statut": "resolu",
    "variantes": []
   }
  },
@@ -2995,6 +4140,130 @@
     }
    ],
    "statut": "resolu",
+   "variantes": [
+    "formule"
+   ]
+  },
+  "formule": {
+   "S": "S = \\{-1 - \\sqrt{5}\\,;\\,-1 + \\sqrt{5}\\}",
+   "approx": "soit \\(x_{1} \\approx -3{,}236\\) et \\(x_{2} \\approx 1{,}236\\)",
+   "cartes": [
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "x^{2} + 2x + 1 = 5",
+         "gauche": "(x + 1)^{2} = 5",
+         "lien": "\\iff",
+         "prop": "Id. rem. \\((A + B)^{2}\\) avec \\(A = x,\\ B = 1\\)"
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      0
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "x^{2} + 2x - 4 = 0",
+         "gauche": "x^{2} + 2x + 1 = 5",
+         "lien": "\\iff"
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      1
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\Delta = b^{2} - 4ac = 2^{2} - 4 \\cdot 1 \\cdot (-4) = 4 + 16 = \\fbox{$20$}",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      2,
+      3
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = \\sqrt{20} = 2\\sqrt{5}",
+         "lien": ""
+        },
+        {
+         "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-2 - 2\\sqrt{5}}{2} = -1 - \\sqrt{5}",
+         "lien": ""
+        },
+        {
+         "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-2 + 2\\sqrt{5}}{2} = -1 + \\sqrt{5}",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      4
+     ]
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "DEVELOPPER",
+     "(x + 1)^{2} = 5"
+    ],
+    [
+     "ramener",
+     "RAMENER",
+     "x^{2} + 2x + 1 = 5"
+    ],
+    [
+     "factoriser",
+     "FORMULE",
+     "x^{2} + 2x - 4"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "x^{2} + 2x - 4"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "x^{2} + 2x - 4"
+    ]
+   ],
+   "message": null,
+   "solution": [
+    {
+     "tex": "S = \\{-1 - \\sqrt{5}\\,;\\,-1 + \\sqrt{5}\\}",
+     "type": "resultat_lim"
+    },
+    {
+     "html": "soit \\(x_{1} \\approx -3{,}236\\) et \\(x_{2} \\approx 1{,}236\\)",
+     "type": "texte"
+    }
+   ],
+   "statut": "resolu",
    "variantes": []
   }
  },
@@ -3087,6 +4356,126 @@
      "produit_nul",
      "PRODUIT_NUL",
      "x(x + 1)"
+    ]
+   ],
+   "message": null,
+   "solution": [
+    {
+     "tex": "S = \\{-1\\,;\\,0\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "statut": "resolu",
+   "variantes": [
+    "formule"
+   ]
+  },
+  "formule": {
+   "S": "S = \\{-1\\,;\\,0\\}",
+   "approx": null,
+   "cartes": [
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "x^{2} + 2x + 1 = x + 1",
+         "gauche": "(x + 1)^{2} = x + 1",
+         "lien": "\\iff",
+         "prop": "Id. rem. \\((A + B)^{2}\\) avec \\(A = x,\\ B = 1\\)"
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      0
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "x^{2} + x = 0",
+         "gauche": "x^{2} + 2x + 1 = x + 1",
+         "lien": "\\iff"
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      1
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\Delta = b^{2} - 4ac = 1^{2} - 4 \\cdot 1 \\cdot 0 = \\fbox{$1$}",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      2,
+      3
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 1",
+         "lien": ""
+        },
+        {
+         "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-1 - 1}{2} = -1",
+         "lien": ""
+        },
+        {
+         "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-1 + 1}{2} = 0",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      4
+     ]
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "DEVELOPPER",
+     "(x + 1)^{2} = x + 1"
+    ],
+    [
+     "ramener",
+     "RAMENER",
+     "x^{2} + 2x + 1 = x + 1"
+    ],
+    [
+     "factoriser",
+     "FORMULE",
+     "x^{2} + x"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "x^{2} + x"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "x^{2} + x"
     ]
    ],
    "message": null,
@@ -3631,6 +5020,126 @@
     }
    ],
    "statut": "resolu",
+   "variantes": [
+    "formule"
+   ]
+  },
+  "formule": {
+   "S": "S = \\{-2\\,;\\,1\\}",
+   "approx": null,
+   "cartes": [
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "x^{2} + 4x + 4 = 3x + 6",
+         "gauche": "(x + 2)^{2} = 3(x + 2)",
+         "lien": "\\iff",
+         "prop": "Id. rem. \\((A + B)^{2}\\) avec \\(A = x,\\ B = 2\\) ; distribution"
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      0
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "x^{2} + x - 2 = 0",
+         "gauche": "x^{2} + 4x + 4 = 3x + 6",
+         "lien": "\\iff"
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      1
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\Delta = b^{2} - 4ac = 1^{2} - 4 \\cdot 1 \\cdot (-2) = 1 + 8 = \\fbox{$9$}",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      2,
+      3
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 3",
+         "lien": ""
+        },
+        {
+         "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-1 - 3}{2} = -2",
+         "lien": ""
+        },
+        {
+         "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-1 + 3}{2} = 1",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      4
+     ]
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "DEVELOPPER",
+     "(x + 2)^{2} = 3(x + 2)"
+    ],
+    [
+     "ramener",
+     "RAMENER",
+     "x^{2} + 4x + 4 = 3x + 6"
+    ],
+    [
+     "factoriser",
+     "FORMULE",
+     "x^{2} + x - 2"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "x^{2} + x - 2"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "x^{2} + x - 2"
+    ]
+   ],
+   "message": null,
+   "solution": [
+    {
+     "tex": "S = \\{-2\\,;\\,1\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "statut": "resolu",
    "variantes": []
   }
  },
@@ -4036,6 +5545,130 @@
      "produit_nul",
      "PRODUIT_NUL",
      "(x - 1)(-2x - 1)"
+    ]
+   ],
+   "message": null,
+   "solution": [
+    {
+     "tex": "S = \\{-\\frac{1}{2}\\,;\\,1\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "statut": "resolu",
+   "variantes": [
+    "formule"
+   ]
+  },
+  "formule": {
+   "S": "S = \\{-\\frac{1}{2}\\,;\\,1\\}",
+   "approx": null,
+   "cartes": [
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "2x - x^{2} - 2 + x = x^{2} + 3x - x - 3",
+         "gauche": "(x - 1)(2 - x) = (x - 1)(x + 3)",
+         "lien": "\\iff",
+         "prop": "double distribution"
+        },
+        {
+         "expr": "-x^{2} + 3x - 2 = x^{2} + 2x - 3",
+         "lien": "\\iff"
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      0
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "2x^{2} - x - 1 = 0",
+         "gauche": "-x^{2} + 3x - 2 = x^{2} + 2x - 3",
+         "lien": "\\iff"
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      1
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\Delta = b^{2} - 4ac = (-1)^{2} - 4 \\cdot 2 \\cdot (-1) = 1 + 8 = \\fbox{$9$}",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      2,
+      3
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 3",
+         "lien": ""
+        },
+        {
+         "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{1 - 3}{4} = -\\frac{1}{2}",
+         "lien": ""
+        },
+        {
+         "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{1 + 3}{4} = 1",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      4
+     ]
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "DEVELOPPER",
+     "(x - 1)(2 - x) = (x - 1)(x + 3)"
+    ],
+    [
+     "ramener",
+     "RAMENER",
+     "-x^{2} + 3x - 2 = x^{2} + 2x - 3"
+    ],
+    [
+     "factoriser",
+     "FORMULE",
+     "2x^{2} - x - 1"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "2x^{2} - x - 1"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "2x^{2} - x - 1"
     ]
    ],
    "message": null,
@@ -4466,6 +6099,134 @@
     }
    ],
    "statut": "resolu",
+   "variantes": [
+    "formule"
+   ]
+  },
+  "formule": {
+   "S": "S = \\{-\\frac{5}{2}\\,;\\,1\\}",
+   "approx": null,
+   "cartes": [
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "x^{2} + 2x - x - 2 = -(x^{2} + 3x - x - 3)",
+         "gauche": "(x - 1)(x + 2) = -(x - 1)(x + 3)",
+         "lien": "\\iff",
+         "prop": "double distribution"
+        },
+        {
+         "expr": "x^{2} + 2x - x - 2 = -x^{2} - 3x + x + 3",
+         "lien": "\\iff"
+        },
+        {
+         "expr": "x^{2} + x - 2 = -x^{2} - 2x + 3",
+         "lien": "\\iff"
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      0
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "2x^{2} + 3x - 5 = 0",
+         "gauche": "x^{2} + x - 2 = -x^{2} - 2x + 3",
+         "lien": "\\iff"
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      1
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\Delta = b^{2} - 4ac = 3^{2} - 4 \\cdot 2 \\cdot (-5) = 9 + 40 = \\fbox{$49$}",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      2,
+      3
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 7",
+         "lien": ""
+        },
+        {
+         "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-3 - 7}{4} = -\\frac{5}{2}",
+         "lien": ""
+        },
+        {
+         "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-3 + 7}{4} = 1",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      4
+     ]
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "DEVELOPPER",
+     "(x - 1)(x + 2) = -(x - 1)(x + 3)"
+    ],
+    [
+     "ramener",
+     "RAMENER",
+     "x^{2} + x - 2 = -x^{2} - 2x + 3"
+    ],
+    [
+     "factoriser",
+     "FORMULE",
+     "2x^{2} + 3x - 5"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "2x^{2} + 3x - 5"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "2x^{2} + 3x - 5"
+    ]
+   ],
+   "message": null,
+   "solution": [
+    {
+     "tex": "S = \\{-\\frac{5}{2}\\,;\\,1\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "statut": "resolu",
    "variantes": []
   }
  },
@@ -4584,6 +6345,130 @@
     }
    ],
    "statut": "resolu",
+   "variantes": [
+    "formule"
+   ]
+  },
+  "formule": {
+   "S": "S = \\{0\\,;\\,1\\}",
+   "approx": null,
+   "cartes": [
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "x^{2} + 2x - x - 2 = 2x - 2",
+         "gauche": "(x - 1)(x + 2) = 2x - 2",
+         "lien": "\\iff",
+         "prop": "double distribution"
+        },
+        {
+         "expr": "x^{2} + x - 2 = 2x - 2",
+         "lien": "\\iff"
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      0
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "x^{2} - x = 0",
+         "gauche": "x^{2} + x - 2 = 2x - 2",
+         "lien": "\\iff"
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      1
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\Delta = b^{2} - 4ac = (-1)^{2} - 4 \\cdot 1 \\cdot 0 = \\fbox{$1$}",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      2,
+      3
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 1",
+         "lien": ""
+        },
+        {
+         "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{1 - 1}{2} = 0",
+         "lien": ""
+        },
+        {
+         "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{1 + 1}{2} = 1",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      4
+     ]
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "DEVELOPPER",
+     "(x - 1)(x + 2) = 2x - 2"
+    ],
+    [
+     "ramener",
+     "RAMENER",
+     "x^{2} + x - 2 = 2x - 2"
+    ],
+    [
+     "factoriser",
+     "FORMULE",
+     "x^{2} - x"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "x^{2} - x"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "x^{2} - x"
+    ]
+   ],
+   "message": null,
+   "solution": [
+    {
+     "tex": "S = \\{0\\,;\\,1\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "statut": "resolu",
    "variantes": []
   }
  },
@@ -4686,6 +6571,139 @@
     }
    ],
    "statut": "resolu",
+   "variantes": [
+    "formule"
+   ]
+  },
+  "formule": {
+   "S": "S = \\{-2\\,;\\,1\\}",
+   "approx": null,
+   "cartes": [
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "(x - 1)(x + 2) = 3(x^{2} + 2x - x - 2)",
+         "gauche": "(x - 1)(x + 2) = 3(x - 1)(x + 2)",
+         "lien": "\\iff",
+         "prop": "double distribution"
+        },
+        {
+         "expr": "(x - 1)(x + 2) = 3(x^{2} + x - 2)",
+         "lien": "\\iff"
+        },
+        {
+         "expr": "x^{2} + 2x - x - 2 = 3x^{2} + 3x - 6",
+         "lien": "\\iff",
+         "prop": "double distribution ; distribution"
+        },
+        {
+         "expr": "x^{2} + x - 2 = 3x^{2} + 3x - 6",
+         "lien": "\\iff"
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      0
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "2x^{2} + 2x - 4 = 0",
+         "gauche": "x^{2} + x - 2 = 3x^{2} + 3x - 6",
+         "lien": "\\iff"
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      1
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\Delta = b^{2} - 4ac = 2^{2} - 4 \\cdot 2 \\cdot (-4) = 4 + 32 = \\fbox{$36$}",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      2,
+      3
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 6",
+         "lien": ""
+        },
+        {
+         "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-2 - 6}{4} = -2",
+         "lien": ""
+        },
+        {
+         "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-2 + 6}{4} = 1",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      4
+     ]
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "DEVELOPPER",
+     "(x - 1)(x + 2) = 3(x - 1)(x + 2)"
+    ],
+    [
+     "ramener",
+     "RAMENER",
+     "x^{2} + x - 2 = 3x^{2} + 3x - 6"
+    ],
+    [
+     "factoriser",
+     "FORMULE",
+     "2x^{2} + 2x - 4"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "2x^{2} + 2x - 4"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "2x^{2} + 2x - 4"
+    ]
+   ],
+   "message": null,
+   "solution": [
+    {
+     "tex": "S = \\{-2\\,;\\,1\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "statut": "resolu",
    "variantes": []
   }
  },
@@ -4778,6 +6796,130 @@
      "produit_nul",
      "PRODUIT_NUL",
      "(x - 1)(x + 1)"
+    ]
+   ],
+   "message": null,
+   "solution": [
+    {
+     "tex": "S = \\{-1\\,;\\,1\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "statut": "resolu",
+   "variantes": [
+    "formule"
+   ]
+  },
+  "formule": {
+   "S": "S = \\{-1\\,;\\,1\\}",
+   "approx": null,
+   "cartes": [
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "x^{2} + 2x - x - 2 = x - 1",
+         "gauche": "(x - 1)(x + 2) = x - 1",
+         "lien": "\\iff",
+         "prop": "double distribution"
+        },
+        {
+         "expr": "x^{2} + x - 2 = x - 1",
+         "lien": "\\iff"
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      0
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "x^{2} - 1 = 0",
+         "gauche": "x^{2} + x - 2 = x - 1",
+         "lien": "\\iff"
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      1
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\Delta = b^{2} - 4ac = 0^{2} - 4 \\cdot 1 \\cdot (-1) = \\fbox{$4$}",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      2,
+      3
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 2",
+         "lien": ""
+        },
+        {
+         "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-2}{2} = -1",
+         "lien": ""
+        },
+        {
+         "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{2}{2} = 1",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      4
+     ]
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "DEVELOPPER",
+     "(x - 1)(x + 2) = x - 1"
+    ],
+    [
+     "ramener",
+     "RAMENER",
+     "x^{2} + x - 2 = x - 1"
+    ],
+    [
+     "factoriser",
+     "FORMULE",
+     "x^{2} - 1"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "x^{2} - 1"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "x^{2} - 1"
     ]
    ],
    "message": null,
@@ -5791,6 +7933,112 @@
     }
    ],
    "statut": "resolu",
+   "variantes": [
+    "formule"
+   ]
+  },
+  "formule": {
+   "S": "S = \\{-3\\,;\\,1\\}",
+   "approx": null,
+   "cartes": [
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "-(x^{2} + 2x + 1) + 4 = 0",
+         "gauche": "-(x + 1)^{2} + 4 = 0",
+         "lien": "\\iff",
+         "prop": "Id. rem. \\((A + B)^{2}\\) avec \\(A = x,\\ B = 1\\)"
+        },
+        {
+         "expr": "-x^{2} - 2x - 1 + 4 = 0",
+         "lien": "\\iff"
+        },
+        {
+         "expr": "-x^{2} - 2x + 3 = 0",
+         "lien": "\\iff"
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      0
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\Delta = b^{2} - 4ac = (-2)^{2} - 4 \\cdot (-1) \\cdot 3 = 4 + 12 = \\fbox{$16$}",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      1,
+      2
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 4",
+         "lien": ""
+        },
+        {
+         "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{2 - 4}{-2} = 1",
+         "lien": ""
+        },
+        {
+         "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{2 + 4}{-2} = -3",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      3
+     ]
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "DEVELOPPER",
+     "-(x + 1)^{2} + 4 = 0"
+    ],
+    [
+     "factoriser",
+     "FORMULE",
+     "-x^{2} - 2x + 3"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "-x^{2} - 2x + 3"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "-x^{2} - 2x + 3"
+    ]
+   ],
+   "message": null,
+   "solution": [
+    {
+     "tex": "S = \\{-3\\,;\\,1\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "statut": "resolu",
    "variantes": []
   }
  },
@@ -6037,6 +8285,112 @@
      "produit_nul",
      "PRODUIT_NUL",
      "-(x - 1)(x + 2)"
+    ]
+   ],
+   "message": null,
+   "solution": [
+    {
+     "tex": "S = \\{-2\\,;\\,1\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "statut": "resolu",
+   "variantes": [
+    "formule"
+   ]
+  },
+  "formule": {
+   "S": "S = \\{-2\\,;\\,1\\}",
+   "approx": null,
+   "cartes": [
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "-(x^{2} + 2x - x - 2) = 0",
+         "gauche": "-(x - 1)(x + 2) = 0",
+         "lien": "\\iff",
+         "prop": "double distribution"
+        },
+        {
+         "expr": "-x^{2} - 2x + x + 2 = 0",
+         "lien": "\\iff"
+        },
+        {
+         "expr": "-x^{2} - x + 2 = 0",
+         "lien": "\\iff"
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      0
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\Delta = b^{2} - 4ac = (-1)^{2} - 4 \\cdot (-1) \\cdot 2 = 1 + 8 = \\fbox{$9$}",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      1,
+      2
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 3",
+         "lien": ""
+        },
+        {
+         "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{1 - 3}{-2} = 1",
+         "lien": ""
+        },
+        {
+         "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{1 + 3}{-2} = -2",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      3
+     ]
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "DEVELOPPER",
+     "-(x - 1)(x + 2) = 0"
+    ],
+    [
+     "factoriser",
+     "FORMULE",
+     "-x^{2} - x + 2"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "-x^{2} - x + 2"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "-x^{2} - x + 2"
     ]
    ],
    "message": null,
@@ -6949,6 +9303,81 @@
     }
    ],
    "statut": "resolu",
+   "variantes": [
+    "formule"
+   ]
+  },
+  "formule": {
+   "S": "S = \\{0\\,;\\,5\\}",
+   "approx": null,
+   "cartes": [
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\Delta = b^{2} - 4ac = 5^{2} - 4 \\cdot (-1) \\cdot 0 = \\fbox{$25$}",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      0,
+      1
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 5",
+         "lien": ""
+        },
+        {
+         "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-5 - 5}{-2} = 5",
+         "lien": ""
+        },
+        {
+         "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-5 + 5}{-2} = 0",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      2
+     ]
+    }
+   ],
+   "etapes": [
+    [
+     "factoriser",
+     "FORMULE",
+     "-x^{2} + 5x"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "-x^{2} + 5x"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "-x^{2} + 5x"
+    ]
+   ],
+   "message": null,
+   "solution": [
+    {
+     "tex": "S = \\{0\\,;\\,5\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "statut": "resolu",
    "variantes": []
   }
  },
@@ -7044,6 +9473,104 @@
     }
    ],
    "statut": "resolu",
+   "variantes": [
+    "formule"
+   ]
+  },
+  "formule": {
+   "S": "S = \\{0\\,;\\,2\\}",
+   "approx": null,
+   "cartes": [
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "-x^{2} + 2x = 0",
+         "gauche": "-\\frac{x^{2}}{2} + x = 0",
+         "lien": "\\iff",
+         "prop": "on multiplie par 2"
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      0
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\Delta = b^{2} - 4ac = 2^{2} - 4 \\cdot (-1) \\cdot 0 = \\fbox{$4$}",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      1,
+      2
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 2",
+         "lien": ""
+        },
+        {
+         "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-2 - 2}{-2} = 2",
+         "lien": ""
+        },
+        {
+         "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-2 + 2}{-2} = 0",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      3
+     ]
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "FRACTIONS",
+     "-\\frac{x^{2}}{2} + x = 0"
+    ],
+    [
+     "factoriser",
+     "FORMULE",
+     "-x^{2} + 2x"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "-x^{2} + 2x"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "-x^{2} + 2x"
+    ]
+   ],
+   "message": null,
+   "solution": [
+    {
+     "tex": "S = \\{0\\,;\\,2\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "statut": "resolu",
    "variantes": []
   }
  },
@@ -7129,131 +9656,6 @@
      "produit_nul",
      "PRODUIT_NUL",
      "-x(x + 1)(x - 1)"
-    ]
-   ],
-   "message": null,
-   "solution": [
-    {
-     "tex": "S = \\{-1\\,;\\,0\\,;\\,1\\}",
-     "type": "resultat_lim"
-    }
-   ],
-   "statut": "resolu",
-   "variantes": [
-    "formule"
-   ]
-  },
-  "formule": {
-   "S": "S = \\{-1\\,;\\,0\\,;\\,1\\}",
-   "approx": null,
-   "cartes": [
-    {
-     "blocs": [
-      {
-       "rangees": [
-        {
-         "expr": "x(-x^{2} + 1) = 0",
-         "gauche": "-x^{3} + x = 0",
-         "lien": "\\iff",
-         "prop": "ME"
-        }
-       ],
-       "type": "chaine"
-      }
-     ],
-     "etapes": [
-      0
-     ]
-    },
-    {
-     "blocs": [
-      {
-       "rangees": [
-        {
-         "expr": "{x = 0} \\text{ ou } \\allowbreak {-x^{2} + 1 = 0}",
-         "gauche": "x(-x^{2} + 1) = 0",
-         "lien": "\\iff",
-         "prop": "produit nul"
-        }
-       ],
-       "type": "chaine"
-      }
-     ],
-     "etapes": [
-      1,
-      2
-     ]
-    },
-    {
-     "blocs": [
-      {
-       "rangees": [
-        {
-         "expr": "\\Delta = b^{2} - 4ac = 0^{2} - 4 \\cdot (-1) \\cdot 1 = \\fbox{$4$}",
-         "lien": ""
-        }
-       ],
-       "type": "chaine"
-      }
-     ],
-     "etapes": [
-      3
-     ]
-    },
-    {
-     "blocs": [
-      {
-       "rangees": [
-        {
-         "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 2",
-         "lien": ""
-        },
-        {
-         "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-2}{-2} = 1",
-         "lien": ""
-        },
-        {
-         "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{2}{-2} = -1",
-         "lien": ""
-        },
-        {
-         "expr": "{x = 0} \\text{ ou } \\allowbreak {x = 1} \\text{ ou } \\allowbreak {x = -1}",
-         "lien": "\\iff"
-        }
-       ],
-       "type": "chaine"
-      }
-     ],
-     "etapes": [
-      4
-     ]
-    }
-   ],
-   "etapes": [
-    [
-     "factoriser",
-     "ME",
-     "-x^{3} + x"
-    ],
-    [
-     "factoriser",
-     "FORMULE",
-     "-x^{2} + 1"
-    ],
-    [
-     "produit_nul",
-     "PRODUIT_NUL",
-     "x(-x^{2} + 1)"
-    ],
-    [
-     "delta_valeur",
-     "FORMULE",
-     "-x^{2} + 1"
-    ],
-    [
-     "delta_nombre",
-     "FORMULE",
-     "-x^{2} + 1"
     ]
    ],
    "message": null,
@@ -7559,6 +9961,131 @@
      "produit_nul",
      "PRODUIT_NUL",
      "(0{,}5x + 1{,}5)(0{,}5x - 0{,}5)"
+    ]
+   ],
+   "message": null,
+   "solution": [
+    {
+     "tex": "S = \\{-3\\,;\\,1\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "statut": "resolu",
+   "variantes": [
+    "formule"
+   ]
+  },
+  "formule": {
+   "S": "S = \\{-3\\,;\\,1\\}",
+   "approx": null,
+   "cartes": [
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "0{,}25(x^{2} + 2x + 1) = 1",
+         "gauche": "0{,}25(x + 1)^{2} = 1",
+         "lien": "\\iff",
+         "prop": "Id. rem. \\((A + B)^{2}\\) avec \\(A = x,\\ B = 1\\)"
+        },
+        {
+         "expr": "0{,}25x^{2} + 0{,}5x + 0{,}25 = 1",
+         "lien": "\\iff",
+         "prop": "distribution"
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      0
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "0{,}25x^{2} + 0{,}5x - 0{,}75 = 0",
+         "gauche": "0{,}25x^{2} + 0{,}5x + 0{,}25 = 1",
+         "lien": "\\iff"
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      1
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\Delta = b^{2} - 4ac = 0{,}5^{2} - 4 \\cdot 0{,}25 \\cdot (-0{,}75) = 0{,}25 + 0{,}75 = \\fbox{$1$}",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      2,
+      3
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 1",
+         "lien": ""
+        },
+        {
+         "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-0{,}5 - 1}{0{,}5} = -3",
+         "lien": ""
+        },
+        {
+         "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-0{,}5 + 1}{0{,}5} = 1",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      4
+     ]
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "DEVELOPPER",
+     "0{,}25(x + 1)^{2} = 1"
+    ],
+    [
+     "ramener",
+     "RAMENER",
+     "0{,}25x^{2} + 0{,}5x + 0{,}25 = 1"
+    ],
+    [
+     "factoriser",
+     "FORMULE",
+     "0{,}25x^{2} + 0{,}5x - 0{,}75"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "0{,}25x^{2} + 0{,}5x - 0{,}75"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "0{,}25x^{2} + 0{,}5x - 0{,}75"
     ]
    ],
    "message": null,
@@ -8123,6 +10650,113 @@
     }
    ],
    "statut": "resolu",
+   "variantes": [
+    "formule"
+   ]
+  },
+  "formule": {
+   "S": "S = \\{-2\\,;\\,1\\}",
+   "approx": null,
+   "cartes": [
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "0{,}5(x^{2} + 2x - x - 2) = 0",
+         "gauche": "0{,}5(x - 1)(x + 2) = 0",
+         "lien": "\\iff",
+         "prop": "double distribution"
+        },
+        {
+         "expr": "0{,}5(x^{2} + x - 2) = 0",
+         "lien": "\\iff"
+        },
+        {
+         "expr": "0{,}5x^{2} + 0{,}5x - 1 = 0",
+         "lien": "\\iff",
+         "prop": "distribution"
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      0
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\Delta = b^{2} - 4ac = 0{,}5^{2} - 4 \\cdot 0{,}5 \\cdot (-1) = 0{,}25 + 2 = \\fbox{$2{,}25$}",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      1,
+      2
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 1{,}5",
+         "lien": ""
+        },
+        {
+         "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-0{,}5 - 1{,}5}{1} = -2",
+         "lien": ""
+        },
+        {
+         "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-0{,}5 + 1{,}5}{1} = 1",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      3
+     ]
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "DEVELOPPER",
+     "0{,}5(x - 1)(x + 2) = 0"
+    ],
+    [
+     "factoriser",
+     "FORMULE",
+     "0{,}5x^{2} + 0{,}5x - 1"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "0{,}5x^{2} + 0{,}5x - 1"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "0{,}5x^{2} + 0{,}5x - 1"
+    ]
+   ],
+   "message": null,
+   "solution": [
+    {
+     "tex": "S = \\{-2\\,;\\,1\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "statut": "resolu",
    "variantes": []
   }
  },
@@ -8565,6 +11199,130 @@
      "produit_nul",
      "PRODUIT_NUL",
      "(x - 3)(2x + 1)"
+    ]
+   ],
+   "message": null,
+   "solution": [
+    {
+     "tex": "S = \\{-\\frac{1}{2}\\,;\\,3\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "statut": "resolu",
+   "variantes": [
+    "formule"
+   ]
+  },
+  "formule": {
+   "S": "S = \\{-\\frac{1}{2}\\,;\\,3\\}",
+   "approx": null,
+   "cartes": [
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "0 = 2x^{2} + x - 6x - 3",
+         "gauche": "0 = (x - 3)(2x + 1)",
+         "lien": "\\iff",
+         "prop": "double distribution"
+        },
+        {
+         "expr": "0 = 2x^{2} - 5x - 3",
+         "lien": "\\iff"
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      0
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "2x^{2} - 5x - 3 = 0",
+         "gauche": "0 = 2x^{2} - 5x - 3",
+         "lien": "\\iff"
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      1
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\Delta = b^{2} - 4ac = (-5)^{2} - 4 \\cdot 2 \\cdot (-3) = 25 + 24 = \\fbox{$49$}",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      2,
+      3
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 7",
+         "lien": ""
+        },
+        {
+         "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{5 - 7}{4} = -\\frac{1}{2}",
+         "lien": ""
+        },
+        {
+         "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{5 + 7}{4} = 3",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      4
+     ]
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "DEVELOPPER",
+     "0 = (x - 3)(2x + 1)"
+    ],
+    [
+     "ramener",
+     "RAMENER",
+     "0 = 2x^{2} - 5x - 3"
+    ],
+    [
+     "factoriser",
+     "FORMULE",
+     "2x^{2} - 5x - 3"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "2x^{2} - 5x - 3"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "2x^{2} - 5x - 3"
     ]
    ],
    "message": null,
@@ -9572,6 +12330,112 @@
      "produit_nul",
      "PRODUIT_NUL",
      "(3x + 6)(2 - 3x)"
+    ]
+   ],
+   "message": null,
+   "solution": [
+    {
+     "tex": "S = \\{-2\\,;\\,\\frac{2}{3}\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "statut": "resolu",
+   "variantes": [
+    "formule"
+   ]
+  },
+  "formule": {
+   "S": "S = \\{-2\\,;\\,\\frac{2}{3}\\}",
+   "approx": null,
+   "cartes": [
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "16 - (9x^{2} + 12x + 4) = 0",
+         "gauche": "16 - (3x + 2)^{2} = 0",
+         "lien": "\\iff",
+         "prop": "Id. rem. \\((A + B)^{2}\\) avec \\(A = 3x,\\ B = 2\\)"
+        },
+        {
+         "expr": "16 - 9x^{2} - 12x - 4 = 0",
+         "lien": "\\iff"
+        },
+        {
+         "expr": "-9x^{2} - 12x + 12 = 0",
+         "lien": "\\iff"
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      0
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\Delta = b^{2} - 4ac = (-12)^{2} - 4 \\cdot (-9) \\cdot 12 = 144 + 432 = \\fbox{$576$}",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      1,
+      2
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 24",
+         "lien": ""
+        },
+        {
+         "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{12 - 24}{-18} = \\frac{2}{3}",
+         "lien": ""
+        },
+        {
+         "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{12 + 24}{-18} = -2",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      3
+     ]
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "DEVELOPPER",
+     "16 - (3x + 2)^{2} = 0"
+    ],
+    [
+     "factoriser",
+     "FORMULE",
+     "-9x^{2} - 12x + 12"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "-9x^{2} - 12x + 12"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "-9x^{2} - 12x + 12"
     ]
    ],
    "message": null,
@@ -11381,6 +14245,104 @@
     }
    ],
    "statut": "resolu",
+   "variantes": [
+    "formule"
+   ]
+  },
+  "formule": {
+   "S": "S = \\{0\\,;\\,3\\}",
+   "approx": null,
+   "cartes": [
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "2x^{2} - 6x = 0",
+         "gauche": "2x(x - 3) = 0",
+         "lien": "\\iff",
+         "prop": "distribution"
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      0
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\Delta = b^{2} - 4ac = (-6)^{2} - 4 \\cdot 2 \\cdot 0 = \\fbox{$36$}",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      1,
+      2
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 6",
+         "lien": ""
+        },
+        {
+         "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{6 - 6}{4} = 0",
+         "lien": ""
+        },
+        {
+         "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{6 + 6}{4} = 3",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      3
+     ]
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "DEVELOPPER",
+     "2x(x - 3) = 0"
+    ],
+    [
+     "factoriser",
+     "FORMULE",
+     "2x^{2} - 6x"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "2x^{2} - 6x"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "2x^{2} - 6x"
+    ]
+   ],
+   "message": null,
+   "solution": [
+    {
+     "tex": "S = \\{0\\,;\\,3\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "statut": "resolu",
    "variantes": []
   }
  },
@@ -12113,126 +15075,6 @@
     }
    ],
    "statut": "resolu",
-   "variantes": [
-    "formule"
-   ]
-  },
-  "formule": {
-   "S": "S = \\{0\\,;\\,1\\}",
-   "approx": null,
-   "cartes": [
-    {
-     "blocs": [
-      {
-       "rangees": [
-        {
-         "expr": "x(2x^{2} - 4x + 2) = 0",
-         "gauche": "2x^{3} - 4x^{2} + 2x = 0",
-         "lien": "\\iff",
-         "prop": "ME"
-        }
-       ],
-       "type": "chaine"
-      }
-     ],
-     "etapes": [
-      0
-     ]
-    },
-    {
-     "blocs": [
-      {
-       "rangees": [
-        {
-         "expr": "{x = 0} \\text{ ou } \\allowbreak {2x^{2} - 4x + 2 = 0}",
-         "gauche": "x(2x^{2} - 4x + 2) = 0",
-         "lien": "\\iff",
-         "prop": "produit nul"
-        }
-       ],
-       "type": "chaine"
-      }
-     ],
-     "etapes": [
-      1,
-      2
-     ]
-    },
-    {
-     "blocs": [
-      {
-       "rangees": [
-        {
-         "expr": "\\Delta = b^{2} - 4ac = (-4)^{2} - 4 \\cdot 2 \\cdot 2 = 16 - 16 = \\fbox{$0$}",
-         "lien": ""
-        }
-       ],
-       "type": "chaine"
-      }
-     ],
-     "etapes": [
-      3
-     ]
-    },
-    {
-     "blocs": [
-      {
-       "rangees": [
-        {
-         "texte": "\\(\\Delta = 0\\) : une seule solution."
-        },
-        {
-         "expr": "x = \\frac{-b}{2a} = \\frac{4}{4} = 1",
-         "lien": ""
-        },
-        {
-         "expr": "{x = 0} \\text{ ou } \\allowbreak {x = 1}",
-         "lien": "\\iff"
-        }
-       ],
-       "type": "chaine"
-      }
-     ],
-     "etapes": [
-      4
-     ]
-    }
-   ],
-   "etapes": [
-    [
-     "factoriser",
-     "ME",
-     "2x^{3} - 4x^{2} + 2x"
-    ],
-    [
-     "factoriser",
-     "FORMULE",
-     "2x^{2} - 4x + 2"
-    ],
-    [
-     "produit_nul",
-     "PRODUIT_NUL",
-     "x(2x^{2} - 4x + 2)"
-    ],
-    [
-     "delta_valeur",
-     "FORMULE",
-     "2x^{2} - 4x + 2"
-    ],
-    [
-     "delta_nombre",
-     "FORMULE",
-     "2x^{2} - 4x + 2"
-    ]
-   ],
-   "message": null,
-   "solution": [
-    {
-     "tex": "S = \\{0\\,;\\,1\\}",
-     "type": "resultat_lim"
-    }
-   ],
-   "statut": "resolu",
    "variantes": []
   }
  },
@@ -12323,131 +15165,6 @@
      "produit_nul",
      "PRODUIT_NUL",
      "x^{2}(x + 4)(2x - 7)"
-    ]
-   ],
-   "message": null,
-   "solution": [
-    {
-     "tex": "S = \\{-4\\,;\\,0\\,;\\,\\frac{7}{2}\\}",
-     "type": "resultat_lim"
-    }
-   ],
-   "statut": "resolu",
-   "variantes": [
-    "formule"
-   ]
-  },
-  "formule": {
-   "S": "S = \\{-4\\,;\\,0\\,;\\,\\frac{7}{2}\\}",
-   "approx": null,
-   "cartes": [
-    {
-     "blocs": [
-      {
-       "rangees": [
-        {
-         "expr": "x^{2}(2x^{2} + x - 28) = 0",
-         "gauche": "2x^{4} + x^{3} - 28x^{2} = 0",
-         "lien": "\\iff",
-         "prop": "ME"
-        }
-       ],
-       "type": "chaine"
-      }
-     ],
-     "etapes": [
-      0
-     ]
-    },
-    {
-     "blocs": [
-      {
-       "rangees": [
-        {
-         "expr": "{x^{2} = 0} \\text{ ou } \\allowbreak {2x^{2} + x - 28 = 0}",
-         "gauche": "x^{2}(2x^{2} + x - 28) = 0",
-         "lien": "\\iff",
-         "prop": "produit nul"
-        }
-       ],
-       "type": "chaine"
-      }
-     ],
-     "etapes": [
-      1,
-      2
-     ]
-    },
-    {
-     "blocs": [
-      {
-       "rangees": [
-        {
-         "expr": "\\Delta = b^{2} - 4ac = 1^{2} - 4 \\cdot 2 \\cdot (-28) = 1 + 224 = \\fbox{$225$}",
-         "lien": ""
-        }
-       ],
-       "type": "chaine"
-      }
-     ],
-     "etapes": [
-      3
-     ]
-    },
-    {
-     "blocs": [
-      {
-       "rangees": [
-        {
-         "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 15",
-         "lien": ""
-        },
-        {
-         "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-1 - 15}{4} = -4",
-         "lien": ""
-        },
-        {
-         "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-1 + 15}{4} = \\frac{7}{2}",
-         "lien": ""
-        },
-        {
-         "expr": "{x = 0} \\text{ ou } \\allowbreak {x = -4} \\text{ ou } \\allowbreak {x = \\frac{7}{2}}",
-         "lien": "\\iff"
-        }
-       ],
-       "type": "chaine"
-      }
-     ],
-     "etapes": [
-      4
-     ]
-    }
-   ],
-   "etapes": [
-    [
-     "factoriser",
-     "ME",
-     "2x^{4} + x^{3} - 28x^{2}"
-    ],
-    [
-     "factoriser",
-     "FORMULE",
-     "2x^{2} + x - 28"
-    ],
-    [
-     "produit_nul",
-     "PRODUIT_NUL",
-     "x^{2}(2x^{2} + x - 28)"
-    ],
-    [
-     "delta_valeur",
-     "FORMULE",
-     "2x^{2} + x - 28"
-    ],
-    [
-     "delta_nombre",
-     "FORMULE",
-     "2x^{2} + x - 28"
     ]
    ],
    "message": null,
@@ -12778,6 +15495,130 @@
     }
    ],
    "statut": "resolu",
+   "variantes": [
+    "formule"
+   ]
+  },
+  "formule": {
+   "S": "S = \\{-1\\,;\\,5\\}",
+   "approx": null,
+   "cartes": [
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "3x + 3 = x^{2} - 2x + x - 2",
+         "gauche": "3(x + 1) = (x + 1)(x - 2)",
+         "lien": "\\iff",
+         "prop": "distribution ; double distribution"
+        },
+        {
+         "expr": "3x + 3 = x^{2} - x - 2",
+         "lien": "\\iff"
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      0
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "x^{2} - 4x - 5 = 0",
+         "gauche": "3x + 3 = x^{2} - x - 2",
+         "lien": "\\iff"
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      1
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\Delta = b^{2} - 4ac = (-4)^{2} - 4 \\cdot 1 \\cdot (-5) = 16 + 20 = \\fbox{$36$}",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      2,
+      3
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 6",
+         "lien": ""
+        },
+        {
+         "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{4 - 6}{2} = -1",
+         "lien": ""
+        },
+        {
+         "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{4 + 6}{2} = 5",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      4
+     ]
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "DEVELOPPER",
+     "3(x + 1) = (x + 1)(x - 2)"
+    ],
+    [
+     "ramener",
+     "RAMENER",
+     "3x + 3 = x^{2} - x - 2"
+    ],
+    [
+     "factoriser",
+     "FORMULE",
+     "x^{2} - 4x - 5"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "x^{2} - 4x - 5"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "x^{2} - 4x - 5"
+    ]
+   ],
+   "message": null,
+   "solution": [
+    {
+     "tex": "S = \\{-1\\,;\\,5\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "statut": "resolu",
    "variantes": []
   }
  },
@@ -12818,6 +15659,104 @@
      "produit_nul",
      "PRODUIT_NUL",
      "3(x + 1)^{2}"
+    ]
+   ],
+   "message": null,
+   "solution": [
+    {
+     "tex": "S = \\{-1\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "statut": "resolu",
+   "variantes": [
+    "formule"
+   ]
+  },
+  "formule": {
+   "S": "S = \\{-1\\}",
+   "approx": null,
+   "cartes": [
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "3(x^{2} + 2x + 1) = 0",
+         "gauche": "3(x + 1)^{2} = 0",
+         "lien": "\\iff",
+         "prop": "Id. rem. \\((A + B)^{2}\\) avec \\(A = x,\\ B = 1\\)"
+        },
+        {
+         "expr": "3x^{2} + 6x + 3 = 0",
+         "lien": "\\iff",
+         "prop": "distribution"
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      0
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\Delta = b^{2} - 4ac = 6^{2} - 4 \\cdot 3 \\cdot 3 = 36 - 36 = \\fbox{$0$}",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      1,
+      2
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "texte": "\\(\\Delta = 0\\) : une seule solution."
+        },
+        {
+         "expr": "x = \\frac{-b}{2a} = \\frac{-6}{6} = -1",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      3
+     ]
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "DEVELOPPER",
+     "3(x + 1)^{2} = 0"
+    ],
+    [
+     "factoriser",
+     "FORMULE",
+     "3x^{2} + 6x + 3"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "3x^{2} + 6x + 3"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "3x^{2} + 6x + 3"
     ]
    ],
    "message": null,
@@ -13033,6 +15972,104 @@
      "produit_nul",
      "PRODUIT_NUL",
      "3(x + 2)(x - 2)"
+    ]
+   ],
+   "message": null,
+   "solution": [
+    {
+     "tex": "S = \\{-2\\,;\\,2\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "statut": "resolu",
+   "variantes": [
+    "formule"
+   ]
+  },
+  "formule": {
+   "S": "S = \\{-2\\,;\\,2\\}",
+   "approx": null,
+   "cartes": [
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "3x^{2} - 12 = 0",
+         "gauche": "3(x^{2} - 4) = 0",
+         "lien": "\\iff",
+         "prop": "distribution"
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      0
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\Delta = b^{2} - 4ac = 0^{2} - 4 \\cdot 3 \\cdot (-12) = \\fbox{$144$}",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      1,
+      2
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 12",
+         "lien": ""
+        },
+        {
+         "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-12}{6} = -2",
+         "lien": ""
+        },
+        {
+         "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{12}{6} = 2",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      3
+     ]
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "DEVELOPPER",
+     "3(x^{2} - 4) = 0"
+    ],
+    [
+     "factoriser",
+     "FORMULE",
+     "3x^{2} - 12"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "3x^{2} - 12"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "3x^{2} - 12"
     ]
    ],
    "message": null,
@@ -13681,6 +16718,81 @@
     }
    ],
    "statut": "resolu",
+   "variantes": [
+    "formule"
+   ]
+  },
+  "formule": {
+   "S": "S = \\{0\\,;\\,4\\}",
+   "approx": null,
+   "cartes": [
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\Delta = b^{2} - 4ac = (-12)^{2} - 4 \\cdot 3 \\cdot 0 = \\fbox{$144$}",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      0,
+      1
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 12",
+         "lien": ""
+        },
+        {
+         "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{12 - 12}{6} = 0",
+         "lien": ""
+        },
+        {
+         "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{12 + 12}{6} = 4",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      2
+     ]
+    }
+   ],
+   "etapes": [
+    [
+     "factoriser",
+     "FORMULE",
+     "3x^{2} - 12x"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "3x^{2} - 12x"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "3x^{2} - 12x"
+    ]
+   ],
+   "message": null,
+   "solution": [
+    {
+     "tex": "S = \\{0\\,;\\,4\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "statut": "resolu",
    "variantes": []
   }
  },
@@ -13975,6 +17087,131 @@
     }
    ],
    "statut": "resolu",
+   "variantes": [
+    "formule"
+   ]
+  },
+  "formule": {
+   "S": "S = \\{\\frac{4}{5}\\,;\\,8\\}",
+   "approx": null,
+   "cartes": [
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "4(x^{2} + 2x + 1) = 9(x^{2} - 4x + 4)",
+         "gauche": "4(x + 1)^{2} = 9(x - 2)^{2}",
+         "lien": "\\iff",
+         "prop": "Id. rem. \\((A + B)^{2}\\) avec \\(A = x,\\ B = 1\\) ; Id. rem. \\((A - B)^{2}\\) avec \\(A = x,\\ B = 2\\)"
+        },
+        {
+         "expr": "4x^{2} + 8x + 4 = 9x^{2} - 36x + 36",
+         "lien": "\\iff",
+         "prop": "distribution"
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      0
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "5x^{2} - 44x + 32 = 0",
+         "gauche": "4x^{2} + 8x + 4 = 9x^{2} - 36x + 36",
+         "lien": "\\iff"
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      1
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\Delta = b^{2} - 4ac = (-44)^{2} - 4 \\cdot 5 \\cdot 32 = 1\\text{’}936 - 640 = \\fbox{$1\\text{’}296$}",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      2,
+      3
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 36",
+         "lien": ""
+        },
+        {
+         "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{44 - 36}{10} = \\frac{4}{5}",
+         "lien": ""
+        },
+        {
+         "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{44 + 36}{10} = 8",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      4
+     ]
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "DEVELOPPER",
+     "4(x + 1)^{2} = 9(x - 2)^{2}"
+    ],
+    [
+     "ramener",
+     "RAMENER",
+     "4x^{2} + 8x + 4 = 9x^{2} - 36x + 36"
+    ],
+    [
+     "factoriser",
+     "FORMULE",
+     "5x^{2} - 44x + 32"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "5x^{2} - 44x + 32"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "5x^{2} - 44x + 32"
+    ]
+   ],
+   "message": null,
+   "solution": [
+    {
+     "tex": "S = \\{\\frac{4}{5}\\,;\\,8\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "statut": "resolu",
    "variantes": []
   }
  },
@@ -14066,6 +17303,131 @@
      "produit_nul",
      "PRODUIT_NUL",
      "(2x - 3)(2x - 5)"
+    ]
+   ],
+   "message": null,
+   "solution": [
+    {
+     "tex": "S = \\{\\frac{3}{2}\\,;\\,\\frac{5}{2}\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "statut": "resolu",
+   "variantes": [
+    "formule"
+   ]
+  },
+  "formule": {
+   "S": "S = \\{\\frac{3}{2}\\,;\\,\\frac{5}{2}\\}",
+   "approx": null,
+   "cartes": [
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "4(x^{2} - 4x + 4) = 1",
+         "gauche": "4(x - 2)^{2} = 1",
+         "lien": "\\iff",
+         "prop": "Id. rem. \\((A - B)^{2}\\) avec \\(A = x,\\ B = 2\\)"
+        },
+        {
+         "expr": "4x^{2} - 16x + 16 = 1",
+         "lien": "\\iff",
+         "prop": "distribution"
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      0
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "4x^{2} - 16x + 15 = 0",
+         "gauche": "4x^{2} - 16x + 16 = 1",
+         "lien": "\\iff"
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      1
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\Delta = b^{2} - 4ac = (-16)^{2} - 4 \\cdot 4 \\cdot 15 = 256 - 240 = \\fbox{$16$}",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      2,
+      3
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 4",
+         "lien": ""
+        },
+        {
+         "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{16 - 4}{8} = \\frac{3}{2}",
+         "lien": ""
+        },
+        {
+         "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{16 + 4}{8} = \\frac{5}{2}",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      4
+     ]
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "DEVELOPPER",
+     "4(x - 2)^{2} = 1"
+    ],
+    [
+     "ramener",
+     "RAMENER",
+     "4x^{2} - 16x + 16 = 1"
+    ],
+    [
+     "factoriser",
+     "FORMULE",
+     "4x^{2} - 16x + 15"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "4x^{2} - 16x + 15"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "4x^{2} - 16x + 15"
     ]
    ],
    "message": null,
@@ -14177,6 +17539,135 @@
     },
     {
      "html": "soit \\(x \\approx 1{,}134\\) ou \\(x \\approx 2{,}866\\)",
+     "type": "texte"
+    }
+   ],
+   "statut": "resolu",
+   "variantes": [
+    "formule"
+   ]
+  },
+  "formule": {
+   "S": "S = \\{\\frac{4 - \\sqrt{3}}{2}\\,;\\,\\frac{4 + \\sqrt{3}}{2}\\}",
+   "approx": "soit \\(x_{1} \\approx 1{,}134\\) et \\(x_{2} \\approx 2{,}866\\)",
+   "cartes": [
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "4(x^{2} - 4x + 4) = 3",
+         "gauche": "4(x - 2)^{2} = 3",
+         "lien": "\\iff",
+         "prop": "Id. rem. \\((A - B)^{2}\\) avec \\(A = x,\\ B = 2\\)"
+        },
+        {
+         "expr": "4x^{2} - 16x + 16 = 3",
+         "lien": "\\iff",
+         "prop": "distribution"
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      0
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "4x^{2} - 16x + 13 = 0",
+         "gauche": "4x^{2} - 16x + 16 = 3",
+         "lien": "\\iff"
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      1
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\Delta = b^{2} - 4ac = (-16)^{2} - 4 \\cdot 4 \\cdot 13 = 256 - 208 = \\fbox{$48$}",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      2,
+      3
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = \\sqrt{48} = 4\\sqrt{3}",
+         "lien": ""
+        },
+        {
+         "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{16 - 4\\sqrt{3}}{8} = \\frac{4 - \\sqrt{3}}{2}",
+         "lien": ""
+        },
+        {
+         "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{16 + 4\\sqrt{3}}{8} = \\frac{4 + \\sqrt{3}}{2}",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      4
+     ]
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "DEVELOPPER",
+     "4(x - 2)^{2} = 3"
+    ],
+    [
+     "ramener",
+     "RAMENER",
+     "4x^{2} - 16x + 16 = 3"
+    ],
+    [
+     "factoriser",
+     "FORMULE",
+     "4x^{2} - 16x + 13"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "4x^{2} - 16x + 13"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "4x^{2} - 16x + 13"
+    ]
+   ],
+   "message": null,
+   "solution": [
+    {
+     "tex": "S = \\{\\frac{4 - \\sqrt{3}}{2}\\,;\\,\\frac{4 + \\sqrt{3}}{2}\\}",
+     "type": "resultat_lim"
+    },
+    {
+     "html": "soit \\(x_{1} \\approx 1{,}134\\) et \\(x_{2} \\approx 2{,}866\\)",
      "type": "texte"
     }
    ],
@@ -18648,6 +22139,104 @@
     }
    ],
    "statut": "resolu",
+   "variantes": [
+    "formule"
+   ]
+  },
+  "formule": {
+   "S": "S = \\{-1\\,;\\,0\\}",
+   "approx": null,
+   "cartes": [
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "x^{2} + x = 0",
+         "gauche": "x(x + 1) = 0",
+         "lien": "\\iff",
+         "prop": "distribution"
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      0
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\Delta = b^{2} - 4ac = 1^{2} - 4 \\cdot 1 \\cdot 0 = \\fbox{$1$}",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      1,
+      2
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 1",
+         "lien": ""
+        },
+        {
+         "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-1 - 1}{2} = -1",
+         "lien": ""
+        },
+        {
+         "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-1 + 1}{2} = 0",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      3
+     ]
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "DEVELOPPER",
+     "x(x + 1) = 0"
+    ],
+    [
+     "factoriser",
+     "FORMULE",
+     "x^{2} + x"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "x^{2} + x"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "x^{2} + x"
+    ]
+   ],
+   "message": null,
+   "solution": [
+    {
+     "tex": "S = \\{-1\\,;\\,0\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "statut": "resolu",
    "variantes": []
   }
  },
@@ -18820,181 +22409,6 @@
     }
    ],
    "statut": "resolu",
-   "variantes": [
-    "formule"
-   ]
-  },
-  "formule": {
-   "S": "S = \\{-3\\,;\\,0\\,;\\,1\\}",
-   "approx": null,
-   "cartes": [
-    {
-     "blocs": [
-      {
-       "rangees": [
-        {
-         "expr": "x(x^{2} + 2x + 1) = 4x",
-         "gauche": "x(x + 1)^{2} = 4x",
-         "lien": "\\iff",
-         "prop": "Id. rem. \\((A + B)^{2}\\) avec \\(A = x,\\ B = 1\\)"
-        },
-        {
-         "expr": "x^{3} + 2x^{2} + x = 4x",
-         "lien": "\\iff",
-         "prop": "distribution"
-        }
-       ],
-       "type": "chaine"
-      }
-     ],
-     "etapes": [
-      0
-     ]
-    },
-    {
-     "blocs": [
-      {
-       "rangees": [
-        {
-         "expr": "x^{3} + 2x^{2} - 3x = 0",
-         "gauche": "x^{3} + 2x^{2} + x = 4x",
-         "lien": "\\iff"
-        }
-       ],
-       "type": "chaine"
-      }
-     ],
-     "etapes": [
-      1
-     ]
-    },
-    {
-     "blocs": [
-      {
-       "rangees": [
-        {
-         "expr": "x(x^{2} + 2x - 3) = 0",
-         "gauche": "x^{3} + 2x^{2} - 3x = 0",
-         "lien": "\\iff",
-         "prop": "ME"
-        }
-       ],
-       "type": "chaine"
-      }
-     ],
-     "etapes": [
-      2
-     ]
-    },
-    {
-     "blocs": [
-      {
-       "rangees": [
-        {
-         "expr": "{x = 0} \\text{ ou } \\allowbreak {x^{2} + 2x - 3 = 0}",
-         "gauche": "x(x^{2} + 2x - 3) = 0",
-         "lien": "\\iff",
-         "prop": "produit nul"
-        }
-       ],
-       "type": "chaine"
-      }
-     ],
-     "etapes": [
-      3,
-      4
-     ]
-    },
-    {
-     "blocs": [
-      {
-       "rangees": [
-        {
-         "expr": "\\Delta = b^{2} - 4ac = 2^{2} - 4 \\cdot 1 \\cdot (-3) = 4 + 12 = \\fbox{$16$}",
-         "lien": ""
-        }
-       ],
-       "type": "chaine"
-      }
-     ],
-     "etapes": [
-      5
-     ]
-    },
-    {
-     "blocs": [
-      {
-       "rangees": [
-        {
-         "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 4",
-         "lien": ""
-        },
-        {
-         "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-2 - 4}{2} = -3",
-         "lien": ""
-        },
-        {
-         "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-2 + 4}{2} = 1",
-         "lien": ""
-        },
-        {
-         "expr": "{x = 0} \\text{ ou } \\allowbreak {x = -3} \\text{ ou } \\allowbreak {x = 1}",
-         "lien": "\\iff"
-        }
-       ],
-       "type": "chaine"
-      }
-     ],
-     "etapes": [
-      6
-     ]
-    }
-   ],
-   "etapes": [
-    [
-     "ramener",
-     "DEVELOPPER",
-     "x(x + 1)^{2} = 4x"
-    ],
-    [
-     "ramener",
-     "RAMENER",
-     "x^{3} + 2x^{2} + x = 4x"
-    ],
-    [
-     "factoriser",
-     "ME",
-     "x^{3} + 2x^{2} - 3x"
-    ],
-    [
-     "factoriser",
-     "FORMULE",
-     "x^{2} + 2x - 3"
-    ],
-    [
-     "produit_nul",
-     "PRODUIT_NUL",
-     "x(x^{2} + 2x - 3)"
-    ],
-    [
-     "delta_valeur",
-     "FORMULE",
-     "x^{2} + 2x - 3"
-    ],
-    [
-     "delta_nombre",
-     "FORMULE",
-     "x^{2} + 2x - 3"
-    ]
-   ],
-   "message": null,
-   "solution": [
-    {
-     "tex": "S = \\{-3\\,;\\,0\\,;\\,1\\}",
-     "type": "resultat_lim"
-    }
-   ],
-   "statut": "resolu",
    "variantes": []
   }
  },
@@ -19083,6 +22497,126 @@
      "produit_nul",
      "PRODUIT_NUL",
      "(x - 3)(x - 2)"
+    ]
+   ],
+   "message": null,
+   "solution": [
+    {
+     "tex": "S = \\{2\\,;\\,3\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "statut": "resolu",
+   "variantes": [
+    "formule"
+   ]
+  },
+  "formule": {
+   "S": "S = \\{2\\,;\\,3\\}",
+   "approx": null,
+   "cartes": [
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "x^{2} - 3x = 2x - 6",
+         "gauche": "x(x - 3) = 2(x - 3)",
+         "lien": "\\iff",
+         "prop": "distribution"
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      0
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "x^{2} - 5x + 6 = 0",
+         "gauche": "x^{2} - 3x = 2x - 6",
+         "lien": "\\iff"
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      1
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\Delta = b^{2} - 4ac = (-5)^{2} - 4 \\cdot 1 \\cdot 6 = 25 - 24 = \\fbox{$1$}",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      2,
+      3
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 1",
+         "lien": ""
+        },
+        {
+         "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{5 - 1}{2} = 2",
+         "lien": ""
+        },
+        {
+         "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{5 + 1}{2} = 3",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      4
+     ]
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "DEVELOPPER",
+     "x(x - 3) = 2(x - 3)"
+    ],
+    [
+     "ramener",
+     "RAMENER",
+     "x^{2} - 3x = 2x - 6"
+    ],
+    [
+     "factoriser",
+     "FORMULE",
+     "x^{2} - 5x + 6"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "x^{2} - 5x + 6"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "x^{2} - 5x + 6"
     ]
    ],
    "message": null,
@@ -25858,6 +29392,143 @@
     }
    ],
    "statut": "resolu",
+   "variantes": [
+    "formule"
+   ]
+  },
+  "formule": {
+   "S": "S = \\{0\\,;\\,1\\}",
+   "approx": null,
+   "cartes": [
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "x^{3} - (x - 1)^{2}(x - 1) = 1",
+         "gauche": "x^{3} - (x - 1)^{3} = 1",
+         "lien": "\\iff"
+        },
+        {
+         "expr": "x^{3} - (x^{2} - 2x + 1)(x - 1) = 1",
+         "lien": "\\iff",
+         "prop": "Id. rem. \\((A - B)^{2}\\) avec \\(A = x,\\ B = 1\\)"
+        },
+        {
+         "expr": "x^{3} - (x^{3} - x^{2} - 2x^{2} + 2x + x - 1) = 1",
+         "lien": "\\iff",
+         "prop": "double distribution"
+        },
+        {
+         "expr": "x^{3} - x^{3} + x^{2} + 2x^{2} - 2x - x + 1 = 1",
+         "lien": "\\iff"
+        },
+        {
+         "expr": "3x^{2} - 3x + 1 = 1",
+         "lien": "\\iff"
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      0
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "3x^{2} - 3x = 0",
+         "gauche": "3x^{2} - 3x + 1 = 1",
+         "lien": "\\iff"
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      1
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\Delta = b^{2} - 4ac = (-3)^{2} - 4 \\cdot 3 \\cdot 0 = \\fbox{$9$}",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      2,
+      3
+     ]
+    },
+    {
+     "blocs": [
+      {
+       "rangees": [
+        {
+         "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 3",
+         "lien": ""
+        },
+        {
+         "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{3 - 3}{6} = 0",
+         "lien": ""
+        },
+        {
+         "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{3 + 3}{6} = 1",
+         "lien": ""
+        }
+       ],
+       "type": "chaine"
+      }
+     ],
+     "etapes": [
+      4
+     ]
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "DEVELOPPER",
+     "x^{3} - (x - 1)^{3} = 1"
+    ],
+    [
+     "ramener",
+     "RAMENER",
+     "3x^{2} - 3x + 1 = 1"
+    ],
+    [
+     "factoriser",
+     "FORMULE",
+     "3x^{2} - 3x"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "3x^{2} - 3x"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "3x^{2} - 3x"
+    ]
+   ],
+   "message": null,
+   "solution": [
+    {
+     "tex": "S = \\{0\\,;\\,1\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "statut": "resolu",
    "variantes": []
   }
  },
@@ -26123,135 +29794,6 @@
     }
    ],
    "statut": "resolu",
-   "variantes": [
-    "formule"
-   ]
-  },
-  "formule": {
-   "S": "S = \\{-\\sqrt{5}\\,;\\,0\\,;\\,\\sqrt{5}\\}",
-   "approx": "soit \\(x \\approx -2{,}236\\) ou \\(x = 0\\) ou \\(x \\approx 2{,}236\\)",
-   "cartes": [
-    {
-     "blocs": [
-      {
-       "rangees": [
-        {
-         "expr": "x(x^{2} - 5) = 0",
-         "gauche": "x^{3} - 5x = 0",
-         "lien": "\\iff",
-         "prop": "ME"
-        }
-       ],
-       "type": "chaine"
-      }
-     ],
-     "etapes": [
-      0
-     ]
-    },
-    {
-     "blocs": [
-      {
-       "rangees": [
-        {
-         "expr": "{x = 0} \\text{ ou } \\allowbreak {x^{2} - 5 = 0}",
-         "gauche": "x(x^{2} - 5) = 0",
-         "lien": "\\iff",
-         "prop": "produit nul"
-        }
-       ],
-       "type": "chaine"
-      }
-     ],
-     "etapes": [
-      1,
-      2
-     ]
-    },
-    {
-     "blocs": [
-      {
-       "rangees": [
-        {
-         "expr": "\\Delta = b^{2} - 4ac = 0^{2} - 4 \\cdot 1 \\cdot (-5) = \\fbox{$20$}",
-         "lien": ""
-        }
-       ],
-       "type": "chaine"
-      }
-     ],
-     "etapes": [
-      3
-     ]
-    },
-    {
-     "blocs": [
-      {
-       "rangees": [
-        {
-         "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = \\sqrt{20} = 2\\sqrt{5}",
-         "lien": ""
-        },
-        {
-         "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-2\\sqrt{5}}{2} = -\\sqrt{5}",
-         "lien": ""
-        },
-        {
-         "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{2\\sqrt{5}}{2} = \\sqrt{5}",
-         "lien": ""
-        },
-        {
-         "expr": "{x = 0} \\text{ ou } \\allowbreak {x = -\\sqrt{5}} \\text{ ou } \\allowbreak {x = \\sqrt{5}}",
-         "lien": "\\iff"
-        }
-       ],
-       "type": "chaine"
-      }
-     ],
-     "etapes": [
-      4
-     ]
-    }
-   ],
-   "etapes": [
-    [
-     "factoriser",
-     "ME",
-     "x^{3} - 5x"
-    ],
-    [
-     "factoriser",
-     "FORMULE",
-     "x^{2} - 5"
-    ],
-    [
-     "produit_nul",
-     "PRODUIT_NUL",
-     "x(x^{2} - 5)"
-    ],
-    [
-     "delta_valeur",
-     "FORMULE",
-     "x^{2} - 5"
-    ],
-    [
-     "delta_nombre",
-     "FORMULE",
-     "x^{2} - 5"
-    ]
-   ],
-   "message": null,
-   "solution": [
-    {
-     "tex": "S = \\{-\\sqrt{5}\\,;\\,0\\,;\\,\\sqrt{5}\\}",
-     "type": "resultat_lim"
-    },
-    {
-     "html": "soit \\(x \\approx -2{,}236\\) ou \\(x = 0\\) ou \\(x \\approx 2{,}236\\)",
-     "type": "texte"
-    }
-   ],
-   "statut": "resolu",
    "variantes": []
   }
  },
@@ -26381,131 +29923,6 @@
     }
    ],
    "statut": "resolu",
-   "variantes": [
-    "formule"
-   ]
-  },
-  "formule": {
-   "S": "S = \\{0\\,;\\,2\\,;\\,3\\}",
-   "approx": null,
-   "cartes": [
-    {
-     "blocs": [
-      {
-       "rangees": [
-        {
-         "expr": "x(x^{2} - 5x + 6) = 0",
-         "gauche": "x^{3} - 5x^{2} + 6x = 0",
-         "lien": "\\iff",
-         "prop": "ME"
-        }
-       ],
-       "type": "chaine"
-      }
-     ],
-     "etapes": [
-      0
-     ]
-    },
-    {
-     "blocs": [
-      {
-       "rangees": [
-        {
-         "expr": "{x = 0} \\text{ ou } \\allowbreak {x^{2} - 5x + 6 = 0}",
-         "gauche": "x(x^{2} - 5x + 6) = 0",
-         "lien": "\\iff",
-         "prop": "produit nul"
-        }
-       ],
-       "type": "chaine"
-      }
-     ],
-     "etapes": [
-      1,
-      2
-     ]
-    },
-    {
-     "blocs": [
-      {
-       "rangees": [
-        {
-         "expr": "\\Delta = b^{2} - 4ac = (-5)^{2} - 4 \\cdot 1 \\cdot 6 = 25 - 24 = \\fbox{$1$}",
-         "lien": ""
-        }
-       ],
-       "type": "chaine"
-      }
-     ],
-     "etapes": [
-      3
-     ]
-    },
-    {
-     "blocs": [
-      {
-       "rangees": [
-        {
-         "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 1",
-         "lien": ""
-        },
-        {
-         "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{5 - 1}{2} = 2",
-         "lien": ""
-        },
-        {
-         "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{5 + 1}{2} = 3",
-         "lien": ""
-        },
-        {
-         "expr": "{x = 0} \\text{ ou } \\allowbreak {x = 2} \\text{ ou } \\allowbreak {x = 3}",
-         "lien": "\\iff"
-        }
-       ],
-       "type": "chaine"
-      }
-     ],
-     "etapes": [
-      4
-     ]
-    }
-   ],
-   "etapes": [
-    [
-     "factoriser",
-     "ME",
-     "x^{3} - 5x^{2} + 6x"
-    ],
-    [
-     "factoriser",
-     "FORMULE",
-     "x^{2} - 5x + 6"
-    ],
-    [
-     "produit_nul",
-     "PRODUIT_NUL",
-     "x(x^{2} - 5x + 6)"
-    ],
-    [
-     "delta_valeur",
-     "FORMULE",
-     "x^{2} - 5x + 6"
-    ],
-    [
-     "delta_nombre",
-     "FORMULE",
-     "x^{2} - 5x + 6"
-    ]
-   ],
-   "message": null,
-   "solution": [
-    {
-     "tex": "S = \\{0\\,;\\,2\\,;\\,3\\}",
-     "type": "resultat_lim"
-    }
-   ],
-   "statut": "resolu",
    "variantes": []
   }
  },
@@ -26588,131 +30005,6 @@
      "produit_nul",
      "PRODUIT_NUL",
      "x(x + 1)(x - 1)"
-    ]
-   ],
-   "message": null,
-   "solution": [
-    {
-     "tex": "S = \\{-1\\,;\\,0\\,;\\,1\\}",
-     "type": "resultat_lim"
-    }
-   ],
-   "statut": "resolu",
-   "variantes": [
-    "formule"
-   ]
-  },
-  "formule": {
-   "S": "S = \\{-1\\,;\\,0\\,;\\,1\\}",
-   "approx": null,
-   "cartes": [
-    {
-     "blocs": [
-      {
-       "rangees": [
-        {
-         "expr": "x(x^{2} - 1) = 0",
-         "gauche": "x^{3} - x = 0",
-         "lien": "\\iff",
-         "prop": "ME"
-        }
-       ],
-       "type": "chaine"
-      }
-     ],
-     "etapes": [
-      0
-     ]
-    },
-    {
-     "blocs": [
-      {
-       "rangees": [
-        {
-         "expr": "{x = 0} \\text{ ou } \\allowbreak {x^{2} - 1 = 0}",
-         "gauche": "x(x^{2} - 1) = 0",
-         "lien": "\\iff",
-         "prop": "produit nul"
-        }
-       ],
-       "type": "chaine"
-      }
-     ],
-     "etapes": [
-      1,
-      2
-     ]
-    },
-    {
-     "blocs": [
-      {
-       "rangees": [
-        {
-         "expr": "\\Delta = b^{2} - 4ac = 0^{2} - 4 \\cdot 1 \\cdot (-1) = \\fbox{$4$}",
-         "lien": ""
-        }
-       ],
-       "type": "chaine"
-      }
-     ],
-     "etapes": [
-      3
-     ]
-    },
-    {
-     "blocs": [
-      {
-       "rangees": [
-        {
-         "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 2",
-         "lien": ""
-        },
-        {
-         "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-2}{2} = -1",
-         "lien": ""
-        },
-        {
-         "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{2}{2} = 1",
-         "lien": ""
-        },
-        {
-         "expr": "{x = 0} \\text{ ou } \\allowbreak {x = -1} \\text{ ou } \\allowbreak {x = 1}",
-         "lien": "\\iff"
-        }
-       ],
-       "type": "chaine"
-      }
-     ],
-     "etapes": [
-      4
-     ]
-    }
-   ],
-   "etapes": [
-    [
-     "factoriser",
-     "ME",
-     "x^{3} - x"
-    ],
-    [
-     "factoriser",
-     "FORMULE",
-     "x^{2} - 1"
-    ],
-    [
-     "produit_nul",
-     "PRODUIT_NUL",
-     "x(x^{2} - 1)"
-    ],
-    [
-     "delta_valeur",
-     "FORMULE",
-     "x^{2} - 1"
-    ],
-    [
-     "delta_nombre",
-     "FORMULE",
-     "x^{2} - 1"
     ]
    ],
    "message": null,
@@ -26827,153 +30119,6 @@
      "produit_nul",
      "PRODUIT_NUL",
      "x(x + 2)(x - 2)"
-    ]
-   ],
-   "message": null,
-   "solution": [
-    {
-     "tex": "S = \\{-2\\,;\\,0\\,;\\,2\\}",
-     "type": "resultat_lim"
-    }
-   ],
-   "statut": "resolu",
-   "variantes": [
-    "formule"
-   ]
-  },
-  "formule": {
-   "S": "S = \\{-2\\,;\\,0\\,;\\,2\\}",
-   "approx": null,
-   "cartes": [
-    {
-     "blocs": [
-      {
-       "rangees": [
-        {
-         "expr": "x^{3} - 4x = 0",
-         "gauche": "x^{3} = 4x",
-         "lien": "\\iff"
-        }
-       ],
-       "type": "chaine"
-      }
-     ],
-     "etapes": [
-      0
-     ]
-    },
-    {
-     "blocs": [
-      {
-       "rangees": [
-        {
-         "expr": "x(x^{2} - 4) = 0",
-         "gauche": "x^{3} - 4x = 0",
-         "lien": "\\iff",
-         "prop": "ME"
-        }
-       ],
-       "type": "chaine"
-      }
-     ],
-     "etapes": [
-      1
-     ]
-    },
-    {
-     "blocs": [
-      {
-       "rangees": [
-        {
-         "expr": "{x = 0} \\text{ ou } \\allowbreak {x^{2} - 4 = 0}",
-         "gauche": "x(x^{2} - 4) = 0",
-         "lien": "\\iff",
-         "prop": "produit nul"
-        }
-       ],
-       "type": "chaine"
-      }
-     ],
-     "etapes": [
-      2,
-      3
-     ]
-    },
-    {
-     "blocs": [
-      {
-       "rangees": [
-        {
-         "expr": "\\Delta = b^{2} - 4ac = 0^{2} - 4 \\cdot 1 \\cdot (-4) = \\fbox{$16$}",
-         "lien": ""
-        }
-       ],
-       "type": "chaine"
-      }
-     ],
-     "etapes": [
-      4
-     ]
-    },
-    {
-     "blocs": [
-      {
-       "rangees": [
-        {
-         "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 4",
-         "lien": ""
-        },
-        {
-         "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-4}{2} = -2",
-         "lien": ""
-        },
-        {
-         "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{4}{2} = 2",
-         "lien": ""
-        },
-        {
-         "expr": "{x = 0} \\text{ ou } \\allowbreak {x = -2} \\text{ ou } \\allowbreak {x = 2}",
-         "lien": "\\iff"
-        }
-       ],
-       "type": "chaine"
-      }
-     ],
-     "etapes": [
-      5
-     ]
-    }
-   ],
-   "etapes": [
-    [
-     "ramener",
-     "RAMENER",
-     "x^{3} = 4x"
-    ],
-    [
-     "factoriser",
-     "ME",
-     "x^{3} - 4x"
-    ],
-    [
-     "factoriser",
-     "FORMULE",
-     "x^{2} - 4"
-    ],
-    [
-     "produit_nul",
-     "PRODUIT_NUL",
-     "x(x^{2} - 4)"
-    ],
-    [
-     "delta_valeur",
-     "FORMULE",
-     "x^{2} - 4"
-    ],
-    [
-     "delta_nombre",
-     "FORMULE",
-     "x^{2} - 4"
     ]
    ],
    "message": null,

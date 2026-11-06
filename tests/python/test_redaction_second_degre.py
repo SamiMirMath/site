@@ -18,7 +18,10 @@ plan, P2b, P3, P4a et P4b).
   structure que l'outil n'écrit pas reçoit « hors du cours ».
 - P4b : degrés ≠ 2 (E13 : ME de xᵏ, Id. rem. de A = x², x⁴ − 16 avec D28 et E9), degré 1 (isoler, D20), identité et égalité fausse
   (phrases d'Exp-log), formes structurées laissées à P4b ; messages définitifs (bicarrée, hors du cours) : aucun statut temporaire.
-- Les formes d'`A_VENIR` (toutes les parties sont faites : aucun xfail) et chaque exercice du § 8 (instantané et oracle)."""
+- Les formes d'`A_VENIR` (toutes les parties sont faites : aucun xfail) et chaque exercice du § 8 (instantané et oracle).
+- R3 (questions 25 et 37 de suivi.md, « les deux boutons pour comparer ») : la variante « Par la formule » si et seulement si
+  l'équation se ramène à un trinôme de degré 2 (SymPy) et que le cours n'utilise pas la formule, sur tout le corpus ; elle ramène et
+  développe, puis la formule ; mêmes solutions que le cours (oracle) ; garde-fou."""
 import json
 import re
 import unicodedata
@@ -297,10 +300,11 @@ class TestInvariants(unittest.TestCase):
         res = resoudre("3t^2+5t+12=0")
         cartes = sd.cartes(res)
         self.assertEqual(cartes[-1]["blocs"], [sortie.texte(r"\(\Delta < 0\) : l'équation n'a aucune solution réelle.")])
-        res = resoudre(RESOLUES["ME de 2x, puis Id. rem. (carré)"], sd.ORDRE_PAR_LA_FORMULE)      # Δ = 0, puis ⇔ x = 0 ou x = 1
+        res = resoudre("(x+1)(2x^2+2x+1/2)=0")             # Δ = 0 sur un facteur, puis ⇔ x = −1 ou x = −1/2 (R3 : chemin du cours)
+        self.assertEqual(res["etapes"][-1]["phase"], "delta_nombre")
         rangees = sd.cartes(res)[-1]["blocs"][0]["rangees"]
         self.assertEqual([r.get("lien") for r in rangees], [None, "", r"\iff"])
-        self.assertFalse(any("gauche" in r for r in rangees))      # jamais « x = −b/2a = 1 ⇔ x = 0 ou x = 1 »
+        self.assertFalse(any("gauche" in r for r in rangees))      # jamais « x = −b/2a = −1/2 ⇔ x = −1 ou x = −1/2 »
         with self.assertRaises(ValueError):
             sd.cartes(resoudre("x^4-5x^2+4=0"))
 
@@ -574,11 +578,17 @@ class TestRedaction(unittest.TestCase):
         self.assertIsNone(resoudre(P2B["2.10 a"])["approx"])
 
     def test_variante_par_la_formule(self):
-        """E12 : proposée seulement si le chemin du cours n'utilise pas la formule ; sans phrase de choix ; Δ = 0 (4x² − 12x + 9) ;
-        a < 0 : x₁ avec −√Δ, S croissant (§ 13.4)."""
+        """E12, revue par R3 (questions 25 et 37) : proposée seulement si le chemin du cours n'utilise pas la formule ; sans phrase de
+        choix ; Δ = 0 (4x² − 12x + 9) ; c = 0, la formule directe (3x² − 12x : Δ = 144, x = 0 ou x = 4) ; a < 0 : x₁ avec −√Δ,
+        S croissant (§ 13.4)."""
         self.assertEqual(resoudre(P2B["§ 7 4x² − 12x + 9"])["variantes"], ["formule"])
         self.assertEqual(resoudre(P2B["Javet 2.17 c"])["variantes"], [])
-        self.assertEqual(resoudre(P2B["§ 7 3x² − 12x"])["variantes"], [])       # la variante n'aurait pas de formule (c = 0)
+        self.assertEqual(resoudre(P2B["§ 7 3x² − 12x"])["variantes"], ["formule"])        # R3 : la formule directe, c = 0
+        self.assertEqual(textes(resoudre(P2B["§ 7 3x² − 12x"], sd.ORDRE_PAR_LA_FORMULE)), [
+            r" | \Delta = b^{2} - 4ac = (-12)^{2} - 4 \cdot 3 \cdot 0 = \fbox{$144$} | ",
+            r" | \Delta > 0 \text{ : deux solutions.} \quad \sqrt{\Delta} = 12 | ",
+            r" | x_{1} = \frac{-b - \sqrt{\Delta}}{2a} = \frac{12 - 12}{6} = 0 | ",
+            r" | x_{2} = \frac{-b + \sqrt{\Delta}}{2a} = \frac{12 + 12}{6} = 4 | "])
         v = resoudre(P2B["§ 7 4x² − 12x + 9"], sd.ORDRE_PAR_LA_FORMULE)
         self.assertEqual(textes(v), [r" | \Delta = b^{2} - 4ac = (-12)^{2} - 4 \cdot 4 \cdot 9 = 144 - 144 = \fbox{$0$} | ",
                                      r"\(\Delta = 0\) : une seule solution.",
@@ -931,7 +941,7 @@ class TestStructures(unittest.TestCase):
             ("produit_nul", "PRODUIT_NUL", "(2x - 3)(2x - 5)")])
         p = res["etapes"][1]["parametres"]
         self.assertEqual((p["A"], p["B"], p["forme"]), ("2(x - 2)", "1", "structuree"))
-        self.assertEqual(res["variantes"], [])
+        self.assertEqual(res["variantes"], ["formule"])                 # R3 (question 25) : la variante développe, puis la formule
 
     def test_2_9_l_etiquette_sans_ligne_intermediaire(self):
         """Corrigé 2.9 l : étiquette en marge ; ((x + 1) + 4)((x + 1) − 4) donne directement (x + 5)(x − 3) (aucun « − » devant une
@@ -1050,14 +1060,20 @@ class TestStructures(unittest.TestCase):
         self.assertEqual(textes(resoudre(P4A["E3 facteur à droite d'abord"]))[3:6], [
             r"\iff | (x + 1)[3 - (x - 2)] = 0 | ME", r"\iff | (x + 1)(3 - x + 2) = 0 | ", r"\iff | (x + 1)(5 - x) = 0 | "])
 
-    def test_aucune_variante_ni_developpement(self):
-        """E1.3 : rien n'est développé (aucune étape DEVELOPPER) ; pas de variante « formule » (elle demanderait de développer)."""
+    def test_aucun_developpement(self):
+        """E1.3 : rien n'est développé sur le chemin du cours (aucune étape DEVELOPPER) ; R3 (question 25) : la variante « formule »
+        est proposée quand l'équation est un trinôme de degré 2 et que le cours n'utilise pas la formule ; elle développe."""
         for nom, saisie in P4A.items():
             with self.subTest(nom=nom):
                 res = resoudre(saisie)
                 self.assertEqual(res["statut"], "resolu")
-                self.assertEqual(res["variantes"], [])
+                P = polynome(saisie)
+                attendu = P.degre == 2 and not P.monome() and not any(e["methode"] == "FORMULE" for e in res["etapes"])
+                self.assertEqual(res["variantes"], ["formule"] if attendu else [])
                 self.assertFalse(any(e["methode"] == "DEVELOPPER" for e in res["etapes"]))
+                if attendu:
+                    v = resoudre(saisie, sd.ORDRE_PAR_LA_FORMULE)
+                    self.assertEqual([e["methode"] for e in v["etapes"]][-3:], ["FORMULE", "FORMULE", "FORMULE"])
 
     def test_enonce_ecrit_comme_le_corrigé(self):
         """Les produits de l'énoncé côte à côte (`Juxtaposition`) ; seulement sur une forme structurée (les énoncés de P2b et P3
@@ -1123,7 +1139,7 @@ class TestDegres(OracleMixin, unittest.TestCase):
         self.assertEqual([(e["phase"], e["methode"], e["cible"]) for e in res["etapes"]], [
             ("factoriser", "ME", "x^{3} - x"), ("factoriser", "IDREM_DIFF", "x^{2} - 1"),
             ("produit_nul", "PRODUIT_NUL", "x(x + 1)(x - 1)")])
-        self.assertEqual(res["variantes"], ["formule"])                 # E12 : ME de x seulement, puis la formule sur x² − 1
+        self.assertEqual(res["variantes"], [])                          # R3 : aucune variante en degré ≥ 3
 
     def test_az_4_1_f_monome(self):
         """E13, D7 : ME de x², « x² = 0 » puis « x = 0 »."""
@@ -1607,3 +1623,190 @@ class TestR2(unittest.TestCase):
         for saisie in list(FORMES_NON_ECRITES) + sorted(restes):
             with self.subTest(saisie=saisie):
                 self.assertEqual(resoudre(saisie)["statut"], "forme_non_traitee")
+
+
+# ---------------------------------------------------------------------------------------------------------------------------
+# R3 : les deux boutons pour comparer (questions 25 et 37 de suivi.md, tranchées le 06.11.2026)
+# ---------------------------------------------------------------------------------------------------------------------------
+def trinome_sympy(saisie):
+    """(degré, nombre de termes non nuls) de gauche − droite, lus par SymPy depuis la saisie (indépendant de la brique) ; None si
+    SymPy ne lit pas la saisie (saisie invalide)."""
+    from sympy import Poly, Symbol
+    from sympy.parsing.sympy_parser import (convert_xor, implicit_multiplication_application, parse_expr, rationalize,
+                                            standard_transformations)
+    if saisie.count("=") != 1:
+        return None
+    lettres = sorted(set(re.findall(r"[a-z]", re.sub(r"sqrt|ln|log|exp", "", saisie))))
+    if len(lettres) != 1:
+        return None
+    x = Symbol(lettres[0])
+    T = standard_transformations + (implicit_multiplication_application, convert_xor, rationalize)
+    try:
+        g, d = (parse_expr(m.replace(",", "."), local_dict={x.name: x}, transformations=T) for m in saisie.split("="))
+        p = Poly((g - d).expand(), x)
+    except Exception:                                                    # noqa: BLE001 (saisie que SymPy ne lit pas)
+        return None
+    return p.degree(), sum(1 for c in p.all_coeffs() if c != 0)
+
+
+BADGES_DE_LA_FORMULE = {"Formule", "Discriminant"}
+
+
+def cours_utilise_la_formule(cartes):
+    """D'après la page : une carte « Formule », « Discriminant » ou « Valeurs de … » (étapes de la formule, R1)."""
+    return any(c.get("badge") in BADGES_DE_LA_FORMULE or (c.get("badge") or "").startswith("Valeurs de ") for c in cartes)
+
+
+class TestR3(OracleMixin, unittest.TestCase):
+
+    def test_regle_sur_tout_le_corpus(self):
+        """Règle de R3 sur tout le corpus de l'outil (`cas.entrees_equations` : page, § 8, § 6, résolues, non résolues, formes non
+        écrites, saisies invalides), sortie de la page : deux boutons (« Méthodes du cours », « Par la formule ») si et seulement si
+        l'équation est résolue, se ramène à un trinôme de degré 2 (degré lu par SymPy ; pas un monôme ax²) et que le chemin du cours
+        n'utilise pas la formule ; sinon une seule résolution (ou le message). Puis les polynômes générés (brique)."""
+        import resoudre_eq
+        from cas import entrees_equations
+        vues = 0
+        for saisie in entrees_equations():
+            with self.subTest(saisie=saisie):
+                s = resoudre_eq.resoudre(saisie)
+                if not s["ok"]:
+                    self.assertNotIn("variantes", s)
+                    continue
+                lu = trinome_sympy(saisie)
+                self.assertIsNotNone(lu)
+                cours = next(v for v in s["variantes"] if v["cle"] == "cours")["cartes"] if "variantes" in s else s["cartes"]
+                attendu = lu[0] == 2 and lu[1] >= 2 and not cours_utilise_la_formule(cours)
+                self.assertEqual("variantes" in s, attendu)
+                if attendu:
+                    vues += 1
+                    self.assertEqual([(v["cle"], v["libelle"]) for v in s["variantes"]],
+                                     [("cours", "Méthodes du cours"), ("formule", "Par la formule")])
+                    self.assertEqual(s["variante_defaut"], "cours")
+                    formule = next(v for v in s["variantes"] if v["cle"] == "formule")["cartes"]
+                    self.assertTrue(cours_utilise_la_formule(formule))
+                    self.assertEqual(formule[-1]["blocs"][0], cours[-1]["blocs"][0])   # le même S (la ligne ≈ nomme x₁, x₂ : E14)
+        self.assertGreater(vues, 100)
+        for nom, P, res in GENEREES:
+            with self.subTest(nom=nom):
+                attendu = not P.monome() and not any(e["methode"] == "FORMULE" for e in res["etapes"])
+                self.assertEqual(res["variantes"], ["formule"] if attendu else [])
+
+    def test_memes_solutions_et_oracle(self):
+        """Garde-fou exact : les solutions de la variante sont exactement celles du chemin du cours, celles d'`oracle.racines`, et
+        chacune annule exactement l'équation ; sur le corpus et les polynômes générés."""
+        cas_ = [(nom, polynome(s), resoudre(s), resoudre(s, sd.ORDRE_PAR_LA_FORMULE)) for nom, s in RESOLUES.items()
+                if resoudre(s)["variantes"]]
+        for i, (nom, P, res) in enumerate(GENEREES):
+            if res["variantes"]:
+                dec = i % 3 == 0
+                cas_.append((nom, P, res, sd.resoudre_equation(sd.arbre_polynome(P, "x", dec), Nb(0), "x", dec,
+                                                               sd.ORDRE_PAR_LA_FORMULE)))
+        self.assertGreater(len(cas_), 150)
+        for nom, P, res, v in cas_:
+            with self.subTest(nom=nom):
+                self.assertEqual(v["statut"], "resolu")
+                self.assertEqual(v["solutions"], res["solutions"])
+                self.assertEqual(v["S"], res["S"])
+                self.assertSolutionsOracle(P, v["solutions"], nom)
+                for x in v["solutions"]:
+                    self.assertEqual(evaluer(P, x), (0, 0))
+
+    def test_la_variante_ramene_puis_la_formule(self):
+        """La variante : les lignes pour ramener et développer (les mêmes qu'une forme développée : E1, E2, R2), puis la formule sur le
+        trinôme ramené (Δ, puis les valeurs de x) ; aucune autre méthode, aucune phrase de choix, plus de mise en évidence de x. Chaque
+        valeur affichée est recalculée ici : (a, b, c) proportionnels aux coefficients de gauche − droite (SymPy), Δ = b² − 4ac encadré,
+        x₁ = (−b − √Δ)/(2a) et x₂ = (−b + √Δ)/(2a) (ou x = −b/(2a))."""
+        n = 0
+        for nom, res in TOUTES:
+            if not nom.endswith("(variante formule)"):
+                continue
+            n += 1
+            with self.subTest(nom=nom):
+                phases = [(e["phase"], e["methode"]) for e in res["etapes"]]
+                self.assertTrue(all(p == "ramener" for p, _ in phases[:-3]), phases)
+                self.assertEqual(phases[-3:], [("factoriser", "FORMULE"), ("delta_valeur", "FORMULE"), ("delta_nombre", "FORMULE")])
+                self.assertFalse(any(isinstance(r, LigneTexte) for e in res["etapes"][-3:-2] for r in e["lignes"]))   # E1 : réordonner
+                self.assertFalse(any("Pas de ME" in t or "unitaire" in t or "on utilise la formule" in t for t in textes(res)))
+                f = res["etapes"][-1]["parametres"]
+                a, b, c = f["a"], f["b"], f["c"]
+                P = polynome(RESOLUES[nom.replace(" (variante formule)", "")])
+                self.assertEqual(P.degre, 2)
+                self.assertEqual([k * a for k in (P[0], P[1], P[2])], [k * P[2] for k in (c, b, a)])
+                delta = b * b - 4 * a * c
+                self.assertEqual(f["delta"], delta)
+                self.assertTrue(textes(res)[sum(len(e["lignes"]) for e in res["etapes"][:-2])].endswith(
+                    r"= \fbox{$" + nombres.exact(delta, a_des_decimaux(lire(RESOLUES[nom.replace(" (variante formule)", "")])[0])
+                                                 or a_des_decimaux(lire(RESOLUES[nom.replace(" (variante formule)", "")])[1]))
+                    + "$} | "))
+                if delta > 0:
+                    rd = Nombre(0, 1, int(delta.numerator * delta.denominator)) * Nombre(F(1, delta.denominator))
+                    self.assertEqual(rd * rd, Nombre(delta))
+                    self.assertEqual((f["x1"], f["x2"]), ((Nombre(-b) - rd) * Nombre(1 / (2 * a)), (Nombre(-b) + rd) * Nombre(1 / (2 * a))))
+                elif delta == 0:
+                    self.assertEqual(f["x"], Nombre(-b / (2 * a)))
+        self.assertGreater(n, 100)
+
+    def test_un_seul_bouton(self):
+        """Un seul bouton : le chemin du cours passe par la formule (Javet 2.17 c, 2.12 b, Javet 2.17 e, x² + 4 = 0), degré ≥ 3 (2.12 c,
+        Az 4.1 f : plus de mise en évidence de x dans une variante), degré 1, identité, monôme ax² (3x² = 0 ⇔ x = 0), message."""
+        for saisie in (RESOLUES["Javet 2.17 c"], RESOLUES["2.12 b"], RESOLUES["Javet 2.17 e"], "x^2+4=0", P4B["2.12 c"],
+                       P4B["Az 4.1 f"], "2x^3-4x^2+2x=0", "3x-6=0", "(x+1)^2=x^2+2x+1", "3x^2=0", "x^4-5x^2+4=0"):
+            with self.subTest(saisie=saisie):
+                self.assertEqual(resoudre(saisie)["variantes"], [])
+                self.assertEqual(resoudre(saisie, sd.ORDRE_PAR_LA_FORMULE)["statut"] in ("resolu",),
+                                 sd.vers_polynome(expr.Op("-", *lire(saisie)[:2]), lire(saisie)[2]).degre == 2
+                                 and not polynome(saisie).monome())
+
+    def test_formes_structurees_2_12_e(self):
+        """Question 25 : 2.12 e (facteur commun) garde son chemin du cours (ME du facteur commun) ; la variante développe
+        (double distribution), ramène à 2x² − x − 1 = 0, puis la formule ; mêmes solutions."""
+        import resoudre_eq
+        s = resoudre_eq.resoudre(P4A["2.12 e"])
+        badges = {v["cle"]: [c.get("badge") or c["titre"] for c in v["cartes"]] for v in s["variantes"]}
+        self.assertEqual(badges, {"cours": ["Ramener à 0", "Mise en évidence", "Produit nul", "Solution"],
+                                  "formule": ["Développer", "Ramener à 0", "Discriminant", "Valeurs de x", "Solution"]})
+        v = resoudre(P4A["2.12 e"], sd.ORDRE_PAR_LA_FORMULE)
+        self.assertEqual(textes(v), [
+            r" | (x - 1)(2 - x) = (x - 1)(x + 3) | ",
+            r"\iff | 2x - x^{2} - 2 + x = x^{2} + 3x - x - 3 | double distribution",
+            r"\iff | -x^{2} + 3x - 2 = x^{2} + 2x - 3 | ",
+            r"\iff | 2x^{2} - x - 1 = 0 | ",
+            r" | \Delta = b^{2} - 4ac = (-1)^{2} - 4 \cdot 2 \cdot (-1) = 1 + 8 = \fbox{$9$} | ",
+            r" | \Delta > 0 \text{ : deux solutions.} \quad \sqrt{\Delta} = 3 | ",
+            r" | x_{1} = \frac{-b - \sqrt{\Delta}}{2a} = \frac{1 - 3}{4} = -\frac{1}{2} | ",
+            r" | x_{2} = \frac{-b + \sqrt{\Delta}}{2a} = \frac{1 + 3}{4} = 1 | "])
+        self.assertEqual(v["S"], resoudre(P4A["2.12 e"])["S"])
+        for nom in ("2.9 k", "2.12 h", "2.9 l"):
+            with self.subTest(nom=nom):
+                self.assertEqual(resoudre(P4A[nom])["variantes"], ["formule"])
+                self.assertEqual(resoudre(P4A[nom], sd.ORDRE_PAR_LA_FORMULE)["etapes"][0]["methode"], "DEVELOPPER")
+
+    def test_garde_fou_de_la_variante(self):
+        """Une variante dont les solutions diffèrent de celles du cours : « ne_conclut_pas » pour toute l'équation (jamais un résultat
+        douteux) ; une variante qui ne conclut pas : pas de variante, le chemin du cours seul, inchangé."""
+        saisie = P2B["§ 7 4x² − 12x + 9"]
+        avant = resoudre(saisie)
+        self.assertEqual(avant["variantes"], ["formule"])
+        ancien = sd._resoudre
+
+        def solutions_faussees(*a):
+            r = ancien(*a)
+            if a[-1] == sd.ORDRE_PAR_LA_FORMULE:
+                r = dict(r, solutions=r["solutions"] + [Nombre(7)])
+            return r
+
+        def ne_conclut_pas(*a):
+            return sd._non_resolu("ne_conclut_pas") if a[-1] == sd.ORDRE_PAR_LA_FORMULE else ancien(*a)
+
+        try:
+            sd._resoudre = solutions_faussees
+            self.assertEqual(resoudre(saisie)["statut"], "ne_conclut_pas")
+            sd._resoudre = ne_conclut_pas
+            r = resoudre(saisie)
+            self.assertEqual(r["variantes"], [])
+            self.assertEqual((r["statut"], r["solutions"], r["S"], r["approx"], sd.cartes(r), sd.blocs_solution(r)),
+                             (avant["statut"], avant["solutions"], avant["S"], avant["approx"], sd.cartes(avant), sd.blocs_solution(avant)))
+        finally:
+            sd._resoudre = ancien
+        self.assertEqual(resoudre(saisie)["variantes"], ["formule"])

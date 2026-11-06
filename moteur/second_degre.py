@@ -42,7 +42,8 @@ de k√m/d, § 13.2).
 
 Les facteurs sont des tuples de `Nombre` (ordre croissant) : (5x + √3) est (Nombre(0, 1, 3), Nombre(5)). Les noms de méthodes sont
 ceux du § 5 (« ME », « IDREM_DIFF », « IDREM_PLUS », « IDREM_MOINS », « SP », « TATONNEMENT », « FORMULE », « PRODUIT_NUL »,
-« ISOLER »), plus « IDREM » (la famille, pour l'ordre du cours), « ME_PUISSANCE » (la variante E12 : seulement xʲ) et
+« ISOLER »), plus « IDREM » (la famille, pour l'ordre du cours), « ME_PUISSANCE » (seulement xʲ ; l'ancienne variante E12, gardée
+pour `appliquer` et `s_applique`, hors de toute résolution affichée depuis R3) et
 « FRACTIONS » (R2 : on multiplie les deux membres par le plus petit dénominateur commun).
 
 Aucun état : aucune variable de module n'est modifiée (A7) ; les décimaux de l'énoncé sont un paramètre (`decimaux_enonce`).
@@ -67,7 +68,7 @@ __all__ = ["Polynome", "Nombre", "HorsBornes", "vers_polynome", "mise_en_evidenc
            "forme_structuree", "PHRASE_RAMENER", "ecrire_enonce", "Groupe", "Crochet", "Juxtaposition", "bicarree", "hors_du_cours"]
 
 ORDRE_DU_COURS = ("ME", "IDREM", "SP", "TATONNEMENT", "FORMULE")          # D28 : ordre fixe, même si a = 1
-ORDRE_PAR_LA_FORMULE = ("ME_PUISSANCE", "FORMULE")                       # E12 : seulement xʲ en évidence, puis la formule
+ORDRE_PAR_LA_FORMULE = ("FORMULE",)        # R3 (questions 25 et 37) : ramener / développer jusqu'au trinôme, puis la formule
 IDREM = ("IDREM_DIFF", "IDREM_PLUS", "IDREM_MOINS")
 METHODES = ORDRE_DU_COURS + ("ME_PUISSANCE",) + IDREM
 
@@ -364,7 +365,7 @@ def verifier_solution(P, x):
 # =====================================================================
 def mise_en_evidence(P, constante=True):
     """ME (E3, D21) : facteur k·xʲ, avec k = pgcd des coefficients (−pgcd si a < 0) et xʲ la plus grande puissance commune ;
-    constante=False (variante E12) : seulement xʲ. {k, j, facteur (Polynome k·xʲ), reste (Polynome), facteurs} ou None (rien à
+    constante=False (ancienne variante E12, `appliquer`) : seulement xʲ. {k, j, facteur (Polynome k·xʲ), reste (Polynome), facteurs} ou None (rien à
     mettre en évidence, un seul terme, ou coefficients non entiers : § 13.4)."""
     P = Polynome(P)
     if not P.entiers() or sum(1 for c in P if c != 0) < 2:
@@ -2523,12 +2524,13 @@ def resoudre_equation(gauche, droite, inconnue, decimaux_enonce=False, methodes=
 
     {statut: "resolu" | "pas_encore" | "hors_cours" | "forme_non_traitee" | "ne_conclut_pas" | "hors_bornes",
      etapes: [Etape], solutions: [Nombre] croissantes, S: TeX, approx: texte « soit … ≈ … » (TeX entre \\( et \\)) ou None,
-     variantes: ["formule"] (E12 : le chemin du cours n'utilise pas la formule) ou [], message: texte pour un statut non résolu}
+     variantes: ["formule"] (R3 : `_variante`) ou [], message: texte pour un statut non résolu}
     Etape = {phase, methode, cible (TeX), parametres (calcul exact), lignes (rangées : triplets (lien, expr, prop) et `LigneTexte`),
              segment (la `Chaine` de l'étape, pivot puis ⇔, ou None)}.
 
     P4a : une forme structurée (`forme_structuree`, E1.3) est résolue sans développer (`_rediger_structure` : produit déjà nul,
-    facteur commun aux deux membres, Id. rem. sur la forme structurée ; chaque ligne relue, garde-fou exact), sans variante. P3 :
+    facteur commun aux deux membres, Id. rem. sur la forme structurée ; chaque ligne relue, garde-fou exact) ; sa variante
+    « Par la formule » la développe (R3). P3 :
     sinon, l'équation est ramenée à « P = 0 » (E1, E2 : `ramener`, étapes de phase « ramener »). R2 (question 29) : les fractions
     sont supprimées d'abord (aucune forme structurée ensuite) ; une forme structurée que l'outil n'écrit pas est développée
     (« développer d'abord ») ; si elle finit en « hors du cours » ou « bicarrée », « forme_non_traitee » (un produit nul direct
@@ -2537,42 +2539,77 @@ def resoudre_equation(gauche, droite, inconnue, decimaux_enonce=False, methodes=
     avec les phrases d'Exp-log. Degré ≥ 3 que le cours ne résout pas : « pas_encore » (bicarrée, `bicarree`) ou « hors_cours »
     (seulement s'il est vrai, `hors_du_cours`) ; une forme que l'outil n'écrit pas (depuis R2 : division ou parenthèses imbriquées)
     et un degré ≥ 3 douteux : « forme_non_traitee » (P5, question 29 de suivi.md). Le calcul est celui de `chemin` (garde-fou exact) ; une valeur écrite qui ne vérifie pas son calcul donne
-    « ne_conclut_pas ». methodes=ORDRE_PAR_LA_FORMULE : la variante E12 (sans effet sur une forme structurée). Une autre lettre que
-    l'inconnue : ValueError (la lecture de la saisie, equations-2e-degre/equations.py, la refuse avant)."""
+    « ne_conclut_pas ». R3 (questions 25 et 37 de suivi.md, « les deux boutons pour comparer », remplace la règle E12) : la variante
+    « Par la formule » est proposée (variantes = ["formule"]) quand P est un trinôme de degré 2 et que le cours n'utilise pas la
+    formule, formes structurées comprises (`_variante`) ; methodes=ORDRE_PAR_LA_FORMULE la rédige : l'équation ramenée et développée
+    jusqu'à ax² + bx + c = 0 (même une forme structurée : `ramener`), puis Δ et les valeurs de x ; seulement pour un trinôme de
+    degré 2 (sinon « forme_non_traitee », jamais affiché). Une autre lettre que l'inconnue : ValueError (la lecture de la saisie,
+    equations-2e-degre/equations.py, la refuse avant)."""
     autres = (variables(gauche) | variables(droite)) - {inconnue}
     if autres:
         raise ValueError(f"autres lettres que l'inconnue {inconnue} : {sorted(autres)}")
     try:
-        structure = False
-        if not a_des_fractions(gauche, droite, inconnue) and forme_structuree(gauche, droite, inconnue):
-            res = _rediger_structure(gauche, droite, inconnue, decimaux_enonce)
-            if res is not None:
-                return res
-            structure = True                                            # R2 : une structure que l'outil n'écrit pas est développée
-        prep = ramener(gauche, droite, inconnue, decimaux_enonce, structure=False)
-        if prep is None:
-            return _non_resolu("forme_non_traitee")
-        P, enonce = prep["P"], ecrire_enonce(gauche, droite, inconnue)
-        if P.degre <= 1:
-            return _rediger_bas_degre(enonce, P, prep, inconnue, decimaux_enonce)
-        ch = chemin(P, methodes)
-        if ch["statut"] == "hors_cours":
-            if structure:                                               # un produit nul direct pourrait la résoudre : rien de douteux
-                return _non_resolu("forme_non_traitee")
-            if bicarree(P):
-                return _non_resolu("pas_encore")
-            return _non_resolu("hors_cours" if hors_du_cours(P, ch) else "forme_non_traitee")
-        if ch["statut"] != "resolu":
-            return _non_resolu(ch["statut"])
-        res = _rediger(enonce, P, ch, inconnue, decimaux_enonce, cours=methodes != ORDRE_PAR_LA_FORMULE, prep=prep)
-        if methodes == ORDRE_DU_COURS and not _formule_utilisee(ch):
-            v = chemin(P, ORDRE_PAR_LA_FORMULE)
-            res["variantes"] = ["formule"] if v["statut"] == "resolu" and _formule_utilisee(v) else []
+        res = _resoudre(gauche, droite, inconnue, decimaux_enonce, methodes)
+        if methodes == ORDRE_DU_COURS:
+            res["variantes"] = _variante(res, gauche, droite, inconnue, decimaux_enonce)
         return res
     except HorsBornes:
         return _non_resolu("hors_bornes")
     except (_Incoherent, ValueError, TypeError, ZeroDivisionError):      # valeur non garantie, écriture qui ne vérifie pas son calcul
         return _non_resolu("ne_conclut_pas")
+
+
+def _trinome(P):
+    """R3 : un trinôme de degré 2 (b ou c non nul : ax² = 0 ⇔ x = 0 n'a rien à comparer)."""
+    return P.degre == 2 and not P.monome()
+
+
+def _variante(res, gauche, droite, inconnue, dec):
+    """R3 (questions 25 et 37 de suivi.md, tranchées le 06.11.2026 : « les deux boutons, ainsi ils peuvent comparer ») : ["formule"]
+    si la résolution du cours est résolue, que l'équation ramenée P = 0 est un trinôme de degré 2 et qu'aucune étape du cours
+    n'utilise la formule (sinon un seul bouton) ; [] sinon (degré 1, degré ≥ 3, message). Garde-fou : la variante rédigée doit être
+    résolue et utiliser la formule (sinon pas de variante, le cours seul) ; ses solutions doivent être exactement celles du cours,
+    sinon _Incoherent (« ne_conclut_pas » pour toute l'équation : on ne saurait pas laquelle est fausse)."""
+    if res["statut"] != "resolu" or _formule_utilisee(res):
+        return []
+    if not _trinome(vers_polynome(Op("-", gauche, droite), inconnue)):
+        return []
+    v = _resoudre(gauche, droite, inconnue, dec, ORDRE_PAR_LA_FORMULE)
+    if v["statut"] != "resolu" or not _formule_utilisee(v):
+        return []
+    if v["solutions"] != res["solutions"]:
+        raise _Incoherent("la variante « Par la formule » et le chemin du cours n'ont pas les mêmes solutions")
+    return ["formule"]
+
+
+def _resoudre(gauche, droite, inconnue, decimaux_enonce, methodes):
+    """La résolution, sans la variante (`resoudre_equation`) ; les exceptions passent à l'appelant."""
+    par_la_formule = methodes == ORDRE_PAR_LA_FORMULE
+    structure = False
+    if not a_des_fractions(gauche, droite, inconnue) and forme_structuree(gauche, droite, inconnue):
+        if not par_la_formule:                                      # R3 : la variante développe toute forme structurée
+            res = _rediger_structure(gauche, droite, inconnue, decimaux_enonce)
+            if res is not None:
+                return res
+        structure = True                                            # R2 : une structure que l'outil n'écrit pas est développée
+    prep = ramener(gauche, droite, inconnue, decimaux_enonce, structure=False)
+    if prep is None:
+        return _non_resolu("forme_non_traitee")
+    P, enonce = prep["P"], ecrire_enonce(gauche, droite, inconnue)
+    if par_la_formule and not _trinome(P):
+        return _non_resolu("forme_non_traitee")                     # R3 : la variante ne rédige qu'un trinôme de degré 2
+    if P.degre <= 1:
+        return _rediger_bas_degre(enonce, P, prep, inconnue, decimaux_enonce)
+    ch = chemin(P, methodes)
+    if ch["statut"] == "hors_cours":
+        if structure:                                               # un produit nul direct pourrait la résoudre : rien de douteux
+            return _non_resolu("forme_non_traitee")
+        if bicarree(P):
+            return _non_resolu("pas_encore")
+        return _non_resolu("hors_cours" if hors_du_cours(P, ch) else "forme_non_traitee")
+    if ch["statut"] != "resolu":
+        return _non_resolu(ch["statut"])
+    return _rediger(enonce, P, ch, inconnue, decimaux_enonce, cours=not par_la_formule, prep=prep)
 
 
 def _ecrire_isoler(R, ctx, P):

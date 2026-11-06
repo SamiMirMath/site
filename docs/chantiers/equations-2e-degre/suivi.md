@@ -24,7 +24,8 @@ d'un outil existant modifiés (détail : `journal.md`, « Contrôles du chef d'o
 | P4b | degrés ≠ 2 (ME de xᵏ, E9, x⁴ − 16), degré 1, identité, messages définitifs | `88ea64e` | 7 min 21 | 13 Python, 1 renommé (7 xfail « P4b » passent) |
 | P5 | l'outil (page, `resoudre_eq`, manifeste, registre sans filière) ; message « forme non traitée » (question 29) | `f65131b` | 7 min 10 | 6 Python (3 retirés), 3 de pages |
 | R1 | une carte par étape (question 36) | `ee52a47` | 7 min (Python 100 s, pages 335 s) | 3 Python, 1 de pages |
-| R2 | développer d'abord, fractions supprimées d'abord (question 29) | commit « R2 » de la branche | 7 min (Python 95 s, pages 334 s) | 8 Python (1 renommé), 1 de pages |
+| R2 | développer d'abord, fractions supprimées d'abord (question 29) | `88f44ee` | 7 min (Python 95 s, pages 334 s) | 8 Python (1 renommé), 1 de pages |
+| R3 | les deux boutons pour comparer (questions 37 et 25) | commit « R3 » de la branche | voir `journal.md`, R3 | 6 Python (1 renommé), 1 de pages |
 | P6 | filières, carte de l'accueil, butée de `test_accueil`, `test_acc01` | hors nuit, après relecture | — | — |
 
 Suite finale (chef d'orchestre, sur `f65131b`, `PROCESSUS_PAGES=4`, `…/rapports/FIN`) : code 0 ; Python 1 666 passés + 1 xfail
@@ -55,6 +56,8 @@ ordre et mêmes étapes (ramener · factoriser (ME) · factoriser (TATONNEMENT, 
 à celui de P3 (`journal.md`, P3, « Texte rendu de 2.11 h »).
 
 **À relire par l'enseignant** (détail : section « À relire » ci-dessous et `journal.md`) :
+- **R3** : 37 entrées gagnent la variante « Par la formule » (formes structurées, c = 0), 8 la perdent (degré ≥ 3) ; chemin du cours
+  inchangé pour les 225 entrées ; captures `/home/sami-ubuntu/nuits/equations-2e-degre/captures/R3/` ; question 42.
 - **R2** : textes de 2(x + 1)² = 8, x²/2 = 1 + x, Az 4.1 b et h (`journal.md`, R2) ; les 16 instantanés changés (tous « forme non
   traitée » avant) et les 21 nouveaux ; captures `/home/sami-ubuntu/nuits/equations-2e-degre/captures/R2/` ; question 41.
 - **R1** : captures `/home/sami-ubuntu/nuits/equations-2e-degre/captures/R1/` ; tous les instantanés du nouvel outil, découpage en
@@ -82,8 +85,10 @@ ordre et mêmes étapes (ramener · factoriser (ME) · factoriser (TATONNEMENT, 
 - **8** instabilité de chargement de `test_soc04_parametre_f` en P0, acceptée par le chef comme celle de `test_clavier`.
 - **40** (R1) étape sans ligne de chaîne (tentative en échec, phrase de choix seule, « Δ < 0 ») : une carte de textes à elle ; badges.
 - **41** (R2) choix de rédaction du développement pas à pas et de la suppression des fractions ; formes encore non écrites.
+- **42** (R3) choix de la variante : pas pour un monôme ax² = 0 ; solutions différentes → « ne conclut pas » ; une forme structurée
+  développée comme en R2 ; plus de ME de xʲ (aucune variante en degré ≥ 3).
 - 36 **tranché : une carte par étape** (R1, fait) ; 29 **tranché : développer d'abord, fractions supprimées d'abord** (R2, fait) ; 37 et 25
-  **tranchés : les deux boutons pour comparer** (R3) ; autres questions : options par défaut gardées (proposé le 06.11.2026, sans objection de l'enseignant) ; 30 « bicarrée » aussi après une ME ; 31 ordre d'écriture de x⁴ − 16.
+  **tranchés : les deux boutons pour comparer** (R3, fait) ; autres questions : options par défaut gardées (proposé le 06.11.2026, sans objection de l'enseignant) ; 30 « bicarrée » aussi après une ME ; 31 ordre d'écriture de x⁴ − 16.
 - 9 radicande > 10¹² : message des bornes ; 10 ME non entière en degré ≥ 3 (0,5x³ − 2x) ; 11 `s_applique` hors du chemin (quiz).
 - 12 fond de l'encadré D29 seulement avec `:has` ; 13 et 17 un seul cadre « A = 4z, B = 9 ».
 - 15 « unitaire » deux fois (S-P de plus de 12 lignes) ; 16 petites options de rédaction de P2b ; 32 petites phrases de P4b.
@@ -95,7 +100,7 @@ ordre et mêmes étapes (ramener · factoriser (ME) · factoriser (TATONNEMENT, 
 - Pour mémoire (réglées pendant la nuit) : 14 (statut `non_traite`, disparu en P4b), 19 (réglée par P4a).
 
 Exceptions (`architecture.md`) : aucune. Variations de sous-tests : quatre lignes, section « Variations de sous-tests » (lue par
-`verifier`). Tests renommés ou retirés : quatre (P4a, P4b, P5, R2), section « Tests renommés ».
+`verifier`). Tests renommés ou retirés : cinq (P4a, P4b, P5, R2, R3), section « Tests renommés ».
 
 Fusion, par l'enseignant, une commande à la fois : `git checkout main && git merge --no-ff --no-edit equations-2e-degre`, puis
 `git push`, puis `git branch -d equations-2e-degre`.
@@ -113,7 +118,8 @@ Fusion, par l'enseignant, une commande à la fois : `git checkout main && git me
 | P4b | Degrés ≠ 2 (ME de xᵏ, Id. rem. de A = x², E9), degré 1, identité, messages définitifs (bicarrée, hors du cours) ; plus de `non_traite` | faite (suite verte, dump identique) | `88ea64e` |
 | P5 | L'outil (page, adaptateur, manifeste, registre sans filière, tests) ; message vrai « forme non traitée » (question 29) | faite (suite verte, dump : seuls ajouts du nouvel outil) | `f65131b` |
 | R1 | Une carte par étape (question 36) ; invariant du § 5 adapté | faite (suite verte, dump : outils existants identiques au départ) | `ee52a47` |
-| R2 | Développer d'abord, fractions supprimées d'abord (question 29) | faite (suite verte, dump : outils existants identiques au départ) | commit « R2 » |
+| R2 | Développer d'abord, fractions supprimées d'abord (question 29) | faite (suite verte, dump : outils existants identiques au départ) | `88f44ee` |
+| R3 | Les deux boutons pour comparer (questions 37 et 25) | faite (suite verte, dump : outils existants identiques au départ) | commit « R3 » |
 | P6 | Filières, carte de l'accueil, butée de `test_accueil`, `test_acc01` (après relecture) | hors nuit | — |
 
 ## Questions pour l'enseignant
@@ -157,7 +163,7 @@ Questions nouvelles de la nuit :
 16. **P2b, petites options de rédaction** (à juger sur les instantanés) : a < 0 avec a ≠ −1 et pgcd 1 → « Le coefficient de x² est
     négatif (a = −3) : on met d'abord −1 en évidence. » ; ME de −x → « … on met d'abord −x en évidence. » ; Δ avec b = 0 sans le calcul
     « 0 − 16 » ; 2a = 1 écrit (« \frac{-2}{1} = −2 », 0,5x² − 2 = 0) ; variante « formule » non proposée quand elle n'aurait pas de
-    formule (3x² − 12x).
+    formule (3x² − 12x ; revu en R3 : proposée, la formule directe).
 17. **P2b, A et B** (question 13) : un seul cadre « ⟦A = 4z, B = 9⟧ », comme D29 l'écrit. **Identité** : la phrase d'Exp-log est
     prête, branchée en P4b (aucune identité ne peut se produire en P2b).
 
@@ -188,6 +194,8 @@ Questions nouvelles de la nuit :
     (structures) ; 2(x + 1)(x + 3) = 5, k(B)² avec des termes en x, (x + 1)³ = 8 + x et 4(x − 2)² = −1 restent « non_traite » (hors
     d'E2, pas une structure). Question 19 réglée par P4a.
 25. **P4a, pas de variante « formule »** sur une forme structurée : elle demanderait de développer, ce qu'E1.3 exclut.
+    **Revue en R3** (question 37, tranchée) : la variante développe la forme structurée, puis la formule ; le chemin du cours, lui,
+    ne développe toujours pas.
 26. **P4a, E1.3 « on soustrait le second membre »** : tout reste à gauche, même si le coefficient de tête devient négatif
     ((x + 1)² = (2x − 3)² ⇔ (x + 1)² − (2x − 3)² = 0) ; « 0 = produit » : la ligne « produit = 0 ». L'**énoncé** d'une forme structurée
     a ses produits côte à côte (`second_degre.ecrire_enonce` : « (x − 1)(2 − x)(5 − 3x) », là où expr.tex écrit « (x − 1)(2 − x) ·
@@ -241,7 +249,7 @@ Questions nouvelles de la nuit :
     la variante « Par la formule » est proposée pour toute équation qui se ramène à un trinôme du 2e degré, formes structurées
     comprises (question 25) et 3x² − 12x = 0 (formule directe, c = 0) ; un seul bouton seulement quand le chemin du cours passe déjà
     par la formule ; aucun en degré 1 ou ≥ 3. Remplace la règle E12 de decisions.md (« seulement si le chemin du cours n'utilise pas
-    la formule », ME de la puissance de x indispensable) pour ces cas ; decisions.md non modifié.
+    la formule », ME de la puissance de x indispensable) pour ces cas ; decisions.md non modifié. **Fait en R3** (question 42).
 38. **P5, aperçu** : seulement la lecture (syntaxe) ; « x+1 » s'affiche sans erreur (le message « pas de = » vient au calcul) ; une
     équation que l'analyse accepte est écrite comme l'énoncé (`ecrire_enonce`). Erreurs de l'analyse (plusieurs lettres, 2^x…) :
     seulement au calcul, comme Exp-log.
@@ -280,7 +288,29 @@ Questions nouvelles de la nuit :
       (x² − 3)² = 1, (x − 1)(x + 2)(x + 3) = 5(x − 1), et les degrés ≥ 3 douteux des questions 10 et 30 (0,5x³ − 2x, 2x⁴ − 10x² + 8,
       x⁶ − 64).
 
+42. **R3, les deux boutons pour comparer** (questions 37 et 25) ; choix pris :
+    - **règle** : variante « Par la formule » si et seulement si l'équation résolue se ramène à un trinôme de degré 2 (P = gauche −
+      droite) et qu'aucune étape du cours n'utilise la formule ; **pas pour un monôme** ax² = 0 (3x² = 0 ⇔ x = 0 : rien à comparer,
+      Δ = 0 − 0 ; option qui affiche le moins) ; aucune en degré 1, en degré ≥ 3 (les 8 variantes « ME de x, puis la formule » de
+      degré ≥ 3 disparaissent, dont 2.12 c) ni pour un message.
+    - **rédaction** : on ramène et développe jusqu'à ax² + bx + c = 0 avec les lignes de E1, E2 et R2 (celles d'une forme développée),
+      puis Δ et les valeurs de x ; plus de mise en évidence de la puissance de x (c = 0 : la formule directe, « Δ = (−12)² − 4 · 3 · 0
+      = ⟦144⟧ ») ; a < 0 comme avant (pas de −1 en évidence, x₁ avec −√Δ, S croissant). Une forme structurée est développée comme en
+      R2 (2.12 e : double distribution des deux membres, puis E1 ramène du côté où x² reste positif, 2x² − x − 1 = 0, alors que le
+      cours ramène à gauche). Autre possibilité : ramener d'abord tout à gauche, puis développer.
+    - **garde-fou** : la variante n'est proposée que si elle conclut et a exactement les solutions du cours ; des solutions
+      différentes donnent « Le calcul ne permet pas de conclure… » pour toute l'équation (jamais rencontré).
+
 ## À relire par l'enseignant
+
+- **R3, les deux boutons pour comparer** (question 42) : instantanés du nouvel outil (`tests/python/instantanes/equations-2e-degre.json`,
+  `tests/python/instantanes/resoudre/equations-2e-degre.json`) : 225 entrées, **chemin du cours identique pour toutes** (vérifié entrée
+  par entrée) ; **37 gagnent la variante** « Par la formule » (33 formes structurées, dont 2.9 k, 2.9 l, 2.12 e, 2.12 h ; 4 formes
+  développées avec c = 0, dont 3x² − 12x = 0) ; **8 la perdent** (degré ≥ 3 : x³ − x = 0 (2.12 c), x³ = 4x, 2x³ − 4x² + 2x = 0…) ;
+  73 gardent la même ; 107 sans variante, identiques. Références de pages : 5 changées (boutons et variante seulement : 2.9 k, 2.9 l,
+  2.12 e, 2.12 h gagnent le sélecteur, 2.12 c le perd). Liste et textes rendus dans `journal.md`, R3. Captures à 390 px :
+  `/home/sami-ubuntu/nuits/equations-2e-degre/captures/R3/` (`2.12-e-par-la-formule-tout-390-clair.png`,
+  `3x2-moins-12x-par-la-formule-tout-390-clair.png`).
 
 - **R2, développer d'abord, fractions supprimées d'abord** (question 41) : instantanés du nouvel outil
   (`tests/python/instantanes/equations-2e-degre.json`, `tests/python/instantanes/resoudre/equations-2e-degre.json`) : **188 entrées
@@ -351,6 +381,11 @@ Lue par `verifier`. Format, une ligne par test : `` - `<identifiant pytest compl
 
 ## Tests renommés
 
+- R3 : `tests/python/test_redaction_second_degre.py::TestStructures::test_aucune_variante_ni_developpement` →
+  `::TestStructures::test_aucun_developpement` (test de P4a, absent de `tests/reference`) : le chemin du cours d'une forme structurée
+  ne développe toujours rien (même contrôle) ; la variante, qui n'était jamais proposée, suit maintenant la règle de R3 (question 37)
+  et y est contrôlée (proposée ⇔ trinôme de degré 2 et cours sans formule ; elle finit par la formule), plus `TestR3`.
+
 - R2 : `tests/python/test_redaction_second_degre.py::TestNonResolu::test_hors_de_ce_que_e2_developpe` →
   `::TestNonResolu::test_developper_d_abord` (test de P3, absent de `tests/reference`) : ce qu'E2 n'écrivait pas est maintenant
   développé ou débarrassé de ses fractions (question 29) ; mêmes saisies, contrôlées résolues (première étape attendue), ou « hors du
@@ -372,6 +407,7 @@ Lue par `verifier`. Format, une ligne par test : `` - `<identifiant pytest compl
 
 ## Reprise après compactage
 
+- **R3 faite** (06.11.2026, les deux boutons pour comparer, questions 37 et 25) : détail dans `journal.md`, R3. Suivante : P6.
 - **R2 faite** (06.11.2026, développer d'abord, fractions supprimées d'abord, question 29) : détail dans `journal.md`, R2.
   Suivantes : R3 (questions 37 et 25), P6.
 - **R1 faite** (06.11.2026, une carte par étape, question 36) : détail dans `journal.md`, R1.
