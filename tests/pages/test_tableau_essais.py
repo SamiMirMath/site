@@ -104,7 +104,8 @@ def carte_2_11_h():
     c.ajouter(eq("2(x + 4)(2x - 7) = 0"), "⇔", texte_avant=[
         r"Le trinôme \(2x^{2} + x - 28\) n'est pas unitaire : tâtonnement.",
         r"\(\fbox{$x = -4$}\) est solution de \(2x^{2} + x - 28 = 0\), car \(2 \cdot (-4)^{2} - 4 - 28 = 32 - 4 - 28 = 0\).",
-        r"Donc \(2x^{2} + x - 28 = (x + 4)(2x + \triangle)\) avec \(4 \cdot \triangle = -28\), donc \(\fbox{$\triangle = -7$}\)."])
+        r"Donc \(2x^{2} + x - 28 = {(x - (-4))(\square x + \triangle)} = {(x + 4)(\square x + \triangle)}\), avec "
+        r"\(\fbox{$\square = 2$}\) et \(-28 = 4 \cdot \triangle\), donc \(\fbox{$\triangle = -7$}\)."])
     c.ajouter(Ou([Eq(Nb(2), Nb(0)), eq("x + 4 = 0"), eq("2x - 7 = 0")]), "⇔", "produit nul")
     c.ajouter(solutions("x", -4, F(7, 2)), "⇔")
     return so.carte("2.11 h", [bloc_chaine(c, membre_gauche=True, **OPTIONS), so.resultat_lim(r"S = \{-4\,;\,\frac{7}{2}\}")])
@@ -294,7 +295,7 @@ class TestTableauEssais(unittest.TestCase):
         « .katex * » la mettrait grise), fond --ok-soft, en clair et en sombre ; la valeur reste visible au-dessus du fond (le cadre de
         \\fbox suit le contenu dans le HTML de KaTeX) ; une seule boîte (jamais coupée), dans sa carte, de 320 à 1100 px."""
         attendu = {c["titre"]: json.dumps(c).count("\\\\fbox") for c in self.cartes}
-        self.assertEqual(sum(attendu.values()), 5)
+        self.assertEqual(sum(attendu.values()), 6)
         fautes = []
         for w, sombre in avec_largeurs(self.page):
             for c in self.page.evaluer(JS_FBOX):
@@ -313,6 +314,37 @@ class TestTableauEssais(unittest.TestCase):
         gris = [f for c in self.page.evaluer(JS_FBOX) for f in c["boites"] if f["gris"]]
         self.assertEqual(len(gris), 1)                                                 # l'étiquette « avec ⟦A = 4z, B = 9⟧ »
         self.assertNotEqual(gris[0]["texte"], gris[0]["bords"][0])                     # texte gris, cadre vert
+
+    def test_carre_et_triangle_rendus(self):
+        """Question 45 : □ (\\square) et △ (\\triangle) de la ligne « Donc … » du tâtonnement sont rendus par KaTeX (aucune erreur de
+        KaTeX dans les cartes) ; 2.11 h montre trois □ (deux facteurs, un cadre) et quatre △, visibles, de 320 à 1100 px, en clair et
+        en sombre (glyphe non vide, couleur du texte différente du fond de la carte) ; chaque produit (x − (−4))(□x + △), (x + 4)(□x + △)
+        reste d'un seul morceau insécable de KaTeX (la ligne ne se coupe jamais dans un facteur)."""
+        js = r"""
+(async () => {
+  await new Promise(r => setTimeout(r, 150));
+  const c = [...document.querySelectorAll('#cartes .card')].find(c => c.querySelector('h3').textContent === '2.11 h');
+  const glyphes = [...c.querySelectorAll('.katex-html *')].filter(e => !e.children.length && /^[\u25a1\u25b3]$/.test(e.textContent));
+  const fond = getComputedStyle(c).backgroundColor;
+  const donc = [...c.querySelectorAll('.katex')].find(k => k.querySelector('annotation').textContent.includes('\\square x'));
+  return {erreurs: document.querySelectorAll('#cartes .katex-error').length,
+          produits: [...donc.querySelectorAll('.katex-html > .base')].map(b => b.textContent).filter(t => t.includes('\u25a1')),
+          glyphes: glyphes.map(e => { const r = e.getBoundingClientRect();
+            return {g: e.textContent, w: r.width, h: r.height, couleur: getComputedStyle(e).color, fond}; })};
+})()
+"""
+        fautes = []
+        for w, sombre in avec_largeurs(self.page):
+            m = self.page.evaluer(js)
+            compte = {g: sum(1 for x in m["glyphes"] if x["g"] == g) for g in "\u25a1\u25b3"}
+            if m["erreurs"] or compte != {"\u25a1": 3, "\u25b3": 4}:
+                fautes.append((w, sombre, m["erreurs"], compte))
+            if m["produits"] != ["(x\u2212(\u22124))(\u25a1x+\u25b3)=", "(x+4)(\u25a1x+\u25b3)"]:   # chaque produit insécable
+                fautes.append((w, sombre, m["produits"]))
+            for x in m["glyphes"]:
+                if x["w"] <= 0 or x["h"] <= 0 or x["couleur"] == x["fond"]:
+                    fautes.append((w, sombre, x))
+        self.assertEqual(fautes, [])
 
     def test_coupure_seulement_apres_ou(self):
         """Produits nuls (coupure_ou) : un morceau insécable de KaTeX par équation du « ou » (la ligne ne peut se couper qu'après un

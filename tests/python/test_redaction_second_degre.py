@@ -80,6 +80,11 @@ def lignes(res):
     return [r for e in res["etapes"] for r in e["lignes"]]
 
 
+# Question 45 (06.11.2026) : la ligne « Donc … » du tâtonnement de 2.11 h (après la ME), avec □ et △.
+DONC_2_11_H = (r"Donc \(2x^{2} + x - 28 = {(x - (-4))(\square x + \triangle)} = {(x + 4)(\square x + \triangle)}\), avec "
+               r"\(\fbox{$\square = 2$}\) et \(-28 = 4 \cdot \triangle\), donc \(\fbox{$\triangle = -7$}\).")
+
+
 def textes(res):
     """Les lignes rendues, en texte : « lien | expr | prop » ou le texte pleine largeur (un tableau : « [tableau] »)."""
     out = []
@@ -381,7 +386,7 @@ class TestRedaction(unittest.TestCase):
             r"\iff | 2(2x^{2} + x - 28) = 0 | ME",
             r"Le trinôme \(2x^{2} + x - 28\) n'est pas unitaire : tâtonnement.",
             r"\(\fbox{$x = -4$}\) est solution de \(2x^{2} + x - 28 = 0\), car \(2 \cdot (-4)^{2} - 4 - 28 = 32 - 4 - 28 = 0\).",
-            r"Donc \(2x^{2} + x - 28 = (x + 4)(2x + \triangle)\) avec \(4 \cdot \triangle = -28\), donc \(\fbox{$\triangle = -7$}\).",
+            DONC_2_11_H,
             r"\iff | 2(x + 4)(2x - 7) = 0 | ",
             r"\iff | " + ou(IMP % "2", "x + 4 = 0", "2x - 7 = 0") + " | produit nul",
             r"\iff | " + ou("x = -4", r"x = \frac{7}{2}") + " | "])
@@ -614,7 +619,7 @@ class TestRedaction(unittest.TestCase):
             with self.subTest(nom=nom):
                 for t in textes(res):
                     for cadre in re.findall(r"\\fbox\{\$(.*?)\$\}", t):
-                        self.assertRegex(cadre, r"^(A = .*,\\ B = .*|[a-z] = -?[0-9].*|\\triangle = .*|-?[0-9\\].*)$")
+                        self.assertRegex(cadre, r"^(A = .*,\\ B = .*|[a-z] = -?[0-9].*|\\square = -?[0-9]+|\\triangle = .*|-?[0-9\\].*)$")
                     if "Vérification" in t:
                         self.assertNotIn("fbox", t.split("Vérification")[1])
                     if t.startswith(r" | \Delta = b^{2}"):
@@ -752,7 +757,7 @@ class TestRamener(unittest.TestCase):
             r"\iff | 2(2x^{2} + x - 28) = 0 | ME",
             r"Le trinôme \(2x^{2} + x - 28\) n'est pas unitaire : tâtonnement.",
             r"\(\fbox{$x = -4$}\) est solution de \(2x^{2} + x - 28 = 0\), car \(2 \cdot (-4)^{2} - 4 - 28 = 32 - 4 - 28 = 0\).",
-            r"Donc \(2x^{2} + x - 28 = (x + 4)(2x + \triangle)\) avec \(4 \cdot \triangle = -28\), donc \(\fbox{$\triangle = -7$}\).",
+            DONC_2_11_H,
             r"\iff | 2(x + 4)(2x - 7) = 0 | ",
             r"\iff | " + ou(IMP % "2", "x + 4 = 0", "2x - 7 = 0") + " | produit nul",
             r"\iff | " + ou("x = -4", r"x = \frac{7}{2}") + " | "])
@@ -1810,3 +1815,81 @@ class TestR3(OracleMixin, unittest.TestCase):
         finally:
             sd._resoudre = ancien
         self.assertEqual(resoudre(saisie)["variantes"], ["formule"])
+
+
+class TestQuestion45(unittest.TestCase):
+    """Question 45 (décision de l'enseignant du 06.11.2026, prime sur E7) : la ligne « Donc … » du tâtonnement écrit le second facteur
+    avec □ et △, identifie □ = a (encadré, D29) et c = (−r) · △ (c d'abord, (−r) écrit comme un nombre) ; une racine négative passe par
+    (x − (r)), puis (x + |r|) ; une racine positive, directement (x − r)."""
+
+    def test_lignes_mot_pour_mot(self):
+        attendus = {
+            "3x^2+7x-6=0": [
+                r"\(\fbox{$x = -3$}\) est solution, car \(3 \cdot (-3)^{2} + 7 \cdot (-3) - 6 = 27 - 21 - 6 = 0\).",
+                r"Donc \(3x^{2} + 7x - 6 = {(x - (-3))(\square x + \triangle)} = {(x + 3)(\square x + \triangle)}\), avec "
+                r"\(\fbox{$\square = 3$}\) et \(-6 = 3 \cdot \triangle\), donc \(\fbox{$\triangle = -2$}\).",
+                r"\iff | (x + 3)(3x - 2) = 0 | "],
+            P3["2.11 h"]: [
+                r"\(\fbox{$x = -4$}\) est solution de \(2x^{2} + x - 28 = 0\), car \(2 \cdot (-4)^{2} - 4 - 28 = 32 - 4 - 28 = 0\).",
+                DONC_2_11_H,
+                r"\iff | 2(x + 4)(2x - 7) = 0 | "],
+            P2B["2.11 d"]: [
+                r"\(\fbox{$x = 4$}\) est solution, car \(2 \cdot 4^{2} - 4 - 28 = 32 - 4 - 28 = 0\).",
+                r"Donc \(2x^{2} - x - 28 = {(x - 4)(\square x + \triangle)}\), avec \(\fbox{$\square = 2$}\) et "
+                r"\(-28 = -4 \cdot \triangle\), donc \(\fbox{$\triangle = 7$}\).",
+                r"\iff | (x - 4)(2x + 7) = 0 | "]}
+        for saisie, attendu in attendus.items():
+            with self.subTest(saisie=saisie):
+                t = textes(resoudre(saisie))
+                i = next(k for k, l in enumerate(t) if "est solution" in l)
+                self.assertEqual(t[i:i + 3], attendu)
+
+    def test_sur_tout_le_corpus(self):
+        """Chaque tâtonnement réussi (corpus, variantes et polynômes générés) : la ligne « Donc … » suit la règle, valeurs relues sur
+        le calcul (r, □ = a, △, c = (−r) · △)."""
+        donc_re = re.compile(r"Donc \\\((.*?) = (.*)\\\), avec \\\(\\fbox\{\$\\square = (-?\d+)\$\}\\\) et \\\((-?\d+) = (-?\d+) "
+                             r"\\cdot \\triangle\\\), donc \\\(\\fbox\{\$\\triangle = (-?\d+)\$\}\\\)\.")
+        vus = 0
+        for nom, res in TOUTES + [(nom, res) for nom, _, res in GENEREES]:
+            t = textes(res)
+            for e in res["etapes"]:
+                if e["methode"] != "TATONNEMENT" or not e["parametres"]["aboutit"]:
+                    continue
+                vus += 1
+                r, tri = e["parametres"]["r"], e["parametres"]["triangle"]
+                with self.subTest(nom=nom):
+                    donc = [l for l in t if l.startswith("Donc ")]
+                    self.assertEqual(len(donc), 1)
+                    m = donc_re.fullmatch(donc[0])
+                    self.assertIsNotNone(m, donc[0])
+                    cible, produit, carre, c, moins_r, triangle = m.groups()
+                    self.assertEqual(cible, e["cible"])
+                    self.assertEqual((int(moins_r), int(triangle)), (-r, tri))
+                    self.assertEqual(int(c), -r * tri)
+                    solution = t[t.index(donc[0]) - 1]
+                    x = re.match(r"\\\(\\fbox\{\$([a-z]) = " + str(r) + r"\$\}\\\) est solution", solution).group(1)
+                    second = rf"(\square {x} + \triangle)"
+                    attendu = rf"{{({x} - ({r})){second}}} = {{({x} + {-r}){second}}}" if r < 0 else rf"{{({x} - {r}){second}}}"
+                    self.assertEqual(produit, attendu)
+                    self.assertEqual(sd.en_nombres(e["parametres"]["facteurs"][1]), sd.en_nombres((Nombre(tri), Nombre(int(carre)))))
+        self.assertGreater(vus, 20)
+
+    def test_garde_fou(self):
+        """Une valeur écrite qui ne vérifie pas son calcul (r, □, △, facteurs, binôme écrit) : incohérence, donc « ne_conclut_pas »."""
+        X = expr.Var("x")
+        bon = (X, "3x^{2} + 7x - 6", 3, 7, -6, -3, -2, [(Nombre(3), Nombre(1)), (Nombre(-2), Nombre(3))])
+        self.assertIn(r"\fbox{$\square = 3$}", sd._tex_donc_tatonnement(*bon))
+        for i, faux in ((2, 4), (3, 8), (4, -7), (5, 3), (5, -2), (6, -1), (7, [(Nombre(3), Nombre(1)), (Nombre(-2), Nombre(4))]),
+                        (7, [(Nombre(4), Nombre(1)), (Nombre(-2), Nombre(3))])):
+            args = list(bon)
+            args[i] = faux
+            with self.subTest(argument=i, faux=faux):
+                with self.assertRaises(sd._Incoherent):
+                    sd._tex_donc_tatonnement(*args)
+        ancien = sd._arbre_facteur
+        try:
+            sd._arbre_facteur = lambda f, X, dec: ancien(sd.en_nombres([f[0] + 1] + list(f[1:])) if len(f) == 2 else f, X, dec)
+            self.assertEqual(resoudre("3x^2+7x-6=0")["statut"], "ne_conclut_pas")
+        finally:
+            sd._arbre_facteur = ancien
+        self.assertEqual(resoudre("3x^2+7x-6=0")["statut"], "resolu")

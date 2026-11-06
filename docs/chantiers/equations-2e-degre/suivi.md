@@ -27,6 +27,7 @@ d'un outil existant modifiés (détail : `journal.md`, « Contrôles du chef d'o
 | R2 | développer d'abord, fractions supprimées d'abord (question 29) | `88f44ee` | 7 min (Python 95 s, pages 334 s) | 8 Python (1 renommé), 1 de pages |
 | R3 | les deux boutons pour comparer (questions 37 et 25) | commit « R3 » de la branche | voir `journal.md`, R3 | 6 Python (1 renommé), 1 de pages |
 | P6 | filières 1C, 1Ms, 1Mr, 2C au registre ; 4 cartes à l'accueil (16 → 20 liens) ; `test_acc03` d'origine (question 39) | commit « P6 » de la branche | voir `journal.md`, P6 | aucun (2 tests de pages mis à jour) |
+| R4 | tâtonnement avec □ et △ (question 45), branche `equations-2e-degre-tatonnement` | commit « R4 » de la branche | voir `journal.md`, R4 | 3 Python, 1 de pages |
 
 Suite finale (chef d'orchestre, sur `f65131b`, `PROCESSUS_PAGES=4`, `…/rapports/FIN`) : code 0 ; Python 1 666 passés + 1 xfail
 (celui d'avant le chantier), 128 686 sous-tests (113 s) ; pages 154 passés, 2 520 sous-tests (332 s) ; 7 min 28 de mur ; `verifier`
@@ -56,6 +57,8 @@ ordre et mêmes étapes (ramener · factoriser (ME) · factoriser (TATONNEMENT, 
 à celui de P3 (`journal.md`, P3, « Texte rendu de 2.11 h »).
 
 **À relire par l'enseignant** (détail : section « À relire » ci-dessous et `journal.md`) :
+- **R4** : ligne « Donc … » du tâtonnement (question 45) ; 20 instantanés changés (tous les tâtonnements réussis, ligne « Donc »
+  seulement) ; captures `/home/sami-ubuntu/nuits/equations-2e-degre/captures/R4/`.
 - **P6** : l'accueil (4 cartes « Équations du 2e degré » : I C, Ms, Mr après Factorisation ; II C après Programmation linéaire),
   description épelée « Mise en évidence, … » ; capture `/home/sami-ubuntu/nuits/equations-2e-degre/captures/P6/` ; questions 43, 44.
 - **R3** : 37 entrées gagnent la variante « Par la formule » (formes structurées, c = 0), 8 la perdent (degré ≥ 3) ; chemin du cours
@@ -89,6 +92,7 @@ ordre et mêmes étapes (ramener · factoriser (ME) · factoriser (TATONNEMENT, 
 - **41** (R2) choix de rédaction du développement pas à pas et de la suppression des fractions ; formes encore non écrites.
 - **42** (R3) choix de la variante : pas pour un monôme ax² = 0 ; solutions différentes → « ne conclut pas » ; une forme structurée
   développée comme en R2 ; plus de ME de xʲ (aucune variante en degré ≥ 3).
+- **45 tranchée : tâtonnement avec □ et △** (R4, fait).
 - 36 **tranché : une carte par étape** (R1, fait) ; 29 **tranché : développer d'abord, fractions supprimées d'abord** (R2, fait) ; 37 et 25
   **tranchés : les deux boutons pour comparer** (R3, fait) ; autres questions : options par défaut gardées (proposé le 06.11.2026, sans objection de l'enseignant) ; 30 « bicarrée » aussi après une ME ; 31 ordre d'écriture de x⁴ − 16.
 - 9 radicande > 10¹² : message des bornes ; 10 ME non entière en degré ≥ 3 (0,5x³ − 2x) ; 11 `s_applique` hors du chemin (quiz).
@@ -125,6 +129,7 @@ Fusion, par l'enseignant, une commande à la fois : `git checkout main && git me
 | R2 | Développer d'abord, fractions supprimées d'abord (question 29) | faite (suite verte, dump : outils existants identiques au départ) | `88f44ee` |
 | R3 | Les deux boutons pour comparer (questions 37 et 25) | faite (suite verte, dump : outils existants identiques au départ) | commit « R3 » |
 | P6 | Filières 1C, 1Ms, 1Mr, 2C au registre, cartes de l'accueil, butée de `test_accueil` (20, 8), `test_acc03` d'origine | faite (suite verte, dump identique à R3) | commit « P6 » |
+| R4 | Tâtonnement avec □ et △ (question 45), branche `equations-2e-degre-tatonnement` depuis `main` a073963 | faite (suite verte, dump : seul le nouvel outil diffère de P6) | commit « R4 » |
 
 ## Questions pour l'enseignant
 
@@ -316,7 +321,22 @@ Questions nouvelles de la nuit :
     T22, P6 n'y change rien (option qui affiche le moins). Autre possibilité : rendre toute la carte cliquable (composant commun),
     dans un chantier de l'accueil.
 
+45. **R4, ligne « Donc … » du tâtonnement** : **tranchée par l'enseignant le 06.11.2026** (prime sur E7 de decisions.md et sur le
+    corrigé tatonement.pdf ; decisions.md non modifié). Le second facteur s'écrit avec □ et △, puis □ = a et c = (−r) · △ (c d'abord) :
+    « Donc 3x² + 7x − 6 = (x − (−3))(□x + △) = (x + 3)(□x + △), avec ⟦□ = 3⟧ et −6 = 3 · △, donc ⟦△ = −2⟧. » ; racine positive :
+    « (x − 4)(□x + △) » directement ; □ = a encadré (D29), « −6 = 3 · △ » non ; après une ME, sur le trinôme de la ME ; garde-fou
+    d'écriture (r, □, △, c = (−r) · △ recalculés ; un écart → « ne conclut pas »). Fait en R4. Choix de rendu pris en R4 : chaque
+    produit est un groupe TeX insécable (à 390 px, KaTeX coupait « (□x + » / « △) ») ; la ligne ne se coupe qu'aux « = ».
+
 ## À relire par l'enseignant
+
+- **R4, tâtonnement avec □ et △** (question 45) : instantanés du nouvel outil (`tests/python/instantanes/equations-2e-degre.json`,
+  `tests/python/instantanes/resoudre/equations-2e-degre.json`) : **20 entrées changées sur 225**, exactement celles qui ont un
+  tâtonnement réussi, **seulement sur la ligne « Donc … »** (mêmes valeurs, vérifié entrée par entrée) ; référence de page : 11 sur 57.
+  Avant / après (2.11 h) : « Donc 2x² + x − 28 = (x + 4)(2x + △) avec 4 · △ = −28, donc ⟦△ = −7⟧. » → « Donc 2x² + x − 28 =
+  (x − (−4))(□x + △) = (x + 4)(□x + △), avec ⟦□ = 2⟧ et −28 = 4 · △, donc ⟦△ = −7⟧. » ; liste et 2.11 d dans `journal.md`, R4.
+  Captures à 390 px : `/home/sami-ubuntu/nuits/equations-2e-degre/captures/R4/` (`3x2-plus-7x-moins-6-tout-390-clair.png`,
+  `2.11-h-tout-390-clair.png`, `2.11-h-tout-390-sombre.png`). Choix de rendu : chaque produit est insécable (la ligne se coupe aux « = »).
 
 - **P6, accueil** : `commun/registre.json` (`"filieres": {"1": ["C", "Ms", "Mr"], "2": ["C"]}`, aucun `parametres` ; description
   « ME, … » devenue « Mise en évidence, identités remarquables, Somme-Produit, tâtonnement et formule, étape par étape. », comme
@@ -431,6 +451,8 @@ Lue par `verifier`. Format, une ligne par test : `` - `<identifiant pytest compl
 
 ## Reprise après compactage
 
+- **R4 faite** (06.11.2026, tâtonnement avec □ et △, question 45) sur la branche `equations-2e-degre-tatonnement` (depuis `main`
+  a073963) : détail dans `journal.md`, R4. Reste la fusion par le chef d'orchestre ou l'enseignant.
 - **P6 faite** (06.11.2026, filières au registre et cartes de l'accueil) : détail dans `journal.md`, P6. **Chantier terminé** :
   reste la fusion par l'enseignant (commande dans « Résumé »).
 - **R3 faite** (06.11.2026, les deux boutons pour comparer, questions 37 et 25) : détail dans `journal.md`, R3. Suivante : P6.

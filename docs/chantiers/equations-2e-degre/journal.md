@@ -1761,6 +1761,84 @@ Aucun moteur touché : temps natifs sans changement attendu (dump, `temps`, ci-d
   leurs deux lignes d'`index.txt`, comme en R3.
 - xfail stricts : aucun ajouté, aucun retiré.
 
+## R4 — tâtonnement avec □ et △
+
+Correction de l'enseignant (06.11.2026, question 45 de suivi.md, tranchée ; prime sur E7 de decisions.md et sur le corrigé
+tatonement.pdf, decisions.md non modifié). Branche `equations-2e-degre-tatonnement` (depuis `main` a073963). Seul le nouvel outil change.
+
+### Plan
+
+1. `moteur/second_degre.py`, `_ecrire_tatonnement` : la ligne « Donc … » devient « Donc P = (x − (r))(□x + △) = (x + |r|)(□x + △),
+   avec ⟦□ = a⟧ et c = (−r) · △, donc ⟦△ = …⟧. » (racine positive : « (x − r)(□x + △) » directement) ; □ en `\square`, encadré comme
+   x = r et △ (D29) ; « c = (−r) · △ » non encadré. Ligne « x = r est solution… » et ligne ⇔ inchangées ; échec, autres méthodes,
+   cartes, variante inchangés.
+2. Garde-fou : r, □, △ et c = (−r) · △ recalculés (r annule P, b = △ − a·r, c = −r·△, facteurs du calcul = (x − r)(ax + △), binôme
+   écrit = x ± |r|) ; un écart → `_Incoherent` → « ne_conclut_pas ».
+3. Tests : ligne mot pour mot (3x² + 7x − 6 = 0, 2.11 h après ME, 2.11 d racine positive), règle sur tout le corpus et les polynômes
+   générés, garde-fou ; regex D29 (□ = a encadré) ; carte 2.11 h de `test_tableau_essais` (6 cadres) et rendu KaTeX de □, △.
+4. Instantanés et référence de page régénérés ; comparaison entrée par entrée (`S/tmp/R4/comparer.py`).
+5. Captures à 390 px, temps natif, suite complète, dump, commit.
+
+### Réalisé
+
+- **`moteur/second_degre.py`** : `_tex_donc_tatonnement(X, P_tex, a, b, c, r, △, facteurs)` (garde-fou du plan, point 2), appelée par
+  `_ecrire_tatonnement`. **Écart trouvé aux captures** (première version) : à 390 px, KaTeX coupait la ligne après le « + » d'un
+  facteur (« (x − (−4))(□x + » / « △) = … ») ; chaque produit est maintenant un groupe TeX (`{(x - (-4))(\square x + \triangle)} =
+  {(x + 4)(\square x + \triangle)}`) : la ligne ne se coupe qu'aux « = », jamais dans un facteur (rendu identique à l'écran large).
+- **Tests Python** (`tests/python/test_redaction_second_degre.py`) : `TestQuestion45` (3 tests : `test_lignes_mot_pour_mot`,
+  `test_sur_tout_le_corpus`, `test_garde_fou` : huit valeurs faussées une à une → `_Incoherent`, binôme écrit faussé → « ne_conclut_pas ») ;
+  `DONC_2_11_H` dans `test_2_11_h_exemple_cible` et `test_2_11_h_complet_exemple_cible` ; `test_d29_valeurs_encadrees` : motif
+  `\square = <entier>` ajouté aux cadres permis.
+- **Test de pages** (`tests/pages/test_tableau_essais.py`) : carte 2.11 h écrite avec la nouvelle ligne (cadres 5 → 6, contrôlés par
+  `test_valeurs_encadrees` : bordure, fond, insécable, clair et sombre, 320 à 1100 px) ; nouveau `test_carre_et_triangle_rendus`
+  (aucune `.katex-error`, trois □ et quatre △ rendus et visibles, chaque produit d'un seul morceau insécable de KaTeX, 320 à 1100 px,
+  clair et sombre ; vérifié qu'il échoue sans les accolades).
+- **Instantanés et références** (`REGENERER=1` sur `test_equations_2e_degre` de `test_instantanes` et `test_instantanes_resoudre` ;
+  `capturer_references.py equations-2e-degre`), recoupés entrée par entrée (`S/tmp/R4/comparer.py` : chaque ligne « Donc » ancienne et
+  nouvelle ramenée à ses valeurs (P, binôme, a, (−r), c, △), puis comparaison de toute l'entrée) :
+  - `tests/python/instantanes/equations-2e-degre.json` : 225 entrées, **20 changées**, exactement les 20 qui ont un tâtonnement réussi,
+    seulement sur la ligne « Donc … » (40 lignes, mêmes valeurs) ; 205 identiques.
+  - `tests/python/instantanes/resoudre/equations-2e-degre.json` : 225 entrées, les mêmes **20 changées** (78 lignes « Donc », cartes
+    et `blocs`), 205 identiques.
+  - `tests/pages/references/equations-2e-degre.json` : 57 entrées, **11 changées** (les 11 qui ont un tâtonnement réussi), 46 identiques.
+  - Entrées changées : −2x² + x + 1, −9x² − 12x + 12, 12u² − 45u − 12, 17x² + 288x − 17, 2(x − 1) = 3(1 − x)(x + 2), 2x² + 13x + 15,
+    2x² − x − 28 (2.11 d), 2x⁴ + x³ − 28x², 3x² + 10x − 8, 3x² + 2x − 1, 3x² − 8x − 35, 45u + 12 = 12u², 4t² + 7t − 2, 4t² + 7t = 2,
+    4x² + 2x − 56, 4x² + 2x = 56 (2.11 h), 5y² − 54y − 72, 6x² + 16x − 6, 9x² + 8x − 1, x² − x(x + 1) + 3x² = 4.
+- **Avant / après** (TeX de la ligne) :
+  - 2.11 h (après la ME) : avant `Donc \(2x^{2} + x - 28 = (x + 4)(2x + \triangle)\) avec \(4 \cdot \triangle = -28\), donc
+    \(\fbox{$\triangle = -7$}\).` ; après `Donc \(2x^{2} + x - 28 = {(x - (-4))(\square x + \triangle)} = {(x + 4)(\square x +
+    \triangle)}\), avec \(\fbox{$\square = 2$}\) et \(-28 = 4 \cdot \triangle\), donc \(\fbox{$\triangle = -7$}\).`
+  - 2.11 d (racine positive) : avant `Donc \(2x^{2} - x - 28 = (x - 4)(2x + \triangle)\) avec \(-4 \cdot \triangle = -28\), donc
+    \(\fbox{$\triangle = 7$}\).` ; après `Donc \(2x^{2} - x - 28 = {(x - 4)(\square x + \triangle)}\), avec \(\fbox{$\square = 2$}\)
+    et \(-28 = -4 \cdot \triangle\), donc \(\fbox{$\triangle = 7$}\).`
+
+### Captures à 390 px (`S/captures/R4/`, « Tout afficher » ; `S/tmp/R4/captures_r4.py`)
+
+`3x2-plus-7x-moins-6-tout-390-clair.png`, `2.11-h-tout-390-clair.png`, `2.11-h-tout-390-sombre.png`. Regardées : □ et △ lisibles
+(glyphes de KaTeX, 13,9 × 26 px et 15,8 × 21 px, couleur du texte en clair et en sombre), cadres □ = a et △ = … comme x = r ; aucune
+erreur de KaTeX ; aucun défilement horizontal à 320, 360 et 390 px ; seuls les chemins SVG de l'accolade « impossible » (carte Produit
+nul, dans un conteneur `overflow: hidden`, rognés) dépassent, comme avant R4 (vérifié sur `main`). La ligne « Donc … » se coupe
+après « = » (3 lignes à 390 px).
+
+### Temps (`S/tmp/R4/temps_r4.py`, même mesure que P5, R1, R2 et R3, python3 natif 3.14.4, 3e de trois tours)
+
+`resoudre_eq.resoudre_json` sur le corpus complet (225 entrées) **476,3 ms** (R3 : 475,2 ms), la plus longue 7,0 ms
+(x³ − (x − 1)³ = 1) ; § 8 et § 6 (56) 128,0 ms (R3 : 127,8 ms) ; `resoudre_equation` seule 88,5 ms (R3 : 88,5 ms) ; `apercu_json`
+41,7 ms ; pire cas des bornes 90 ms (R3 : 88 ms). Aucune hausse.
+
+### Suite d'avant commit et dump
+
+- `PROCESSUS_PAGES=4 python3 tests/lancer.py complet --rapport S/rapports/R4` : **code 0** (console `S/rapports/R4-console.log`).
+  Python 1 687 collectés, 1 686 passés + 1 xfail (celui d'avant le chantier), 132 568 sous-tests, 94 s ; pages 158 passés, 2 529
+  sous-tests, 338 s. Aucun échec instable.
+- `comparer_listes.py S/rapports/P6 S/rapports/R4` : 3 tests Python nouveaux (`TestQuestion45`), 1 de pages
+  (`test_carre_et_triangle_rendus`) ; aucun disparu ni renommé ; sous-tests : aucune baisse
+  (`test_vocabulaire::TestVouvoiement::test_litteraux_des_moteurs` 9 890 → 9 903).
+- **Dump** : `dump_sorties.py S/dumps/R4 --processus 6` (19 fichiers, 4 598 sorties, 4 s) ; `diff -r --exclude=temps S/dumps/P6
+  S/dumps/R4` : **seul `resoudre/equations-2e-degre.txt` diffère** (40 lignes : les 20 entrées à tâtonnement réussi, avant / après) ;
+  `apercu/equations-2e-degre.txt` et tous les autres outils identiques à l'octet.
+- xfail stricts : aucun ajouté, aucun retiré.
+
 ## Contrôles du chef d'orchestre
 
 - P0 `0fd0060` : verifier ACCEPTÉ (Python 1 494 / 106 768 sous-tests, pages 145 / 2 421, identiques à la nouvelle référence) ; rapide --depuis HEAD~1 : 23 passés, 245 sous-tests, 3 s (fumée + docs). Échec instable de `test_comportement::test_soc04_parametre_f` (ensemble-definition, `#cartes` absent : page pas encore chargée) au 1er lancement de référence : accepté par le chef comme instabilité de chargement (relancé seul vert, deux suites complètes vertes ensuite, aucune sortie en cause, Python vert) ; question 8 de suivi.md. Branche poussée.
