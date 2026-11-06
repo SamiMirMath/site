@@ -744,6 +744,148 @@ Voir « Temps » ci-dessous (P2b).
 
 ## P3 — saisie
 
+### Plan
+
+1. **`moteur/expr.py`** : `a_des_decimaux(n)` déplacé verbatim d'`exp_log._a_des_decimaux` (docstring comprise), réexporté par
+   `exp_log` sous l'ancien nom (`from expr import a_des_decimaux as _a_des_decimaux`) ; `test_expr.DEPLACES` + la paire (`assertIs`).
+   Dump d'EL identique. Baisse attendue de 1 littéral dans `test_exp_log::TestVouvoiement` (docstring partie), justifiée dans suivi.md.
+2. **`second_degre`, E1 et E2** (section 7, sur `vers_polynome`, aucun calcul nouveau des méthodes) :
+   - lecture de chaque membre en termes signés : monômes écrits (`_monome_ecrit`), parenthèse précédée de « − » (gardée jusqu'à la
+     ligne qui l'enlève ; précédée de « + », elle s'écrit sans parenthèses), produit à développer : nombre ou monôme × parenthèse
+     (« distribution »), deux parenthèses sans autre facteur (« double distribution », tous les produits partiels), carré d'un binôme
+     écrit A ± B, A non négatif (« Id. rem. (A ± B)² avec A = …, B = … », développé en A² ± 2AB + B²) ; toute autre forme : `non_traite`
+     (option qui affiche le moins) ;
+   - lignes, chacune seulement si elle change quelque chose : (1) développement (étiquettes séparées par « ; », sans doublon ; un
+     produit précédé de « − » s'écrit développé entre parenthèses), (2) parenthèses enlevées, (3) réduction de chaque membre (termes
+     de même degré ou coefficient nul), (4) E1.2 : tout du côté où le coefficient de tête est positif (à gauche s'il l'est des deux
+     côtés), ordre décroissant ; second membre nul : seulement réordonner (E1.1, a < 0 gardé) ;
+   - étapes (§ 5) : (1)–(3) phase « ramener », méthode « DEVELOPPER » ; (4) phase « ramener », méthode « RAMENER » (avec (3) s'il
+     n'y a rien à développer) ; une ligne **seulement réordonnée** appartient à l'étape qui suit (`_Redaction` : ligne d'en-tête de
+     l'étape suivante) ;
+   - phrase « On ramène d'abord l'équation à la forme \(\ldots = 0\) : » en tête de la première étape « ramener », seulement si une
+     phrase de choix (E4 : S-P, tâtonnement, formule d'emblée) suit directement, sur le chemin du cours ;
+   - garde-fou : chaque ligne écrite est relue par `vers_polynome` (membres inchangés pour (1)–(3), P ou −P pour (4)) ; un écart lève
+     `_Incoherent` (`ne_conclut_pas`) ;
+   - **structures de P4a laissées en `non_traite`** (E1.3, « si une structure s'applique, sans développer ») : produit ou puissance
+     égal à 0 (produit nul direct) ; facteur non monôme commun aux deux membres (proportionnel) ; un seul carré de binôme k(B)² avec
+     des constantes de signe opposé (ou nulles), ou deux carrés de signes opposés sans constante (Id. rem. structurée). Tout le reste
+     se développe ;
+   - après E1/E2 : degré ≠ 2 (identité, degré 1, degré ≥ 3) reste `non_traite` (P4b), sans étape.
+3. **`equations-2e-degre/equations.py`** (nouveau dossier, sans page, hors du manifeste et du registre jusqu'en P5) : `LEXIQUE_EQ`
+   (fonctions=("sqrt",), message_vide « Écrivez une équation. », message_exposant avec l'exemple x^2) ; `analyser(texte)` →
+   `(gauche, droite, inconnue, decimaux_enonce)` ou `ErreurSaisie`, dans l'ordre du § 13.5 (vide, syntaxe, pas de « = », aucune lettre,
+   plusieurs lettres, inconnue en exposant, inconnue sous √ / au dénominateur / exposant non entier ou négatif, √ sans l'inconnue,
+   division par 0, bornes par `second_degre.vers_polynome`) ; D23. Constantes évaluées par `polynomes.const` (arête de plus que le plan,
+   `equations -> polynomes`, à déclarer en P5 avec les autres ; `test_imports` ne lit pas encore ce dossier, vérifié).
+4. **Tests** : `tests/python/test_equations_saisie.py` (chargé par chemin : chaque message, ordre de priorité sur des saisies mixtes,
+   notation suisse, décimaux de l'énoncé, (x + 1)(x + 3) = 15, Az 4.1 g, e^x = 2 ; R12 sur les messages ; puis la résolution des saisies
+   lues) ; `corpus_second_degre.P3` (énoncés à ramener ou à développer : les 10 de `A_VENIR` marqués P3 et d'autres formes) ;
+   `test_redaction_second_degre` : marque xfail retirée des 10 « P3 » (`PARTIES_FAITES`), invariants, oracle et textes rendus sur `P3`
+   (2.11 h complet, 2.10 h, 2.10 j, (x + 1)(x + 3) = 15, réordonner, « − (…) ») ; `non_traite` contrôlé sur les formes de P4a/P4b et
+   sur les structures de P4a ; instantanés : `P2B` + `P3` (entrées ajoutées, aucune modifiée).
+5. Contrôles : `lancer.py liste` (le nouveau dossier), énumérations de dossiers des tests (`test_accueil`, `test_manifeste`,
+   `test_outils_du_site`, `test_noyau`, `test_imports`, `test_vocabulaire`, `test_memo_garde` : tous lisent le registre, le manifeste
+   ou les dossiers à `index.html`) ; suite complète, dump, temps natif, commit.
+
+### Réalisé
+
+- **`moteur/expr.py`** : `a_des_decimaux` (verbatim, docstring comprise) ; `exp_log` le réexporte (`from expr import …,
+  a_des_decimaux as _a_des_decimaux`, docstring du module complétée) ; `test_expr.DEPLACES` + la paire (`assertIs`). Exp-log :
+  dump identique à l'octet.
+- **`moteur/second_degre.py`**, section 7 (« E1 et E2 », ≈ 290 lignes, aucun calcul nouveau des méthodes) :
+  - `ramener(gauche, droite, inconnue, decimaux_enonce)` → `{P, pas: [(méthode, parametres, [(Eq, étiquette)])], en_tete}` ou
+    None ; `forme_structuree(gauche, droite, inconnue)` (E1.3) ; `PHRASE_RAMENER` ; `_Redaction.en_tete` (ligne seulement
+    réordonnée, posée en tête de l'étape suivante) ; `_ecrire_ramener` ; `resoudre_equation` passe par `ramener` (les deux membres
+    contrôlés pour une autre lettre, pas seulement la gauche) ; `_rediger(…, prep)`.
+  - Lecture d'un membre en termes signés (`_termes_signes` : une somme précédée de « − » est un groupe, précédée de « + » elle se
+    lit comme ses termes, ce que `expr.tex` écrit aussi) ; `_developper` : distribution (nombre ou monôme × une parenthèse, facteurs
+    monômes multipliés, signe des `Neg` compris), double distribution (deux parenthèses sans autre facteur ; produits partiels dans
+    l'ordre écrit : x² + 3x + x + 3), carré d'un binôme écrit A ± B (A sans signe, deux degrés différents ; « Id. rem. \((A - B)^{2}\)
+    avec \(A = 2x,\ B = 1\) », A et B écrits comme saisis, sans cadre) ; tout le reste → None → `non_traite`.
+  - Lignes : (1) développement (étiquettes « ; », sans doublon ; produit précédé de « − » écrit développé entre parenthèses),
+    (2) parenthèses enlevées, (3) réduction de chaque membre (`arbre_polynome` des deux membres), (4) E1 (`arbre_polynome(P) = 0`).
+    Chaque ligne n'est écrite que si elle change le TeX. Garde-fou : (1)–(3) relues par `vers_polynome` = membres d'origine, (4) = P ;
+    sinon `_Incoherent` (test : une écriture faussée exprès donne « ne_conclut_pas »).
+  - Côté (E1.2) : P = gauche − droite ; si le second membre n'est pas nul et que le coefficient de tête de P est négatif, −P
+    (« droite ») ; second membre nul : P gardé, même avec a < 0 (E1.1 : la ME de −1 suit).
+  - Étapes : (1)–(3) « ramener / DEVELOPPER » (`parametres` : `developpements`) ; (4) « ramener / RAMENER » (`cote`, `polynome`), avec
+    (3) quand rien n'est développé (x² + x² = 8) ; (4) seulement réordonnée (second membre nul) : en tête de l'étape suivante (§ 5) ;
+    la phrase d'E1 en tête de la première étape « ramener », si la première méthode est S-P, tâtonnement ou formule d'emblée, sur le
+    chemin du cours.
+  - Structures laissées à P4a (`forme_structuree`) : produit ou puissance (non monôme) égal à 0 ; facteur non monôme commun aux deux
+    membres, proportionnel (`vers_polynome` de chaque facteur), si l'un des membres est un produit ou une puissance (2.12 e,
+    (x − 1)(x + 2) = x − 1) ; termes (tout ramené d'un côté) faits d'un carré de binôme k(B)² et de constantes de signe opposé ou
+    nulles, ou de deux carrés de signes opposés sans constante (2.9 k, 2.9 l, 2.12 h, (x + 1)² = (2x − 3)²). (x + 1)² = −16 se développe.
+  - Après E1/E2, degré ≠ 2 → `non_traite` sans étape (Az 4.1 g : les lignes de développement existent, 1 = 1, identité en P4b).
+- **`equations-2e-degre/equations.py`** (nouveau dossier, un seul fichier, pas d'`index.html`) : `LEXIQUE_EQ`, `MESSAGE_EXPOSANT`
+  (« Mettez l'exposant entre parenthèses, ou séparez-le du facteur suivant avec * : x^2*(x+1). » : les erreurs d'exposant de la
+  lecture sont x^-2, x^2x, x^2(x+1)), `MESSAGES_SAISIE` (§ 4, § 13.5), `ORDRE`, `analyser`. Problèmes lus dans l'arbre (`_problemes`) :
+  inconnue dans un exposant ; sous √, dans un dénominateur, exposant (constant) non entier ou négatif sur une base qui contient
+  l'inconnue ; √ sans l'inconnue, ou puissance d'un nombre d'exposant non entier (2^(1/2), 9^(1/2)) ; division par une constante nulle
+  (aussi 0^(−1)) ; bornes : `vers_polynome` de chaque membre et de leur différence (`HorsBornes`). Constantes par `polynomes.const`.
+- **Énumérations de dossiers** (vérifié à la lecture, puis par la suite) : `test_accueil` et `test_manifeste` ne voient que les
+  dossiers à `index.html` ; `test_imports`, `test_noyau`, `test_vocabulaire`, `test_memo_garde`, `lancer.py` lisent les dossiers du
+  manifeste (`outils_du_site.dossiers_moteurs`) : le nouveau dossier n'y est pas avant P5. Aucune arête déclarée en P3 (le graphe
+  ne lit pas encore `equations.py` ; une arête déclarée sans être lue ferait échouer `test_aretes_figees`). **Arêtes à déclarer en
+  P5** : `equations -> expr`, `-> noyau`, `-> second_degre` (plan) et **`equations -> polynomes`** (`const` : écart au plan, noté).
+  `second_degre` : aucune arête nouvelle (`polynomes.const` passe par l'arête `second_degre -> polynomes` de P1).
+- **`rapide`** : le test de la saisie est relancé quand il change, ou quand `second_degre`/`expr` changent (il les importe) ; pas
+  quand `equations.py` seul change, tant que son dossier n'est pas au manifeste (P5 : le test l'importe par son nom, `import
+  equations`, l'arête du graphe de `lancer.py` viendra avec le manifeste).
+- **Tests** :
+  - `corpus_second_degre` : `P3` (26 équations : les 10 « P3 » d'`A_VENIR` sous leur forme d'énoncé et 16 formes d'E1/E2),
+    `RESOLUES = P2B + P3`, `PARTIES_FAITES = ("P3",)`.
+  - `test_redaction_second_degre` : invariants, oracle, D29, R12 sur `RESOLUES` ; `polynome(saisie)` = gauche − droite ;
+    `TestRamener` (10 tests : 2.11 h complet, phrase seulement avant une phrase de choix (liste exacte des 15 entrées), côté du
+    coefficient de tête, ligne seulement réordonnée (étape suivante), (x + 1)(x + 3) = 15 du § 7, « − (…) », Id. rem. et
+    distribution, Az 4.1 g (lignes du § 7), réduction et premier membre nul, chaque ligne relue + écriture faussée) ;
+    `TestNonResolu` : `non_traite` vérifié sur les parties pas encore faites, `test_structures_laissees_a_p4a` (12 formes oui, 8 non),
+    `test_hors_de_ce_que_e2_developpe` (10 formes) ; marque xfail retirée des 10 `test_a_venir[P3-…]` (mêmes noms de tests).
+  - `test_instantanes_second_degre` : sur `RESOLUES` ; JSON régénéré : **26 entrées nouvelles, aucune des 72 de P2b modifiée**
+    (comparaison JSON entrée par entrée ; le diff git ligne à ligne paraît plus gros à cause du tri des clés).
+  - `tests/python/test_equations_saisie.py` (22 tests) : lexique ; chaque message (vide, syntaxe dont l'exposant, pas de « = »,
+    aucune lettre, plusieurs lettres dont e^x = 2, exposant, prochaine version, racine, division par 0, bornes) ; ordre de priorité
+    sur 13 saisies mixtes ; messages du § 4 mot pour mot ; R12 et C6 sur tous les littéraux d'`equations.py` ; inconnue saisie (D23) ;
+    notation suisse ; décimaux de l'énoncé (et `exp_log._a_des_decimaux is expr.a_des_decimaux`) ; (x + 1)(x + 3) = 15 ; Az 4.1 g ;
+    même lecture que le corpus pour les 98 saisies de `RESOLUES`, même S.
+
+### Texte rendu de 2.11 h (à partir de « 4x² + 2x = 56 »), comparé au § 7
+
+Rangées du bloc « chaine » (`equations.analyser("4x^2+2x=56")`, `resoudre_equation`, `blocs` ; `gauche` : le membre de gauche de la
+première ligne), puis S :
+
+    gauche 4x^{2} + 2x = 56   \iff  4x^{2} + 2x - 56 = 0
+                              \iff  2(2x^{2} + x - 28) = 0                                          ME
+    texte  Le trinôme \(2x^{2} + x - 28\) n'est pas unitaire : tâtonnement.
+    texte  \(\fbox{$x = -4$}\) est solution de \(2x^{2} + x - 28 = 0\), car \(2 \cdot (-4)^{2} - 4 - 28 = 32 - 4 - 28 = 0\).
+    texte  Donc \(2x^{2} + x - 28 = (x + 4)(2x + \triangle)\) avec \(4 \cdot \triangle = -28\), donc \(\fbox{$\triangle = -7$}\).
+                              \iff  2(x + 4)(2x - 7) = 0
+                              \iff  {\underbrace{2 = 0}_{\text{impossible}}} \text{ ou } \allowbreak {x + 4 = 0} \text{ ou } \allowbreak {2x - 7 = 0}
+                                                                                                    produit nul
+                              \iff  {x = -4} \text{ ou } \allowbreak {x = \frac{7}{2}}
+    resultat_lim  S = \{-4\,;\,\frac{7}{2}\}
+
+Étapes : ramener (RAMENER, cible 4x² + 2x = 56, côté gauche) · factoriser (ME, cible 4x² + 2x − 56) · factoriser (TATONNEMENT, cible
+2x² + x − 28, r = −4, △ = −7) · produit_nul ; variante « formule » proposée.
+**Comparaison au § 7** : mêmes lignes, dans le même ordre, et mêmes étapes que l'exemple cible (« ramener · factoriser (ME) ·
+factoriser (TATONNEMENT) · produit_nul ») ; la ligne ramenée ouvre la chaîne sans phrase (une ME suit, E1). Écarts voulus : étiquette
+« produit nul » (D5) ; x = −4 et △ = −7 encadrés (D29) ; parenthèses de la ME ordinaires (rendu seulement).
+
+### Suite d'avant commit et dump
+
+- `PROCESSUS_PAGES=4 python3 tests/lancer.py complet --rapport S/rapports/P3` : **code 0** (≈ 7 min de mur ; console
+  `S/rapports/P3-console.log`). Python 1 641 collectés, 1 628 passés + 13 xfail (1 d'avant + 12 stricts P4a/P4b), 124 615 sous-tests,
+  88,6 s ; pages 151 passés, 2 435 sous-tests, 328,6 s. Aucun échec instable.
+- `comparer_listes.py S/rapports/P2b S/rapports/P3` : 34 tests Python nouveaux (22 `test_equations_saisie`, 10 `TestRamener`,
+  2 `TestNonResolu`), aucun disparu ; les 10 `test_a_venir[P3-…]` passent de xfail à passé (mêmes noms) ; pages identiques nom par nom.
+  Sous-tests en baisse : `test_exp_log::…::test_aucun_texte_du_fichier_ne_tutoie` 957 → 955 (960 → 955 contre `tests/reference`,
+  littéraux « __slots__ » et « nom » de `_a_des_decimaux` déplacés) et `TestNonResolu::test_formes_pas_encore_traitees` 21 → 11
+  (formes P3 résolues), justifiées dans suivi.md ; hausses : instantanés 72 → 98, invariants 317 → 361, oracle 121 → 165,
+  `test_expr` (+1 et +1), `test_vocabulaire::test_litteraux_des_moteurs` 9 447 → 9 508.
+- **Dump** : `dump_sorties.py S/dumps/P3 --processus 6` (17 fichiers, 4 148 sorties, 4 s), `diff -r --exclude=temps S/dumps/depart
+  S/dumps/P3` : **code 0, aucune sortie** (invariant tenu ; Exp-log identique après le déplacement de `_a_des_decimaux`).
+- xfail stricts : **10 retirés** (« P3 ») ; aucun ajouté ; restent 12 (5 « P4a », 7 « P4b »).
+
 ## P4a — formes structurées
 
 ## P4b — degrés ≠ 2 et reste du corpus
@@ -755,6 +897,7 @@ Voir « Temps » ci-dessous (P2b).
 - P0 `0fd0060` : verifier ACCEPTÉ (Python 1 494 / 106 768 sous-tests, pages 145 / 2 421, identiques à la nouvelle référence) ; rapide --depuis HEAD~1 : 23 passés, 245 sous-tests, 3 s (fumée + docs). Échec instable de `test_comportement::test_soc04_parametre_f` (ensemble-definition, `#cartes` absent : page pas encore chargée) au 1er lancement de référence : accepté par le chef comme instabilité de chargement (relancé seul vert, deux suites complètes vertes ensuite, aucune sortie en cause, Python vert) ; question 8 de suivi.md. Branche poussée.
 - P1 `5f21ac0` : verifier ACCEPTÉ (Python 1 534 / 112 356 sous-tests, 1 baisse justifiée test_exp_log::…::test_aucun_texte_du_fichier_ne_tutoie 960 → 957 ; pages 145 / 2 421 identiques) ; rapide --depuis HEAD~1 : Python 1 489 passés + 1 xfail, 112 300 sous-tests (95 s), pages 145 passés, 1 256 sous-tests (306 s), mur 6 min 44 ; dump identique au départ (P1). Branche poussée.
 - P2a `5b9254c` : verifier ACCEPTÉ (Python 1 548 / 112 699 sous-tests, pages 151 / 2 435, ajouts seulement, baisse de P1 toujours justifiée) ; rapide --depuis HEAD~1 : Python 1 327 passés + 1 xfail, 97 492 sous-tests (89 s), pages 151 passés, 1 270 sous-tests (324 s), mur 6 min 55 ; dump identique au départ (P2a). Capture 390 clair regardée par le chef : cadres D29 lisibles, rien ne déborde. Branche poussée.
+- P2b `a52b58a` : verifier ACCEPTÉ (Python 1 607 collectés, 1 584 passés + 23 xfail dont 22 stricts P3/P4a/P4b, 122 989 sous-tests ; pages 151 / 2 435) ; rapide --depuis HEAD~1 : 385 passed, 23 xfailed, 28288 subtests passed in 25.14s ; 151 passed, 1270 subtests passed in 324.52s (0:05:24) (code=0 mur=351s) ; dump identique au départ (P2b). Texte rendu de 2.11 h (forme développée) relu par le chef : conforme au § 7 hors étape « ramener » (P3). Branche poussée.
 
 ## Temps
 
@@ -773,6 +916,12 @@ message des bornes (question 9 de suivi.md).
 et `blocs`) : 93 entrées (les 72 de `corpus_second_degre.P2B` et les 21 formes `A_VENIR`, qui répondent `non_traite`) **77 ms en tout**
 (3e tour), la plus longue 1,6 ms (−9x² − 12x + 12 = 0, avec sa variante) : bien sous 0,1 s par équation. Pire cas des bornes :
 x² + 999 999x − 499 997 = 0 **88 ms** (P1 : 91 ms pour le seul calcul ; la rédaction ne compte pas). Aucune hausse au-delà de 0,1 s.
+
+**P3** (`S/tmp/temps_p3.py`, python3 natif 3.14.4, 3 tours ; `equations.analyser`, puis `resoudre_equation`, variante « formule »
+quand elle est proposée, et `blocs`) : 119 entrées (les 98 de `corpus_second_degre.RESOLUES` et les 21 formes `A_VENIR`, dont les
+11 de P4a/P4b répondent `non_traite`) **149 ms en tout** (3e tour), la plus longue **2,6 ms** (x² − x(x + 1) + 3x² = 4 : quatre lignes
+de développement, tâtonnement, variante) : bien sous 0,1 s par équation. Pire cas des bornes : x² + 999 999x − 499 997 = 0 **88 ms**
+(comme en P2b). Aucune hausse au-delà de 0,1 s (P2b : 77 ms pour 93 entrées sans l'analyse de la saisie ; la plus longue 1,6 ms).
 
 Temps natifs des outils existants au départ (`S/dumps/depart-p1/temps/temps.json`, `--processus 1`, sur b72fe2e ; somme des appels de
 `resoudre_json` et plus long appel ; 12,9 s de mur) :

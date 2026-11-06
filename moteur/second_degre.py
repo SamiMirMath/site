@@ -2,7 +2,8 @@
 second_degre.py — Brique commune : équations polynomiales du 2e degré (et ce qui s'y ramène), en Python pur, sans SymPy.
 
 Chantier equations-2e-degre (docs/chantiers/equations-2e-degre/decisions.md, § 13 en tête). **P1 : le calcul** (sections 1 à 6),
-**P2b : la rédaction** (section 7 : `resoudre_equation`, `appliquer`, étapes structurées du § 5), la saisie en P3. Tout est exact :
+**P2b : la rédaction** (section 7 : `resoudre_equation`, `appliquer`, étapes structurées du § 5), **P3 : ramener et développer**
+(E1, E2 : `ramener` ; la lecture de la saisie est dans equations-2e-degre/equations.py). Tout est exact :
 polynômes à coefficients `Fraction` (`Polynome`), nombres p + q√m (`Nombre`, sur `noyau.racine_q` : pas de nouvelle simplification
 de k√m/d, § 13.2).
 
@@ -21,6 +22,8 @@ de k√m/d, § 13.2).
     produit_nul(facteurs)             D14, D24 ; un monôme k·xʲ donne x = 0 (D7, 3x² = 0 ⇔ x = 0)
     redevelopper, verifier_solution   le garde-fou exact, dans Q(√m) (principe 1)
     approx_garantie(x, decimales)     nombres.approx sur les deux bornes d'un encadrement, raffiné jusqu'à l'égalité (E14)
+    ramener(g, d, x, dec)             E1, E2 : « g = d » ramenée à « P = 0 », lignes de développement et de réduction (P3) ;
+                                      forme_structuree(g, d, x) : une structure s'applique sans développer (E1.3, P4a)
     resoudre_equation(g, d, x, …)     la résolution rédigée (§ 5) : {statut, etapes, solutions, S, approx, variantes, message}
     appliquer(methode, P)             une méthode seule, rédigée (Etape), ou None si elle n'aboutit pas
     blocs(resolution)                 les blocs de moteur/sortie.py : la chaîne (bloc_rangees, membre de gauche), S encadré, la ligne ≈
@@ -49,7 +52,8 @@ __all__ = ["Polynome", "Nombre", "HorsBornes", "vers_polynome", "mise_en_evidenc
            "racine_entiere_unique", "racines_formule", "s_applique", "calculer", "chemin", "produit_nul", "redevelopper",
            "verifier_solution", "approx_garantie", "ORDRE_DU_COURS", "ORDRE_PAR_LA_FORMULE", "METHODES",
            "resoudre_equation", "appliquer", "blocs", "nb_exact", "arbre_polynome", "arbre_nombre", "termes_developpes", "Produit",
-           "SansLien", "rangees", "OPTIONS_CHAINE", "MESSAGES", "PHRASE_IDENTITE", "PHRASE_EGALITE_FAUSSE"]
+           "SansLien", "rangees", "OPTIONS_CHAINE", "MESSAGES", "PHRASE_IDENTITE", "PHRASE_EGALITE_FAUSSE", "ramener",
+           "forme_structuree", "PHRASE_RAMENER"]
 
 ORDRE_DU_COURS = ("ME", "IDREM", "SP", "TATONNEMENT", "FORMULE")          # D28 : ordre fixe, même si a = 1
 ORDRE_PAR_LA_FORMULE = ("ME_PUISSANCE", "FORMULE")                       # E12 : seulement xʲ en évidence, puis la formule
@@ -855,7 +859,7 @@ def _monome_ecrit(n, x):
 
 def termes_developpes(arbre, inconnue):
     """[(j, k)] si l'arbre est une somme de monômes k·xʲ écrits développés, en degrés strictement décroissants, sans coefficient nul
-    (« 0 » seul : le polynôme nul) ; None sinon (à ramener, à développer ou à réordonner : P3)."""
+    (« 0 » seul : le polynôme nul) ; None sinon (à ramener, à développer ou à réordonner : `ramener`)."""
     def termes(n):
         if isinstance(n, Op) and n.op in "+-":
             g, d = termes(n.a), _monome_ecrit(n.b, inconnue)
@@ -906,7 +910,7 @@ class _Redaction:
 
     def __init__(self, enonce):
         self.etapes, self.pivot, self.enonce_ecrit = [], enonce, False
-        self._courante = None
+        self._courante, self._en_tete = None, None
 
     def etape(self, phase, methode, cible, parametres):
         self.fermer()
@@ -914,6 +918,13 @@ class _Redaction:
                           "segment": None}
         self._attente, self._segment = [], None
         self.etapes.append(self._courante)
+        if self._en_tete is not None:                   # une ligne seulement réordonnée appartient à l'étape qui suit (§ 5, E1)
+            element, self._en_tete = self._en_tete, None
+            self.equiv(element)
+
+    def en_tete(self, element):
+        """La première ligne ⇔ de l'étape suivante (E1 : « 5 + x² − 6x = 0 ⇔ x² − 6x + 5 = 0 », sans étiquette)."""
+        self._en_tete = element
 
     def texte(self, contenu):
         self._attente.append(contenu)
@@ -1234,6 +1245,271 @@ def _tex_approx(solutions, noms, x, dec):
     return "soit " + (" et " if nommees else " ou ").join(morceaux)
 
 
+# ---------- E1 et E2 : ramener à « … = 0 » et développer (P3) ----------
+PHRASE_RAMENER = r"On ramène d'abord l'équation à la forme \(\ldots = 0\) :"       # E1 : seulement si une phrase de choix suit
+
+
+class _Groupe:
+    """Une parenthèse précédée de « − » dans un membre écrit : ses termes signés (une parenthèse précédée de « + » se lit comme ses
+    termes)."""
+    __slots__ = ("termes",)
+
+    def __init__(self, termes):
+        self.termes = termes
+
+
+def _sans_neg(n, s=1):
+    while isinstance(n, Neg):
+        n, s = n.a, -s
+    return n, s
+
+
+def _termes_signes(n, s=1):
+    """Les termes d'un membre écrit avec leur signe : [(±1, terme)], terme sans « − » devant ; une somme précédée de « − » est un
+    `_Groupe`."""
+    n, s = _sans_neg(n, s)
+    if isinstance(n, Op) and n.op in "+-":
+        if s < 0:
+            return [(-1, _Groupe(_termes_signes(n)))]
+        return _termes_signes(n.a) + _termes_signes(n.b, -1 if n.op == "-" else 1)
+    return [(s, n)]
+
+
+def _monomes_signes(n, x):
+    """[(j, k)] (k avec son signe) d'une somme de monômes écrits, ou None."""
+    out = []
+    for s, t in _termes_signes(n):
+        m = None if isinstance(t, _Groupe) else _monome_ecrit(t, x)
+        if m is None:
+            return None
+        out.append((m[0], s * m[1]))
+    return out
+
+
+def _facteurs_du_produit(n):
+    if isinstance(n, Op) and n.op == "*":
+        return _facteurs_du_produit(n.a) + _facteurs_du_produit(n.b)
+    return [n]
+
+
+def _developper(t, x):
+    """E2 : (étiquette, [(j, k)] dans l'ordre écrit des produits) pour un terme à développer, ou None (hors de ce que P3 développe) :
+    nombre ou monôme × parenthèse (« distribution ») ; deux parenthèses sans autre facteur (« double distribution », tous les
+    produits partiels) ; carré d'un binôme A ± B, A sans signe (Id. rem., développé en A² ± 2AB + B²)."""
+    if isinstance(t, Pow) and isinstance(t.b, Nb) and t.b.val == 2:
+        termes = _termes_signes(t.a)
+        if len(termes) != 2 or termes[0][0] < 0 or any(isinstance(u, _Groupe) for _, u in termes):
+            return None
+        (_, A), (sb, B) = termes
+        ma, mb = _monome_ecrit(A, x), _monome_ecrit(B, x)
+        if ma is None or mb is None or ma[0] == mb[0] or 0 in (ma[1], mb[1]):
+            return None
+        (ja, ka), (jb, kb) = ma, mb
+        signe = "+" if sb > 0 else "-"
+        return (rf"Id. rem. \((A {signe} B)^{{2}}\) avec \(A = {_t(A)},\ B = {_t(B)}\)",
+                [(2 * ja, ka * ka), (ja + jb, 2 * sb * ka * kb), (2 * jb, kb * kb)])
+    if not (isinstance(t, Op) and t.op == "*"):
+        return None
+    j0, k0, sommes = 0, F(1), []
+    for f in _facteurs_du_produit(t):
+        f, s = _sans_neg(f)
+        k0 *= s
+        m = _monome_ecrit(f, x)
+        if m is not None:
+            j0, k0 = j0 + m[0], k0 * m[1]
+            continue
+        termes = _monomes_signes(f, x) if isinstance(f, Op) and f.op in "+-" else None
+        if termes is None:
+            return None
+        sommes.append(termes)
+    if len(sommes) == 1:
+        return "distribution", [(j0 + j, k0 * k) for j, k in sommes[0]]
+    if len(sommes) == 2 and (j0, k0) == (0, 1):
+        return "double distribution", [(j1 + j2, k1 * k2) for j1, k1 in sommes[0] for j2, k2 in sommes[1]]
+    return None
+
+
+def _lire_membre(n, x):
+    """(entrées, étiquettes) d'un membre pour la ligne du développement (E2), ou None : entrées ("m", ±1, j, |k|) (monôme) ou
+    ("g", −1, [entrées]) (parenthèse précédée de « − » : gardée, ou produit développé écrit entre parenthèses)."""
+    entrees, etiquettes = [], []
+    for s, t in _termes_signes(n):
+        if isinstance(t, _Groupe):
+            interieur = []
+            for s2, u in t.termes:
+                m = None if isinstance(u, _Groupe) else _monome_ecrit(u, x)
+                if m is None:
+                    return None
+                interieur.append(("m", s2, m[0], m[1]))
+            entrees.append(("g", -1, interieur))
+            continue
+        m = _monome_ecrit(t, x)
+        if m is not None:
+            entrees.append(("m", s, m[0], m[1]))
+            continue
+        d = _developper(t, x)
+        if d is None:
+            return None
+        etiquettes.append(d[0])
+        produits = [("m", -1 if k < 0 else 1, j, abs(k)) for j, k in d[1]]
+        entrees += produits if s > 0 else [("g", -1, produits)]
+    return entrees, etiquettes
+
+
+def _sans_groupes(entrees, s=1):
+    out = []
+    for e in entrees:
+        out += _sans_groupes(e[2], s * e[1]) if e[0] == "g" else [("m", s * e[1], e[2], e[3])]
+    return out
+
+
+def _ecrire_entrees(entrees, X, dec):
+    termes = [(e[1], _ecrire_entrees(e[2], X, dec) if e[0] == "g" else _monome_abs(e[3], e[2], X, dec)) for e in entrees]
+    return _somme(termes) if termes else Nb(0)
+
+
+def _reduit(entrees):
+    """Un membre sans parenthèse est réduit : degrés tous différents, aucun coefficient nul (sauf « 0 » seul)."""
+    if entrees == [("m", 1, 0, 0)]:
+        return True
+    degres = [e[2] for e in entrees]
+    return len(set(degres)) == len(degres) and all(e[3] != 0 for e in entrees)
+
+
+def _est_produit(n, x):
+    """Un produit ou une puissance non développés (un monôme écrit, 3x², n'en est pas un)."""
+    n, _ = _sans_neg(n)
+    return ((isinstance(n, Op) and n.op == "*") or isinstance(n, Pow)) and _monome_ecrit(n, x) is None
+
+
+def _facteurs_non_monomes(n, x):
+    n, _ = _sans_neg(n)
+    if isinstance(n, Op) and n.op == "*":
+        return _facteurs_non_monomes(n.a, x) + _facteurs_non_monomes(n.b, x)
+    if isinstance(n, Pow) and isinstance(n.b, Nb) and n.b.val.denominator == 1 and n.b.val >= 1:
+        return _facteurs_non_monomes(n.a, x)
+    if not variables(n) or _monome_ecrit(n, x) is not None:
+        return []
+    return [n]
+
+
+def _proportionnels(P, Q):
+    return P.degre == Q.degre and all(P[-1] * q == Q[-1] * p for p, q in zip(P, Q))
+
+
+def _carre_de_binome(t):
+    """k pour un terme k·(B)² ou (B)² (B une somme écrite, k une constante), sinon None."""
+    k = F(1)
+    if isinstance(t, Op) and t.op == "*" and not variables(t.a):
+        k, t = polynomes.const(t.a), t.b
+    if k is None or not (isinstance(t, Pow) and isinstance(t.b, Nb) and t.b.val == 2):
+        return None
+    base, _ = _sans_neg(t.a)
+    return k if isinstance(base, Op) and base.op in "+-" and variables(base) else None
+
+
+def forme_structuree(gauche, droite, inconnue):
+    """Vrai si une structure s'applique sans développer (E1.3 ; traitée en P4a, « non_traite » d'ici là) : produit ou puissance égal à 0
+    (produit nul direct, E13) ; facteur non monôme commun aux deux membres, à un facteur constant près (E3, 2.12 e) ; un carré de
+    binôme k(B)² et des constantes de signe opposé ou nulles, ou deux carrés de signes opposés sans constante (Id. rem. sur une forme
+    structurée, E5 : 2.9 k, l ; 2.12 h)."""
+    x = inconnue
+    for a, b in ((gauche, droite), (droite, gauche)):
+        if _est_zero(b) and _est_produit(a, x):
+            return True
+    if _est_produit(gauche, x) or _est_produit(droite, x):
+        try:
+            fg = [vers_polynome(f, x) for f in _facteurs_non_monomes(gauche, x)]
+            fd = [vers_polynome(f, x) for f in _facteurs_non_monomes(droite, x)]
+        except (HorsBornes, ValueError):
+            fg = fd = []
+        if any(_proportionnels(P, Q) for P in fg for Q in fd):
+            return True
+    constante, carres = F(0), []
+    for s, t in _termes_signes(gauche) + [(-s, t) for s, t in _termes_signes(droite)]:
+        if isinstance(t, _Groupe):
+            return False
+        if not variables(t):
+            v = polynomes.const(t)
+            if v is None:
+                return False
+            constante += s * v
+            continue
+        k = _carre_de_binome(t)
+        if k is None or k == 0:
+            return False
+        carres.append(s * k)
+    if len(carres) == 1:
+        return constante == 0 or (constante > 0) != (carres[0] > 0)
+    return len(carres) == 2 and constante == 0 and (carres[0] > 0) != (carres[1] > 0)
+
+
+def _relire(eq, x):
+    return vers_polynome(eq.g, x), vers_polynome(eq.d, x)
+
+
+def ramener(gauche, droite, inconnue, decimaux_enonce=False):
+    """E1 et E2 (P3) : l'équation « gauche = droite » ramenée à « P = 0 », ligne par ligne, sans texte :
+    {P: Polynome, pas: [(méthode, parametres, [(Eq, étiquette ou None)])] (méthodes « DEVELOPPER », « RAMENER »), en_tete: Eq ou None
+    (la ligne seulement réordonnée, qui appartient à l'étape suivante, § 5)} ; None si une structure de P4a s'applique
+    (`forme_structuree`) ou si un terme sort de ce que E2 développe. Chaque ligne est relue par `vers_polynome` (garde-fou)."""
+    x, X, dec = inconnue, Var(inconnue), decimaux_enonce
+    Pg, Pd = vers_polynome(gauche, x), vers_polynome(droite, x)
+    if termes_developpes(gauche, x) is not None and _est_zero(droite):            # E1.1 : déjà « P = 0 », développée et ordonnée
+        return {"P": Pg, "pas": [], "en_tete": None}
+    if forme_structuree(gauche, droite, x):
+        return None
+    lus = [_lire_membre(gauche, x), _lire_membre(droite, x)]
+    if None in lus:
+        return None
+    (eg, lg), (ed, ld) = lus
+    etiquettes = list(dict.fromkeys(lg + ld))                                   # E2 : « ; » entre les étiquettes, sans doublon
+    lignes_dev, ligne_red = [], None
+    if etiquettes:
+        lignes_dev.append((Eq(_ecrire_entrees(eg, X, dec), _ecrire_entrees(ed, X, dec)), " ; ".join(etiquettes)))
+    plats = [_sans_groupes(eg), _sans_groupes(ed)]
+    if plats != [eg, ed]:
+        lignes_dev.append((Eq(_ecrire_entrees(plats[0], X, dec), _ecrire_entrees(plats[1], X, dec)), None))
+    if not all(_reduit(m) for m in plats):
+        ligne_red = (Eq(arbre_polynome(Pg, x, dec), arbre_polynome(Pd, x, dec)), None)
+    for eq, _ in lignes_dev + ([ligne_red] if ligne_red else []):
+        if _relire(eq, x) != (Pg, Pd):
+            raise _Incoherent("développement")
+    D = Polynome([a - b for a, b in zip(list(Pg) + [0] * len(Pd), list(Pd) + [0] * len(Pg))])
+    cote = "gauche"
+    if not Pd.nul() and D[-1] < 0:                                              # E1.2 : coefficient de tête positif
+        D, cote = Polynome([-c for c in D]), "droite"
+    final = Eq(arbre_polynome(D, x, dec), Nb(0))
+    if _relire(final, x) != (D, Polynome()):
+        raise _Incoherent("ramener")
+    derniere = (ligne_red or (lignes_dev[-1] if lignes_dev else None) or (Eq(gauche, droite), None))[0]
+    a_ecrire = _t_element(final) != _t_element(derniere)
+    pas, en_tete = [], None
+    if lignes_dev:
+        pas.append(("DEVELOPPER", {"developpements": etiquettes}, lignes_dev + ([ligne_red] if ligne_red else [])))
+        ligne_red = None
+    if a_ecrire and not Pd.nul():
+        pas.append(("RAMENER", {"cote": cote, "polynome": D}, ([ligne_red] if ligne_red else []) + [(final, None)]))
+    else:
+        if ligne_red:
+            pas.append(("RAMENER", {"cote": cote, "polynome": D}, [ligne_red]))
+        if a_ecrire:
+            en_tete = final                                                     # E1 : seulement réordonnée (second membre nul)
+    return {"P": D, "pas": pas, "en_tete": en_tete}
+
+
+def _ecrire_ramener(R, prep, phrase):
+    """Les étapes « ramener » (E1, E2) ; la phrase d'E1 en tête de la première, si une phrase de choix suit (E4)."""
+    for i, (methode, parametres, lignes) in enumerate(prep["pas"]):
+        R.etape("ramener", methode, _t_element(R.pivot), parametres)
+        if i == 0 and phrase:
+            R.texte(PHRASE_RAMENER)
+        for eq, prop in lignes:
+            R.equiv(eq, prop)
+    if prep["en_tete"] is not None:
+        R.en_tete(prep["en_tete"])
+
+
 def _non_resolu(statut):
     return {"statut": statut, "etapes": [], "solutions": [], "S": None, "approx": None, "variantes": [], "message": MESSAGES[statut]}
 
@@ -1251,19 +1527,21 @@ def resoudre_equation(gauche, droite, inconnue, decimaux_enonce=False, methodes=
     Etape = {phase, methode, cible (TeX), parametres (calcul exact), lignes (rangées : triplets (lien, expr, prop) et `LigneTexte`),
              segment (la `Chaine` de l'étape, pivot puis ⇔, ou None)}.
 
-    P2b : seulement « P = 0 » développée et ordonnée (`termes_developpes`), de degré 2 ; tout le reste est « non_traite » (ramener et
-    développer : P3 ; formes structurées : P4a ; degrés ≠ 2, identité : P4b). Le calcul est celui de `chemin` (garde-fou exact) ;
-    une valeur écrite qui ne vérifie pas son calcul donne « ne_conclut_pas ». methodes=ORDRE_PAR_LA_FORMULE : la variante E12."""
-    if termes_developpes(gauche, inconnue) is None or not _est_zero(droite) or variables(gauche) - {inconnue}:
+    P3 : l'équation est d'abord ramenée à « P = 0 » (E1, E2 : `ramener`, étapes de phase « ramener ») ; une forme structurée
+    (`forme_structuree` : P4a) et un P de degré ≠ 2 (identité, degré 1, degré ≥ 3 : P4b) restent « non_traite ». Le calcul est celui
+    de `chemin` (garde-fou exact) ; une valeur écrite qui ne vérifie pas son calcul donne « ne_conclut_pas ».
+    methodes=ORDRE_PAR_LA_FORMULE : la variante E12."""
+    if (variables(gauche) | variables(droite)) - {inconnue}:
         return _non_resolu("non_traite")
     try:
-        P = vers_polynome(gauche, inconnue)
-        if P.degre != 2:
+        prep = ramener(gauche, droite, inconnue, decimaux_enonce)
+        if prep is None or prep["P"].degre != 2:
             return _non_resolu("non_traite")
+        P = prep["P"]
         ch = chemin(P, methodes)
         if ch["statut"] != "resolu":
             return _non_resolu(ch["statut"])
-        res = _rediger(Eq(gauche, droite), P, ch, inconnue, decimaux_enonce, cours=methodes != ORDRE_PAR_LA_FORMULE)
+        res = _rediger(Eq(gauche, droite), P, ch, inconnue, decimaux_enonce, cours=methodes != ORDRE_PAR_LA_FORMULE, prep=prep)
         if methodes == ORDRE_DU_COURS and not _formule_utilisee(ch):
             v = chemin(P, ORDRE_PAR_LA_FORMULE)
             res["variantes"] = ["formule"] if v["statut"] == "resolu" and _formule_utilisee(v) else []
@@ -1274,10 +1552,12 @@ def resoudre_equation(gauche, droite, inconnue, decimaux_enonce=False, methodes=
         return _non_resolu("ne_conclut_pas")
 
 
-def _rediger(enonce, P, ch, inconnue, dec, cours):
+def _rediger(enonce, P, ch, inconnue, dec, cours, prep=None):
     R, ctx = _Redaction(enonce), _Contexte(inconnue, dec, cours)
     formules = {e["cible"]: e["resultat"] for e in ch["etapes"] if e["methode"] == "FORMULE"}
     etapes = ch["etapes"]
+    if prep is not None:
+        _ecrire_ramener(R, prep, phrase=cours and bool(etapes) and etapes[0]["methode"] in ("SP", "TATONNEMENT", "FORMULE"))
     for i, e in enumerate(etapes):
         m, Q, r = e["methode"], e["cible"], e["resultat"]
         if m == "ME":

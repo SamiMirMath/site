@@ -1,11 +1,15 @@
-"""Corpus des tests de la rédaction du 2e degré (chantier equations-2e-degre, P2b ; decisions.md §§ 6, 7, 8 et 13).
+"""Corpus des tests de la rédaction du 2e degré (chantier equations-2e-degre, P2b et P3 ; decisions.md §§ 6, 7, 8 et 13).
 
 - `P2B` : les équations que P2b résout, sous la forme « P = 0 » développée et ordonnée : le § 8 (2.9 à 2.12, Javet 2.17, Az 4.1),
   chaque exercice qui demande de ramener ou de développer pris sous sa forme développée (« (dév.) »), les cas limites du § 6, les
   exemples rédigés du § 7 et les précisions du § 13.4.
-- `A_VENIR` : les formes que P2b ne traite pas encore, avec la partie qui les traitera (P3 : ramener, développer ; P4a : formes
+- `P3` : les équations que P3 ramène à « P = 0 » (E1) ou développe d'abord (E2), de degré 2 : les exercices du § 8 sous leur forme
+  d'énoncé (dont 2.11 h, l'exemple cible) et d'autres formes (côté droit, réduction, décimaux, fractions, « − » devant un produit…).
+- `RESOLUES` : `P2B` et `P3`.
+- `A_VENIR` : les formes que P2b ne traitait pas, avec la partie qui les traite (P3 : ramener, développer ; P4a : formes
   structurées ; P4b : degrés ≠ 2, identité, bicarrée), leurs coefficients développés (ordre décroissant, pour l'oracle) et le S
-  attendu quand l'oracle ne s'applique pas (S = ℝ). Leurs tests sont des xfail stricts.
+  attendu quand l'oracle ne s'applique pas (S = ℝ). Les tests des parties pas encore faites (hors de `PARTIES_FAITES`) sont des xfail
+  stricts.
 
 Les saisies sont lues par `expr.lire_membres` (lexique commun) ; les décimaux de l'énoncé sont ceux de la saisie."""
 
@@ -87,6 +91,42 @@ P2B = {
     "Δ = 0, coefficients non entiers": "(1/2)x^2+x+1/2=0",
     "x²": "x^2=0",
 }
+
+P3 = {
+    # § 8, sous la forme de l'énoncé (E1)
+    "2.9 d": "4x^2=9",
+    "2.9 f": "196z^2+280z=-100",
+    "2.10 h": "x^2+7x=18",
+    "2.10 j": "4x+32=x^2",
+    "2.11 f": "4t^2+7t=2",
+    "2.11 h": "4x^2+2x=56",
+    "2.11 j": "45u+12=12u^2",
+    "2.12 g": "x^2=16",
+    # E1 : réordonner, côté droit, réduction, second membre nul à gauche, décimaux, fractions
+    "E1 termes dans le désordre": "5+x^2-6x=0",
+    "E1 désordre, a < 0 gardé": "10y-y^2-9=0",
+    "E1 côté droit, formule": "x^2-4x=2x^2+1",
+    "E1 premier membre nul": "0=x^2-4",
+    "E1 réduction": "x^2+x^2=8",
+    "E1 décimaux": "0,5x^2=2",
+    "E1 fractions, formule": "(3/2)x^2=4x+1",
+    # E2 : développer (§ 7 et autres formes)
+    "(x + 1)(x + 3) = 15": "(x+1)(x+3)=15",
+    "E2 distribution": "2(x+3)=x^2",
+    "E2 distribution, monôme": "x(x-4)=5",
+    "E2 « − » devant un produit": "5-(x+1)(x+3)=0",
+    "E2 « − » devant une distribution": "x^2-x(x+1)+3x^2=4",
+    "E2 parenthèse précédée de « − »": "x^2-(2x+3)=0",
+    "E2 Id. rem. (A + B)²": "(x+3)^2=2x+14",
+    "E2 Id. rem. (A + B)², Δ < 0": "(x+1)^2=-16",
+    "E2 Id. rem. (A − B)², A constante": "(3-x)^2=1+x",
+    "E2 « − » devant une double distribution": "-(x+1)(x-2)=x",
+    "E2 décimaux": "0,5(x+2)=x^2",
+}
+
+RESOLUES = {**P2B, **P3}
+
+PARTIES_FAITES = ("P3",)
 
 # nom : (saisie, partie, coefficients développés (ordre décroissant) ou None, S attendu en TeX ou None, ce qui manque)
 A_VENIR = {

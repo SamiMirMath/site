@@ -1,14 +1,17 @@
-"""Brique moteur/second_degre.py, P2b du chantier equations-2e-degre : la rédaction (decisions.md §§ 3, 5, 6, 7 et 13 ; plan, P2b).
+"""Brique moteur/second_degre.py, P2b et P3 du chantier equations-2e-degre : la rédaction (decisions.md §§ 3, 5, 6, 7 et 13 ; plan,
+P2b et P3).
 
 - Invariants du § 5 : le bloc affiché est `bloc_rangees(concaténation des lignes de toutes les étapes, membre_gauche=True)` (JSON) ;
   les segments des étapes, mis bout à bout, donnent les rangées de la chaîne entière (`rangees_chaine`) ; chaque segment commence
   par le pivot (le dernier élément écrit) et n'a que des ⇔ ; l'énoncé n'est écrit qu'une fois, et seulement si un ⇔ suit (§ 13.3).
-- Oracle (`oracle.racines`) sur toutes les solutions du corpus (`corpus_second_degre.P2B`), des variantes « formule » (E12) et des
+- Oracle (`oracle.racines`) sur toutes les solutions du corpus (`corpus_second_degre.RESOLUES`), des variantes « formule » (E12) et des
   polynômes générés de P1 ; chaque solution est substituée exactement dans l'équation (calcul écrit ici).
 - Rédaction : le texte rendu de 2.11 h, 2.10 a, Javet 2.17 c et des exemples du § 7 ; E3 à E12, E14 ; D20, D24, D29 ; cas limites
   du § 6 ; vouvoiement (R12) et vocabulaire (C6) de tout texte produit.
 - `nb_exact` sans état, croisé avec `exp_log._nb_exact` ; `appliquer` : s_applique ⇔ une étape, qui se redéveloppe.
-- Ce que P2b ne traite pas encore : xfail stricts nommés par leur partie (P3, P4a, P4b)."""
+- P3 : E1 (ramener, réordonner, côté droit, phrase seulement avant une phrase de choix) et E2 (développer en montrant les produits,
+  « − (…) » puis sans parenthèses) ; les formes structurées (P4a) restent « non_traite ».
+- Ce qui n'est pas encore traité : xfail stricts nommés par leur partie (P4a, P4b)."""
 import json
 import re
 import unicodedata
@@ -28,7 +31,7 @@ import second_degre as sd
 import sortie
 from chaine import Chaine, Eq, LigneTexte, bloc_rangees, tex_element
 from aides_sortie import TUTOIEMENT
-from corpus_second_degre import A_VENIR, MESSAGE_BICARREE, P2B
+from corpus_second_degre import A_VENIR, MESSAGE_BICARREE, P2B, P3, PARTIES_FAITES, RESOLUES
 from expr import Nb
 from second_degre import Nombre
 from test_second_degre import GENERES, OracleMixin, egal_au_polynome, valeur_mp
@@ -57,8 +60,9 @@ def resoudre(saisie, methodes=sd.ORDRE_DU_COURS):
 
 
 def polynome(saisie):
-    g, _, x, _ = lire(saisie)
-    return sd.vers_polynome(g, x)
+    """Le polynôme P de « P = 0 », l'équation ramenée : gauche − droite."""
+    g, d, x, _ = lire(saisie)
+    return sd.vers_polynome(expr.Op("-", g, d), x)
 
 
 def lignes(res):
@@ -78,7 +82,7 @@ def textes(res):
 
 def toutes():
     """(nom, résolution) du corpus et de ses variantes « formule »."""
-    for nom, saisie in P2B.items():
+    for nom, saisie in RESOLUES.items():
         res = resoudre(saisie)
         yield nom, res
         if res["variantes"]:
@@ -86,7 +90,7 @@ def toutes():
 
 
 TOUTES = list(toutes())
-ENONCES = {nom: tex_element(Eq(*lire(P2B[nom.replace(" (variante formule)", "")])[:2]), True, True) for nom, _ in TOUTES}
+ENONCES = {nom: tex_element(Eq(*lire(RESOLUES[nom.replace(" (variante formule)", "")])[:2]), True, True) for nom, _ in TOUTES}
 GENERES_2 = [P for P in GENERES if P.degre == 2]
 
 
@@ -210,7 +214,7 @@ class TestOracle(OracleMixin, unittest.TestCase):
     def test_corpus_et_variantes(self):
         """Solutions = oracle.racines, et chacune annule exactement l'équation (S, ligne ≈ comprise)."""
         for nom, res in TOUTES:
-            saisie = P2B[nom.replace(" (variante formule)", "")]
+            saisie = RESOLUES[nom.replace(" (variante formule)", "")]
             with self.subTest(nom=nom):
                 P = polynome(saisie)
                 self.assertEqual(res["statut"], "resolu")
@@ -219,7 +223,7 @@ class TestOracle(OracleMixin, unittest.TestCase):
                     self.assertEqual(evaluer(P, x), (0, 0))
 
     def test_variante_memes_solutions(self):
-        for nom, saisie in P2B.items():
+        for nom, saisie in RESOLUES.items():
             res = resoudre(saisie)
             if res["variantes"]:
                 with self.subTest(nom=nom):
@@ -616,12 +620,184 @@ class TestAppliquer(OracleMixin, unittest.TestCase):
                     json.dumps(bloc_rangees(e["lignes"]), allow_nan=False)
 
 
+# ---------------------------------------------------------------------------------------------------------------------------
+# P3 : ramener (E1) et développer (E2)
+# ---------------------------------------------------------------------------------------------------------------------------
+PHRASE = r"On ramène d'abord l'équation à la forme \(\ldots = 0\) :"
+
+
+class TestRamener(unittest.TestCase):
+
+    def test_2_11_h_complet_exemple_cible(self):
+        """§ 7, exemple cible, à partir de « 4x² + 2x = 56 » : la ligne ramenée ouvre la chaîne (une ME suit : pas de phrase) ;
+        étapes ramener · factoriser (ME) · factoriser (tâtonnement) · produit nul."""
+        res = resoudre(P3["2.11 h"])
+        self.assertEqual(textes(res), [
+            r" | 4x^{2} + 2x = 56 | ",
+            r"\iff | 4x^{2} + 2x - 56 = 0 | ",
+            r"\iff | 2(2x^{2} + x - 28) = 0 | ME",
+            r"Le trinôme \(2x^{2} + x - 28\) n'est pas unitaire : tâtonnement.",
+            r"\(\fbox{$x = -4$}\) est solution de \(2x^{2} + x - 28 = 0\), car \(2 \cdot (-4)^{2} - 4 - 28 = 32 - 4 - 28 = 0\).",
+            r"Donc \(2x^{2} + x - 28 = (x + 4)(2x + \triangle)\) avec \(4 \cdot \triangle = -28\), donc \(\fbox{$\triangle = -7$}\).",
+            r"\iff | 2(x + 4)(2x - 7) = 0 | ",
+            r"\iff | " + ou(IMP % "2", "x + 4 = 0", "2x - 7 = 0") + " | produit nul",
+            r"\iff | " + ou("x = -4", r"x = \frac{7}{2}") + " | "])
+        self.assertEqual(res["S"], r"S = \{-4\,;\,\frac{7}{2}\}")
+        self.assertEqual([(e["phase"], e["methode"], e["cible"]) for e in res["etapes"]], [
+            ("ramener", "RAMENER", "4x^{2} + 2x = 56"), ("factoriser", "ME", "4x^{2} + 2x - 56"),
+            ("factoriser", "TATONNEMENT", "2x^{2} + x - 28"), ("produit_nul", "PRODUIT_NUL", "2(x + 4)(2x - 7)")])
+        self.assertEqual(res["etapes"][0]["parametres"]["cote"], "gauche")
+        b = sd.blocs(res)[0]["rangees"]
+        self.assertEqual((b[0]["gauche"], b[0]["expr"]), ("4x^{2} + 2x = 56", "4x^{2} + 2x - 56 = 0"))
+
+    def test_phrase_seulement_avant_une_phrase_de_choix(self):
+        """E1 : la phrase précède l'énoncé quand une phrase de choix (S-P, tâtonnement, formule) suit directement ; rien avant une
+        ME ou une Id. rem. ; jamais dans la variante « formule »."""
+        avec = {nom for nom, res in TOUTES if PHRASE in textes(res)}
+        self.assertEqual(avec, {"2.10 h", "2.10 j", "2.11 f", "E1 côté droit, formule", "E1 décimaux", "E1 fractions, formule",
+                                "(x + 1)(x + 3) = 15", "E2 distribution", "E2 distribution, monôme",
+                                "E2 « − » devant une distribution", "E2 parenthèse précédée de « − »", "E2 Id. rem. (A + B)²",
+                                "E2 Id. rem. (A + B)², Δ < 0", "E2 Id. rem. (A − B)², A constante", "E2 décimaux"})
+        for nom, res in TOUTES:
+            t = textes(res)
+            if PHRASE in t:
+                with self.subTest(nom=nom):
+                    self.assertEqual(t.index(PHRASE), 1)                        # après l'énoncé, qui passe à sa droite (B3)
+                    self.assertEqual(res["etapes"][0]["phase"], "ramener")
+                    suite = [x for x in t[2:] if not x.startswith(("\\iff", " | "))]
+                    self.assertTrue(suite[0].startswith(("Pas de ME", "Le trinôme")), suite[0])
+        res = resoudre(P3["2.10 h"])
+        self.assertEqual(textes(res)[:4], [" | x^{2} + 7x = 18 | ", PHRASE, r"\iff | x^{2} + 7x - 18 = 0 | ",
+                                           r"Pas de ME, pas d'Id. rem. ; le trinôme est unitaire (\(a = 1\)) : S-P."])
+        self.assertEqual(sd.blocs(res)[0]["rangees"][0], {"texte": PHRASE})
+
+    def test_cote_du_coefficient_de_tete_positif(self):
+        """E1.2 : tout du côté où le coefficient du terme de plus haut degré devient positif (2.10 j, 2.11 j), à gauche si les deux
+        conviennent ; premier membre nul : à droite."""
+        for nom, debut, cote in (("2.10 j", r"\iff | x^{2} - 4x - 32 = 0 | ", "droite"),
+                                 ("2.11 j", r"\iff | 12u^{2} - 45u - 12 = 0 | ", "droite"),
+                                 ("E1 côté droit, formule", r"\iff | x^{2} + 4x + 1 = 0 | ", "droite"),
+                                 ("E1 premier membre nul", r"\iff | x^{2} - 4 = 0 | ", "droite"),
+                                 ("2.9 f", r"\iff | 196z^{2} + 280z + 100 = 0 | ", "gauche")):
+            with self.subTest(nom=nom):
+                res = resoudre(P3[nom])
+                self.assertIn(debut, textes(res))
+                self.assertEqual([(e["methode"], e["parametres"]["cote"]) for e in res["etapes"] if e["phase"] == "ramener"],
+                                 [("RAMENER", cote)])
+
+    def test_ligne_seulement_reordonnee(self):
+        """E1 (quiz.md, réponse 1) et § 5 : second membre nul, termes dans le désordre : une ligne sans étiquette, qui appartient à
+        l'étape suivante (aucune étape « ramener ») ; a < 0 gardé (E1.1), puis la ME de −1 (D21)."""
+        res = resoudre(P3["E1 termes dans le désordre"])
+        self.assertEqual(textes(res)[:3], [" | 5 + x^{2} - 6x = 0 | ", r"\iff | x^{2} - 6x + 5 = 0 | ",
+                                           r"Pas de ME, pas d'Id. rem. ; le trinôme est unitaire (\(a = 1\)) : S-P."])
+        self.assertEqual(res["etapes"][0]["methode"], "SP")
+        self.assertEqual(res["etapes"][0]["lignes"][:2], [("", "5 + x^{2} - 6x = 0", None), (r"\iff", "x^{2} - 6x + 5 = 0", None)])
+        res = resoudre(P3["E1 désordre, a < 0 gardé"])
+        self.assertEqual(textes(res)[:4], [" | 10y - y^{2} - 9 = 0 | ", r"\iff | -y^{2} + 10y - 9 = 0 | ",
+                                           r"Le trinôme n'est pas unitaire (\(a = -1\)) : on met d'abord \(-1\) en évidence.",
+                                           r"\iff | -(y^{2} - 10y + 9) = 0 | ME"])
+        self.assertEqual([e["methode"] for e in res["etapes"]][:2], ["ME", "SP"])
+        self.assertEqual(res["etapes"][0]["parametres"]["k"], -1)
+
+    def test_double_distribution_x_plus_1_x_plus_3(self):
+        """§ 7 : la phrase, les produits partiels (« double distribution »), la réduction sans étiquette, puis E1.2 et le S-P."""
+        res = resoudre(P3["(x + 1)(x + 3) = 15"])
+        self.assertEqual(textes(res)[:6], [
+            r" | (x + 1)(x + 3) = 15 | ", PHRASE,
+            r"\iff | x^{2} + 3x + x + 3 = 15 | double distribution",
+            r"\iff | x^{2} + 4x + 3 = 15 | ",
+            r"\iff | x^{2} + 4x - 12 = 0 | ",
+            r"Pas de ME, pas d'Id. rem. ; le trinôme est unitaire (\(a = 1\)) : S-P."])
+        self.assertEqual(textes(res)[-3:], [r"\iff | (x - 2)(x + 6) = 0 | ",
+                                            r"\iff | " + ou("x - 2 = 0", "x + 6 = 0") + " | produit nul",
+                                            r"\iff | " + ou("x = 2", "x = -6") + " | "])
+        self.assertEqual(res["S"], r"S = \{-6\,;\,2\}")
+        self.assertEqual([(e["phase"], e["methode"]) for e in res["etapes"]], [
+            ("ramener", "DEVELOPPER"), ("ramener", "RAMENER"), ("factoriser", "SP"), ("produit_nul", "PRODUIT_NUL")])
+        self.assertEqual(res["etapes"][0]["parametres"]["developpements"], ["double distribution"])
+
+    def test_moins_devant_un_produit(self):
+        """E2 : le produit développé s'écrit d'abord entre parenthèses, « − (…) », puis sans parenthèses, puis réduit ; second membre
+        nul : a < 0 gardé (E1.1), ME de −1."""
+        res = resoudre(P3["E2 « − » devant un produit"])
+        self.assertEqual(textes(res)[:6], [
+            r" | 5 - (x + 1)(x + 3) = 0 | ",
+            r"\iff | 5 - (x^{2} + 3x + x + 3) = 0 | double distribution",
+            r"\iff | 5 - x^{2} - 3x - x - 3 = 0 | ",
+            r"\iff | -x^{2} - 4x + 2 = 0 | ",
+            r"Le trinôme n'est pas unitaire (\(a = -1\)) : on met d'abord \(-1\) en évidence.",
+            r"\iff | -(x^{2} + 4x - 2) = 0 | ME"])
+        res = resoudre(P3["E2 « − » devant une distribution"])
+        self.assertEqual(textes(res)[2:6], [
+            r"\iff | x^{2} - (x^{2} + x) + 3x^{2} = 4 | distribution", r"\iff | x^{2} - x^{2} - x + 3x^{2} = 4 | ",
+            r"\iff | 3x^{2} - x = 4 | ", r"\iff | 3x^{2} - x - 4 = 0 | "])
+        res = resoudre(P3["E2 parenthèse précédée de « − »"])
+        self.assertEqual(textes(res)[:3], [r" | x^{2} - (2x + 3) = 0 | ", PHRASE, r"\iff | x^{2} - 2x - 3 = 0 | "])
+        self.assertEqual(res["etapes"][0]["methode"], "DEVELOPPER")
+
+    def test_id_rem_et_distribution(self):
+        """E2 : carré d'un binôme par l'Id. rem. (étiquette « Id. rem. (A ± B)² avec A = …, B = … », sans cadre : A et B se lisent,
+        ils ne se trouvent pas) ; nombre ou monôme × parenthèse : « distribution » ; décimaux de l'énoncé gardés."""
+        self.assertEqual(textes(resoudre(P3["E2 Id. rem. (A + B)²"]))[2],
+                         r"\iff | x^{2} + 6x + 9 = 2x + 14 | Id. rem. \((A + B)^{2}\) avec \(A = x,\ B = 3\)")
+        self.assertEqual(textes(resoudre(P3["E2 Id. rem. (A − B)², A constante"]))[2],
+                         r"\iff | 9 - 6x + x^{2} = 1 + x | Id. rem. \((A - B)^{2}\) avec \(A = 3,\ B = x\)")
+        self.assertEqual(textes(resoudre(P3["E2 distribution, monôme"]))[2:4],
+                         [r"\iff | x^{2} - 4x = 5 | distribution", r"\iff | x^{2} - 4x - 5 = 0 | "])
+        t = textes(resoudre(P3["E2 décimaux"]))
+        self.assertEqual(t[2:4], [r"\iff | 0{,}5x + 1 = x^{2} | distribution", r"\iff | x^{2} - 0{,}5x - 1 = 0 | "])
+
+    def test_az_4_1_g_developpement(self):
+        """§ 7 (Az 4.1 g) : Id. rem. et distribution sur la même ligne, étiquettes séparées par « ; », « − (4x² − 4x) » puis sans
+        parenthèses, puis 1 = 1 ; l'identité elle-même vient en P4b (le test xfail « P4b » de A_VENIR)."""
+        g, d = expr.lire_membres("(2x-1)^2-4x(x-1)=1")
+        prep = sd.ramener(g, d, "x")
+        self.assertTrue(prep["P"].nul())
+        methode, parametres, lignes = prep["pas"][0]
+        self.assertEqual(methode, "DEVELOPPER")
+        self.assertEqual([(tex_element(e), p) for e, p in lignes], [
+            ("4x^{2} - 4x + 1 - (4x^{2} - 4x) = 1", r"Id. rem. \((A - B)^{2}\) avec \(A = 2x,\ B = 1\) ; distribution"),
+            ("4x^{2} - 4x + 1 - 4x^{2} + 4x = 1", None), ("1 = 1", None)])
+        self.assertEqual(resoudre("(2x-1)^2-4x(x-1)=1")["statut"], "non_traite")
+
+    def test_reduction_et_premier_membre_nul(self):
+        self.assertEqual(textes(resoudre(P3["E1 réduction"]))[:3],
+                         [" | x^{2} + x^{2} = 8 | ", r"\iff | 2x^{2} = 8 | ", r"\iff | 2x^{2} - 8 = 0 | "])
+        self.assertEqual(textes(resoudre(P3["E1 premier membre nul"]))[:2], [" | 0 = x^{2} - 4 | ", r"\iff | x^{2} - 4 = 0 | "])
+        self.assertEqual(textes(resoudre(P3["E1 décimaux"]))[:3],
+                         [" | 0{,}5x^{2} = 2 | ", PHRASE, r"\iff | 0{,}5x^{2} - 2 = 0 | "])
+
+    def test_chaque_ligne_relue(self):
+        """Garde-fou : chaque ligne écrite par `ramener` a les mêmes membres (lignes du développement et de la réduction) ou le même
+        P (ligne ramenée), relus par vers_polynome ; une écriture faussée lève une incohérence (« ne_conclut_pas »)."""
+        for nom, saisie in P3.items():
+            g, d, x, dec = lire(saisie)
+            prep = sd.ramener(g, d, x, dec)
+            P = polynome(saisie)
+            with self.subTest(nom=nom):
+                self.assertTrue(prep["P"] == P or prep["P"] == sd.Polynome([-c for c in P]))
+                for methode, _, lignes in prep["pas"]:
+                    for e, _ in lignes:
+                        D = sd.vers_polynome(expr.Op("-", e.g, e.d), x)
+                        self.assertTrue(D == P or D == sd.Polynome([-c for c in P]), (nom, tex_element(e)))
+        ancien = sd._ecrire_entrees
+        try:
+            sd._ecrire_entrees = lambda entrees, X, dec: ancien(entrees[:-1] or entrees, X, dec)
+            self.assertEqual(resoudre(P3["(x + 1)(x + 3) = 15"])["statut"], "ne_conclut_pas")
+        finally:
+            sd._ecrire_entrees = ancien
+        self.assertEqual(resoudre(P3["(x + 1)(x + 3) = 15"])["statut"], "resolu")
+
+
 class TestNonResolu(unittest.TestCase):
 
     def test_formes_pas_encore_traitees(self):
-        """Ce que P2b ne traite pas encore donne « non_traite », avec un message clair, sans aucune étape (jamais un résultat
-        douteux)."""
+        """Ce qui n'est pas encore traité (parties hors de PARTIES_FAITES) donne « non_traite », avec un message clair, sans aucune
+        étape (jamais un résultat douteux)."""
         for nom, (saisie, partie, _, _, _) in A_VENIR.items():
+            if partie in PARTIES_FAITES:
+                continue
             with self.subTest(nom=nom, partie=partie):
                 res = resoudre(saisie)
                 self.assertEqual(res["statut"], "non_traite")
@@ -629,8 +805,33 @@ class TestNonResolu(unittest.TestCase):
                 self.assertEqual((res["etapes"], res["solutions"], res["S"], res["approx"]), ([], [], None, None))
                 with self.assertRaises(ValueError):
                     sd.blocs(res)
-        g, d = expr.lire_membres("x^2+y=0")
-        self.assertEqual(sd.resoudre_equation(g, d, "x")["statut"], "non_traite")
+        for saisie in ("x^2+y=0", "x^2=y"):
+            g, d = expr.lire_membres(saisie)
+            self.assertEqual(sd.resoudre_equation(g, d, "x")["statut"], "non_traite")
+
+    def test_structures_laissees_a_p4a(self):
+        """E1.3 : quand une structure s'applique sans développer (produit nul direct, facteur commun aux deux membres, Id. rem. sur
+        une forme structurée), P3 ne développe pas : « non_traite » jusqu'en P4a. Sinon, on développe (E2)."""
+        oui = ("4(x-2)^2=1", "(x+1)^2=16", "16-(3x+2)^2=0", "(x-1)(2-x)=(x-1)(x+3)", "(x-1)(2-x)(5-3x)=0", "x(x+1)=0",
+               "3(x+1)^2=0", "(x+1)^2=(2x-3)^2", "(x-1)(x+2)=x-1", "-(x+1)^2+4=0", "(x+1)^2=5", "2(x-1)=3(1-x)(x+2)")
+        non = ("(x+1)(x+3)=15", "(x+1)^2=-16", "(2x-1)^2-4x(x-1)=1", "x(x-4)=5", "(x+1)^2+(x-1)^2=10", "(x+1)^2=2x+14",
+               "x^2+7x=18", "5-(x+1)(x+3)=0")
+        for saisie in oui + non:
+            g, d, x, _ = lire(saisie)
+            with self.subTest(saisie=saisie):
+                self.assertEqual(sd.forme_structuree(g, d, x), saisie in oui)
+                if saisie in oui:
+                    self.assertIsNone(sd.ramener(g, d, x))
+                    self.assertEqual(resoudre(saisie)["statut"], "non_traite")
+
+    def test_hors_de_ce_que_e2_developpe(self):
+        """E2 ne développe que nombre ou monôme × parenthèse, deux parenthèses, le carré d'un binôme ; le reste, et tout ce qui n'est
+        pas de degré 2 une fois ramené (P4b), reste « non_traite », sans étape."""
+        for saisie in ("2(x+1)(x+3)=5", "0,5(x+2)^2=x+3", "(x+1)^3=8+x", "x*3+x^2=1", "(x^2+x+1)^2=x", "x^2/2=1+x",
+                       "(x+1)(x+3)=x^2", "x^3=x+1", "x^2+1=x^2+x", "(x+2)(x-2)=x^2-4"):
+            with self.subTest(saisie=saisie):
+                res = resoudre(saisie)
+                self.assertEqual((res["statut"], res["etapes"]), ("non_traite", []))
 
     def test_bornes(self):
         """§ 13.5 : un radicande trop grand pour la simplification (question 9 de suivi.md) donne le message des bornes."""
@@ -643,10 +844,11 @@ class TestNonResolu(unittest.TestCase):
 # Ce que les parties suivantes traiteront (xfail stricts)
 # ---------------------------------------------------------------------------------------------------------------------------
 def _a_venir():
+    """Les formes d'A_VENIR ; celles d'une partie pas encore faite (hors de PARTIES_FAITES) sont des xfail stricts."""
     for nom, (saisie, partie, coeffs, S, quoi) in A_VENIR.items():
         ascii_ = unicodedata.normalize("NFKD", nom).encode("ascii", "ignore").decode()
-        yield pytest.param(saisie, coeffs, S, id=partie + "-" + re.sub(r"[^A-Za-z0-9.]+", "_", ascii_).strip("_"),
-                           marks=pytest.mark.xfail(strict=True, reason=f"{partie} : {quoi} (plan, {partie})"))
+        marques = [] if partie in PARTIES_FAITES else [pytest.mark.xfail(strict=True, reason=f"{partie} : {quoi} (plan, {partie})")]
+        yield pytest.param(saisie, coeffs, S, id=partie + "-" + re.sub(r"[^A-Za-z0-9.]+", "_", ascii_).strip("_"), marks=marques)
 
 
 @pytest.mark.parametrize("saisie, coeffs, S", list(_a_venir()))

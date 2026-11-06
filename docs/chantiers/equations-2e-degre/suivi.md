@@ -15,7 +15,7 @@ au dump de départ (`/home/sami-ubuntu/nuits/equations-2e-degre/dumps/depart`) ;
 | P1 | Correction d'`oracle.racines` ; `moteur/polynomes.py` (déplacements Q2) ; `moteur/second_degre.py`, calcul sans texte | faite (suite verte, dump identique) | voir `git log` |
 | P2a | Affichage commun : `tableau_essais`, encadré D29, options de `chaine.py` | faite (suite verte, dump identique) | voir `git log` |
 | P2b | Rédaction dans `second_degre` (§ 5), instantanés hors d'`instantanes/` | faite (suite verte, dump identique) | voir `git log` |
-| P3 | Saisie : E1, E2, `equations-2e-degre/equations.py` | à faire | — |
+| P3 | Saisie : E1, E2 (`second_degre.ramener`), `equations-2e-degre/equations.py` (`analyser`), `expr.a_des_decimaux` | faite (suite verte, dump identique) | voir `git log` |
 | P4a | Formes structurées, sur l'arbre | à faire | — |
 | P4b | Degrés ≠ 2 et reste du corpus | à faire | — |
 | P5 | L'outil (page, adaptateur, manifeste, registre sans filière, tests) | à faire | — |
@@ -66,7 +66,26 @@ Questions nouvelles de la nuit :
 17. **P2b, A et B** (question 13) : un seul cadre « ⟦A = 4z, B = 9⟧ », comme D29 l'écrit. **Identité** : la phrase d'Exp-log est
     prête, branchée en P4b (aucune identité ne peut se produire en P2b).
 
+18. **P3, ce que E2 développe** : nombre ou monôme × une parenthèse (« distribution »), deux parenthèses sans autre facteur (« double
+    distribution »), carré d'un binôme A ± B écrit avec A sans signe (« Id. rem. (A ± B)² avec A = …, B = … », **sans cadre** : A et B
+    se lisent, ils ne se trouvent pas, D29). Tout le reste (2(x + 1)(x + 3), k(x + 2)², (x + 1)³, x²/2, x·3) : « non_traite ». Une
+    réduction sans étiquette suit le développement quand des termes de même degré apparaissent (§ 7), aussi sans développement
+    (x² + x² = 8 ⇔ 2x² = 8).
+19. **P3, structures laissées à P4a** (`second_degre.forme_structuree`, E1.3) : produit ou puissance = 0 ; facteur non monôme commun
+    aux deux membres (aussi (x − 1)(x + 2) = x − 1) ; un carré de binôme et des constantes de signe opposé ou nulles, ou deux carrés
+    de signes opposés ((x + 1)² = (2x − 3)²). (x + 1)² = −16 se développe. P4a peut revoir la liste.
+20. **P3, phrase d'E1** « On ramène d'abord l'équation à la forme … = 0 : » : écrite aussi devant un simple développement dont le
+    second membre est déjà 0 (x² − (2x + 3) = 0), si une phrase de choix suit.
+21. **P3, saisie** : une puissance d'un nombre à exposant non entier (2^(1/2), 9^(1/2)) reçoit le message « racine », comme √4 ; la
+    lettre e est une inconnue comme une autre (e² = 4 se résout en e) ; chaque membre est borné (x⁸ = x⁹ − x⁹ + 1 : message des
+    bornes). Arête de plus que le plan, à déclarer en P5 : `equations -> polynomes` (`const`).
+
 ## À relire par l'enseignant
+
+- **P3, instantanés de la rédaction** : 26 entrées **nouvelles** dans `tests/python/donnees/equations-2e-degre/instantanes.json`
+  (énoncés à ramener ou à développer : 2.9 d, 2.9 f, 2.10 h, 2.10 j, 2.11 f, 2.11 h, 2.11 j, 2.12 g, (x + 1)(x + 3) = 15 et 17 formes
+  « E1 … », « E2 … ») ; **aucune** des 72 entrées de P2b modifiée. Texte rendu de 2.11 h complet (depuis « 4x² + 2x = 56 ») et
+  comparaison au § 7 dans `journal.md`, P3.
 
 - **P2b, instantanés de la rédaction** (nouveaux, aucun existant modifié) : `tests/python/donnees/equations-2e-degre/instantanes.json`
   (72 équations, variante « formule » comprise) ; texte rendu de 2.11 h et comparaison au § 7 dans `journal.md`, P2b.
@@ -91,7 +110,8 @@ Aucune pour l'instant (exceptions d'import, `architecture.md` § 5).
 
 Lue par `verifier`. Format, une ligne par test : `` - `<identifiant pytest complet>` : <avant> → <après> : <raison> ``.
 
-- `tests/python/test_exp_log.py::TestVouvoiement::test_aucun_texte_du_fichier_ne_tutoie` : 960 → 957 : P1, les docstrings de `_Hors`, `_racine_carree`, `_racine_entiere_exacte`, `_puissance_rationnelle_exacte` et `_const` partent avec leurs fonctions dans `moteur/polynomes.py` (déplacement Q2), dont les littéraux sont contrôlés par `test_vocabulaire.TestVouvoiement.test_litteraux_des_moteurs` (8812 → 9012).
+- `tests/python/test_exp_log.py::TestVouvoiement::test_aucun_texte_du_fichier_ne_tutoie` : 960 → 955 : P3, les deux littéraux (« __slots__ », « nom ») de `_a_des_decimaux` partent dans `moteur/expr.py` (`a_des_decimaux`, déplacement Q2, réexporté), contrôlés par `test_vocabulaire.TestVouvoiement.test_litteraux_des_moteurs` ; avant, P1 (960 → 957) : les docstrings de `_Hors`, `_racine_carree`, `_racine_entiere_exacte`, `_puissance_rationnelle_exacte` et `_const` partent avec leurs fonctions dans `moteur/polynomes.py` (déplacement Q2), dont les littéraux sont contrôlés par `test_vocabulaire.TestVouvoiement.test_litteraux_des_moteurs` (8812 → 9012).
+- `tests/python/test_redaction_second_degre.py::TestNonResolu::test_formes_pas_encore_traitees` : 21 → 11 : P3 (par rapport à P2b ; test absent de `tests/reference`), les 10 formes « P3 » d'`A_VENIR` sont maintenant résolues et contrôlées par `test_a_venir[P3-…]` (xfail retiré), par l'oracle et par les instantanés.
 
 ## Reprise après compactage
 

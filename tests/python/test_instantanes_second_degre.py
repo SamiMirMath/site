@@ -1,6 +1,6 @@
-"""Instantanés de la rédaction du 2e degré (chantier equations-2e-degre, dès P2b : decisions.md § 13.2 ; plan, P2b).
+"""Instantanés de la rédaction du 2e degré (chantier equations-2e-degre, dès P2b : decisions.md § 13.2 ; plan, P2b et P3).
 
-Pour chaque équation de `corpus_second_degre.P2B` : la résolution de `second_degre.resoudre_equation` (statut, étapes : phase,
+Pour chaque équation de `corpus_second_degre.RESOLUES` (P2B, et P3 : énoncés à ramener ou à développer) : la résolution de `second_degre.resoudre_equation` (statut, étapes : phase,
 méthode, cible ; S, ligne ≈, variantes) et ses blocs de moteur/sortie.py (`second_degre.blocs` : ce que la page affichera), plus la
 variante « formule » (E12) quand elle est proposée. Comparés à une référence enregistrée **hors d'`instantanes/`** jusqu'en P5 :
 tests/python/donnees/equations-2e-degre/instantanes.json (dump_sorties.py et les contrôles d'`instantanes/` ne la voient pas
@@ -22,7 +22,7 @@ import expr
 import second_degre as sd
 import sortie
 from aides_sortie import TUTOIEMENT
-from corpus_second_degre import P2B
+from corpus_second_degre import RESOLUES
 from test_instantanes import normaliser
 from test_vocabulaire import INTERDITS, chaines
 
@@ -58,7 +58,7 @@ def instantane(saisie):
 
 
 def calculer():
-    return {nom: instantane(saisie) for nom, saisie in P2B.items()}
+    return {nom: instantane(saisie) for nom, saisie in RESOLUES.items()}
 
 
 def refuse(constante):

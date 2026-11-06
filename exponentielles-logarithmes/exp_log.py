@@ -27,6 +27,8 @@ propriétés génériques (`PROP_AUTRE_COTE`, `PROP_PRODUIT_NUL`, `PROP_MISE_EN_
 
 Les coefficients exacts d'un polynôme écrit avec l'arbre (`_Hors`, `_const`, `_pnet`, `_padd` et les racines exactes d'un rationnel)
 sont la brique commune moteur/polynomes.py (equations-2e-degre, P1), réexportée ici sous les mêmes noms privés.
+`_a_des_decimaux` (un nombre écrit en décimal dans l'arbre) est `expr.a_des_decimaux` (equations-2e-degre, P3), réexporté sous le
+même nom privé.
 
 Interface : `lire_membres(texte)` (syntaxe seule, sert à l'aperçu), `analyser_saisie(texte)` (équation ou calcul, une seule inconnue),
 `apercu_json(texte)`. Les erreurs sont des `ErreurSaisie` au message français.
@@ -45,7 +47,8 @@ from noyau import ErreurSaisie, json_strict
 from nombres import (MOTIF_ESPACE_DANS_UN_NOMBRE, MOTIF_SAISIE, formater_decimal, formater_entier, nettoyer_saisie)
 import expr as _expr
 from expr import (Noeud, Nb, Var, Pi, Neg, Op, Pow, Fn, Defini, variables, tex, tex_saisie, nb_tex, comme_somme, entre_parentheses,
-                  nom_tex, DEBUT_COLLABLE, Tok, Lexique, Parseur, MINUSCULES, NOM_INDEXE, SYMBOLES, OPERATEURS, INEGALITES, lire_nombre, lire_pourcentage)
+                  nom_tex, DEBUT_COLLABLE, Tok, Lexique, Parseur, MINUSCULES, NOM_INDEXE, SYMBOLES, OPERATEURS, INEGALITES, lire_nombre, lire_pourcentage,
+                  a_des_decimaux as _a_des_decimaux)
 from chaine import (Eq, Rel, Texte, Ou, Element, Justification, Chaine, Message, tex_element, LIENS_TEX, tex_chaine,
                     rangees_chaine, PROP_AUTRE_COTE, PROP_PRODUIT_NUL, PROP_MISE_EN_EVIDENCE)
 from polynomes import (Hors as _Hors, racine_carree as _racine_carree, racine_entiere_exacte as _racine_entiere_exacte,
@@ -685,14 +688,6 @@ def _facteurs(n, x):
 
 
 _DECIMAUX = False        # vrai pendant la résolution d'un énoncé qui contient un décimal (voir _avec_decimaux)
-
-
-def _a_des_decimaux(n):
-    """Vrai si l'arbre contient un nombre écrit en décimal (0,7 ; 1,045)."""
-    if isinstance(n, Nb):
-        return n.dec is not None
-    enfants = [getattr(n, nom, None) for nom in getattr(n, "__slots__", ()) if nom != "nom"]
-    return any(_a_des_decimaux(e) for e in enfants if isinstance(e, Noeud))
 
 
 def _avec_decimaux(methode):

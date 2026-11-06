@@ -29,7 +29,7 @@ from types import MappingProxyType
 from noyau import ErreurSaisie
 from nombres import MOTIF_ESPACE_DANS_UN_NOMBRE, MOTIF_SAISIE, formater_decimal, formater_entier, nettoyer_saisie
 
-__all__ = ["Noeud", "Nb", "Var", "Pi", "Neg", "Op", "Pow", "Fn", "Defini", "variables",
+__all__ = ["Noeud", "Nb", "Var", "Pi", "Neg", "Op", "Pow", "Fn", "Defini", "variables", "a_des_decimaux",
            "tex", "tex_saisie", "nb_tex", "comme_somme", "entre_parentheses", "nom_tex", "DEBUT_COLLABLE",
            "Tok", "Lexique", "LEXIQUE_COMMUN", "lire_fonction", "fonction_inconnue", "lire_nom", "tokeniser", "lire_nombre",
            "lire_pourcentage", "Parseur", "lire_membres", "MINUSCULES", "NOM_INDEXE", "SYMBOLES", "OPERATEURS", "INEGALITES",
@@ -147,6 +147,14 @@ def variables(n):
     if isinstance(n, Noeud):
         return set().union(*(variables(e) for e in (getattr(n, s) for s in n.__slots__) if isinstance(e, Noeud)))
     raise TypeError(n)
+
+
+def a_des_decimaux(n):
+    """Vrai si l'arbre contient un nombre écrit en décimal (0,7 ; 1,045)."""
+    if isinstance(n, Nb):
+        return n.dec is not None
+    enfants = [getattr(n, nom, None) for nom in getattr(n, "__slots__", ()) if nom != "nom"]
+    return any(a_des_decimaux(e) for e in enfants if isinstance(e, Noeud))
 
 
 # =====================================================================

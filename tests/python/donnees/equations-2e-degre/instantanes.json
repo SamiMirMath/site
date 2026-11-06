@@ -1,4 +1,192 @@
 {
+ "(x + 1)(x + 3) = 15": {
+  "cours": {
+   "S": "S = \\{-6\\,;\\,2\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "texte": "On ramène d'abord l'équation à la forme \\(\\ldots = 0\\) :"
+      },
+      {
+       "expr": "x^{2} + 3x + x + 3 = 15",
+       "gauche": "(x + 1)(x + 3) = 15",
+       "lien": "\\iff",
+       "prop": "double distribution"
+      },
+      {
+       "expr": "x^{2} + 4x + 3 = 15",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "x^{2} + 4x - 12 = 0",
+       "lien": "\\iff"
+      },
+      {
+       "texte": "Pas de ME, pas d'Id. rem. ; le trinôme est unitaire (\\(a = 1\\)) : S-P."
+      },
+      {
+       "texte": "On cherche deux nombres dont le produit vaut \\(-12\\) et la somme vaut \\(4\\) :"
+      },
+      {
+       "bloc": {
+        "groupes": [
+         {
+          "colonnes": 2,
+          "titre": "produit \\(= -12\\)"
+         },
+         {
+          "colonnes": 1,
+          "titre": "somme"
+         }
+        ],
+        "lignes": [
+         {
+          "cases": [
+           "-1",
+           "12",
+           "11"
+          ]
+         },
+         {
+          "cases": [
+           "-2",
+           "6",
+           "4"
+          ],
+          "ok": true
+         }
+        ],
+        "type": "tableau_essais"
+       }
+      },
+      {
+       "expr": "(x - 2)(x + 6) = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "{x - 2 = 0} \\text{ ou } \\allowbreak {x + 6 = 0}",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "{x = 2} \\text{ ou } \\allowbreak {x = -6}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-6\\,;\\,2\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "DEVELOPPER",
+     "(x + 1)(x + 3) = 15"
+    ],
+    [
+     "ramener",
+     "RAMENER",
+     "x^{2} + 4x + 3 = 15"
+    ],
+    [
+     "factoriser",
+     "SP",
+     "x^{2} + 4x - 12"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "(x - 2)(x + 6)"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": [
+    "formule"
+   ]
+  },
+  "formule": {
+   "S": "S = \\{-6\\,;\\,2\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "x^{2} + 3x + x + 3 = 15",
+       "gauche": "(x + 1)(x + 3) = 15",
+       "lien": "\\iff",
+       "prop": "double distribution"
+      },
+      {
+       "expr": "x^{2} + 4x + 3 = 15",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "x^{2} + 4x - 12 = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "\\Delta = b^{2} - 4ac = 4^{2} - 4 \\cdot 1 \\cdot (-12) = 16 + 48 = \\fbox{$64$}",
+       "lien": ""
+      },
+      {
+       "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 8",
+       "lien": ""
+      },
+      {
+       "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-4 - 8}{2} = -6",
+       "lien": ""
+      },
+      {
+       "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-4 + 8}{2} = 2",
+       "lien": ""
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-6\\,;\\,2\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "DEVELOPPER",
+     "(x + 1)(x + 3) = 15"
+    ],
+    [
+     "ramener",
+     "RAMENER",
+     "x^{2} + 4x + 3 = 15"
+    ],
+    [
+     "factoriser",
+     "FORMULE",
+     "x^{2} + 4x - 12"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "x^{2} + 4x - 12"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "x^{2} + 4x - 12"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "(x+1)(x+3)=15"
+ },
  "(x + 1)(x + 3) = 15 (dév.)": {
   "cours": {
    "S": "S = \\{-6\\,;\\,2\\}",
@@ -1147,6 +1335,166 @@
   },
   "saisie": "x^2-11x+10=0"
  },
+ "2.10 h": {
+  "cours": {
+   "S": "S = \\{-9\\,;\\,2\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "texte": "On ramène d'abord l'équation à la forme \\(\\ldots = 0\\) :"
+      },
+      {
+       "expr": "x^{2} + 7x - 18 = 0",
+       "gauche": "x^{2} + 7x = 18",
+       "lien": "\\iff"
+      },
+      {
+       "texte": "Pas de ME, pas d'Id. rem. ; le trinôme est unitaire (\\(a = 1\\)) : S-P."
+      },
+      {
+       "texte": "On cherche deux nombres dont le produit vaut \\(-18\\) et la somme vaut \\(7\\) :"
+      },
+      {
+       "bloc": {
+        "groupes": [
+         {
+          "colonnes": 2,
+          "titre": "produit \\(= -18\\)"
+         },
+         {
+          "colonnes": 1,
+          "titre": "somme"
+         }
+        ],
+        "lignes": [
+         {
+          "cases": [
+           "-1",
+           "18",
+           "17"
+          ]
+         },
+         {
+          "cases": [
+           "-2",
+           "9",
+           "7"
+          ],
+          "ok": true
+         }
+        ],
+        "type": "tableau_essais"
+       }
+      },
+      {
+       "expr": "(x - 2)(x + 9) = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "{x - 2 = 0} \\text{ ou } \\allowbreak {x + 9 = 0}",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "{x = 2} \\text{ ou } \\allowbreak {x = -9}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-9\\,;\\,2\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "RAMENER",
+     "x^{2} + 7x = 18"
+    ],
+    [
+     "factoriser",
+     "SP",
+     "x^{2} + 7x - 18"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "(x - 2)(x + 9)"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": [
+    "formule"
+   ]
+  },
+  "formule": {
+   "S": "S = \\{-9\\,;\\,2\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "x^{2} + 7x - 18 = 0",
+       "gauche": "x^{2} + 7x = 18",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "\\Delta = b^{2} - 4ac = 7^{2} - 4 \\cdot 1 \\cdot (-18) = 49 + 72 = \\fbox{$121$}",
+       "lien": ""
+      },
+      {
+       "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 11",
+       "lien": ""
+      },
+      {
+       "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-7 - 11}{2} = -9",
+       "lien": ""
+      },
+      {
+       "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-7 + 11}{2} = 2",
+       "lien": ""
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-9\\,;\\,2\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "RAMENER",
+     "x^{2} + 7x = 18"
+    ],
+    [
+     "factoriser",
+     "FORMULE",
+     "x^{2} + 7x - 18"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "x^{2} + 7x - 18"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "x^{2} + 7x - 18"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "x^2+7x=18"
+ },
  "2.10 h (dév.)": {
   "cours": {
    "S": "S = \\{-9\\,;\\,2\\}",
@@ -1422,6 +1770,173 @@
    "variantes": []
   },
   "saisie": "x^2+18x+45=0"
+ },
+ "2.10 j": {
+  "cours": {
+   "S": "S = \\{-4\\,;\\,8\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "texte": "On ramène d'abord l'équation à la forme \\(\\ldots = 0\\) :"
+      },
+      {
+       "expr": "x^{2} - 4x - 32 = 0",
+       "gauche": "4x + 32 = x^{2}",
+       "lien": "\\iff"
+      },
+      {
+       "texte": "Pas de ME, pas d'Id. rem. ; le trinôme est unitaire (\\(a = 1\\)) : S-P."
+      },
+      {
+       "texte": "On cherche deux nombres dont le produit vaut \\(-32\\) et la somme vaut \\(-4\\) :"
+      },
+      {
+       "bloc": {
+        "groupes": [
+         {
+          "colonnes": 2,
+          "titre": "produit \\(= -32\\)"
+         },
+         {
+          "colonnes": 1,
+          "titre": "somme"
+         }
+        ],
+        "lignes": [
+         {
+          "cases": [
+           "1",
+           "-32",
+           "-31"
+          ]
+         },
+         {
+          "cases": [
+           "2",
+           "-16",
+           "-14"
+          ]
+         },
+         {
+          "cases": [
+           "4",
+           "-8",
+           "-4"
+          ],
+          "ok": true
+         }
+        ],
+        "type": "tableau_essais"
+       }
+      },
+      {
+       "expr": "(x + 4)(x - 8) = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "{x + 4 = 0} \\text{ ou } \\allowbreak {x - 8 = 0}",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "{x = -4} \\text{ ou } \\allowbreak {x = 8}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-4\\,;\\,8\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "RAMENER",
+     "4x + 32 = x^{2}"
+    ],
+    [
+     "factoriser",
+     "SP",
+     "x^{2} - 4x - 32"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "(x + 4)(x - 8)"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": [
+    "formule"
+   ]
+  },
+  "formule": {
+   "S": "S = \\{-4\\,;\\,8\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "x^{2} - 4x - 32 = 0",
+       "gauche": "4x + 32 = x^{2}",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "\\Delta = b^{2} - 4ac = (-4)^{2} - 4 \\cdot 1 \\cdot (-32) = 16 + 128 = \\fbox{$144$}",
+       "lien": ""
+      },
+      {
+       "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 12",
+       "lien": ""
+      },
+      {
+       "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{4 - 12}{2} = -4",
+       "lien": ""
+      },
+      {
+       "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{4 + 12}{2} = 8",
+       "lien": ""
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-4\\,;\\,8\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "RAMENER",
+     "4x + 32 = x^{2}"
+    ],
+    [
+     "factoriser",
+     "FORMULE",
+     "x^{2} - 4x - 32"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "x^{2} - 4x - 32"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "x^{2} - 4x - 32"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "4x+32=x^2"
  },
  "2.10 j (dév.)": {
   "cours": {
@@ -2113,6 +2628,137 @@
   },
   "saisie": "3x^2+2x-1=0"
  },
+ "2.11 f": {
+  "cours": {
+   "S": "S = \\{-2\\,;\\,\\frac{1}{4}\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "texte": "On ramène d'abord l'équation à la forme \\(\\ldots = 0\\) :"
+      },
+      {
+       "expr": "4t^{2} + 7t - 2 = 0",
+       "gauche": "4t^{2} + 7t = 2",
+       "lien": "\\iff"
+      },
+      {
+       "texte": "Pas de ME, pas d'Id. rem. ; \\(a = 4 \\neq 1\\) : tâtonnement."
+      },
+      {
+       "texte": "\\(\\fbox{$t = -2$}\\) est solution, car \\(4 \\cdot (-2)^{2} + 7 \\cdot (-2) - 2 = 16 - 14 - 2 = 0\\)."
+      },
+      {
+       "texte": "Donc \\(4t^{2} + 7t - 2 = (t + 2)(4t + \\triangle)\\) avec \\(2 \\cdot \\triangle = -2\\), donc \\(\\fbox{$\\triangle = -1$}\\)."
+      },
+      {
+       "expr": "(t + 2)(4t - 1) = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "{t + 2 = 0} \\text{ ou } \\allowbreak {4t - 1 = 0}",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "{t = -2} \\text{ ou } \\allowbreak {t = \\frac{1}{4}}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-2\\,;\\,\\frac{1}{4}\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "RAMENER",
+     "4t^{2} + 7t = 2"
+    ],
+    [
+     "factoriser",
+     "TATONNEMENT",
+     "4t^{2} + 7t - 2"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "(t + 2)(4t - 1)"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": [
+    "formule"
+   ]
+  },
+  "formule": {
+   "S": "S = \\{-2\\,;\\,\\frac{1}{4}\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "4t^{2} + 7t - 2 = 0",
+       "gauche": "4t^{2} + 7t = 2",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "\\Delta = b^{2} - 4ac = 7^{2} - 4 \\cdot 4 \\cdot (-2) = 49 + 32 = \\fbox{$81$}",
+       "lien": ""
+      },
+      {
+       "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 9",
+       "lien": ""
+      },
+      {
+       "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-7 - 9}{8} = -2",
+       "lien": ""
+      },
+      {
+       "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-7 + 9}{8} = \\frac{1}{4}",
+       "lien": ""
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-2\\,;\\,\\frac{1}{4}\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "RAMENER",
+     "4t^{2} + 7t = 2"
+    ],
+    [
+     "factoriser",
+     "FORMULE",
+     "4t^{2} + 7t - 2"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "4t^{2} + 7t - 2"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "4t^{2} + 7t - 2"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "4t^2+7t=2"
+ },
  "2.11 f (dév.)": {
   "cours": {
    "S": "S = \\{-2\\,;\\,\\frac{1}{4}\\}",
@@ -2330,6 +2976,144 @@
    "variantes": []
   },
   "saisie": "17x^2+288x-17=0"
+ },
+ "2.11 h": {
+  "cours": {
+   "S": "S = \\{-4\\,;\\,\\frac{7}{2}\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "4x^{2} + 2x - 56 = 0",
+       "gauche": "4x^{2} + 2x = 56",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "2(2x^{2} + x - 28) = 0",
+       "lien": "\\iff",
+       "prop": "ME"
+      },
+      {
+       "texte": "Le trinôme \\(2x^{2} + x - 28\\) n'est pas unitaire : tâtonnement."
+      },
+      {
+       "texte": "\\(\\fbox{$x = -4$}\\) est solution de \\(2x^{2} + x - 28 = 0\\), car \\(2 \\cdot (-4)^{2} - 4 - 28 = 32 - 4 - 28 = 0\\)."
+      },
+      {
+       "texte": "Donc \\(2x^{2} + x - 28 = (x + 4)(2x + \\triangle)\\) avec \\(4 \\cdot \\triangle = -28\\), donc \\(\\fbox{$\\triangle = -7$}\\)."
+      },
+      {
+       "expr": "2(x + 4)(2x - 7) = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "{\\underbrace{2 = 0}_{\\text{impossible}}} \\text{ ou } \\allowbreak {x + 4 = 0} \\text{ ou } \\allowbreak {2x - 7 = 0}",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "{x = -4} \\text{ ou } \\allowbreak {x = \\frac{7}{2}}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-4\\,;\\,\\frac{7}{2}\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "RAMENER",
+     "4x^{2} + 2x = 56"
+    ],
+    [
+     "factoriser",
+     "ME",
+     "4x^{2} + 2x - 56"
+    ],
+    [
+     "factoriser",
+     "TATONNEMENT",
+     "2x^{2} + x - 28"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "2(x + 4)(2x - 7)"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": [
+    "formule"
+   ]
+  },
+  "formule": {
+   "S": "S = \\{-4\\,;\\,\\frac{7}{2}\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "4x^{2} + 2x - 56 = 0",
+       "gauche": "4x^{2} + 2x = 56",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "\\Delta = b^{2} - 4ac = 2^{2} - 4 \\cdot 4 \\cdot (-56) = 4 + 896 = \\fbox{$900$}",
+       "lien": ""
+      },
+      {
+       "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 30",
+       "lien": ""
+      },
+      {
+       "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-2 - 30}{8} = -4",
+       "lien": ""
+      },
+      {
+       "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-2 + 30}{8} = \\frac{7}{2}",
+       "lien": ""
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-4\\,;\\,\\frac{7}{2}\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "RAMENER",
+     "4x^{2} + 2x = 56"
+    ],
+    [
+     "factoriser",
+     "FORMULE",
+     "4x^{2} + 2x - 56"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "4x^{2} + 2x - 56"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "4x^{2} + 2x - 56"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "4x^2+2x=56"
  },
  "2.11 h (dév.)": {
   "cours": {
@@ -2558,6 +3342,144 @@
    "variantes": []
   },
   "saisie": "3x^2-8x-35=0"
+ },
+ "2.11 j": {
+  "cours": {
+   "S": "S = \\{-\\frac{1}{4}\\,;\\,4\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "12u^{2} - 45u - 12 = 0",
+       "gauche": "45u + 12 = 12u^{2}",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "3(4u^{2} - 15u - 4) = 0",
+       "lien": "\\iff",
+       "prop": "ME"
+      },
+      {
+       "texte": "Le trinôme \\(4u^{2} - 15u - 4\\) n'est pas unitaire : tâtonnement."
+      },
+      {
+       "texte": "\\(\\fbox{$u = 4$}\\) est solution de \\(4u^{2} - 15u - 4 = 0\\), car \\(4 \\cdot 4^{2} - 15 \\cdot 4 - 4 = 64 - 60 - 4 = 0\\)."
+      },
+      {
+       "texte": "Donc \\(4u^{2} - 15u - 4 = (u - 4)(4u + \\triangle)\\) avec \\(-4 \\cdot \\triangle = -4\\), donc \\(\\fbox{$\\triangle = 1$}\\)."
+      },
+      {
+       "expr": "3(u - 4)(4u + 1) = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "{\\underbrace{3 = 0}_{\\text{impossible}}} \\text{ ou } \\allowbreak {u - 4 = 0} \\text{ ou } \\allowbreak {4u + 1 = 0}",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "{u = 4} \\text{ ou } \\allowbreak {u = -\\frac{1}{4}}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-\\frac{1}{4}\\,;\\,4\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "RAMENER",
+     "45u + 12 = 12u^{2}"
+    ],
+    [
+     "factoriser",
+     "ME",
+     "12u^{2} - 45u - 12"
+    ],
+    [
+     "factoriser",
+     "TATONNEMENT",
+     "4u^{2} - 15u - 4"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "3(u - 4)(4u + 1)"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": [
+    "formule"
+   ]
+  },
+  "formule": {
+   "S": "S = \\{-\\frac{1}{4}\\,;\\,4\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "12u^{2} - 45u - 12 = 0",
+       "gauche": "45u + 12 = 12u^{2}",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "\\Delta = b^{2} - 4ac = (-45)^{2} - 4 \\cdot 12 \\cdot (-12) = 2\\text{’}025 + 576 = \\fbox{$2\\text{’}601$}",
+       "lien": ""
+      },
+      {
+       "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 51",
+       "lien": ""
+      },
+      {
+       "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{45 - 51}{24} = -\\frac{1}{4}",
+       "lien": ""
+      },
+      {
+       "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{45 + 51}{24} = 4",
+       "lien": ""
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-\\frac{1}{4}\\,;\\,4\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "RAMENER",
+     "45u + 12 = 12u^{2}"
+    ],
+    [
+     "factoriser",
+     "FORMULE",
+     "12u^{2} - 45u - 12"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "12u^{2} - 45u - 12"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "12u^{2} - 45u - 12"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "45u+12=12u^2"
  },
  "2.11 j (dév.)": {
   "cours": {
@@ -3269,6 +4191,126 @@
   },
   "saisie": "t^2+8t-48=0"
  },
+ "2.12 g": {
+  "cours": {
+   "S": "S = \\{-4\\,;\\,4\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "x^{2} - 16 = 0",
+       "gauche": "x^{2} = 16",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "(x + 4)(x - 4) = 0",
+       "lien": "\\iff",
+       "prop": "Id. rem. \\(A^{2} - B^{2}\\) avec \\(\\fbox{$A = x,\\ B = 4$}\\)"
+      },
+      {
+       "expr": "{x + 4 = 0} \\text{ ou } \\allowbreak {x - 4 = 0}",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "{x = -4} \\text{ ou } \\allowbreak {x = 4}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-4\\,;\\,4\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "RAMENER",
+     "x^{2} = 16"
+    ],
+    [
+     "factoriser",
+     "IDREM_DIFF",
+     "x^{2} - 16"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "(x + 4)(x - 4)"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": [
+    "formule"
+   ]
+  },
+  "formule": {
+   "S": "S = \\{-4\\,;\\,4\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "x^{2} - 16 = 0",
+       "gauche": "x^{2} = 16",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "\\Delta = b^{2} - 4ac = 0^{2} - 4 \\cdot 1 \\cdot (-16) = \\fbox{$64$}",
+       "lien": ""
+      },
+      {
+       "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 8",
+       "lien": ""
+      },
+      {
+       "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-8}{2} = -4",
+       "lien": ""
+      },
+      {
+       "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{8}{2} = 4",
+       "lien": ""
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-4\\,;\\,4\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "RAMENER",
+     "x^{2} = 16"
+    ],
+    [
+     "factoriser",
+     "FORMULE",
+     "x^{2} - 16"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "x^{2} - 16"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "x^{2} - 16"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "x^2=16"
+ },
  "2.12 g (dév.)": {
   "cours": {
    "S": "S = \\{-4\\,;\\,4\\}",
@@ -3817,6 +4859,126 @@
   },
   "saisie": "48z^2-216z+243=0"
  },
+ "2.9 d": {
+  "cours": {
+   "S": "S = \\{-\\frac{3}{2}\\,;\\,\\frac{3}{2}\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "4x^{2} - 9 = 0",
+       "gauche": "4x^{2} = 9",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "(2x + 3)(2x - 3) = 0",
+       "lien": "\\iff",
+       "prop": "Id. rem. \\(A^{2} - B^{2}\\) avec \\(\\fbox{$A = 2x,\\ B = 3$}\\)"
+      },
+      {
+       "expr": "{2x + 3 = 0} \\text{ ou } \\allowbreak {2x - 3 = 0}",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "{x = -\\frac{3}{2}} \\text{ ou } \\allowbreak {x = \\frac{3}{2}}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-\\frac{3}{2}\\,;\\,\\frac{3}{2}\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "RAMENER",
+     "4x^{2} = 9"
+    ],
+    [
+     "factoriser",
+     "IDREM_DIFF",
+     "4x^{2} - 9"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "(2x + 3)(2x - 3)"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": [
+    "formule"
+   ]
+  },
+  "formule": {
+   "S": "S = \\{-\\frac{3}{2}\\,;\\,\\frac{3}{2}\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "4x^{2} - 9 = 0",
+       "gauche": "4x^{2} = 9",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "\\Delta = b^{2} - 4ac = 0^{2} - 4 \\cdot 4 \\cdot (-9) = \\fbox{$144$}",
+       "lien": ""
+      },
+      {
+       "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 12",
+       "lien": ""
+      },
+      {
+       "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-12}{8} = -\\frac{3}{2}",
+       "lien": ""
+      },
+      {
+       "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{12}{8} = \\frac{3}{2}",
+       "lien": ""
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-\\frac{3}{2}\\,;\\,\\frac{3}{2}\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "RAMENER",
+     "4x^{2} = 9"
+    ],
+    [
+     "factoriser",
+     "FORMULE",
+     "4x^{2} - 9"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "4x^{2} - 9"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "4x^{2} - 9"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "4x^2=9"
+ },
  "2.9 d (dév.)": {
   "cours": {
    "S": "S = \\{-\\frac{3}{2}\\,;\\,\\frac{3}{2}\\}",
@@ -4029,6 +5191,137 @@
    "variantes": []
   },
   "saisie": "8x^2-112x+392=0"
+ },
+ "2.9 f": {
+  "cours": {
+   "S": "S = \\{-\\frac{5}{7}\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "196z^{2} + 280z + 100 = 0",
+       "gauche": "196z^{2} + 280z = -100",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "4(49z^{2} + 70z + 25) = 0",
+       "lien": "\\iff",
+       "prop": "ME"
+      },
+      {
+       "texte": "Id. rem. \\(A^{2} + 2AB + B^{2}\\) avec \\(\\fbox{$A = 7z,\\ B = 5$}\\). Vérification : \\(2AB = 2 \\cdot 7z \\cdot 5 = 70z\\) \\(\\checkmark\\)"
+      },
+      {
+       "expr": "4(7z + 5)^{2} = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "4(7z + 5)(7z + 5) = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "{\\underbrace{4 = 0}_{\\text{impossible}}} \\text{ ou } \\allowbreak {7z + 5 = 0}",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "z = -\\frac{5}{7}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-\\frac{5}{7}\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "RAMENER",
+     "196z^{2} + 280z = -100"
+    ],
+    [
+     "factoriser",
+     "ME",
+     "196z^{2} + 280z + 100"
+    ],
+    [
+     "factoriser",
+     "IDREM_PLUS",
+     "49z^{2} + 70z + 25"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "4(7z + 5)(7z + 5)"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": [
+    "formule"
+   ]
+  },
+  "formule": {
+   "S": "S = \\{-\\frac{5}{7}\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "196z^{2} + 280z + 100 = 0",
+       "gauche": "196z^{2} + 280z = -100",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "\\Delta = b^{2} - 4ac = 280^{2} - 4 \\cdot 196 \\cdot 100 = 78\\text{’}400 - 78\\text{’}400 = \\fbox{$0$}",
+       "lien": ""
+      },
+      {
+       "texte": "\\(\\Delta = 0\\) : une seule solution."
+      },
+      {
+       "expr": "z = \\frac{-b}{2a} = \\frac{-280}{392} = -\\frac{5}{7}",
+       "lien": ""
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-\\frac{5}{7}\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "RAMENER",
+     "196z^{2} + 280z = -100"
+    ],
+    [
+     "factoriser",
+     "FORMULE",
+     "196z^{2} + 280z + 100"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "196z^{2} + 280z + 100"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "196z^{2} + 280z + 100"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "196z^2+280z=-100"
  },
  "2.9 f (dév.)": {
   "cours": {
@@ -4963,6 +6256,2199 @@
    "variantes": []
   },
   "saisie": "3x^2+4=0"
+ },
+ "E1 côté droit, formule": {
+  "cours": {
+   "S": "S = \\{-2 - \\sqrt{3}\\,;\\,-2 + \\sqrt{3}\\}",
+   "approx": "soit \\(x_{1} \\approx -3{,}732\\) et \\(x_{2} \\approx -0{,}268\\)",
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "texte": "On ramène d'abord l'équation à la forme \\(\\ldots = 0\\) :"
+      },
+      {
+       "expr": "x^{2} + 4x + 1 = 0",
+       "gauche": "x^{2} - 4x = 2x^{2} + 1",
+       "lien": "\\iff"
+      },
+      {
+       "texte": "Pas de ME, pas d'Id. rem. ; le trinôme est unitaire (\\(a = 1\\)) : S-P."
+      },
+      {
+       "texte": "On cherche deux nombres dont le produit vaut \\(1\\) et la somme vaut \\(4\\) :"
+      },
+      {
+       "bloc": {
+        "groupes": [
+         {
+          "colonnes": 2,
+          "titre": "produit \\(= 1\\)"
+         },
+         {
+          "colonnes": 1,
+          "titre": "somme"
+         }
+        ],
+        "lignes": [
+         {
+          "cases": [
+           "1",
+           "1",
+           "2"
+          ]
+         }
+        ],
+        "type": "tableau_essais"
+       }
+      },
+      {
+       "texte": "Aucun couple ne convient : on utilise la formule."
+      },
+      {
+       "expr": "\\Delta = b^{2} - 4ac = 4^{2} - 4 \\cdot 1 \\cdot 1 = 16 - 4 = \\fbox{$12$}",
+       "lien": ""
+      },
+      {
+       "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = \\sqrt{12} = 2\\sqrt{3}",
+       "lien": ""
+      },
+      {
+       "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-4 - 2\\sqrt{3}}{2} = -2 - \\sqrt{3}",
+       "lien": ""
+      },
+      {
+       "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-4 + 2\\sqrt{3}}{2} = -2 + \\sqrt{3}",
+       "lien": ""
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-2 - \\sqrt{3}\\,;\\,-2 + \\sqrt{3}\\}",
+     "type": "resultat_lim"
+    },
+    {
+     "html": "soit \\(x_{1} \\approx -3{,}732\\) et \\(x_{2} \\approx -0{,}268\\)",
+     "type": "texte"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "RAMENER",
+     "x^{2} - 4x = 2x^{2} + 1"
+    ],
+    [
+     "factoriser",
+     "SP",
+     "x^{2} + 4x + 1"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "x^{2} + 4x + 1"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "x^{2} + 4x + 1"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "x^2-4x=2x^2+1"
+ },
+ "E1 décimaux": {
+  "cours": {
+   "S": "S = \\{-2\\,;\\,2\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "texte": "On ramène d'abord l'équation à la forme \\(\\ldots = 0\\) :"
+      },
+      {
+       "expr": "0{,}5x^{2} - 2 = 0",
+       "gauche": "0{,}5x^{2} = 2",
+       "lien": "\\iff"
+      },
+      {
+       "texte": "Pas de ME, pas d'Id. rem. ; les coefficients ne sont pas entiers : on utilise la formule."
+      },
+      {
+       "expr": "\\Delta = b^{2} - 4ac = 0^{2} - 4 \\cdot 0{,}5 \\cdot (-2) = \\fbox{$4$}",
+       "lien": ""
+      },
+      {
+       "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 2",
+       "lien": ""
+      },
+      {
+       "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-2}{1} = -2",
+       "lien": ""
+      },
+      {
+       "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{2}{1} = 2",
+       "lien": ""
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-2\\,;\\,2\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "RAMENER",
+     "0{,}5x^{2} = 2"
+    ],
+    [
+     "factoriser",
+     "FORMULE",
+     "0{,}5x^{2} - 2"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "0{,}5x^{2} - 2"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "0{,}5x^{2} - 2"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "0,5x^2=2"
+ },
+ "E1 désordre, a < 0 gardé": {
+  "cours": {
+   "S": "S = \\{1\\,;\\,9\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "-y^{2} + 10y - 9 = 0",
+       "gauche": "10y - y^{2} - 9 = 0",
+       "lien": "\\iff"
+      },
+      {
+       "texte": "Le trinôme n'est pas unitaire (\\(a = -1\\)) : on met d'abord \\(-1\\) en évidence."
+      },
+      {
+       "expr": "-(y^{2} - 10y + 9) = 0",
+       "lien": "\\iff",
+       "prop": "ME"
+      },
+      {
+       "texte": "Le trinôme \\(y^{2} - 10y + 9\\) est unitaire : S-P."
+      },
+      {
+       "texte": "On cherche deux nombres dont le produit vaut \\(9\\) et la somme vaut \\(-10\\) :"
+      },
+      {
+       "bloc": {
+        "groupes": [
+         {
+          "colonnes": 2,
+          "titre": "produit \\(= 9\\)"
+         },
+         {
+          "colonnes": 1,
+          "titre": "somme"
+         }
+        ],
+        "lignes": [
+         {
+          "cases": [
+           "-1",
+           "-9",
+           "-10"
+          ],
+          "ok": true
+         }
+        ],
+        "type": "tableau_essais"
+       }
+      },
+      {
+       "expr": "-(y - 1)(y - 9) = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "{\\underbrace{-1 = 0}_{\\text{impossible}}} \\text{ ou } \\allowbreak {y - 1 = 0} \\text{ ou } \\allowbreak {y - 9 = 0}",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "{y = 1} \\text{ ou } \\allowbreak {y = 9}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{1\\,;\\,9\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "factoriser",
+     "ME",
+     "-y^{2} + 10y - 9"
+    ],
+    [
+     "factoriser",
+     "SP",
+     "y^{2} - 10y + 9"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "-(y - 1)(y - 9)"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": [
+    "formule"
+   ]
+  },
+  "formule": {
+   "S": "S = \\{1\\,;\\,9\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "-y^{2} + 10y - 9 = 0",
+       "gauche": "10y - y^{2} - 9 = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "\\Delta = b^{2} - 4ac = 10^{2} - 4 \\cdot (-1) \\cdot (-9) = 100 - 36 = \\fbox{$64$}",
+       "lien": ""
+      },
+      {
+       "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 8",
+       "lien": ""
+      },
+      {
+       "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-10 - 8}{-2} = 9",
+       "lien": ""
+      },
+      {
+       "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-10 + 8}{-2} = 1",
+       "lien": ""
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{1\\,;\\,9\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "factoriser",
+     "FORMULE",
+     "-y^{2} + 10y - 9"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "-y^{2} + 10y - 9"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "-y^{2} + 10y - 9"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "10y-y^2-9=0"
+ },
+ "E1 fractions, formule": {
+  "cours": {
+   "S": "S = \\{\\frac{4 - \\sqrt{22}}{3}\\,;\\,\\frac{4 + \\sqrt{22}}{3}\\}",
+   "approx": "soit \\(x_{1} \\approx -0{,}230\\) et \\(x_{2} \\approx 2{,}897\\)",
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "texte": "On ramène d'abord l'équation à la forme \\(\\ldots = 0\\) :"
+      },
+      {
+       "expr": "\\frac{3}{2}x^{2} - 4x - 1 = 0",
+       "gauche": "\\frac{3}{2} \\cdot x^{2} = 4x + 1",
+       "lien": "\\iff"
+      },
+      {
+       "texte": "Pas de ME, pas d'Id. rem. ; les coefficients ne sont pas entiers : on utilise la formule."
+      },
+      {
+       "expr": "\\Delta = b^{2} - 4ac = (-4)^{2} - 4 \\cdot \\frac{3}{2} \\cdot (-1) = 16 + 6 = \\fbox{$22$}",
+       "lien": ""
+      },
+      {
+       "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = \\sqrt{22}",
+       "lien": ""
+      },
+      {
+       "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{4 - \\sqrt{22}}{3}",
+       "lien": ""
+      },
+      {
+       "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{4 + \\sqrt{22}}{3}",
+       "lien": ""
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{\\frac{4 - \\sqrt{22}}{3}\\,;\\,\\frac{4 + \\sqrt{22}}{3}\\}",
+     "type": "resultat_lim"
+    },
+    {
+     "html": "soit \\(x_{1} \\approx -0{,}230\\) et \\(x_{2} \\approx 2{,}897\\)",
+     "type": "texte"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "RAMENER",
+     "\\frac{3}{2} \\cdot x^{2} = 4x + 1"
+    ],
+    [
+     "factoriser",
+     "FORMULE",
+     "\\frac{3}{2}x^{2} - 4x - 1"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "\\frac{3}{2}x^{2} - 4x - 1"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "\\frac{3}{2}x^{2} - 4x - 1"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "(3/2)x^2=4x+1"
+ },
+ "E1 premier membre nul": {
+  "cours": {
+   "S": "S = \\{-2\\,;\\,2\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "x^{2} - 4 = 0",
+       "gauche": "0 = x^{2} - 4",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "(x + 2)(x - 2) = 0",
+       "lien": "\\iff",
+       "prop": "Id. rem. \\(A^{2} - B^{2}\\) avec \\(\\fbox{$A = x,\\ B = 2$}\\)"
+      },
+      {
+       "expr": "{x + 2 = 0} \\text{ ou } \\allowbreak {x - 2 = 0}",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "{x = -2} \\text{ ou } \\allowbreak {x = 2}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-2\\,;\\,2\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "RAMENER",
+     "0 = x^{2} - 4"
+    ],
+    [
+     "factoriser",
+     "IDREM_DIFF",
+     "x^{2} - 4"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "(x + 2)(x - 2)"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": [
+    "formule"
+   ]
+  },
+  "formule": {
+   "S": "S = \\{-2\\,;\\,2\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "x^{2} - 4 = 0",
+       "gauche": "0 = x^{2} - 4",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "\\Delta = b^{2} - 4ac = 0^{2} - 4 \\cdot 1 \\cdot (-4) = \\fbox{$16$}",
+       "lien": ""
+      },
+      {
+       "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 4",
+       "lien": ""
+      },
+      {
+       "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-4}{2} = -2",
+       "lien": ""
+      },
+      {
+       "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{4}{2} = 2",
+       "lien": ""
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-2\\,;\\,2\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "RAMENER",
+     "0 = x^{2} - 4"
+    ],
+    [
+     "factoriser",
+     "FORMULE",
+     "x^{2} - 4"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "x^{2} - 4"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "x^{2} - 4"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "0=x^2-4"
+ },
+ "E1 réduction": {
+  "cours": {
+   "S": "S = \\{-2\\,;\\,2\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "2x^{2} = 8",
+       "gauche": "x^{2} + x^{2} = 8",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "2x^{2} - 8 = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "2(x^{2} - 4) = 0",
+       "lien": "\\iff",
+       "prop": "ME"
+      },
+      {
+       "expr": "2(x + 2)(x - 2) = 0",
+       "lien": "\\iff",
+       "prop": "Id. rem. \\(A^{2} - B^{2}\\) avec \\(\\fbox{$A = x,\\ B = 2$}\\)"
+      },
+      {
+       "expr": "{\\underbrace{2 = 0}_{\\text{impossible}}} \\text{ ou } \\allowbreak {x + 2 = 0} \\text{ ou } \\allowbreak {x - 2 = 0}",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "{x = -2} \\text{ ou } \\allowbreak {x = 2}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-2\\,;\\,2\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "RAMENER",
+     "x^{2} + x^{2} = 8"
+    ],
+    [
+     "factoriser",
+     "ME",
+     "2x^{2} - 8"
+    ],
+    [
+     "factoriser",
+     "IDREM_DIFF",
+     "x^{2} - 4"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "2(x + 2)(x - 2)"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": [
+    "formule"
+   ]
+  },
+  "formule": {
+   "S": "S = \\{-2\\,;\\,2\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "2x^{2} = 8",
+       "gauche": "x^{2} + x^{2} = 8",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "2x^{2} - 8 = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "\\Delta = b^{2} - 4ac = 0^{2} - 4 \\cdot 2 \\cdot (-8) = \\fbox{$64$}",
+       "lien": ""
+      },
+      {
+       "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 8",
+       "lien": ""
+      },
+      {
+       "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-8}{4} = -2",
+       "lien": ""
+      },
+      {
+       "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{8}{4} = 2",
+       "lien": ""
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-2\\,;\\,2\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "RAMENER",
+     "x^{2} + x^{2} = 8"
+    ],
+    [
+     "factoriser",
+     "FORMULE",
+     "2x^{2} - 8"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "2x^{2} - 8"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "2x^{2} - 8"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "x^2+x^2=8"
+ },
+ "E1 termes dans le désordre": {
+  "cours": {
+   "S": "S = \\{1\\,;\\,5\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "x^{2} - 6x + 5 = 0",
+       "gauche": "5 + x^{2} - 6x = 0",
+       "lien": "\\iff"
+      },
+      {
+       "texte": "Pas de ME, pas d'Id. rem. ; le trinôme est unitaire (\\(a = 1\\)) : S-P."
+      },
+      {
+       "texte": "On cherche deux nombres dont le produit vaut \\(5\\) et la somme vaut \\(-6\\) :"
+      },
+      {
+       "bloc": {
+        "groupes": [
+         {
+          "colonnes": 2,
+          "titre": "produit \\(= 5\\)"
+         },
+         {
+          "colonnes": 1,
+          "titre": "somme"
+         }
+        ],
+        "lignes": [
+         {
+          "cases": [
+           "-1",
+           "-5",
+           "-6"
+          ],
+          "ok": true
+         }
+        ],
+        "type": "tableau_essais"
+       }
+      },
+      {
+       "expr": "(x - 1)(x - 5) = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "{x - 1 = 0} \\text{ ou } \\allowbreak {x - 5 = 0}",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "{x = 1} \\text{ ou } \\allowbreak {x = 5}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{1\\,;\\,5\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "factoriser",
+     "SP",
+     "x^{2} - 6x + 5"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "(x - 1)(x - 5)"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": [
+    "formule"
+   ]
+  },
+  "formule": {
+   "S": "S = \\{1\\,;\\,5\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "x^{2} - 6x + 5 = 0",
+       "gauche": "5 + x^{2} - 6x = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "\\Delta = b^{2} - 4ac = (-6)^{2} - 4 \\cdot 1 \\cdot 5 = 36 - 20 = \\fbox{$16$}",
+       "lien": ""
+      },
+      {
+       "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 4",
+       "lien": ""
+      },
+      {
+       "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{6 - 4}{2} = 1",
+       "lien": ""
+      },
+      {
+       "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{6 + 4}{2} = 5",
+       "lien": ""
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{1\\,;\\,5\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "factoriser",
+     "FORMULE",
+     "x^{2} - 6x + 5"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "x^{2} - 6x + 5"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "x^{2} - 6x + 5"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "5+x^2-6x=0"
+ },
+ "E2 Id. rem. (A + B)²": {
+  "cours": {
+   "S": "S = \\{-5\\,;\\,1\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "texte": "On ramène d'abord l'équation à la forme \\(\\ldots = 0\\) :"
+      },
+      {
+       "expr": "x^{2} + 6x + 9 = 2x + 14",
+       "gauche": "(x + 3)^{2} = 2x + 14",
+       "lien": "\\iff",
+       "prop": "Id. rem. \\((A + B)^{2}\\) avec \\(A = x,\\ B = 3\\)"
+      },
+      {
+       "expr": "x^{2} + 4x - 5 = 0",
+       "lien": "\\iff"
+      },
+      {
+       "texte": "Pas de ME, pas d'Id. rem. ; le trinôme est unitaire (\\(a = 1\\)) : S-P."
+      },
+      {
+       "texte": "On cherche deux nombres dont le produit vaut \\(-5\\) et la somme vaut \\(4\\) :"
+      },
+      {
+       "bloc": {
+        "groupes": [
+         {
+          "colonnes": 2,
+          "titre": "produit \\(= -5\\)"
+         },
+         {
+          "colonnes": 1,
+          "titre": "somme"
+         }
+        ],
+        "lignes": [
+         {
+          "cases": [
+           "-1",
+           "5",
+           "4"
+          ],
+          "ok": true
+         }
+        ],
+        "type": "tableau_essais"
+       }
+      },
+      {
+       "expr": "(x - 1)(x + 5) = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "{x - 1 = 0} \\text{ ou } \\allowbreak {x + 5 = 0}",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "{x = 1} \\text{ ou } \\allowbreak {x = -5}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-5\\,;\\,1\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "DEVELOPPER",
+     "(x + 3)^{2} = 2x + 14"
+    ],
+    [
+     "ramener",
+     "RAMENER",
+     "x^{2} + 6x + 9 = 2x + 14"
+    ],
+    [
+     "factoriser",
+     "SP",
+     "x^{2} + 4x - 5"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "(x - 1)(x + 5)"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": [
+    "formule"
+   ]
+  },
+  "formule": {
+   "S": "S = \\{-5\\,;\\,1\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "x^{2} + 6x + 9 = 2x + 14",
+       "gauche": "(x + 3)^{2} = 2x + 14",
+       "lien": "\\iff",
+       "prop": "Id. rem. \\((A + B)^{2}\\) avec \\(A = x,\\ B = 3\\)"
+      },
+      {
+       "expr": "x^{2} + 4x - 5 = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "\\Delta = b^{2} - 4ac = 4^{2} - 4 \\cdot 1 \\cdot (-5) = 16 + 20 = \\fbox{$36$}",
+       "lien": ""
+      },
+      {
+       "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 6",
+       "lien": ""
+      },
+      {
+       "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-4 - 6}{2} = -5",
+       "lien": ""
+      },
+      {
+       "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-4 + 6}{2} = 1",
+       "lien": ""
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-5\\,;\\,1\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "DEVELOPPER",
+     "(x + 3)^{2} = 2x + 14"
+    ],
+    [
+     "ramener",
+     "RAMENER",
+     "x^{2} + 6x + 9 = 2x + 14"
+    ],
+    [
+     "factoriser",
+     "FORMULE",
+     "x^{2} + 4x - 5"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "x^{2} + 4x - 5"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "x^{2} + 4x - 5"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "(x+3)^2=2x+14"
+ },
+ "E2 Id. rem. (A + B)², Δ < 0": {
+  "cours": {
+   "S": "S = \\varnothing",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "texte": "On ramène d'abord l'équation à la forme \\(\\ldots = 0\\) :"
+      },
+      {
+       "expr": "x^{2} + 2x + 1 = -16",
+       "gauche": "(x + 1)^{2} = -16",
+       "lien": "\\iff",
+       "prop": "Id. rem. \\((A + B)^{2}\\) avec \\(A = x,\\ B = 1\\)"
+      },
+      {
+       "expr": "x^{2} + 2x + 17 = 0",
+       "lien": "\\iff"
+      },
+      {
+       "texte": "Pas de ME, pas d'Id. rem. ; le trinôme est unitaire (\\(a = 1\\)) : S-P."
+      },
+      {
+       "texte": "On cherche deux nombres dont le produit vaut \\(17\\) et la somme vaut \\(2\\) :"
+      },
+      {
+       "bloc": {
+        "groupes": [
+         {
+          "colonnes": 2,
+          "titre": "produit \\(= 17\\)"
+         },
+         {
+          "colonnes": 1,
+          "titre": "somme"
+         }
+        ],
+        "lignes": [
+         {
+          "cases": [
+           "1",
+           "17",
+           "18"
+          ]
+         }
+        ],
+        "type": "tableau_essais"
+       }
+      },
+      {
+       "texte": "Aucun couple ne convient : on utilise la formule."
+      },
+      {
+       "expr": "\\Delta = b^{2} - 4ac = 2^{2} - 4 \\cdot 1 \\cdot 17 = 4 - 68 = \\fbox{$-64$}",
+       "lien": ""
+      },
+      {
+       "texte": "\\(\\Delta < 0\\) : l'équation n'a aucune solution réelle."
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\varnothing",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "DEVELOPPER",
+     "(x + 1)^{2} = -16"
+    ],
+    [
+     "ramener",
+     "RAMENER",
+     "x^{2} + 2x + 1 = -16"
+    ],
+    [
+     "factoriser",
+     "SP",
+     "x^{2} + 2x + 17"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "x^{2} + 2x + 17"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "x^{2} + 2x + 17"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "(x+1)^2=-16"
+ },
+ "E2 Id. rem. (A − B)², A constante": {
+  "cours": {
+   "S": "S = \\{\\frac{7 - \\sqrt{17}}{2}\\,;\\,\\frac{7 + \\sqrt{17}}{2}\\}",
+   "approx": "soit \\(x_{1} \\approx 1{,}438\\) et \\(x_{2} \\approx 5{,}562\\)",
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "texte": "On ramène d'abord l'équation à la forme \\(\\ldots = 0\\) :"
+      },
+      {
+       "expr": "9 - 6x + x^{2} = 1 + x",
+       "gauche": "(3 - x)^{2} = 1 + x",
+       "lien": "\\iff",
+       "prop": "Id. rem. \\((A - B)^{2}\\) avec \\(A = 3,\\ B = x\\)"
+      },
+      {
+       "expr": "x^{2} - 7x + 8 = 0",
+       "lien": "\\iff"
+      },
+      {
+       "texte": "Pas de ME, pas d'Id. rem. ; le trinôme est unitaire (\\(a = 1\\)) : S-P."
+      },
+      {
+       "texte": "On cherche deux nombres dont le produit vaut \\(8\\) et la somme vaut \\(-7\\) :"
+      },
+      {
+       "bloc": {
+        "groupes": [
+         {
+          "colonnes": 2,
+          "titre": "produit \\(= 8\\)"
+         },
+         {
+          "colonnes": 1,
+          "titre": "somme"
+         }
+        ],
+        "lignes": [
+         {
+          "cases": [
+           "-1",
+           "-8",
+           "-9"
+          ]
+         },
+         {
+          "cases": [
+           "-2",
+           "-4",
+           "-6"
+          ]
+         }
+        ],
+        "type": "tableau_essais"
+       }
+      },
+      {
+       "texte": "Aucun couple ne convient : on utilise la formule."
+      },
+      {
+       "expr": "\\Delta = b^{2} - 4ac = (-7)^{2} - 4 \\cdot 1 \\cdot 8 = 49 - 32 = \\fbox{$17$}",
+       "lien": ""
+      },
+      {
+       "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = \\sqrt{17}",
+       "lien": ""
+      },
+      {
+       "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{7 - \\sqrt{17}}{2}",
+       "lien": ""
+      },
+      {
+       "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{7 + \\sqrt{17}}{2}",
+       "lien": ""
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{\\frac{7 - \\sqrt{17}}{2}\\,;\\,\\frac{7 + \\sqrt{17}}{2}\\}",
+     "type": "resultat_lim"
+    },
+    {
+     "html": "soit \\(x_{1} \\approx 1{,}438\\) et \\(x_{2} \\approx 5{,}562\\)",
+     "type": "texte"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "DEVELOPPER",
+     "(3 - x)^{2} = 1 + x"
+    ],
+    [
+     "ramener",
+     "RAMENER",
+     "9 - 6x + x^{2} = 1 + x"
+    ],
+    [
+     "factoriser",
+     "SP",
+     "x^{2} - 7x + 8"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "x^{2} - 7x + 8"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "x^{2} - 7x + 8"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "(3-x)^2=1+x"
+ },
+ "E2 distribution": {
+  "cours": {
+   "S": "S = \\{1 - \\sqrt{7}\\,;\\,1 + \\sqrt{7}\\}",
+   "approx": "soit \\(x_{1} \\approx -1{,}646\\) et \\(x_{2} \\approx 3{,}646\\)",
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "texte": "On ramène d'abord l'équation à la forme \\(\\ldots = 0\\) :"
+      },
+      {
+       "expr": "2x + 6 = x^{2}",
+       "gauche": "2(x + 3) = x^{2}",
+       "lien": "\\iff",
+       "prop": "distribution"
+      },
+      {
+       "expr": "x^{2} - 2x - 6 = 0",
+       "lien": "\\iff"
+      },
+      {
+       "texte": "Pas de ME, pas d'Id. rem. ; le trinôme est unitaire (\\(a = 1\\)) : S-P."
+      },
+      {
+       "texte": "On cherche deux nombres dont le produit vaut \\(-6\\) et la somme vaut \\(-2\\) :"
+      },
+      {
+       "bloc": {
+        "groupes": [
+         {
+          "colonnes": 2,
+          "titre": "produit \\(= -6\\)"
+         },
+         {
+          "colonnes": 1,
+          "titre": "somme"
+         }
+        ],
+        "lignes": [
+         {
+          "cases": [
+           "1",
+           "-6",
+           "-5"
+          ]
+         },
+         {
+          "cases": [
+           "2",
+           "-3",
+           "-1"
+          ]
+         }
+        ],
+        "type": "tableau_essais"
+       }
+      },
+      {
+       "texte": "Aucun couple ne convient : on utilise la formule."
+      },
+      {
+       "expr": "\\Delta = b^{2} - 4ac = (-2)^{2} - 4 \\cdot 1 \\cdot (-6) = 4 + 24 = \\fbox{$28$}",
+       "lien": ""
+      },
+      {
+       "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = \\sqrt{28} = 2\\sqrt{7}",
+       "lien": ""
+      },
+      {
+       "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{2 - 2\\sqrt{7}}{2} = 1 - \\sqrt{7}",
+       "lien": ""
+      },
+      {
+       "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{2 + 2\\sqrt{7}}{2} = 1 + \\sqrt{7}",
+       "lien": ""
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{1 - \\sqrt{7}\\,;\\,1 + \\sqrt{7}\\}",
+     "type": "resultat_lim"
+    },
+    {
+     "html": "soit \\(x_{1} \\approx -1{,}646\\) et \\(x_{2} \\approx 3{,}646\\)",
+     "type": "texte"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "DEVELOPPER",
+     "2(x + 3) = x^{2}"
+    ],
+    [
+     "ramener",
+     "RAMENER",
+     "2x + 6 = x^{2}"
+    ],
+    [
+     "factoriser",
+     "SP",
+     "x^{2} - 2x - 6"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "x^{2} - 2x - 6"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "x^{2} - 2x - 6"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "2(x+3)=x^2"
+ },
+ "E2 distribution, monôme": {
+  "cours": {
+   "S": "S = \\{-1\\,;\\,5\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "texte": "On ramène d'abord l'équation à la forme \\(\\ldots = 0\\) :"
+      },
+      {
+       "expr": "x^{2} - 4x = 5",
+       "gauche": "x(x - 4) = 5",
+       "lien": "\\iff",
+       "prop": "distribution"
+      },
+      {
+       "expr": "x^{2} - 4x - 5 = 0",
+       "lien": "\\iff"
+      },
+      {
+       "texte": "Pas de ME, pas d'Id. rem. ; le trinôme est unitaire (\\(a = 1\\)) : S-P."
+      },
+      {
+       "texte": "On cherche deux nombres dont le produit vaut \\(-5\\) et la somme vaut \\(-4\\) :"
+      },
+      {
+       "bloc": {
+        "groupes": [
+         {
+          "colonnes": 2,
+          "titre": "produit \\(= -5\\)"
+         },
+         {
+          "colonnes": 1,
+          "titre": "somme"
+         }
+        ],
+        "lignes": [
+         {
+          "cases": [
+           "1",
+           "-5",
+           "-4"
+          ],
+          "ok": true
+         }
+        ],
+        "type": "tableau_essais"
+       }
+      },
+      {
+       "expr": "(x + 1)(x - 5) = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "{x + 1 = 0} \\text{ ou } \\allowbreak {x - 5 = 0}",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "{x = -1} \\text{ ou } \\allowbreak {x = 5}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-1\\,;\\,5\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "DEVELOPPER",
+     "x(x - 4) = 5"
+    ],
+    [
+     "ramener",
+     "RAMENER",
+     "x^{2} - 4x = 5"
+    ],
+    [
+     "factoriser",
+     "SP",
+     "x^{2} - 4x - 5"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "(x + 1)(x - 5)"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": [
+    "formule"
+   ]
+  },
+  "formule": {
+   "S": "S = \\{-1\\,;\\,5\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "x^{2} - 4x = 5",
+       "gauche": "x(x - 4) = 5",
+       "lien": "\\iff",
+       "prop": "distribution"
+      },
+      {
+       "expr": "x^{2} - 4x - 5 = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "\\Delta = b^{2} - 4ac = (-4)^{2} - 4 \\cdot 1 \\cdot (-5) = 16 + 20 = \\fbox{$36$}",
+       "lien": ""
+      },
+      {
+       "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 6",
+       "lien": ""
+      },
+      {
+       "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{4 - 6}{2} = -1",
+       "lien": ""
+      },
+      {
+       "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{4 + 6}{2} = 5",
+       "lien": ""
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-1\\,;\\,5\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "DEVELOPPER",
+     "x(x - 4) = 5"
+    ],
+    [
+     "ramener",
+     "RAMENER",
+     "x^{2} - 4x = 5"
+    ],
+    [
+     "factoriser",
+     "FORMULE",
+     "x^{2} - 4x - 5"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "x^{2} - 4x - 5"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "x^{2} - 4x - 5"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "x(x-4)=5"
+ },
+ "E2 décimaux": {
+  "cours": {
+   "S": "S = \\{\\frac{1 - \\sqrt{17}}{4}\\,;\\,\\frac{1 + \\sqrt{17}}{4}\\}",
+   "approx": "soit \\(x_{1} \\approx -0{,}781\\) et \\(x_{2} \\approx 1{,}281\\)",
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "texte": "On ramène d'abord l'équation à la forme \\(\\ldots = 0\\) :"
+      },
+      {
+       "expr": "0{,}5x + 1 = x^{2}",
+       "gauche": "0{,}5(x + 2) = x^{2}",
+       "lien": "\\iff",
+       "prop": "distribution"
+      },
+      {
+       "expr": "x^{2} - 0{,}5x - 1 = 0",
+       "lien": "\\iff"
+      },
+      {
+       "texte": "Pas de ME, pas d'Id. rem. ; les coefficients ne sont pas entiers : on utilise la formule."
+      },
+      {
+       "expr": "\\Delta = b^{2} - 4ac = (-0{,}5)^{2} - 4 \\cdot 1 \\cdot (-1) = 0{,}25 + 4 = \\fbox{$4{,}25$}",
+       "lien": ""
+      },
+      {
+       "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = \\sqrt{4{,}25} = \\frac{\\sqrt{17}}{2}",
+       "lien": ""
+      },
+      {
+       "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{0{,}5 - \\frac{\\sqrt{17}}{2}}{2} = \\frac{1 - \\sqrt{17}}{4}",
+       "lien": ""
+      },
+      {
+       "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{0{,}5 + \\frac{\\sqrt{17}}{2}}{2} = \\frac{1 + \\sqrt{17}}{4}",
+       "lien": ""
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{\\frac{1 - \\sqrt{17}}{4}\\,;\\,\\frac{1 + \\sqrt{17}}{4}\\}",
+     "type": "resultat_lim"
+    },
+    {
+     "html": "soit \\(x_{1} \\approx -0{,}781\\) et \\(x_{2} \\approx 1{,}281\\)",
+     "type": "texte"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "DEVELOPPER",
+     "0{,}5(x + 2) = x^{2}"
+    ],
+    [
+     "ramener",
+     "RAMENER",
+     "0{,}5x + 1 = x^{2}"
+    ],
+    [
+     "factoriser",
+     "FORMULE",
+     "x^{2} - 0{,}5x - 1"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "x^{2} - 0{,}5x - 1"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "x^{2} - 0{,}5x - 1"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "0,5(x+2)=x^2"
+ },
+ "E2 parenthèse précédée de « − »": {
+  "cours": {
+   "S": "S = \\{-1\\,;\\,3\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "texte": "On ramène d'abord l'équation à la forme \\(\\ldots = 0\\) :"
+      },
+      {
+       "expr": "x^{2} - 2x - 3 = 0",
+       "gauche": "x^{2} - (2x + 3) = 0",
+       "lien": "\\iff"
+      },
+      {
+       "texte": "Pas de ME, pas d'Id. rem. ; le trinôme est unitaire (\\(a = 1\\)) : S-P."
+      },
+      {
+       "texte": "On cherche deux nombres dont le produit vaut \\(-3\\) et la somme vaut \\(-2\\) :"
+      },
+      {
+       "bloc": {
+        "groupes": [
+         {
+          "colonnes": 2,
+          "titre": "produit \\(= -3\\)"
+         },
+         {
+          "colonnes": 1,
+          "titre": "somme"
+         }
+        ],
+        "lignes": [
+         {
+          "cases": [
+           "1",
+           "-3",
+           "-2"
+          ],
+          "ok": true
+         }
+        ],
+        "type": "tableau_essais"
+       }
+      },
+      {
+       "expr": "(x + 1)(x - 3) = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "{x + 1 = 0} \\text{ ou } \\allowbreak {x - 3 = 0}",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "{x = -1} \\text{ ou } \\allowbreak {x = 3}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-1\\,;\\,3\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "DEVELOPPER",
+     "x^{2} - (2x + 3) = 0"
+    ],
+    [
+     "factoriser",
+     "SP",
+     "x^{2} - 2x - 3"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "(x + 1)(x - 3)"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": [
+    "formule"
+   ]
+  },
+  "formule": {
+   "S": "S = \\{-1\\,;\\,3\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "x^{2} - 2x - 3 = 0",
+       "gauche": "x^{2} - (2x + 3) = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "\\Delta = b^{2} - 4ac = (-2)^{2} - 4 \\cdot 1 \\cdot (-3) = 4 + 12 = \\fbox{$16$}",
+       "lien": ""
+      },
+      {
+       "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 4",
+       "lien": ""
+      },
+      {
+       "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{2 - 4}{2} = -1",
+       "lien": ""
+      },
+      {
+       "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{2 + 4}{2} = 3",
+       "lien": ""
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-1\\,;\\,3\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "DEVELOPPER",
+     "x^{2} - (2x + 3) = 0"
+    ],
+    [
+     "factoriser",
+     "FORMULE",
+     "x^{2} - 2x - 3"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "x^{2} - 2x - 3"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "x^{2} - 2x - 3"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "x^2-(2x+3)=0"
+ },
+ "E2 « − » devant un produit": {
+  "cours": {
+   "S": "S = \\{-2 - \\sqrt{6}\\,;\\,-2 + \\sqrt{6}\\}",
+   "approx": "soit \\(x_{1} \\approx -4{,}449\\) et \\(x_{2} \\approx 0{,}449\\)",
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "5 - (x^{2} + 3x + x + 3) = 0",
+       "gauche": "5 - (x + 1)(x + 3) = 0",
+       "lien": "\\iff",
+       "prop": "double distribution"
+      },
+      {
+       "expr": "5 - x^{2} - 3x - x - 3 = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "-x^{2} - 4x + 2 = 0",
+       "lien": "\\iff"
+      },
+      {
+       "texte": "Le trinôme n'est pas unitaire (\\(a = -1\\)) : on met d'abord \\(-1\\) en évidence."
+      },
+      {
+       "expr": "-(x^{2} + 4x - 2) = 0",
+       "lien": "\\iff",
+       "prop": "ME"
+      },
+      {
+       "texte": "Le trinôme \\(x^{2} + 4x - 2\\) est unitaire : S-P."
+      },
+      {
+       "texte": "On cherche deux nombres dont le produit vaut \\(-2\\) et la somme vaut \\(4\\) :"
+      },
+      {
+       "bloc": {
+        "groupes": [
+         {
+          "colonnes": 2,
+          "titre": "produit \\(= -2\\)"
+         },
+         {
+          "colonnes": 1,
+          "titre": "somme"
+         }
+        ],
+        "lignes": [
+         {
+          "cases": [
+           "-1",
+           "2",
+           "1"
+          ]
+         }
+        ],
+        "type": "tableau_essais"
+       }
+      },
+      {
+       "texte": "Aucun couple ne convient : on utilise la formule."
+      },
+      {
+       "expr": "{\\underbrace{-1 = 0}_{\\text{impossible}}} \\text{ ou } \\allowbreak {x^{2} + 4x - 2 = 0}",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "\\Delta = b^{2} - 4ac = 4^{2} - 4 \\cdot 1 \\cdot (-2) = 16 + 8 = \\fbox{$24$}",
+       "lien": ""
+      },
+      {
+       "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = \\sqrt{24} = 2\\sqrt{6}",
+       "lien": ""
+      },
+      {
+       "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-4 - 2\\sqrt{6}}{2} = -2 - \\sqrt{6}",
+       "lien": ""
+      },
+      {
+       "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-4 + 2\\sqrt{6}}{2} = -2 + \\sqrt{6}",
+       "lien": ""
+      },
+      {
+       "expr": "{x = -2 - \\sqrt{6}} \\text{ ou } \\allowbreak {x = -2 + \\sqrt{6}}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-2 - \\sqrt{6}\\,;\\,-2 + \\sqrt{6}\\}",
+     "type": "resultat_lim"
+    },
+    {
+     "html": "soit \\(x_{1} \\approx -4{,}449\\) et \\(x_{2} \\approx 0{,}449\\)",
+     "type": "texte"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "DEVELOPPER",
+     "5 - (x + 1)(x + 3) = 0"
+    ],
+    [
+     "factoriser",
+     "ME",
+     "-x^{2} - 4x + 2"
+    ],
+    [
+     "factoriser",
+     "SP",
+     "x^{2} + 4x - 2"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "-(x^{2} + 4x - 2)"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "x^{2} + 4x - 2"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "x^{2} + 4x - 2"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "5-(x+1)(x+3)=0"
+ },
+ "E2 « − » devant une distribution": {
+  "cours": {
+   "S": "S = \\{-1\\,;\\,\\frac{4}{3}\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "texte": "On ramène d'abord l'équation à la forme \\(\\ldots = 0\\) :"
+      },
+      {
+       "expr": "x^{2} - (x^{2} + x) + 3x^{2} = 4",
+       "gauche": "x^{2} - x(x + 1) + 3x^{2} = 4",
+       "lien": "\\iff",
+       "prop": "distribution"
+      },
+      {
+       "expr": "x^{2} - x^{2} - x + 3x^{2} = 4",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "3x^{2} - x = 4",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "3x^{2} - x - 4 = 0",
+       "lien": "\\iff"
+      },
+      {
+       "texte": "Pas de ME, pas d'Id. rem. ; \\(a = 3 \\neq 1\\) : tâtonnement."
+      },
+      {
+       "texte": "\\(\\fbox{$x = -1$}\\) est solution, car \\(3 \\cdot (-1)^{2} + 1 - 4 = 3 + 1 - 4 = 0\\)."
+      },
+      {
+       "texte": "Donc \\(3x^{2} - x - 4 = (x + 1)(3x + \\triangle)\\) avec \\(1 \\cdot \\triangle = -4\\), donc \\(\\fbox{$\\triangle = -4$}\\)."
+      },
+      {
+       "expr": "(x + 1)(3x - 4) = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "{x + 1 = 0} \\text{ ou } \\allowbreak {3x - 4 = 0}",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "{x = -1} \\text{ ou } \\allowbreak {x = \\frac{4}{3}}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-1\\,;\\,\\frac{4}{3}\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "DEVELOPPER",
+     "x^{2} - x(x + 1) + 3x^{2} = 4"
+    ],
+    [
+     "ramener",
+     "RAMENER",
+     "3x^{2} - x = 4"
+    ],
+    [
+     "factoriser",
+     "TATONNEMENT",
+     "3x^{2} - x - 4"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "(x + 1)(3x - 4)"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": [
+    "formule"
+   ]
+  },
+  "formule": {
+   "S": "S = \\{-1\\,;\\,\\frac{4}{3}\\}",
+   "approx": null,
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "x^{2} - (x^{2} + x) + 3x^{2} = 4",
+       "gauche": "x^{2} - x(x + 1) + 3x^{2} = 4",
+       "lien": "\\iff",
+       "prop": "distribution"
+      },
+      {
+       "expr": "x^{2} - x^{2} - x + 3x^{2} = 4",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "3x^{2} - x = 4",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "3x^{2} - x - 4 = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "\\Delta = b^{2} - 4ac = (-1)^{2} - 4 \\cdot 3 \\cdot (-4) = 1 + 48 = \\fbox{$49$}",
+       "lien": ""
+      },
+      {
+       "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 7",
+       "lien": ""
+      },
+      {
+       "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{1 - 7}{6} = -1",
+       "lien": ""
+      },
+      {
+       "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{1 + 7}{6} = \\frac{4}{3}",
+       "lien": ""
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-1\\,;\\,\\frac{4}{3}\\}",
+     "type": "resultat_lim"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "DEVELOPPER",
+     "x^{2} - x(x + 1) + 3x^{2} = 4"
+    ],
+    [
+     "ramener",
+     "RAMENER",
+     "3x^{2} - x = 4"
+    ],
+    [
+     "factoriser",
+     "FORMULE",
+     "3x^{2} - x - 4"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "3x^{2} - x - 4"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "3x^{2} - x - 4"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "x^2-x(x+1)+3x^2=4"
+ },
+ "E2 « − » devant une double distribution": {
+  "cours": {
+   "S": "S = \\{-\\sqrt{2}\\,;\\,\\sqrt{2}\\}",
+   "approx": "soit \\(x \\approx -1{,}414\\) ou \\(x \\approx 1{,}414\\)",
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "-(x^{2} - 2x + x - 2) = x",
+       "gauche": "-(x + 1)(x - 2) = x",
+       "lien": "\\iff",
+       "prop": "double distribution"
+      },
+      {
+       "expr": "-x^{2} + 2x - x + 2 = x",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "-x^{2} + x + 2 = x",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "x^{2} - 2 = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "(x + \\sqrt{2})(x - \\sqrt{2}) = 0",
+       "lien": "\\iff",
+       "prop": "Id. rem. \\(A^{2} - B^{2}\\) avec \\(\\fbox{$A = x,\\ B = \\sqrt{2}$}\\)"
+      },
+      {
+       "expr": "{x + \\sqrt{2} = 0} \\text{ ou } \\allowbreak {x - \\sqrt{2} = 0}",
+       "lien": "\\iff",
+       "prop": "produit nul"
+      },
+      {
+       "expr": "{x = -\\sqrt{2}} \\text{ ou } \\allowbreak {x = \\sqrt{2}}",
+       "lien": "\\iff"
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-\\sqrt{2}\\,;\\,\\sqrt{2}\\}",
+     "type": "resultat_lim"
+    },
+    {
+     "html": "soit \\(x \\approx -1{,}414\\) ou \\(x \\approx 1{,}414\\)",
+     "type": "texte"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "DEVELOPPER",
+     "-(x + 1)(x - 2) = x"
+    ],
+    [
+     "ramener",
+     "RAMENER",
+     "-x^{2} + x + 2 = x"
+    ],
+    [
+     "factoriser",
+     "IDREM_DIFF",
+     "x^{2} - 2"
+    ],
+    [
+     "produit_nul",
+     "PRODUIT_NUL",
+     "(x + \\sqrt{2})(x - \\sqrt{2})"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": [
+    "formule"
+   ]
+  },
+  "formule": {
+   "S": "S = \\{-\\sqrt{2}\\,;\\,\\sqrt{2}\\}",
+   "approx": "soit \\(x_{1} \\approx -1{,}414\\) et \\(x_{2} \\approx 1{,}414\\)",
+   "blocs": [
+    {
+     "rangees": [
+      {
+       "expr": "-(x^{2} - 2x + x - 2) = x",
+       "gauche": "-(x + 1)(x - 2) = x",
+       "lien": "\\iff",
+       "prop": "double distribution"
+      },
+      {
+       "expr": "-x^{2} + 2x - x + 2 = x",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "-x^{2} + x + 2 = x",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "x^{2} - 2 = 0",
+       "lien": "\\iff"
+      },
+      {
+       "expr": "\\Delta = b^{2} - 4ac = 0^{2} - 4 \\cdot 1 \\cdot (-2) = \\fbox{$8$}",
+       "lien": ""
+      },
+      {
+       "expr": "\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = \\sqrt{8} = 2\\sqrt{2}",
+       "lien": ""
+      },
+      {
+       "expr": "x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-2\\sqrt{2}}{2} = -\\sqrt{2}",
+       "lien": ""
+      },
+      {
+       "expr": "x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{2\\sqrt{2}}{2} = \\sqrt{2}",
+       "lien": ""
+      }
+     ],
+     "type": "chaine"
+    },
+    {
+     "tex": "S = \\{-\\sqrt{2}\\,;\\,\\sqrt{2}\\}",
+     "type": "resultat_lim"
+    },
+    {
+     "html": "soit \\(x_{1} \\approx -1{,}414\\) et \\(x_{2} \\approx 1{,}414\\)",
+     "type": "texte"
+    }
+   ],
+   "etapes": [
+    [
+     "ramener",
+     "DEVELOPPER",
+     "-(x + 1)(x - 2) = x"
+    ],
+    [
+     "ramener",
+     "RAMENER",
+     "-x^{2} + x + 2 = x"
+    ],
+    [
+     "factoriser",
+     "FORMULE",
+     "x^{2} - 2"
+    ],
+    [
+     "delta_valeur",
+     "FORMULE",
+     "x^{2} - 2"
+    ],
+    [
+     "delta_nombre",
+     "FORMULE",
+     "x^{2} - 2"
+    ]
+   ],
+   "message": null,
+   "statut": "resolu",
+   "variantes": []
+  },
+  "saisie": "-(x+1)(x-2)=x"
  },
  "Javet 2.17 a": {
   "cours": {
