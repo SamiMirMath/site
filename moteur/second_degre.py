@@ -1162,9 +1162,25 @@ def _ecrire_tatonnement(R, ctx, Q, etape):
         raise _Incoherent("△ du tâtonnement")
     de = rf" de \({P_tex} = 0\)" if ctx.apres_me else ""
     R.texte(rf"\(\fbox{{${_t(X)} = {exact(racine)}$}}\) est solution{de}, car \({_tex_calcul_tatonnement(a, b, c, racine)}\).")
-    R.texte(rf"Donc \({P_tex} = ({_t(ctx.facteur(r['facteurs'][0]))})({_t(Op('*', Nb(a), X))} + \triangle)\) avec "
-            rf"\({exact(-racine)} \cdot \triangle = {exact(c)}\), donc \(\fbox{{$\triangle = {exact(triangle)}$}}\).")
+    R.texte(_tex_donc_tatonnement(X, P_tex, a, b, c, racine, triangle, r["facteurs"]))
     R.equiv(ctx.remplacer(Q, [(f, 1) for f in r["facteurs"]]))
+
+
+def _tex_donc_tatonnement(X, P_tex, a, b, c, racine, triangle, facteurs):
+    """Question 45 (06.11.2026, prime sur E7) : « Donc 3x² + 7x − 6 = (x − (−3))(□x + △) = (x + 3)(□x + △), avec ⟦□ = 3⟧ et
+    −6 = 3 · △, donc ⟦△ = −2⟧. » ; racine positive : « (x − 4)(□x + △) » sans étape ; c = (−r) · △, (−r) écrit comme un nombre ;
+    □ et △ encadrés (D29) ; chaque produit est un groupe TeX (la ligne ne se coupe qu'aux « = », jamais dans un facteur, à 390 px). Garde-fou : chaque valeur écrite est recalculée (ax² + bx + c = (x − r)(□x + △), □ = a, c = (−r)·△,
+    facteurs du calcul)."""
+    x = _t(X)
+    binome = rf"{x} + {exact(-racine)}" if racine < 0 else rf"{x} - {exact(racine)}"
+    if (racine == 0 or a * racine * racine + b * racine + c != 0 or b != triangle - a * racine or c != -racine * triangle
+            or [en_nombres(f) for f in facteurs] != [en_nombres((Nombre(-racine), Nombre(1))), en_nombres((Nombre(triangle), Nombre(a)))]
+            or _t(_arbre_facteur(facteurs[0], X, False)) != binome):
+        raise _Incoherent("ligne « Donc » du tâtonnement")
+    second = rf"(\square {x} + \triangle)"                      # chaque produit entre accolades : insécable (jamais coupé dans un facteur)
+    produit = rf"{{({x} - {_par(racine)}){second}}} = {{({binome}){second}}}" if racine < 0 else rf"{{({binome}){second}}}"
+    return (rf"Donc \({P_tex} = {produit}\), avec \(\fbox{{$\square = {exact(a)}$}}\) et "
+            rf"\({exact(c)} = {exact(-racine)} \cdot \triangle\), donc \(\fbox{{$\triangle = {exact(triangle)}$}}\).")
 
 
 def _delta_tex(f, dec):
