@@ -21,7 +21,8 @@ from noyau import ErreurSaisie
 DEPLACES = [(n, n) for n in ("Noeud", "Nb", "Var", "Pi", "Neg", "Op", "Pow", "Fn", "Defini", "variables", "tex", "tex_saisie", "Tok")] + [
     ("_nb_tex", "nb_tex"), ("_comme_somme", "comme_somme"), ("_entre_parentheses", "entre_parentheses"), ("_nom_tex", "nom_tex"),
     ("_DEBUT_COLLABLE", "DEBUT_COLLABLE"), ("_MINUSCULES", "MINUSCULES"), ("_NOM_INDEXE", "NOM_INDEXE"), ("_SYMBOLES", "SYMBOLES"),
-    ("_OPERATEURS", "OPERATEURS"), ("_INEGALITES", "INEGALITES"), ("_nombre", "lire_nombre"), ("_pourcentage", "lire_pourcentage")]
+    ("_OPERATEURS", "OPERATEURS"), ("_INEGALITES", "INEGALITES"), ("_nombre", "lire_nombre"), ("_pourcentage", "lire_pourcentage"),
+    ("_a_des_decimaux", "a_des_decimaux")]      # equations-2e-degre, P3 (decisions.md § 13.2, Q2)
 # Gardés dans exp_log, branchés sur la brique (même nom, même signature) : la lecture avec le lexique d'Exp-log.
 ENVELOPPES = ("tokeniser", "lire_membres", "_Parseur")
 # Propres à Exp-log, restés dans exp_log : jamais dans la brique.

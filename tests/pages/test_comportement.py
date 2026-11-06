@@ -18,13 +18,16 @@ from cas_el import BATTERIE_M_VAR, entrees_el, entrees_el_m  # noqa: E402
 
 RACINE = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 CALCUL = {"ensemble-definition": "ln(x^2-4x)/(x-5)", "derivee-variations": "ln(x)/x", "limites-asymptotes": "(x^2-1)/(x-3)",
-          "etude-complete": "x^2*e^(-x)", "factorisation": "x^2+5x-14", "exponentielles-logarithmes": "2^(x-1)=3^x"}
+          "etude-complete": "x^2*e^(-x)", "factorisation": "x^2+5x-14", "exponentielles-logarithmes": "2^(x-1)=3^x",
+          "equations-2e-degre": "2x^2-4x-4=0"}      # Javet 2.17 c : la formule est sur le chemin du cours, donc pas de variante (test_t33)
 
 CHOISIS = [o for o in os.environ.get("OUTILS", "").split(",") if o] or OUTILS
 EXEMPLE = {"ensemble-definition": "ln(x-1)", "derivee-variations": "x^2", "limites-asymptotes": "1/x",
-           "etude-complete": "x^2", "factorisation": "x^2-1", "exponentielles-logarithmes": "3^(x+1)=27"}
+           "etude-complete": "x^2", "factorisation": "x^2-1", "exponentielles-logarithmes": "3^(x+1)=27",
+           "equations-2e-degre": "6x^2-6=0"}        # 2.9 a
 INVALIDE = {"ensemble-definition": "ln(", "derivee-variations": "ln(", "limites-asymptotes": "ln(",
-            "etude-complete": "ln(", "factorisation": "sqrt(x)", "exponentielles-logarithmes": "x<3"}
+            "etude-complete": "ln(", "factorisation": "sqrt(x)", "exponentielles-logarithmes": "x<3",
+            "equations-2e-degre": "x+y=1"}
 ANALYSE = ["ensemble-definition", "derivee-variations", "limites-asymptotes", "etude-complete"]
 
 
@@ -83,6 +86,50 @@ class TestComportement(unittest.TestCase):
         self.assertEqual(page.evaluer("document.querySelectorAll('#cartes .card:not(.cache)').length"), 2)
         page.evaluer("document.querySelector('#tout').click()")
         self.assertEqual(page.evaluer("document.querySelector('#cartes .card:last-child').classList.contains('final')"), True)
+
+    def test_equations_2e_degre_une_carte_par_etape(self):
+        """R1 (question 36 du chantier equations-2e-degre) : 2.11 h donne une carte par étape (« Étape k », badge Ramener à 0, Mise en
+        évidence, Tâtonnement, Produit nul), puis « Solution » ; « Étape suivante » les dévoile une à une ; chaque carte d'étape
+        commence par l'équation d'arrivée de la précédente, en membre de gauche ; la variante « Par la formule » est découpée de même."""
+        page = self.ouvrir("equations-2e-degre")
+        self.calculer(page, "4x^2+2x=56")
+        progression = "document.querySelector('#progression').textContent"
+        self.assertEqual(page.evaluer(progression), "Étape 1 / 5")
+        self.assertEqual(self.titres_et_badges(page), ["Ramener à 0"])
+        page.evaluer("document.querySelector('#suivant').click()")
+        self.assertEqual((page.evaluer(progression), self.titres_et_badges(page)), ("Étape 2 / 5", ["Ramener à 0", "Mise en évidence"]))
+        page.evaluer("document.querySelector('#tout').click()")
+        self.assertEqual(self.titres_et_badges(page), ["Ramener à 0", "Mise en évidence", "Tâtonnement", "Produit nul", "Solution"])
+        self.assertEqual(page.evaluer("[...document.querySelectorAll('#cartes .card h3')].map(h => h.childNodes[0].textContent.trim())"),
+                         ["Étape 1", "Étape 2", "Étape 3", "Étape 4", "Solution"])
+        gauches = ("[...document.querySelectorAll('#cartes .card')].map(c => { const g = c.querySelector('.gauche annotation');"
+                   " return g ? g.textContent : null; })")
+        self.assertEqual(page.evaluer(gauches), ["4x^{2} + 2x = 56", "4x^{2} + 2x - 56 = 0", "2(2x^{2} + x - 28) = 0",
+                                                 "2(x + 4)(2x - 7) = 0", None])
+        page.evaluer("document.querySelector('#variantes button[data-variante=\"formule\"]').click()")
+        page.evaluer("document.querySelector('#tout').click()")
+        self.assertEqual(self.titres_et_badges(page), ["Ramener à 0", "Discriminant", "Valeurs de x", "Solution"])
+        page.evaluer("document.querySelector('#variantes button[data-variante=\"cours\"]').click()")
+
+    def test_equations_2e_degre_deux_boutons_pour_comparer(self):
+        """R3 (questions 25 et 37 du chantier equations-2e-degre) : 3x² − 12x = 0 (c = 0) et 2.12 e (forme structurée) ont les deux
+        boutons « Méthodes du cours » (pressé) et « Par la formule » ; la formule directe (Discriminant, Valeurs de x), ou développer
+        d'abord ; 2.12 c (degré 3) et Javet 2.17 c (la formule est sur le chemin du cours) n'ont qu'une résolution."""
+        page = self.ouvrir("equations-2e-degre")
+        boutons = "[...document.querySelectorAll('#variantes button')].map(b => [b.textContent, b.getAttribute('aria-pressed')])"
+        visible = "!!document.querySelector('#variantes') && !document.querySelector('#variantes').hidden"
+        for entree, formule in (("3x^2-12x=0", ["Discriminant", "Valeurs de x", "Solution"]),
+                                ("(x-1)(2-x)=(x-1)(x+3)", ["Développer", "Ramener à 0", "Discriminant", "Valeurs de x", "Solution"])):
+            self.calculer(page, entree)
+            self.assertTrue(page.evaluer(visible), entree)
+            self.assertEqual(page.evaluer(boutons), [["Méthodes du cours", "true"], ["Par la formule", "false"]], entree)
+            page.evaluer("document.querySelector('#variantes button[data-variante=\"formule\"]').click()")
+            page.evaluer("document.querySelector('#tout').click()")
+            self.assertEqual(self.titres_et_badges(page), formule, entree)
+            page.evaluer("document.querySelector('#variantes button[data-variante=\"cours\"]').click()")
+        for entree in ("x^3-x=0", "2x^2-4x-4=0"):
+            self.calculer(page, entree)
+            self.assertFalse(page.evaluer(visible), entree)
 
     def test_t33_el_exercice_tire_en_python(self):
         """Exponentielles et logarithmes : « Nouvelle équation » tire un exercice en Python (énoncé « Résoudre : … ») de chacun des niveaux

@@ -21,6 +21,8 @@ from ensemble_def import (
     # polynômes exacts
     pn, deg, peval, pdivlin, pmul, padd, pscal, nul, decomposer, r_norm,
     trinome,
+    # racines carrées exactes : n = k²·m (m sans facteur carré) ; √q = k·√m (equations-2e-degre, P1 : le Nombre p + q√m de second_degre)
+    squarefree, racine_q,
     # conditions d'existence (liste (genre, arbre), dans l'ordre de l'analyse)
     conditions,
     # tableaux de signes

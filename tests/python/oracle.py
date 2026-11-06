@@ -272,7 +272,9 @@ def racines(coeffs):
       ne sont pas rendues : x² + 1 donne [] (« aucune solution réelle ») ; la somme des multiplicités vaut donc le degré si et
       seulement si toutes les racines sont réelles.
 
-    Méthode : coefficients exacts rendus entiers (PPCM des dénominateurs) ; toutes les racines complexes (valeurs propres de la
+    Méthode : coefficients exacts rendus entiers (PPCM des dénominateurs) ; les termes constants nuls sont retirés d'abord (racine 0,
+    de multiplicité exacte le nombre de termes retirés : la contre-vérification relative ci-dessous ne conclut pas en 0, chantier du
+    2e degré, Q11), le reste porte sur le quotient ; toutes les racines complexes (valeurs propres de la
     matrice compagne, `mp.eig`) à une précision interne de 30 × degré + 40 chiffres ; une racine de multiplicité m n'y est connue
     qu'à environ 10^(−précision/m) près (≤ 10⁻³⁰ pour toute m ≤ degré), bien sous les seuils. Deux racines à moins de 10⁻²⁰ sont
     regroupées (de proche en proche) ; la taille du groupe est la multiplicité. Un groupe est réel si chacun de ses membres a
@@ -284,9 +286,13 @@ def racines(coeffs):
     distinctes plus proches que 10⁻²⁰ seraient comptées comme une racine multiple (cas hors du corpus du 2e degré). Le contexte
     global de mpmath (précision, arrondi) est le même avant et après l'appel, même en cas d'erreur."""
     a = _racines_entiers(coeffs)
+    zero = 0                                     # racine nulle (termes constants nuls, multiplicité connue) : retirée d'abord, car la
+    while a[-1] == 0:                            # contre-vérification relative à Σ|aᵢ||r|ⁱ ne peut pas conclure en r = 0 (Q11 du 2e degré)
+        a.pop()
+        zero += 1
     n = len(a) - 1
     if n == 0:
-        return []
+        return [(mp.mpf(0), zero)] if zero else []
     chiffres = 30 * n + 40
     trouvees = []
     with mp.workdps(chiffres):
@@ -304,5 +310,7 @@ def racines(coeffs):
             trouvees.append((r, m))
     if len(trouvees) != _racines_sturm(a):
         raise ValueError(f"nombre de racines réelles différent de celui de la suite de Sturm : l'oracle ne conclut pas ({coeffs!r})")
+    if zero:
+        trouvees.append((mp.mpf(0), zero))
     with mp.workdps(CHIFFRES_RACINES):
         return sorted((+r, m) for r, m in trouvees)

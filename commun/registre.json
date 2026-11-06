@@ -52,6 +52,13 @@
       "parametres": {"Ms": "?filiere=M", "Mr": "?filiere=M"},
       "descriptions": {"Ms": "Équations exponentielles et logarithmiques avec ensemble de définition, étape par étape.",
                        "Mr": "Équations exponentielles et logarithmiques avec ensemble de définition, étape par étape."}
+    },
+    {
+      "id": "equations-2e-degre",
+      "chemin": "equations-2e-degre/",
+      "titre": "Équations du 2e degré",
+      "description": "Mise en évidence, identités remarquables, Somme-Produit, tâtonnement et formule, étape par étape.",
+      "filieres": {"1": ["C", "Ms", "Mr"], "2": ["C"]}
     }
   ]
 }

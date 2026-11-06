@@ -18,8 +18,15 @@ Chaque couche ne dépend que de celles du dessous.
                     pour ceux qui rédigent : parties, redaction_bh, demain second_degre)
 1. Briques communes moteur/ : nombres, sortie (blocs affichés, pour les moteurs qui rédigent comme pour les adaptateurs),
                     noyau (façade de la base), expr (arbre d'expressions, TeX, lecture avec le lexique de l'outil),
-                    chaine (chaînes du corrigé : ⇔, propriétés, TeX, rangées alignées et leur bloc « chaine »), et demain second_degre
+                    chaine (chaînes du corrigé : ⇔, propriétés, TeX, rangées alignées et leur bloc « chaine »), polynomes
+                    (coefficients exacts d'un polynôme écrit avec l'arbre), second_degre (équations du 2e degré : calcul exact,
+                    garde-fou et rédaction en étapes structurées ; chantier equations-2e-degre)
 ```
+
+Exemple d'outil récent sur ces couches (chantier equations-2e-degre, P5) : la page `equations-2e-degre/index.html` (couche 4), l'adaptateur
+`resoudre_eq.py` (couche 3 : une carte faite des blocs de `second_degre.blocs`, variante « Par la formule »), le moteur `equations.py`
+(couche 2 : lecture et analyse de la saisie, messages), et tout le calcul et la rédaction dans la brique `second_degre` (couche 1),
+réutilisable par un autre outil sans import entre outils (D15 de ses décisions).
 
 | Couche | Peut importer | Ne doit jamais importer |
 |---|---|---|
@@ -65,22 +72,31 @@ qui lit le registre et le manifeste ; les données propres à un outil restent �
 `tests/python/test_outils_du_site.py` et `tests/pages/test_donnees_des_pages.py` (un outil oublié ou en trop échoue, sauf exception
 nommée avec sa raison). Pour un outil à moteur Python, la liste devient :
 
-1. `<outil>/` : le moteur, l'adaptateur `resoudre_xx.py`, `index.html` (configuration de `monterOutil`) ;
-2. `moteur/manifeste.json` : module, fichiers, fonctions ;
+1. `<outil>/` : le moteur, l'adaptateur `resoudre_xx.py`, `index.html` (configuration de `monterOutil`, balise GoatCounter exacte,
+   `style.css` puis `composants.css`, `aria-live` sur `#etat` et `#apercu`) ;
+2. `moteur/manifeste.json` : module, fichiers, fonctions ; un nouveau dossier de moteur change l'ordre de `sys.path` : la butée de
+   `test_outils_du_site.test_ordre_de_sys_path` est mise à jour exprès ;
 3. les données propres à l'outil dans les tests, que les tests réclament d'eux-mêmes (environ 10 fichiers, au lieu d'environ 14 dont
    la moitié pouvait être oubliée en silence) :
    - `tests/python` : le corpus (`cas.py` ou un module à lui), `test_instantanes.py` (fonction et corpus, ou exception nommée) et
      `test_instantanes_resoudre.py` (de même, et une méthode `test_<outil>` chacun ; instantanés écrits avec `REGENERER=1`),
      `test_json_strict.OUTILS_ENTREES`, `test_resoudre_import.EXEMPLE`, `test_source_unique.TestDispositionDuClavier.PAGES`,
      `test_vocabulaire` (`ANALYSES`, ou une méthode nommée dans `METHODES`) ;
-   - `tests/pages` : `rendu.py` (`REDUIT`, et `entrees` pour le corpus), `test_comportement.py` (`CALCUL`, `EXEMPLE`, `INVALIDE`),
-     `test_rendu.py` (une méthode `test_<outil>`), la référence de page (`capturer_references.py`) ;
-4. à la fin, après relecture à l'écran : `commun/registre.json`, la carte de l'accueil, et la butée « 16 liens / 7 outils » de
-   `tests/pages/test_accueil.py`, mise à jour exprès.
+   - `tests/pages` : `rendu.py` (`REDUIT`, et `entrees` pour le corpus ; `ERREURS` si le corpus n'a pas de saisie invalide),
+     `test_comportement.py` (`CALCUL`, `EXEMPLE`, `INVALIDE`), `test_rendu.py` (une méthode `test_<outil>`), la référence de page
+     (`capturer_references.py`) ;
+4. `commun/registre.json` dès que la page existe : `test_accueil.test_aucun_outil_oublie` réclame tout dossier à `index.html`, et
+   `dump_sorties.py` tout outil du manifeste. Avant la relecture à l'écran, l'entrée a `"filieres": {}` (aucune carte à l'accueil :
+   chantier equations-2e-degre, Q1) ; la butée « liens / outils » de `tests/pages/test_accueil.py` est mise à jour exprès (le nombre
+   d'outils), et `test_acc03` (page) exclut le temps de la relecture les outils sans filière (`if o["filieres"]`) ;
+5. à la fin, après relecture à l'écran : les filières au registre, la carte de l'accueil, le nombre de liens de la même butée, et
+   `test_acc03` revient à « les liens de l'accueil = tous les chemins du registre » (equations-2e-degre, P6).
 
 Rien à écrire, ces listes dérivent du registre ou du manifeste : `tests/lancer.py` (`DOSSIERS_MOTEURS`, `OUTILS_PAGES`, variantes de
 filière), `moteurs.py` (sys.path), `test_style_commun`, `test_tableaux_css`, `test_source_unique.MIGREES`, `test_vocabulaire` (dossiers
-des moteurs, pages), `test_memo_garde`, `test_resoudre_import` (fichiers et module), `rendu.OUTILS`, `test_largeurs`, `captures.py`.
+des moteurs, pages), `test_memo_garde`, `test_resoudre_import` (fichiers et module), `rendu.OUTILS`, `test_largeurs` (une méthode
+`test_balayage_<outil>` générée, qui ne lance que le premier exemple de la page : un test de plus pour les autres exemples si leurs
+blocs diffèrent, comme `test_equations_2e_degre_chaque_exemple`), `captures.py`, `dump_sorties.py`.
 
 Et les nouvelles arêtes d'import (A1), s'il y en a, dans `ARETES` de `tests/python/test_imports.py`, chacune avec sa raison (le test
 réclame toute arête nouvelle) ; un nouveau moteur d'outil entre aussi dans `test_noyau.MOTEURS` (réclamé de même).
@@ -96,7 +112,8 @@ Elles sont tolérées ; celles qui sont des arêtes d'import (A1) sont **listée
 | `parties` et `resoudre_el` importent l'adaptateur `resoudre_ed` | A1 | R11 |
 | `exp_log._DECIMAUX` | A7 | R5 : `moteur/expr.py` ne le lit pas (B1 : il reste dans `exp_log`, seul `_nb_exact` le lit, aucun état dans la brique) ; puis R10 |
 | 3 parseurs (ED, `moteur/expr.py` repris d'EL avec le lexique d'EL, FA), 2 arbres d'expressions (ED, `expr`), 2 classes `Chaine` (`moteur/chaine.py` reprise d'EL, LA) | A2 | R5 (la chaîne commune `moteur/chaine.py`, B2 ; celle de LA reste à elle), le reste seulement si un outil en a besoin |
-| 5 formats de « ≈ » (`exp_log.tex_approx`, `ensemble_def.dec`, `parties.approchee`, `redaction_bh.fmt_approx` et `fmt_val` ; plus `exp_log._trois_decimales` pour l'interprétation, R16), `qtex` sans notation suisse | A5 | La fonction unique existe (`nombres.approx`, et `nombres.exact` pour les valeurs exactes : R5, briques-communes B5) ; les outils ne sont **pas encore rebranchés** : R9, outil par outil (sur le corpus d'Exp-log, `approx` donne exactement `tex_approx` : journal de briques-communes, B5) |
+| 5 formats de « ≈ » (`exp_log.tex_approx`, `ensemble_def.dec`, `parties.approchee`, `redaction_bh.fmt_approx` et `fmt_val` ; plus `exp_log._trois_decimales` pour l'interprétation, R16), `qtex` sans notation suisse | A5 | La fonction unique existe (`nombres.approx`, et `nombres.exact` pour les valeurs exactes : R5, briques-communes B5) ; les outils existants ne sont **pas encore rebranchés** : R9, outil par outil (sur le corpus d'Exp-log, `approx` donne exactement `tex_approx` : journal de briques-communes, B5). L'outil Équations du 2e degré, né après, n'écrit ses nombres que par elles (`second_degre.approx_garantie`, `nb_exact`) : pas de 6e format |
+| 4 copies de la simplification et de l'écriture de k√m/d : la base (`ensemble_def.squarefree`, `racine_q`, `Num.quad`), `factorisation._tex_quad`, `exp_log._racines_du_second_degre` (par `_premiers`), `parties._racine_tex` | A2, A5 | **« nombres partout »** (dette nommée par le chantier equations-2e-degre, § 13.2 de ses décisions) : `squarefree` et `racine_q` sont dans la façade `noyau` depuis son P1, et `second_degre.Nombre` (p + q√m) s'appuie dessus, sans 5e copie ; Factorisation, Exp-log et l'Étude complète ne sont pas rebranchés |
 | HTML de la grille `.chaine` écrit dans un bloc `texte` (`resoudre_el.py`) | A4 | Le type de bloc `chaine` existe (R5, briques-communes B3 : `sortie.chaine`, `chaine.bloc_chaine`, rendu commun avec les mêmes classes) et son CSS est commun (B4 : la grille `.chaine` dans `commun/composants.css`, la page EL n'en garde aucune règle ; `test_style_commun`) ; reste la migration d'Exp-log, qui écrit encore sa grille en HTML, vers le bloc : chantier **à décider** (instantanés et références de pages d'EL à relire) |
 
 ## 6. Ordre des chantiers

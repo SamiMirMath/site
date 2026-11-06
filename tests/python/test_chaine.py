@@ -374,6 +374,107 @@ class TestBlocChaine(unittest.TestCase):
                 self.assertNotIn("chaine", vus)
 
 
+def chaines_exp_log():
+    """Les chaînes des corrigés d'Exp-log (méthode des logarithmes) sur quelques saisies : la sortie de l'outil ne doit pas changer."""
+    for saisie in ("3^(x+1)=27", "2^(x-1)=3^x", "log(5-x)=8", "2^x = 3^(x-1)", "log(x^2-3x)=1", "ln(2-x)=1"):
+        for carte in corriger(saisie)["etapes"]:
+            for ligne in carte["lignes"]:
+                if isinstance(ligne, Chaine):
+                    yield saisie, ligne
+
+
+class TestBlocRangees(unittest.TestCase):
+    """P2a du chantier equations-2e-degre : `bloc_rangees(rangees, membre_gauche)`, sorti de `bloc_chaine` (des rangées déjà écrites,
+    celles de plusieurs chaînes mises bout à bout), et l'option `coupure_ou` (produit nul à trois facteurs à 390 px, decisions.md
+    § 13.3)."""
+
+    def chaines(self):
+        x = Var("x")
+        yield "2.9 a", exercice_2_9_a()
+        yield "2.9 c", exercice_2_9_c()
+        yield "2.9 c sans texte", exercice_2_9_c(texte=False)
+        yield "texte en tête", Chaine([eq("t^2 + 20t + 100 = 0"), eq("(t + 10)^2 = 0")], ["⇔"], [None], textes={1: ["Id. rem."]})
+        yield "égalités", Chaine([Op("+", x, Nb(1)), Op("+", Nb(1), x)], ["="], [None], textes={1: ["on commute"]})
+        yield "propriété en tête", Chaine([Texte("x > 0", detail="2 > 0"), eq("x = 1")], ["⇔"], [None])
+        yield from chaines_exp_log()
+
+    def test_bloc_chaine_est_bloc_rangees_de_rangees_chaine(self):
+        """Pour toutes les options, `bloc_chaine(c, …)` = `bloc_rangees(rangees_chaine(c, …), membre_gauche)` (même dict)."""
+        n = 0
+        for nom, c in self.chaines():
+            for grise in (False, True):
+                for impossible in (False, True):
+                    for gauche in (False, True):
+                        for coupure in (False, True):
+                            with self.subTest(nom, grise=grise, impossible=impossible, gauche=gauche, coupure=coupure):
+                                n += 1
+                                self.assertEqual(chaine.bloc_chaine(c, grise, impossible, gauche, coupure),
+                                                 chaine.bloc_rangees(rangees_chaine(c, grise, impossible, coupure), gauche))
+        self.assertGreater(n, 6 * 16)
+
+    def test_coupure_ou_desactivee_par_defaut(self):
+        """Désactivée (défaut), l'option ne change aucun TeX : Exp-log et les chaînes du 2e degré restent identiques à l'octet."""
+        for nom, c in self.chaines():
+            with self.subTest(nom):
+                self.assertEqual(rangees_chaine(c), rangees_chaine(c, coupure_ou=False))
+                self.assertEqual(chaine.bloc_chaine(c), chaine.bloc_chaine(c, coupure_ou=False))
+                self.assertNotIn("allowbreak", str(rangees_chaine(c)))
+                for e in c.elements:
+                    self.assertEqual(tex_element(e), tex_element(e, coupure_ou=False))
+                    self.assertEqual(tex_element(e, impossible=True), tex_element(e, impossible=True, coupure_ou=False))
+
+    def test_coupure_ou_activee(self):
+        """Activée : chaque membre du « ou » est un groupe {…} (KaTeX ne coupe pas à l'intérieur), \\allowbreak après chaque « ou » ;
+        rien d'autre ne change (une équation seule, un élément qui n'est pas un « ou »)."""
+        trois = Ou([Eq(Nb(2), Nb(0)), eq("x + 4 = 0"), eq("2x - 7 = 0")])               # 2.11 h
+        self.assertEqual(tex_element(trois, impossible=True, coupure_ou=True),
+                         r"{\underbrace{2 = 0}_{\text{impossible}}} \text{ ou } \allowbreak {x + 4 = 0} \text{ ou } \allowbreak "
+                         r"{2x - 7 = 0}")
+        self.assertEqual(tex_element(trois, coupure_ou=True),
+                         r"{2 = 0} \text{ ou } \allowbreak {x + 4 = 0} \text{ ou } \allowbreak {2x - 7 = 0}")
+        for e in (eq("x = 1"), Rel(Var("x"), "<", Nb(0)), Texte("x > 0"), eq("x^2 - 1 = 0").g):
+            with self.subTest(tex_element(e)):
+                self.assertEqual(tex_element(e, coupure_ou=True), tex_element(e))
+        c = exercice_2_9_a()
+        avec, sans = rangees_chaine(c, impossible=True, coupure_ou=True), rangees_chaine(c, impossible=True)
+        self.assertEqual(avec[:3], sans[:3])
+        self.assertEqual(avec[3][1], r"{\underbrace{6 = 0}_{\text{impossible}}} \text{ ou } \allowbreak {x + 1 = 0} \text{ ou } "
+                                     r"\allowbreak {x - 1 = 0}")
+        self.assertEqual(avec[4][1], r"{x = -1} \text{ ou } \allowbreak {x = 1}")
+        self.assertEqual(chaine.bloc_chaine(c, impossible=True, coupure_ou=True)["rangees"][3]["expr"], avec[3][1])
+
+    def test_membre_gauche_apres_des_lignes_pleines_en_tete(self):
+        """Rangées mises bout à bout dont la première est une ligne pleine largeur (phrase de choix et tableau d'abord, § 13.3) : le membre
+        de gauche est la première rangée-ligne, les lignes pleines restent au-dessus."""
+        tableau = so.tableau_essais([(r"produit \(= -36\)", 2), ("somme", 1)], [["4", "-9", "-5"]], ok=0)
+        debut = [LigneTexte("Pas de ME, pas d'Id. rem. ; le trinôme est unitaire : S-P."), LigneTexte(tableau)]
+        suite = rangees_chaine(Chaine([eq("x^2 - 5x - 36 = 0"), eq("(x + 4)(x - 9) = 0")], ["⇔"], [None]))
+        b = chaine.bloc_rangees(debut + suite, membre_gauche=True)
+        self.assertEqual(so.valider(so.sortie_ok("x", [so.carte("t", [b])])), [])
+        self.assertEqual(b["rangees"], [{"texte": "Pas de ME, pas d'Id. rem. ; le trinôme est unitaire : S-P."}, {"bloc": tableau},
+                                        {"lien": r"\iff", "expr": "(x + 4)(x - 9) = 0", "gauche": "x^{2} - 5x - 36 = 0"}])
+        self.assertEqual(chaine.bloc_rangees(debut + suite)["rangees"][2:],
+                         [{"lien": "", "expr": "x^{2} - 5x - 36 = 0"}, {"lien": r"\iff", "expr": "(x + 4)(x - 9) = 0"}])
+
+    def test_membre_gauche_sans_effet(self):
+        """Première rangée-ligne avec un lien ou une propriété, ligne suivante sans lien, une seule ligne : rien ne change."""
+        for rangees in ([(r"\iff", "x = 1", None), (r"\iff", "x = 2", None)],
+                        [("", "x = 1", "ME"), (r"\iff", "x = 2", None)],
+                        [LigneTexte("a"), ("", r"\Delta = 20", None), ("", r"\sqrt{\Delta} = 2\sqrt{5}", None)],
+                        [LigneTexte("a"), ("", "x = 1", None)]):
+            with self.subTest(rangees=rangees):
+                self.assertEqual(chaine.bloc_rangees(rangees, membre_gauche=True), chaine.bloc_rangees(rangees))
+                self.assertNotIn("gauche", str(chaine.bloc_rangees(rangees, membre_gauche=True)))
+
+    def test_rangees_inchangees(self):
+        """La liste reçue n'est pas modifiée (A7) ; un tuple de rangées convient aussi."""
+        rangees = [LigneTexte("a"), ("", "x = 1", None), (r"\iff", "x = 2", None)]
+        copie = list(rangees)
+        b = chaine.bloc_rangees(rangees, membre_gauche=True)
+        self.assertEqual(rangees, copie)
+        self.assertEqual(chaine.bloc_rangees(tuple(rangees), membre_gauche=True), b)
+
+
 class TestSansEtat(unittest.TestCase):
     """A7 : aucune variable de module modifiée, aucun conteneur modifiable au niveau du module ; la brique n'importe que expr, et sortie
     pour son bloc (bloc_chaine, B3)."""

@@ -12,17 +12,20 @@ une justification propre à un outil, sous-classe de `Justification`, qui s'écr
 connaît aucun élément ni aucune propriété d'un outil, sauf les trois propriétés génériques (`PROP_AUTRE_COTE`, `PROP_PRODUIT_NUL`,
 `PROP_MISE_EN_EVIDENCE`) ; les autres (`PROP_*` d'Exp-log) restent dans l'outil.
 
-Trois options de présentation, tirées des corrigés du 2e degré (docs/chantiers/equations-2e-degre/decisions.md, D5, D7, E5, E8),
-désactivées par défaut (la sortie d'Exp-log ne change pas) :
+Quatre options de présentation, tirées des corrigés du 2e degré (docs/chantiers/equations-2e-degre/decisions.md, D5, D7, E5, E8,
+§ 13.3), désactivées par défaut (la sortie d'Exp-log ne change pas) :
 - `etiquette_grise=True` (`tex_chaine`, `rangees_chaine`) : la propriété est une étiquette grise, sans parenthèses (« ME ») ;
 - `impossible=True` (`tex_element`, `tex_chaine`, `rangees_chaine`) : dans un « ou », une égalité entre deux nombres différents (le
   facteur constant du produit nul, 6 = 0) porte la mention « impossible » dessous ;
 - une ligne de texte au milieu d'une chaîne (`Chaine(…, textes=…)`, `Chaine.ajouter(…, texte_avant=…)`) : une ligne pleine largeur
-  entre deux éléments, sans casser l'alignement des ⇔ (`LigneTexte` dans les rangées).
+  entre deux éléments, sans casser l'alignement des ⇔ (`LigneTexte` dans les rangées) ;
+- `coupure_ou=True` (`tex_element`, `rangees_chaine`, `bloc_chaine`) : dans un « ou », la ligne ne se coupe qu'après un « ou » (produit
+  nul à trois facteurs sur un écran étroit) ; chaque équation reste entière.
 
 Pour la page : `bloc_chaine(c)` donne le bloc « chaine » de moteur/sortie.py (B3 : rangées alignées, lignes pleine largeur, et le membre de
-gauche dans sa colonne avec `membre_gauche=True`), que commun/rendu.js affiche ; Exp-log écrit encore sa grille lui-même (resoudre_el.py,
-exception nommée de docs/architecture.md, § 5).
+gauche dans sa colonne avec `membre_gauche=True`), que commun/rendu.js affiche ; `bloc_rangees(rangees)` fait de même pour des rangées
+déjà écrites (celles de plusieurs chaînes mises bout à bout, par exemple les étapes d'une résolution du 2e degré) ; Exp-log écrit encore
+sa grille lui-même (resoudre_el.py, exception nommée de docs/architecture.md, § 5).
 
 Aucun état : aucune variable de module n'est modifiée, les tables sont en lecture seule (règle A7 de docs/architecture.md).
 """
@@ -34,8 +37,8 @@ import sortie
 from expr import Nb, Neg, tex
 
 __all__ = ["Eq", "Rel", "Ou", "Texte", "Element", "Justification", "Chaine", "Message", "LigneTexte", "tex_element", "tex_message",
-           "LIENS_TEX", "tex_chaine", "rangees_chaine", "est_impossible", "texte_message", "bloc_chaine", "PROP_AUTRE_COTE",
-           "PROP_PRODUIT_NUL", "PROP_MISE_EN_EVIDENCE"]
+           "LIENS_TEX", "tex_chaine", "rangees_chaine", "est_impossible", "texte_message", "bloc_chaine", "bloc_rangees",
+           "PROP_AUTRE_COTE", "PROP_PRODUIT_NUL", "PROP_MISE_EN_EVIDENCE"]
 
 
 # =====================================================================
@@ -181,9 +184,11 @@ def est_impossible(e):
     return g is not None and d is not None and g != d
 
 
-def tex_element(e, impossible=False):
+def tex_element(e, impossible=False, coupure_ou=False):
     """TeX d'un élément. `impossible` : dans un « ou », une égalité entre deux nombres différents s'écrit avec « impossible » dessous,
-    comme dans le corrigé (`\\underbrace{6 = 0}_{\\text{impossible}}`)."""
+    comme dans le corrigé (`\\underbrace{6 = 0}_{\\text{impossible}}`). `coupure_ou` : dans un « ou », chaque équation est un groupe
+    `{…}` (KaTeX ne coupe pas une ligne à l'intérieur) et `\\allowbreak` suit chaque « ou » : sur un écran étroit, la ligne ne se coupe
+    qu'après un « ou »."""
     if isinstance(e, Eq):
         return tex(e.g) + "".join(" = " + tex(m) for m in e.milieu) + " = " + tex(e.d)
     if isinstance(e, Element):
@@ -191,8 +196,11 @@ def tex_element(e, impossible=False):
     if isinstance(e, Texte):
         return e.tex + (r" \quad (" + e.detail + ")" if e.detail else "")
     if isinstance(e, Ou):
-        return r" \text{ ou } ".join(r"\underbrace{" + tex_element(q) + r"}_{\text{impossible}}" if impossible and est_impossible(q)
-                                     else tex_element(q) for q in e.eqs)
+        membres = [r"\underbrace{" + tex_element(q) + r"}_{\text{impossible}}" if impossible and est_impossible(q)
+                   else tex_element(q) for q in e.eqs]
+        if coupure_ou:
+            return r" \text{ ou } \allowbreak ".join("{" + m + "}" for m in membres)
+        return r" \text{ ou } ".join(membres)
     if isinstance(e, Rel):
         return tex(e.g) + Rel.SIGNES[e.signe] + tex(e.d)
     return tex(e)
@@ -240,7 +248,7 @@ def _gauche(e):
     return tex(e)
 
 
-def rangees_chaine(c, etiquette_grise=False, impossible=False):
+def rangees_chaine(c, etiquette_grise=False, impossible=False, coupure_ou=False):
     """La chaîne en lignes alignées, une étape par ligne comme le corrigé : [(lien, expression, propriété)], les trois en TeX/texte.
     `lien` : « \\iff » ou vide ; `expression` : un élément après un « ⇔ » ; les liens « = » prolongent la ligne (`√2 = 2^(1/2) = 4^(1/4)`)
     jusqu'à une propriété, après laquelle la suite commence une nouvelle ligne `{} = suite`, alignée sous le « = » précédent ;
@@ -248,22 +256,22 @@ def rangees_chaine(c, etiquette_grise=False, impossible=False):
     l'expression dans la deuxième et la propriété à droite (sous l'expression sur un écran étroit).
 
     Options : `etiquette_grise` (la propriété et la note sans parenthèses, séparées par « ; » ; le gris est celui de la colonne dans
-    la page), `impossible` (voir `tex_element`). Une ligne de texte au milieu de la chaîne est une rangée `LigneTexte(contenu)`, avant
-    la rangée de l'élément qu'elle précède ; un lien « = » qui la suit commence une nouvelle ligne."""
+    la page), `impossible` et `coupure_ou` (voir `tex_element`). Une ligne de texte au milieu de la chaîne est une rangée
+    `LigneTexte(contenu)`, avant la rangée de l'élément qu'elle précède ; un lien « = » qui la suit commence une nouvelle ligne."""
     premier = c.elements[0]
-    rangees = [["", premier.tex if isinstance(premier, Texte) else tex_element(premier, impossible),
+    rangees = [["", premier.tex if isinstance(premier, Texte) else tex_element(premier, impossible, coupure_ou),
                 r"(\(" + premier.detail + r"\))" if isinstance(premier, Texte) and premier.detail else None]]
     ancre = _gauche(premier)
     for i, (e, lien, prop) in enumerate(zip(c.elements[1:], c.liens, c.props), 1):
         rangees.extend(LigneTexte(m) for m in c.textes.get(i, ()))
         if lien in ("⇔", "⇒"):                                        # ⇒ : l'implication, quand la ligne ne se lit pas dans l'autre sens
-            rangees.append([LIENS_TEX[lien].strip(), tex_element(e, impossible), None])
+            rangees.append([LIENS_TEX[lien].strip(), tex_element(e, impossible, coupure_ou), None])
             ancre = _gauche(e)
         elif not isinstance(rangees[-1], LigneTexte) and rangees[-1][2] is None:   # pas de propriété : la suite d'égalités continue
-            rangees[-1][1] += LIENS_TEX.get(lien, " = ") + tex_element(e, impossible)
+            rangees[-1][1] += LIENS_TEX.get(lien, " = ") + tex_element(e, impossible, coupure_ou)
         else:                                                         # nouvelle ligne, son « = » sous celui de la ligne d'au-dessus
             cale = r"\phantom{" + ancre + "}" if ancre and len(ancre) <= 30 else ""
-            rangees.append(["", cale + LIENS_TEX.get(lien, " = ") + tex_element(e, impossible), None])
+            rangees.append(["", cale + LIENS_TEX.get(lien, " = ") + tex_element(e, impossible, coupure_ou), None])
         if isinstance(prop, Justification):
             rangees[-1][2] = prop.ecrire_rangee()
         elif prop:
@@ -288,19 +296,33 @@ def texte_message(m):
     raise TypeError(m)
 
 
-def bloc_chaine(c, etiquette_grise=False, impossible=False, membre_gauche=False):
-    """Le bloc « chaine » de moteur/sortie.py (A4), tiré des rangées de `rangees_chaine` (mêmes options `etiquette_grise` et
-    `impossible`) : une ligne {lien, expr, prop} par rangée, une ligne pleine largeur par `LigneTexte` (un texte ou un `Message` :
-    `rangee_texte` ; un bloc, dict de moteur/sortie.py : `rangee_bloc`).
+def bloc_chaine(c, etiquette_grise=False, impossible=False, membre_gauche=False, coupure_ou=False):
+    """Le bloc « chaine » de moteur/sortie.py (A4), tiré des rangées de `rangees_chaine` (mêmes options `etiquette_grise`, `impossible`
+    et `coupure_ou`) : `bloc_rangees(rangees_chaine(c, …), membre_gauche)`.
 
     `membre_gauche` : comme le corrigé (« 6x² − 6 = 0 ⇔ 6(x² − 1) = 0 », les ⇔ suivants dessous), le premier élément passe dans la
     colonne de gauche de la première ligne à ⇔ (ou ⇒) ; les lignes pleine largeur écrites avant elle restent au-dessus. Seulement si la
     première rangée n'a pas de propriété et si la ligne suivante commence par un lien ; sinon la chaîne reste telle quelle."""
-    rangees = rangees_chaine(c, etiquette_grise, impossible)
-    lignes = [r for r in rangees if not isinstance(r, LigneTexte)]
+    return bloc_rangees(rangees_chaine(c, etiquette_grise, impossible, coupure_ou), membre_gauche)
+
+
+def bloc_rangees(rangees, membre_gauche=False):
+    """Le bloc « chaine » de moteur/sortie.py (A4) tiré de rangées déjà écrites (celles de `rangees_chaine`, d'une ou de plusieurs
+    chaînes mises bout à bout) : une ligne {lien, expr, prop} par rangée (lien, expression, propriété), une ligne pleine largeur par
+    `LigneTexte` (un texte ou un `Message` : `rangee_texte` ; un bloc, dict de moteur/sortie.py : `rangee_bloc`).
+
+    `membre_gauche` : la première rangée-ligne (des lignes pleine largeur peuvent la précéder : phrase de choix et tableau d'abord)
+    passe dans la colonne de gauche de la ligne suivante, comme le corrigé (« A ⇔ B »), si elle n'a ni lien ni propriété et si la ligne
+    suivante commence par un lien ; les lignes pleine largeur écrites entre elles restent au-dessus. Sinon les rangées restent telles
+    quelles."""
+    rangees = list(rangees)
+    lignes = [i for i, r in enumerate(rangees) if not isinstance(r, LigneTexte)]
     gauche = None
-    if membre_gauche and lignes[0][2] is None and len(lignes) > 1 and lignes[1][0]:
-        gauche, rangees = lignes[0][1], rangees[1:]
+    if membre_gauche and len(lignes) > 1:
+        premiere, suivante = rangees[lignes[0]], rangees[lignes[1]]
+        if not premiere[0] and premiere[2] is None and suivante[0]:
+            gauche = premiere[1]
+            del rangees[lignes[0]]
     lignes_du_bloc = []
     for r in rangees:
         if isinstance(r, LigneTexte):

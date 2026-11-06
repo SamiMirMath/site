@@ -1,0 +1,6363 @@
+{
+ "(2x-1)^2-4x(x-1)=1": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Développer⟦(2x - 1)^{2} - 4x \\cdot (x - 1) = 1⟧⟦\\iff⟧⟦4x^{2} - 4x + 1 - (4x^{2} - 4x) = 1⟧Id. rem. ⟦(A - B)^{2}⟧ avec ⟦A = 2x,\\ B = 1⟧ ; distribution⟦\\iff⟧⟦4x^{2} - 4x + 1 - 4x^{2} + 4x = 1⟧⟦\\iff⟧⟦1 = 1⟧Cette égalité est vraie pour tout nombre réel.",
+    "titre": "Étape 1Développer"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\mathbb{R}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "(3/2)x^2-4x-1=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1FormulePas de ME, pas d'Id. rem. ; les coefficients ne sont pas entiers : on utilise la formule.",
+    "titre": "Étape 1Formule"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Discriminant⟦\\Delta = b^{2} - 4ac = (-4)^{2} - 4 \\cdot \\frac{3}{2} \\cdot (-1) = 16 + 6 = \\fbox{$22$}⟧",
+    "titre": "Étape 2Discriminant"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Valeurs de x⟦\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = \\sqrt{22}⟧⟦x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{4 - \\sqrt{22}}{3}⟧⟦x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{4 + \\sqrt{22}}{3}⟧",
+    "titre": "Étape 3Valeurs de x"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\{\\frac{4 - \\sqrt{22}}{3}\\,;\\,\\frac{4 + \\sqrt{22}}{3}\\}⟧soit ⟦x_{1} \\approx -0{,}230⟧ et ⟦x_{2} \\approx 2{,}897⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4"
+ },
+ "(5/4)s^2+3s+1=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1FormulePas de ME, pas d'Id. rem. ; les coefficients ne sont pas entiers : on utilise la formule.",
+    "titre": "Étape 1Formule"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Discriminant⟦\\Delta = b^{2} - 4ac = 3^{2} - 4 \\cdot \\frac{5}{4} \\cdot 1 = 9 - 5 = \\fbox{$4$}⟧",
+    "titre": "Étape 2Discriminant"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Valeurs de s⟦\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 2⟧⟦x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-3 - 2}{\\frac{5}{2}} = -2⟧⟦x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-3 + 2}{\\frac{5}{2}} = -\\frac{2}{5}⟧",
+    "titre": "Étape 3Valeurs de s"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\{-2\\,;\\,-\\frac{2}{5}\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4"
+ },
+ "(x+1)(x+3)=15": {
+  "au_depart": {
+   "progression": "Étape 1 / 5",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": true,
+    "cle": "cours",
+    "texte": "Méthodes du cours"
+   },
+   {
+    "choisi": false,
+    "cle": "formule",
+    "texte": "Par la formule"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1DévelopperOn ramène d'abord l'équation à la forme ⟦\\ldots = 0⟧ :⟦(x + 1)(x + 3) = 15⟧⟦\\iff⟧⟦x^{2} + 3x + x + 3 = 15⟧double distribution⟦\\iff⟧⟦x^{2} + 4x + 3 = 15⟧",
+    "titre": "Étape 1Développer"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Ramener à 0⟦x^{2} + 4x + 3 = 15⟧⟦\\iff⟧⟦x^{2} + 4x - 12 = 0⟧",
+    "titre": "Étape 2Ramener à 0"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Somme-ProduitPas de ME, pas d'Id. rem. ; le trinôme est unitaire (⟦a = 1⟧) : S-P.On cherche deux nombres dont le produit vaut ⟦-12⟧ et la somme vaut ⟦4⟧ :produit ⟦= -12⟧somme⟦-1⟧⟦12⟧⟦11⟧⟦-2⟧⟦6⟧⟦4⟧✓⟦x^{2} + 4x - 12 = 0⟧⟦\\iff⟧⟦(x - 2)(x + 6) = 0⟧",
+    "titre": "Étape 3Somme-Produit"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 4Produit nul⟦(x - 2)(x + 6) = 0⟧⟦\\iff⟧⟦{x - 2 = 0} \\text{ ou } \\allowbreak {x + 6 = 0}⟧produit nul⟦\\iff⟧⟦{x = 2} \\text{ ou } \\allowbreak {x = -6}⟧",
+    "titre": "Étape 4Produit nul"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\{-6\\,;\\,2\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 5 / 5",
+  "variantes": {
+   "cours": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1DévelopperOn ramène d'abord l'équation à la forme ⟦\\ldots = 0⟧ :⟦(x + 1)(x + 3) = 15⟧⟦\\iff⟧⟦x^{2} + 3x + x + 3 = 15⟧double distribution⟦\\iff⟧⟦x^{2} + 4x + 3 = 15⟧",
+      "titre": "Étape 1Développer"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Ramener à 0⟦x^{2} + 4x + 3 = 15⟧⟦\\iff⟧⟦x^{2} + 4x - 12 = 0⟧",
+      "titre": "Étape 2Ramener à 0"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Somme-ProduitPas de ME, pas d'Id. rem. ; le trinôme est unitaire (⟦a = 1⟧) : S-P.On cherche deux nombres dont le produit vaut ⟦-12⟧ et la somme vaut ⟦4⟧ :produit ⟦= -12⟧somme⟦-1⟧⟦12⟧⟦11⟧⟦-2⟧⟦6⟧⟦4⟧✓⟦x^{2} + 4x - 12 = 0⟧⟦\\iff⟧⟦(x - 2)(x + 6) = 0⟧",
+      "titre": "Étape 3Somme-Produit"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 4Produit nul⟦(x - 2)(x + 6) = 0⟧⟦\\iff⟧⟦{x - 2 = 0} \\text{ ou } \\allowbreak {x + 6 = 0}⟧produit nul⟦\\iff⟧⟦{x = 2} \\text{ ou } \\allowbreak {x = -6}⟧",
+      "titre": "Étape 4Produit nul"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{-6\\,;\\,2\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Méthodes du cours",
+    "progression_finale": "Étape 5 / 5"
+   },
+   "formule": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Développer⟦(x + 1)(x + 3) = 15⟧⟦\\iff⟧⟦x^{2} + 3x + x + 3 = 15⟧double distribution⟦\\iff⟧⟦x^{2} + 4x + 3 = 15⟧",
+      "titre": "Étape 1Développer"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Ramener à 0⟦x^{2} + 4x + 3 = 15⟧⟦\\iff⟧⟦x^{2} + 4x - 12 = 0⟧",
+      "titre": "Étape 2Ramener à 0"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Discriminant⟦\\Delta = b^{2} - 4ac = 4^{2} - 4 \\cdot 1 \\cdot (-12) = 16 + 48 = \\fbox{$64$}⟧",
+      "titre": "Étape 3Discriminant"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 4Valeurs de x⟦\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 8⟧⟦x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-4 - 8}{2} = -6⟧⟦x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-4 + 8}{2} = 2⟧",
+      "titre": "Étape 4Valeurs de x"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{-6\\,;\\,2\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Par la formule",
+    "progression_finale": "Étape 5 / 5"
+   }
+  }
+ },
+ "(x+1)^2=16": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": true,
+    "cle": "cours",
+    "texte": "Méthodes du cours"
+   },
+   {
+    "choisi": false,
+    "cle": "formule",
+    "texte": "Par la formule"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ramener à 0⟦(x + 1)^{2} = 16⟧⟦\\iff⟧⟦(x + 1)^{2} - 16 = 0⟧",
+    "titre": "Étape 1Ramener à 0"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Identité remarquable⟦(x + 1)^{2} - 16 = 0⟧⟦\\iff⟧⟦((x + 1) + 4)((x + 1) - 4) = 0⟧Id. rem. ⟦A^{2} - B^{2}⟧ avec ⟦\\fbox{$A = x + 1,\\ B = 4$}⟧⟦\\iff⟧⟦(x + 5)(x - 3) = 0⟧",
+    "titre": "Étape 2Identité remarquable"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Produit nul⟦(x + 5)(x - 3) = 0⟧⟦\\iff⟧⟦{x + 5 = 0} \\text{ ou } \\allowbreak {x - 3 = 0}⟧produit nul⟦\\iff⟧⟦{x = -5} \\text{ ou } \\allowbreak {x = 3}⟧",
+    "titre": "Étape 3Produit nul"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\{-5\\,;\\,3\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4",
+  "variantes": {
+   "cours": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ramener à 0⟦(x + 1)^{2} = 16⟧⟦\\iff⟧⟦(x + 1)^{2} - 16 = 0⟧",
+      "titre": "Étape 1Ramener à 0"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Identité remarquable⟦(x + 1)^{2} - 16 = 0⟧⟦\\iff⟧⟦((x + 1) + 4)((x + 1) - 4) = 0⟧Id. rem. ⟦A^{2} - B^{2}⟧ avec ⟦\\fbox{$A = x + 1,\\ B = 4$}⟧⟦\\iff⟧⟦(x + 5)(x - 3) = 0⟧",
+      "titre": "Étape 2Identité remarquable"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Produit nul⟦(x + 5)(x - 3) = 0⟧⟦\\iff⟧⟦{x + 5 = 0} \\text{ ou } \\allowbreak {x - 3 = 0}⟧produit nul⟦\\iff⟧⟦{x = -5} \\text{ ou } \\allowbreak {x = 3}⟧",
+      "titre": "Étape 3Produit nul"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{-5\\,;\\,3\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Méthodes du cours",
+    "progression_finale": "Étape 4 / 4"
+   },
+   "formule": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Développer⟦(x + 1)^{2} = 16⟧⟦\\iff⟧⟦x^{2} + 2x + 1 = 16⟧Id. rem. ⟦(A + B)^{2}⟧ avec ⟦A = x,\\ B = 1⟧",
+      "titre": "Étape 1Développer"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Ramener à 0⟦x^{2} + 2x + 1 = 16⟧⟦\\iff⟧⟦x^{2} + 2x - 15 = 0⟧",
+      "titre": "Étape 2Ramener à 0"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Discriminant⟦\\Delta = b^{2} - 4ac = 2^{2} - 4 \\cdot 1 \\cdot (-15) = 4 + 60 = \\fbox{$64$}⟧",
+      "titre": "Étape 3Discriminant"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 4Valeurs de x⟦\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 8⟧⟦x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-2 - 8}{2} = -5⟧⟦x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-2 + 8}{2} = 3⟧",
+      "titre": "Étape 4Valeurs de x"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{-5\\,;\\,3\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Par la formule",
+    "progression_finale": "Étape 5 / 5"
+   }
+  }
+ },
+ "(x-1)(2-x)(5-3x)=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 2",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Produit nul⟦(x - 1)(2 - x)(5 - 3x) = 0⟧⟦\\iff⟧⟦{x - 1 = 0} \\text{ ou } \\allowbreak {2 - x = 0} \\text{ ou } \\allowbreak {5 - 3x = 0}⟧produit nul⟦\\iff⟧⟦{x = 1} \\text{ ou } \\allowbreak {x = 2} \\text{ ou } \\allowbreak {x = \\frac{5}{3}}⟧",
+    "titre": "Étape 1Produit nul"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\{1\\,;\\,\\frac{5}{3}\\,;\\,2\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 2 / 2"
+ },
+ "(x-1)(2-x)=(x-1)(x+3)": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": true,
+    "cle": "cours",
+    "texte": "Méthodes du cours"
+   },
+   {
+    "choisi": false,
+    "cle": "formule",
+    "texte": "Par la formule"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ramener à 0Attention : on ne divise pas par ⟦(x - 1)⟧, car ce facteur peut être nul ! On ramène tout dans le membre de gauche, puis on met ⟦(x - 1)⟧ en évidence.⟦(x - 1)(2 - x) = (x - 1)(x + 3)⟧⟦\\iff⟧⟦(x - 1)(2 - x) - (x - 1)(x + 3) = 0⟧",
+    "titre": "Étape 1Ramener à 0"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Mise en évidence⟦(x - 1)(2 - x) - (x - 1)(x + 3) = 0⟧⟦\\iff⟧⟦(x - 1)[(2 - x) - (x + 3)] = 0⟧ME⟦\\iff⟧⟦(x - 1)(2 - x - x - 3) = 0⟧⟦\\iff⟧⟦(x - 1)(-2x - 1) = 0⟧",
+    "titre": "Étape 2Mise en évidence"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Produit nul⟦(x - 1)(-2x - 1) = 0⟧⟦\\iff⟧⟦{x - 1 = 0} \\text{ ou } \\allowbreak {-2x - 1 = 0}⟧produit nul⟦\\iff⟧⟦{x = 1} \\text{ ou } \\allowbreak {x = -\\frac{1}{2}}⟧",
+    "titre": "Étape 3Produit nul"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\{-\\frac{1}{2}\\,;\\,1\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4",
+  "variantes": {
+   "cours": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ramener à 0Attention : on ne divise pas par ⟦(x - 1)⟧, car ce facteur peut être nul ! On ramène tout dans le membre de gauche, puis on met ⟦(x - 1)⟧ en évidence.⟦(x - 1)(2 - x) = (x - 1)(x + 3)⟧⟦\\iff⟧⟦(x - 1)(2 - x) - (x - 1)(x + 3) = 0⟧",
+      "titre": "Étape 1Ramener à 0"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Mise en évidence⟦(x - 1)(2 - x) - (x - 1)(x + 3) = 0⟧⟦\\iff⟧⟦(x - 1)[(2 - x) - (x + 3)] = 0⟧ME⟦\\iff⟧⟦(x - 1)(2 - x - x - 3) = 0⟧⟦\\iff⟧⟦(x - 1)(-2x - 1) = 0⟧",
+      "titre": "Étape 2Mise en évidence"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Produit nul⟦(x - 1)(-2x - 1) = 0⟧⟦\\iff⟧⟦{x - 1 = 0} \\text{ ou } \\allowbreak {-2x - 1 = 0}⟧produit nul⟦\\iff⟧⟦{x = 1} \\text{ ou } \\allowbreak {x = -\\frac{1}{2}}⟧",
+      "titre": "Étape 3Produit nul"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{-\\frac{1}{2}\\,;\\,1\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Méthodes du cours",
+    "progression_finale": "Étape 4 / 4"
+   },
+   "formule": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Développer⟦(x - 1)(2 - x) = (x - 1)(x + 3)⟧⟦\\iff⟧⟦2x - x^{2} - 2 + x = x^{2} + 3x - x - 3⟧double distribution⟦\\iff⟧⟦-x^{2} + 3x - 2 = x^{2} + 2x - 3⟧",
+      "titre": "Étape 1Développer"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Ramener à 0⟦-x^{2} + 3x - 2 = x^{2} + 2x - 3⟧⟦\\iff⟧⟦2x^{2} - x - 1 = 0⟧",
+      "titre": "Étape 2Ramener à 0"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Discriminant⟦\\Delta = b^{2} - 4ac = (-1)^{2} - 4 \\cdot 2 \\cdot (-1) = 1 + 8 = \\fbox{$9$}⟧",
+      "titre": "Étape 3Discriminant"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 4Valeurs de x⟦\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 3⟧⟦x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{1 - 3}{4} = -\\frac{1}{2}⟧⟦x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{1 + 3}{4} = 1⟧",
+      "titre": "Étape 4Valeurs de x"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{-\\frac{1}{2}\\,;\\,1\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Par la formule",
+    "progression_finale": "Étape 5 / 5"
+   }
+  }
+ },
+ "-6x^2+12x-6=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": true,
+    "cle": "cours",
+    "texte": "Méthodes du cours"
+   },
+   {
+    "choisi": false,
+    "cle": "formule",
+    "texte": "Par la formule"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Mise en évidenceLe coefficient de ⟦x^{2}⟧ est négatif (⟦a = -6⟧) : on met d'abord ⟦-6⟧ en évidence.⟦-6x^{2} + 12x - 6 = 0⟧⟦\\iff⟧⟦-6(x^{2} - 2x + 1) = 0⟧ME",
+    "titre": "Étape 1Mise en évidence"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Identité remarquableId. rem. ⟦A^{2} - 2AB + B^{2}⟧ avec ⟦\\fbox{$A = x,\\ B = 1$}⟧. Vérification : ⟦2AB = 2 \\cdot x \\cdot 1 = 2x⟧ ⟦\\checkmark⟧⟦-6(x^{2} - 2x + 1) = 0⟧⟦\\iff⟧⟦-6(x - 1)^{2} = 0⟧⟦\\iff⟧⟦-6(x - 1)(x - 1) = 0⟧",
+    "titre": "Étape 2Identité remarquable"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Produit nul⟦-6(x - 1)(x - 1) = 0⟧⟦\\iff⟧⟦{\\underbrace{-6 = 0}_{\\text{impossible}}} \\text{ ou } \\allowbreak {x - 1 = 0}⟧produit nul⟦\\iff⟧⟦x = 1⟧",
+    "titre": "Étape 3Produit nul"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\{1\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4",
+  "variantes": {
+   "cours": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Mise en évidenceLe coefficient de ⟦x^{2}⟧ est négatif (⟦a = -6⟧) : on met d'abord ⟦-6⟧ en évidence.⟦-6x^{2} + 12x - 6 = 0⟧⟦\\iff⟧⟦-6(x^{2} - 2x + 1) = 0⟧ME",
+      "titre": "Étape 1Mise en évidence"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Identité remarquableId. rem. ⟦A^{2} - 2AB + B^{2}⟧ avec ⟦\\fbox{$A = x,\\ B = 1$}⟧. Vérification : ⟦2AB = 2 \\cdot x \\cdot 1 = 2x⟧ ⟦\\checkmark⟧⟦-6(x^{2} - 2x + 1) = 0⟧⟦\\iff⟧⟦-6(x - 1)^{2} = 0⟧⟦\\iff⟧⟦-6(x - 1)(x - 1) = 0⟧",
+      "titre": "Étape 2Identité remarquable"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Produit nul⟦-6(x - 1)(x - 1) = 0⟧⟦\\iff⟧⟦{\\underbrace{-6 = 0}_{\\text{impossible}}} \\text{ ou } \\allowbreak {x - 1 = 0}⟧produit nul⟦\\iff⟧⟦x = 1⟧",
+      "titre": "Étape 3Produit nul"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{1\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Méthodes du cours",
+    "progression_finale": "Étape 4 / 4"
+   },
+   "formule": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Discriminant⟦\\Delta = b^{2} - 4ac = 12^{2} - 4 \\cdot (-6) \\cdot (-6) = 144 - 144 = \\fbox{$0$}⟧",
+      "titre": "Étape 1Discriminant"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Valeurs de x⟦\\Delta = 0⟧ : une seule solution.⟦x = \\frac{-b}{2a} = \\frac{-12}{-12} = 1⟧",
+      "titre": "Étape 2Valeurs de x"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{1\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Par la formule",
+    "progression_finale": "Étape 3 / 3"
+   }
+  }
+ },
+ "-y^2+10y-9=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": true,
+    "cle": "cours",
+    "texte": "Méthodes du cours"
+   },
+   {
+    "choisi": false,
+    "cle": "formule",
+    "texte": "Par la formule"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Mise en évidenceLe trinôme n'est pas unitaire (⟦a = -1⟧) : on met d'abord ⟦-1⟧ en évidence.⟦-y^{2} + 10y - 9 = 0⟧⟦\\iff⟧⟦-(y^{2} - 10y + 9) = 0⟧ME",
+    "titre": "Étape 1Mise en évidence"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Somme-ProduitLe trinôme ⟦y^{2} - 10y + 9⟧ est unitaire : S-P.On cherche deux nombres dont le produit vaut ⟦9⟧ et la somme vaut ⟦-10⟧ :produit ⟦= 9⟧somme⟦-1⟧⟦-9⟧⟦-10⟧✓⟦-(y^{2} - 10y + 9) = 0⟧⟦\\iff⟧⟦-(y - 1)(y - 9) = 0⟧",
+    "titre": "Étape 2Somme-Produit"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Produit nul⟦-(y - 1)(y - 9) = 0⟧⟦\\iff⟧⟦{\\underbrace{-1 = 0}_{\\text{impossible}}} \\text{ ou } \\allowbreak {y - 1 = 0} \\text{ ou } \\allowbreak {y - 9 = 0}⟧produit nul⟦\\iff⟧⟦{y = 1} \\text{ ou } \\allowbreak {y = 9}⟧",
+    "titre": "Étape 3Produit nul"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\{1\\,;\\,9\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4",
+  "variantes": {
+   "cours": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Mise en évidenceLe trinôme n'est pas unitaire (⟦a = -1⟧) : on met d'abord ⟦-1⟧ en évidence.⟦-y^{2} + 10y - 9 = 0⟧⟦\\iff⟧⟦-(y^{2} - 10y + 9) = 0⟧ME",
+      "titre": "Étape 1Mise en évidence"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Somme-ProduitLe trinôme ⟦y^{2} - 10y + 9⟧ est unitaire : S-P.On cherche deux nombres dont le produit vaut ⟦9⟧ et la somme vaut ⟦-10⟧ :produit ⟦= 9⟧somme⟦-1⟧⟦-9⟧⟦-10⟧✓⟦-(y^{2} - 10y + 9) = 0⟧⟦\\iff⟧⟦-(y - 1)(y - 9) = 0⟧",
+      "titre": "Étape 2Somme-Produit"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Produit nul⟦-(y - 1)(y - 9) = 0⟧⟦\\iff⟧⟦{\\underbrace{-1 = 0}_{\\text{impossible}}} \\text{ ou } \\allowbreak {y - 1 = 0} \\text{ ou } \\allowbreak {y - 9 = 0}⟧produit nul⟦\\iff⟧⟦{y = 1} \\text{ ou } \\allowbreak {y = 9}⟧",
+      "titre": "Étape 3Produit nul"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{1\\,;\\,9\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Méthodes du cours",
+    "progression_finale": "Étape 4 / 4"
+   },
+   "formule": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Discriminant⟦\\Delta = b^{2} - 4ac = 10^{2} - 4 \\cdot (-1) \\cdot (-9) = 100 - 36 = \\fbox{$64$}⟧",
+      "titre": "Étape 1Discriminant"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Valeurs de y⟦\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 8⟧⟦x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-10 - 8}{-2} = 9⟧⟦x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-10 + 8}{-2} = 1⟧",
+      "titre": "Étape 2Valeurs de y"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{1\\,;\\,9\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Par la formule",
+    "progression_finale": "Étape 3 / 3"
+   }
+  }
+ },
+ "0,5x^2-2=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1FormulePas de ME, pas d'Id. rem. ; les coefficients ne sont pas entiers : on utilise la formule.",
+    "titre": "Étape 1Formule"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Discriminant⟦\\Delta = b^{2} - 4ac = 0^{2} - 4 \\cdot 0{,}5 \\cdot (-2) = \\fbox{$4$}⟧",
+    "titre": "Étape 2Discriminant"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Valeurs de x⟦\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 2⟧⟦x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-2}{1} = -2⟧⟦x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{2}{1} = 2⟧",
+    "titre": "Étape 3Valeurs de x"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\{-2\\,;\\,2\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4"
+ },
+ "16-(3x+2)^2=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": true,
+    "cle": "cours",
+    "texte": "Méthodes du cours"
+   },
+   {
+    "choisi": false,
+    "cle": "formule",
+    "texte": "Par la formule"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Identité remarquable⟦16 - (3x + 2)^{2} = 0⟧⟦\\iff⟧⟦(4 + (3x + 2))(4 - (3x + 2)) = 0⟧Id. rem. ⟦A^{2} - B^{2}⟧ avec ⟦\\fbox{$A = 4,\\ B = 3x + 2$}⟧⟦\\iff⟧⟦(4 + 3x + 2)(4 - 3x - 2) = 0⟧⟦\\iff⟧⟦(3x + 6)(2 - 3x) = 0⟧",
+    "titre": "Étape 1Identité remarquable"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Produit nul⟦(3x + 6)(2 - 3x) = 0⟧⟦\\iff⟧⟦{3x + 6 = 0} \\text{ ou } \\allowbreak {2 - 3x = 0}⟧produit nul⟦\\iff⟧⟦{x = -2} \\text{ ou } \\allowbreak {x = \\frac{2}{3}}⟧",
+    "titre": "Étape 2Produit nul"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\{-2\\,;\\,\\frac{2}{3}\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3",
+  "variantes": {
+   "cours": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Identité remarquable⟦16 - (3x + 2)^{2} = 0⟧⟦\\iff⟧⟦(4 + (3x + 2))(4 - (3x + 2)) = 0⟧Id. rem. ⟦A^{2} - B^{2}⟧ avec ⟦\\fbox{$A = 4,\\ B = 3x + 2$}⟧⟦\\iff⟧⟦(4 + 3x + 2)(4 - 3x - 2) = 0⟧⟦\\iff⟧⟦(3x + 6)(2 - 3x) = 0⟧",
+      "titre": "Étape 1Identité remarquable"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Produit nul⟦(3x + 6)(2 - 3x) = 0⟧⟦\\iff⟧⟦{3x + 6 = 0} \\text{ ou } \\allowbreak {2 - 3x = 0}⟧produit nul⟦\\iff⟧⟦{x = -2} \\text{ ou } \\allowbreak {x = \\frac{2}{3}}⟧",
+      "titre": "Étape 2Produit nul"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{-2\\,;\\,\\frac{2}{3}\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Méthodes du cours",
+    "progression_finale": "Étape 3 / 3"
+   },
+   "formule": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Développer⟦16 - (3x + 2)^{2} = 0⟧⟦\\iff⟧⟦16 - (9x^{2} + 12x + 4) = 0⟧Id. rem. ⟦(A + B)^{2}⟧ avec ⟦A = 3x,\\ B = 2⟧⟦\\iff⟧⟦16 - 9x^{2} - 12x - 4 = 0⟧⟦\\iff⟧⟦-9x^{2} - 12x + 12 = 0⟧",
+      "titre": "Étape 1Développer"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Discriminant⟦\\Delta = b^{2} - 4ac = (-12)^{2} - 4 \\cdot (-9) \\cdot 12 = 144 + 432 = \\fbox{$576$}⟧",
+      "titre": "Étape 2Discriminant"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Valeurs de x⟦\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 24⟧⟦x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{12 - 24}{-18} = \\frac{2}{3}⟧⟦x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{12 + 24}{-18} = -2⟧",
+      "titre": "Étape 3Valeurs de x"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{-2\\,;\\,\\frac{2}{3}\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Par la formule",
+    "progression_finale": "Étape 4 / 4"
+   }
+  }
+ },
+ "17x^2+288x-17=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": true,
+    "cle": "cours",
+    "texte": "Méthodes du cours"
+   },
+   {
+    "choisi": false,
+    "cle": "formule",
+    "texte": "Par la formule"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1TâtonnementPas de ME, pas d'Id. rem. ; ⟦a = 17 \\neq 1⟧ : tâtonnement.⟦\\fbox{$x = -17$}⟧ est solution, car ⟦17 \\cdot (-17)^{2} + 288 \\cdot (-17) - 17 = 4\\text{’}913 - 4\\text{’}896 - 17 = 0⟧.Donc ⟦17x^{2} + 288x - 17 = (x + 17)(17x + \\triangle)⟧ avec ⟦17 \\cdot \\triangle = -17⟧, donc ⟦\\fbox{$\\triangle = -1$}⟧.⟦17x^{2} + 288x - 17 = 0⟧⟦\\iff⟧⟦(x + 17)(17x - 1) = 0⟧",
+    "titre": "Étape 1Tâtonnement"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Produit nul⟦(x + 17)(17x - 1) = 0⟧⟦\\iff⟧⟦{x + 17 = 0} \\text{ ou } \\allowbreak {17x - 1 = 0}⟧produit nul⟦\\iff⟧⟦{x = -17} \\text{ ou } \\allowbreak {x = \\frac{1}{17}}⟧",
+    "titre": "Étape 2Produit nul"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\{-17\\,;\\,\\frac{1}{17}\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3",
+  "variantes": {
+   "cours": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1TâtonnementPas de ME, pas d'Id. rem. ; ⟦a = 17 \\neq 1⟧ : tâtonnement.⟦\\fbox{$x = -17$}⟧ est solution, car ⟦17 \\cdot (-17)^{2} + 288 \\cdot (-17) - 17 = 4\\text{’}913 - 4\\text{’}896 - 17 = 0⟧.Donc ⟦17x^{2} + 288x - 17 = (x + 17)(17x + \\triangle)⟧ avec ⟦17 \\cdot \\triangle = -17⟧, donc ⟦\\fbox{$\\triangle = -1$}⟧.⟦17x^{2} + 288x - 17 = 0⟧⟦\\iff⟧⟦(x + 17)(17x - 1) = 0⟧",
+      "titre": "Étape 1Tâtonnement"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Produit nul⟦(x + 17)(17x - 1) = 0⟧⟦\\iff⟧⟦{x + 17 = 0} \\text{ ou } \\allowbreak {17x - 1 = 0}⟧produit nul⟦\\iff⟧⟦{x = -17} \\text{ ou } \\allowbreak {x = \\frac{1}{17}}⟧",
+      "titre": "Étape 2Produit nul"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{-17\\,;\\,\\frac{1}{17}\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Méthodes du cours",
+    "progression_finale": "Étape 3 / 3"
+   },
+   "formule": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Discriminant⟦\\Delta = b^{2} - 4ac = 288^{2} - 4 \\cdot 17 \\cdot (-17) = 82\\text{’}944 + 1\\text{’}156 = \\fbox{$84\\text{’}100$}⟧",
+      "titre": "Étape 1Discriminant"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Valeurs de x⟦\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 290⟧⟦x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-288 - 290}{34} = -17⟧⟦x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-288 + 290}{34} = \\frac{1}{17}⟧",
+      "titre": "Étape 2Valeurs de x"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{-17\\,;\\,\\frac{1}{17}\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Par la formule",
+    "progression_finale": "Étape 3 / 3"
+   }
+  }
+ },
+ "18z^2+72z+72=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": true,
+    "cle": "cours",
+    "texte": "Méthodes du cours"
+   },
+   {
+    "choisi": false,
+    "cle": "formule",
+    "texte": "Par la formule"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Mise en évidence⟦18z^{2} + 72z + 72 = 0⟧⟦\\iff⟧⟦18(z^{2} + 4z + 4) = 0⟧ME",
+    "titre": "Étape 1Mise en évidence"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Identité remarquableId. rem. ⟦A^{2} + 2AB + B^{2}⟧ avec ⟦\\fbox{$A = z,\\ B = 2$}⟧. Vérification : ⟦2AB = 2 \\cdot z \\cdot 2 = 4z⟧ ⟦\\checkmark⟧⟦18(z^{2} + 4z + 4) = 0⟧⟦\\iff⟧⟦18(z + 2)^{2} = 0⟧⟦\\iff⟧⟦18(z + 2)(z + 2) = 0⟧",
+    "titre": "Étape 2Identité remarquable"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Produit nul⟦18(z + 2)(z + 2) = 0⟧⟦\\iff⟧⟦{\\underbrace{18 = 0}_{\\text{impossible}}} \\text{ ou } \\allowbreak {z + 2 = 0}⟧produit nul⟦\\iff⟧⟦z = -2⟧",
+    "titre": "Étape 3Produit nul"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\{-2\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4",
+  "variantes": {
+   "cours": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Mise en évidence⟦18z^{2} + 72z + 72 = 0⟧⟦\\iff⟧⟦18(z^{2} + 4z + 4) = 0⟧ME",
+      "titre": "Étape 1Mise en évidence"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Identité remarquableId. rem. ⟦A^{2} + 2AB + B^{2}⟧ avec ⟦\\fbox{$A = z,\\ B = 2$}⟧. Vérification : ⟦2AB = 2 \\cdot z \\cdot 2 = 4z⟧ ⟦\\checkmark⟧⟦18(z^{2} + 4z + 4) = 0⟧⟦\\iff⟧⟦18(z + 2)^{2} = 0⟧⟦\\iff⟧⟦18(z + 2)(z + 2) = 0⟧",
+      "titre": "Étape 2Identité remarquable"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Produit nul⟦18(z + 2)(z + 2) = 0⟧⟦\\iff⟧⟦{\\underbrace{18 = 0}_{\\text{impossible}}} \\text{ ou } \\allowbreak {z + 2 = 0}⟧produit nul⟦\\iff⟧⟦z = -2⟧",
+      "titre": "Étape 3Produit nul"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{-2\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Méthodes du cours",
+    "progression_finale": "Étape 4 / 4"
+   },
+   "formule": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Discriminant⟦\\Delta = b^{2} - 4ac = 72^{2} - 4 \\cdot 18 \\cdot 72 = 5\\text{’}184 - 5\\text{’}184 = \\fbox{$0$}⟧",
+      "titre": "Étape 1Discriminant"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Valeurs de z⟦\\Delta = 0⟧ : une seule solution.⟦z = \\frac{-b}{2a} = \\frac{-72}{36} = -2⟧",
+      "titre": "Étape 2Valeurs de z"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{-2\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Par la formule",
+    "progression_finale": "Étape 3 / 3"
+   }
+  }
+ },
+ "196z^2+280z=-100": {
+  "au_depart": {
+   "progression": "Étape 1 / 5",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": true,
+    "cle": "cours",
+    "texte": "Méthodes du cours"
+   },
+   {
+    "choisi": false,
+    "cle": "formule",
+    "texte": "Par la formule"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ramener à 0⟦196z^{2} + 280z = -100⟧⟦\\iff⟧⟦196z^{2} + 280z + 100 = 0⟧",
+    "titre": "Étape 1Ramener à 0"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Mise en évidence⟦196z^{2} + 280z + 100 = 0⟧⟦\\iff⟧⟦4(49z^{2} + 70z + 25) = 0⟧ME",
+    "titre": "Étape 2Mise en évidence"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Identité remarquableId. rem. ⟦A^{2} + 2AB + B^{2}⟧ avec ⟦\\fbox{$A = 7z,\\ B = 5$}⟧. Vérification : ⟦2AB = 2 \\cdot 7z \\cdot 5 = 70z⟧ ⟦\\checkmark⟧⟦4(49z^{2} + 70z + 25) = 0⟧⟦\\iff⟧⟦4(7z + 5)^{2} = 0⟧⟦\\iff⟧⟦4(7z + 5)(7z + 5) = 0⟧",
+    "titre": "Étape 3Identité remarquable"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 4Produit nul⟦4(7z + 5)(7z + 5) = 0⟧⟦\\iff⟧⟦{\\underbrace{4 = 0}_{\\text{impossible}}} \\text{ ou } \\allowbreak {7z + 5 = 0}⟧produit nul⟦\\iff⟧⟦z = -\\frac{5}{7}⟧",
+    "titre": "Étape 4Produit nul"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\{-\\frac{5}{7}\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 5 / 5",
+  "variantes": {
+   "cours": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ramener à 0⟦196z^{2} + 280z = -100⟧⟦\\iff⟧⟦196z^{2} + 280z + 100 = 0⟧",
+      "titre": "Étape 1Ramener à 0"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Mise en évidence⟦196z^{2} + 280z + 100 = 0⟧⟦\\iff⟧⟦4(49z^{2} + 70z + 25) = 0⟧ME",
+      "titre": "Étape 2Mise en évidence"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Identité remarquableId. rem. ⟦A^{2} + 2AB + B^{2}⟧ avec ⟦\\fbox{$A = 7z,\\ B = 5$}⟧. Vérification : ⟦2AB = 2 \\cdot 7z \\cdot 5 = 70z⟧ ⟦\\checkmark⟧⟦4(49z^{2} + 70z + 25) = 0⟧⟦\\iff⟧⟦4(7z + 5)^{2} = 0⟧⟦\\iff⟧⟦4(7z + 5)(7z + 5) = 0⟧",
+      "titre": "Étape 3Identité remarquable"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 4Produit nul⟦4(7z + 5)(7z + 5) = 0⟧⟦\\iff⟧⟦{\\underbrace{4 = 0}_{\\text{impossible}}} \\text{ ou } \\allowbreak {7z + 5 = 0}⟧produit nul⟦\\iff⟧⟦z = -\\frac{5}{7}⟧",
+      "titre": "Étape 4Produit nul"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{-\\frac{5}{7}\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Méthodes du cours",
+    "progression_finale": "Étape 5 / 5"
+   },
+   "formule": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ramener à 0⟦196z^{2} + 280z = -100⟧⟦\\iff⟧⟦196z^{2} + 280z + 100 = 0⟧",
+      "titre": "Étape 1Ramener à 0"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Discriminant⟦\\Delta = b^{2} - 4ac = 280^{2} - 4 \\cdot 196 \\cdot 100 = 78\\text{’}400 - 78\\text{’}400 = \\fbox{$0$}⟧",
+      "titre": "Étape 2Discriminant"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Valeurs de z⟦\\Delta = 0⟧ : une seule solution.⟦z = \\frac{-b}{2a} = \\frac{-280}{392} = -\\frac{5}{7}⟧",
+      "titre": "Étape 3Valeurs de z"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{-\\frac{5}{7}\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Par la formule",
+    "progression_finale": "Étape 4 / 4"
+   }
+  }
+ },
+ "2x^2+13x+15=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": true,
+    "cle": "cours",
+    "texte": "Méthodes du cours"
+   },
+   {
+    "choisi": false,
+    "cle": "formule",
+    "texte": "Par la formule"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1TâtonnementPas de ME, pas d'Id. rem. ; ⟦a = 2 \\neq 1⟧ : tâtonnement.⟦\\fbox{$x = -5$}⟧ est solution, car ⟦2 \\cdot (-5)^{2} + 13 \\cdot (-5) + 15 = 50 - 65 + 15 = 0⟧.Donc ⟦2x^{2} + 13x + 15 = (x + 5)(2x + \\triangle)⟧ avec ⟦5 \\cdot \\triangle = 15⟧, donc ⟦\\fbox{$\\triangle = 3$}⟧.⟦2x^{2} + 13x + 15 = 0⟧⟦\\iff⟧⟦(x + 5)(2x + 3) = 0⟧",
+    "titre": "Étape 1Tâtonnement"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Produit nul⟦(x + 5)(2x + 3) = 0⟧⟦\\iff⟧⟦{x + 5 = 0} \\text{ ou } \\allowbreak {2x + 3 = 0}⟧produit nul⟦\\iff⟧⟦{x = -5} \\text{ ou } \\allowbreak {x = -\\frac{3}{2}}⟧",
+    "titre": "Étape 2Produit nul"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\{-5\\,;\\,-\\frac{3}{2}\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3",
+  "variantes": {
+   "cours": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1TâtonnementPas de ME, pas d'Id. rem. ; ⟦a = 2 \\neq 1⟧ : tâtonnement.⟦\\fbox{$x = -5$}⟧ est solution, car ⟦2 \\cdot (-5)^{2} + 13 \\cdot (-5) + 15 = 50 - 65 + 15 = 0⟧.Donc ⟦2x^{2} + 13x + 15 = (x + 5)(2x + \\triangle)⟧ avec ⟦5 \\cdot \\triangle = 15⟧, donc ⟦\\fbox{$\\triangle = 3$}⟧.⟦2x^{2} + 13x + 15 = 0⟧⟦\\iff⟧⟦(x + 5)(2x + 3) = 0⟧",
+      "titre": "Étape 1Tâtonnement"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Produit nul⟦(x + 5)(2x + 3) = 0⟧⟦\\iff⟧⟦{x + 5 = 0} \\text{ ou } \\allowbreak {2x + 3 = 0}⟧produit nul⟦\\iff⟧⟦{x = -5} \\text{ ou } \\allowbreak {x = -\\frac{3}{2}}⟧",
+      "titre": "Étape 2Produit nul"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{-5\\,;\\,-\\frac{3}{2}\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Méthodes du cours",
+    "progression_finale": "Étape 3 / 3"
+   },
+   "formule": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Discriminant⟦\\Delta = b^{2} - 4ac = 13^{2} - 4 \\cdot 2 \\cdot 15 = 169 - 120 = \\fbox{$49$}⟧",
+      "titre": "Étape 1Discriminant"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Valeurs de x⟦\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 7⟧⟦x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-13 - 7}{4} = -5⟧⟦x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-13 + 7}{4} = -\\frac{3}{2}⟧",
+      "titre": "Étape 2Valeurs de x"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{-5\\,;\\,-\\frac{3}{2}\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Par la formule",
+    "progression_finale": "Étape 3 / 3"
+   }
+  }
+ },
+ "2x^2-4x-4=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 6",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Mise en évidence⟦2x^{2} - 4x - 4 = 0⟧⟦\\iff⟧⟦2(x^{2} - 2x - 2) = 0⟧ME",
+    "titre": "Étape 1Mise en évidence"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Somme-ProduitLe trinôme ⟦x^{2} - 2x - 2⟧ est unitaire : S-P.On cherche deux nombres dont le produit vaut ⟦-2⟧ et la somme vaut ⟦-2⟧ :produit ⟦= -2⟧somme⟦1⟧⟦-2⟧⟦-1⟧Aucun couple ne convient : on utilise la formule.",
+    "titre": "Étape 2Somme-Produit"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Produit nul⟦2(x^{2} - 2x - 2) = 0⟧⟦\\iff⟧⟦{\\underbrace{2 = 0}_{\\text{impossible}}} \\text{ ou } \\allowbreak {x^{2} - 2x - 2 = 0}⟧produit nul",
+    "titre": "Étape 3Produit nul"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 4Discriminant⟦\\Delta = b^{2} - 4ac = (-2)^{2} - 4 \\cdot 1 \\cdot (-2) = 4 + 8 = \\fbox{$12$}⟧",
+    "titre": "Étape 4Discriminant"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 5Valeurs de x⟦\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = \\sqrt{12} = 2\\sqrt{3}⟧⟦x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{2 - 2\\sqrt{3}}{2} = 1 - \\sqrt{3}⟧⟦x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{2 + 2\\sqrt{3}}{2} = 1 + \\sqrt{3}⟧⟦\\iff⟧⟦{x = 1 - \\sqrt{3}} \\text{ ou } \\allowbreak {x = 1 + \\sqrt{3}}⟧",
+    "titre": "Étape 5Valeurs de x"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\{1 - \\sqrt{3}\\,;\\,1 + \\sqrt{3}\\}⟧soit ⟦x_{1} \\approx -0{,}732⟧ et ⟦x_{2} \\approx 2{,}732⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 6 / 6"
+ },
+ "2x^2-x-28=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": true,
+    "cle": "cours",
+    "texte": "Méthodes du cours"
+   },
+   {
+    "choisi": false,
+    "cle": "formule",
+    "texte": "Par la formule"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1TâtonnementPas de ME, pas d'Id. rem. ; ⟦a = 2 \\neq 1⟧ : tâtonnement.⟦\\fbox{$x = 4$}⟧ est solution, car ⟦2 \\cdot 4^{2} - 4 - 28 = 32 - 4 - 28 = 0⟧.Donc ⟦2x^{2} - x - 28 = (x - 4)(2x + \\triangle)⟧ avec ⟦-4 \\cdot \\triangle = -28⟧, donc ⟦\\fbox{$\\triangle = 7$}⟧.⟦2x^{2} - x - 28 = 0⟧⟦\\iff⟧⟦(x - 4)(2x + 7) = 0⟧",
+    "titre": "Étape 1Tâtonnement"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Produit nul⟦(x - 4)(2x + 7) = 0⟧⟦\\iff⟧⟦{x - 4 = 0} \\text{ ou } \\allowbreak {2x + 7 = 0}⟧produit nul⟦\\iff⟧⟦{x = 4} \\text{ ou } \\allowbreak {x = -\\frac{7}{2}}⟧",
+    "titre": "Étape 2Produit nul"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\{-\\frac{7}{2}\\,;\\,4\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3",
+  "variantes": {
+   "cours": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1TâtonnementPas de ME, pas d'Id. rem. ; ⟦a = 2 \\neq 1⟧ : tâtonnement.⟦\\fbox{$x = 4$}⟧ est solution, car ⟦2 \\cdot 4^{2} - 4 - 28 = 32 - 4 - 28 = 0⟧.Donc ⟦2x^{2} - x - 28 = (x - 4)(2x + \\triangle)⟧ avec ⟦-4 \\cdot \\triangle = -28⟧, donc ⟦\\fbox{$\\triangle = 7$}⟧.⟦2x^{2} - x - 28 = 0⟧⟦\\iff⟧⟦(x - 4)(2x + 7) = 0⟧",
+      "titre": "Étape 1Tâtonnement"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Produit nul⟦(x - 4)(2x + 7) = 0⟧⟦\\iff⟧⟦{x - 4 = 0} \\text{ ou } \\allowbreak {2x + 7 = 0}⟧produit nul⟦\\iff⟧⟦{x = 4} \\text{ ou } \\allowbreak {x = -\\frac{7}{2}}⟧",
+      "titre": "Étape 2Produit nul"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{-\\frac{7}{2}\\,;\\,4\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Méthodes du cours",
+    "progression_finale": "Étape 3 / 3"
+   },
+   "formule": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Discriminant⟦\\Delta = b^{2} - 4ac = (-1)^{2} - 4 \\cdot 2 \\cdot (-28) = 1 + 224 = \\fbox{$225$}⟧",
+      "titre": "Étape 1Discriminant"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Valeurs de x⟦\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 15⟧⟦x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{1 - 15}{4} = -\\frac{7}{2}⟧⟦x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{1 + 15}{4} = 4⟧",
+      "titre": "Étape 2Valeurs de x"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{-\\frac{7}{2}\\,;\\,4\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Par la formule",
+    "progression_finale": "Étape 3 / 3"
+   }
+  }
+ },
+ "2z^2+24z+64=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": true,
+    "cle": "cours",
+    "texte": "Méthodes du cours"
+   },
+   {
+    "choisi": false,
+    "cle": "formule",
+    "texte": "Par la formule"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Mise en évidence⟦2z^{2} + 24z + 64 = 0⟧⟦\\iff⟧⟦2(z^{2} + 12z + 32) = 0⟧ME",
+    "titre": "Étape 1Mise en évidence"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Somme-ProduitLe trinôme ⟦z^{2} + 12z + 32⟧ est unitaire : S-P.On cherche deux nombres dont le produit vaut ⟦32⟧ et la somme vaut ⟦12⟧ :produit ⟦= 32⟧somme⟦1⟧⟦32⟧⟦33⟧⟦2⟧⟦16⟧⟦18⟧⟦4⟧⟦8⟧⟦12⟧✓⟦2(z^{2} + 12z + 32) = 0⟧⟦\\iff⟧⟦2(z + 4)(z + 8) = 0⟧",
+    "titre": "Étape 2Somme-Produit"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Produit nul⟦2(z + 4)(z + 8) = 0⟧⟦\\iff⟧⟦{\\underbrace{2 = 0}_{\\text{impossible}}} \\text{ ou } \\allowbreak {z + 4 = 0} \\text{ ou } \\allowbreak {z + 8 = 0}⟧produit nul⟦\\iff⟧⟦{z = -4} \\text{ ou } \\allowbreak {z = -8}⟧",
+    "titre": "Étape 3Produit nul"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\{-8\\,;\\,-4\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4",
+  "variantes": {
+   "cours": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Mise en évidence⟦2z^{2} + 24z + 64 = 0⟧⟦\\iff⟧⟦2(z^{2} + 12z + 32) = 0⟧ME",
+      "titre": "Étape 1Mise en évidence"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Somme-ProduitLe trinôme ⟦z^{2} + 12z + 32⟧ est unitaire : S-P.On cherche deux nombres dont le produit vaut ⟦32⟧ et la somme vaut ⟦12⟧ :produit ⟦= 32⟧somme⟦1⟧⟦32⟧⟦33⟧⟦2⟧⟦16⟧⟦18⟧⟦4⟧⟦8⟧⟦12⟧✓⟦2(z^{2} + 12z + 32) = 0⟧⟦\\iff⟧⟦2(z + 4)(z + 8) = 0⟧",
+      "titre": "Étape 2Somme-Produit"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Produit nul⟦2(z + 4)(z + 8) = 0⟧⟦\\iff⟧⟦{\\underbrace{2 = 0}_{\\text{impossible}}} \\text{ ou } \\allowbreak {z + 4 = 0} \\text{ ou } \\allowbreak {z + 8 = 0}⟧produit nul⟦\\iff⟧⟦{z = -4} \\text{ ou } \\allowbreak {z = -8}⟧",
+      "titre": "Étape 3Produit nul"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{-8\\,;\\,-4\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Méthodes du cours",
+    "progression_finale": "Étape 4 / 4"
+   },
+   "formule": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Discriminant⟦\\Delta = b^{2} - 4ac = 24^{2} - 4 \\cdot 2 \\cdot 64 = 576 - 512 = \\fbox{$64$}⟧",
+      "titre": "Étape 1Discriminant"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Valeurs de z⟦\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 8⟧⟦x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-24 - 8}{4} = -8⟧⟦x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-24 + 8}{4} = -4⟧",
+      "titre": "Étape 2Valeurs de z"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{-8\\,;\\,-4\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Par la formule",
+    "progression_finale": "Étape 3 / 3"
+   }
+  }
+ },
+ "3t^2+5t+12=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1TâtonnementPas de ME, pas d'Id. rem. ; ⟦a = 3 \\neq 1⟧ : tâtonnement.On teste les diviseurs de ⟦12⟧ (⟦\\pm 1⟧, ⟦\\pm 2⟧, ⟦\\pm 3⟧, ⟦\\pm 4⟧, ⟦\\pm 6⟧, ⟦\\pm 12⟧) : aucun n'est solution. On utilise la formule.",
+    "titre": "Étape 1Tâtonnement"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Discriminant⟦\\Delta = b^{2} - 4ac = 5^{2} - 4 \\cdot 3 \\cdot 12 = 25 - 144 = \\fbox{$-119$}⟧",
+    "titre": "Étape 2Discriminant"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Valeurs de t⟦\\Delta < 0⟧ : l'équation n'a aucune solution réelle.",
+    "titre": "Étape 3Valeurs de t"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\varnothing⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4"
+ },
+ "3x^2+2x-1=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": true,
+    "cle": "cours",
+    "texte": "Méthodes du cours"
+   },
+   {
+    "choisi": false,
+    "cle": "formule",
+    "texte": "Par la formule"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1TâtonnementPas de ME, pas d'Id. rem. ; ⟦a = 3 \\neq 1⟧ : tâtonnement.⟦\\fbox{$x = -1$}⟧ est solution, car ⟦3 \\cdot (-1)^{2} + 2 \\cdot (-1) - 1 = 3 - 2 - 1 = 0⟧.Donc ⟦3x^{2} + 2x - 1 = (x + 1)(3x + \\triangle)⟧ avec ⟦1 \\cdot \\triangle = -1⟧, donc ⟦\\fbox{$\\triangle = -1$}⟧.⟦3x^{2} + 2x - 1 = 0⟧⟦\\iff⟧⟦(x + 1)(3x - 1) = 0⟧",
+    "titre": "Étape 1Tâtonnement"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Produit nul⟦(x + 1)(3x - 1) = 0⟧⟦\\iff⟧⟦{x + 1 = 0} \\text{ ou } \\allowbreak {3x - 1 = 0}⟧produit nul⟦\\iff⟧⟦{x = -1} \\text{ ou } \\allowbreak {x = \\frac{1}{3}}⟧",
+    "titre": "Étape 2Produit nul"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\{-1\\,;\\,\\frac{1}{3}\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3",
+  "variantes": {
+   "cours": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1TâtonnementPas de ME, pas d'Id. rem. ; ⟦a = 3 \\neq 1⟧ : tâtonnement.⟦\\fbox{$x = -1$}⟧ est solution, car ⟦3 \\cdot (-1)^{2} + 2 \\cdot (-1) - 1 = 3 - 2 - 1 = 0⟧.Donc ⟦3x^{2} + 2x - 1 = (x + 1)(3x + \\triangle)⟧ avec ⟦1 \\cdot \\triangle = -1⟧, donc ⟦\\fbox{$\\triangle = -1$}⟧.⟦3x^{2} + 2x - 1 = 0⟧⟦\\iff⟧⟦(x + 1)(3x - 1) = 0⟧",
+      "titre": "Étape 1Tâtonnement"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Produit nul⟦(x + 1)(3x - 1) = 0⟧⟦\\iff⟧⟦{x + 1 = 0} \\text{ ou } \\allowbreak {3x - 1 = 0}⟧produit nul⟦\\iff⟧⟦{x = -1} \\text{ ou } \\allowbreak {x = \\frac{1}{3}}⟧",
+      "titre": "Étape 2Produit nul"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{-1\\,;\\,\\frac{1}{3}\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Méthodes du cours",
+    "progression_finale": "Étape 3 / 3"
+   },
+   "formule": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Discriminant⟦\\Delta = b^{2} - 4ac = 2^{2} - 4 \\cdot 3 \\cdot (-1) = 4 + 12 = \\fbox{$16$}⟧",
+      "titre": "Étape 1Discriminant"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Valeurs de x⟦\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 4⟧⟦x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-2 - 4}{6} = -1⟧⟦x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-2 + 4}{6} = \\frac{1}{3}⟧",
+      "titre": "Étape 2Valeurs de x"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{-1\\,;\\,\\frac{1}{3}\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Par la formule",
+    "progression_finale": "Étape 3 / 3"
+   }
+  }
+ },
+ "3x^2+4=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1TâtonnementPas de ME, pas d'Id. rem. ; ⟦a = 3 \\neq 1⟧ : tâtonnement.On teste les diviseurs de ⟦4⟧ (⟦\\pm 1⟧, ⟦\\pm 2⟧, ⟦\\pm 4⟧) : aucun n'est solution. On utilise la formule.",
+    "titre": "Étape 1Tâtonnement"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Discriminant⟦\\Delta = b^{2} - 4ac = 0^{2} - 4 \\cdot 3 \\cdot 4 = \\fbox{$-48$}⟧",
+    "titre": "Étape 2Discriminant"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Valeurs de x⟦\\Delta < 0⟧ : l'équation n'a aucune solution réelle.",
+    "titre": "Étape 3Valeurs de x"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\varnothing⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4"
+ },
+ "3x^2-8x-35=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": true,
+    "cle": "cours",
+    "texte": "Méthodes du cours"
+   },
+   {
+    "choisi": false,
+    "cle": "formule",
+    "texte": "Par la formule"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1TâtonnementPas de ME, pas d'Id. rem. ; ⟦a = 3 \\neq 1⟧ : tâtonnement.⟦\\fbox{$x = 5$}⟧ est solution, car ⟦3 \\cdot 5^{2} - 8 \\cdot 5 - 35 = 75 - 40 - 35 = 0⟧.Donc ⟦3x^{2} - 8x - 35 = (x - 5)(3x + \\triangle)⟧ avec ⟦-5 \\cdot \\triangle = -35⟧, donc ⟦\\fbox{$\\triangle = 7$}⟧.⟦3x^{2} - 8x - 35 = 0⟧⟦\\iff⟧⟦(x - 5)(3x + 7) = 0⟧",
+    "titre": "Étape 1Tâtonnement"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Produit nul⟦(x - 5)(3x + 7) = 0⟧⟦\\iff⟧⟦{x - 5 = 0} \\text{ ou } \\allowbreak {3x + 7 = 0}⟧produit nul⟦\\iff⟧⟦{x = 5} \\text{ ou } \\allowbreak {x = -\\frac{7}{3}}⟧",
+    "titre": "Étape 2Produit nul"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\{-\\frac{7}{3}\\,;\\,5\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3",
+  "variantes": {
+   "cours": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1TâtonnementPas de ME, pas d'Id. rem. ; ⟦a = 3 \\neq 1⟧ : tâtonnement.⟦\\fbox{$x = 5$}⟧ est solution, car ⟦3 \\cdot 5^{2} - 8 \\cdot 5 - 35 = 75 - 40 - 35 = 0⟧.Donc ⟦3x^{2} - 8x - 35 = (x - 5)(3x + \\triangle)⟧ avec ⟦-5 \\cdot \\triangle = -35⟧, donc ⟦\\fbox{$\\triangle = 7$}⟧.⟦3x^{2} - 8x - 35 = 0⟧⟦\\iff⟧⟦(x - 5)(3x + 7) = 0⟧",
+      "titre": "Étape 1Tâtonnement"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Produit nul⟦(x - 5)(3x + 7) = 0⟧⟦\\iff⟧⟦{x - 5 = 0} \\text{ ou } \\allowbreak {3x + 7 = 0}⟧produit nul⟦\\iff⟧⟦{x = 5} \\text{ ou } \\allowbreak {x = -\\frac{7}{3}}⟧",
+      "titre": "Étape 2Produit nul"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{-\\frac{7}{3}\\,;\\,5\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Méthodes du cours",
+    "progression_finale": "Étape 3 / 3"
+   },
+   "formule": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Discriminant⟦\\Delta = b^{2} - 4ac = (-8)^{2} - 4 \\cdot 3 \\cdot (-35) = 64 + 420 = \\fbox{$484$}⟧",
+      "titre": "Étape 1Discriminant"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Valeurs de x⟦\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 22⟧⟦x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{8 - 22}{6} = -\\frac{7}{3}⟧⟦x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{8 + 22}{6} = 5⟧",
+      "titre": "Étape 2Valeurs de x"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{-\\frac{7}{3}\\,;\\,5\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Par la formule",
+    "progression_finale": "Étape 3 / 3"
+   }
+  }
+ },
+ "4(x-2)^2=1": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": true,
+    "cle": "cours",
+    "texte": "Méthodes du cours"
+   },
+   {
+    "choisi": false,
+    "cle": "formule",
+    "texte": "Par la formule"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ramener à 0⟦4(x - 2)^{2} = 1⟧⟦\\iff⟧⟦4(x - 2)^{2} - 1 = 0⟧",
+    "titre": "Étape 1Ramener à 0"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Identité remarquableId. rem. ⟦A^{2} - B^{2}⟧ avec ⟦\\fbox{$A = 2(x - 2),\\ B = 1$}⟧ (car ⟦A^{2} = 4(x - 2)^{2}⟧).⟦4(x - 2)^{2} - 1 = 0⟧⟦\\iff⟧⟦(2(x - 2) + 1)(2(x - 2) - 1) = 0⟧⟦\\iff⟧⟦(2x - 4 + 1)(2x - 4 - 1) = 0⟧⟦\\iff⟧⟦(2x - 3)(2x - 5) = 0⟧",
+    "titre": "Étape 2Identité remarquable"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Produit nul⟦(2x - 3)(2x - 5) = 0⟧⟦\\iff⟧⟦{2x - 3 = 0} \\text{ ou } \\allowbreak {2x - 5 = 0}⟧produit nul⟦\\iff⟧⟦{x = \\frac{3}{2}} \\text{ ou } \\allowbreak {x = \\frac{5}{2}}⟧",
+    "titre": "Étape 3Produit nul"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\{\\frac{3}{2}\\,;\\,\\frac{5}{2}\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4",
+  "variantes": {
+   "cours": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ramener à 0⟦4(x - 2)^{2} = 1⟧⟦\\iff⟧⟦4(x - 2)^{2} - 1 = 0⟧",
+      "titre": "Étape 1Ramener à 0"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Identité remarquableId. rem. ⟦A^{2} - B^{2}⟧ avec ⟦\\fbox{$A = 2(x - 2),\\ B = 1$}⟧ (car ⟦A^{2} = 4(x - 2)^{2}⟧).⟦4(x - 2)^{2} - 1 = 0⟧⟦\\iff⟧⟦(2(x - 2) + 1)(2(x - 2) - 1) = 0⟧⟦\\iff⟧⟦(2x - 4 + 1)(2x - 4 - 1) = 0⟧⟦\\iff⟧⟦(2x - 3)(2x - 5) = 0⟧",
+      "titre": "Étape 2Identité remarquable"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Produit nul⟦(2x - 3)(2x - 5) = 0⟧⟦\\iff⟧⟦{2x - 3 = 0} \\text{ ou } \\allowbreak {2x - 5 = 0}⟧produit nul⟦\\iff⟧⟦{x = \\frac{3}{2}} \\text{ ou } \\allowbreak {x = \\frac{5}{2}}⟧",
+      "titre": "Étape 3Produit nul"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{\\frac{3}{2}\\,;\\,\\frac{5}{2}\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Méthodes du cours",
+    "progression_finale": "Étape 4 / 4"
+   },
+   "formule": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Développer⟦4(x - 2)^{2} = 1⟧⟦\\iff⟧⟦4(x^{2} - 4x + 4) = 1⟧Id. rem. ⟦(A - B)^{2}⟧ avec ⟦A = x,\\ B = 2⟧⟦\\iff⟧⟦4x^{2} - 16x + 16 = 1⟧distribution",
+      "titre": "Étape 1Développer"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Ramener à 0⟦4x^{2} - 16x + 16 = 1⟧⟦\\iff⟧⟦4x^{2} - 16x + 15 = 0⟧",
+      "titre": "Étape 2Ramener à 0"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Discriminant⟦\\Delta = b^{2} - 4ac = (-16)^{2} - 4 \\cdot 4 \\cdot 15 = 256 - 240 = \\fbox{$16$}⟧",
+      "titre": "Étape 3Discriminant"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 4Valeurs de x⟦\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 4⟧⟦x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{16 - 4}{8} = \\frac{3}{2}⟧⟦x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{16 + 4}{8} = \\frac{5}{2}⟧",
+      "titre": "Étape 4Valeurs de x"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{\\frac{3}{2}\\,;\\,\\frac{5}{2}\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Par la formule",
+    "progression_finale": "Étape 5 / 5"
+   }
+  }
+ },
+ "45u+12=12u^2": {
+  "au_depart": {
+   "progression": "Étape 1 / 5",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": true,
+    "cle": "cours",
+    "texte": "Méthodes du cours"
+   },
+   {
+    "choisi": false,
+    "cle": "formule",
+    "texte": "Par la formule"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ramener à 0⟦45u + 12 = 12u^{2}⟧⟦\\iff⟧⟦12u^{2} - 45u - 12 = 0⟧",
+    "titre": "Étape 1Ramener à 0"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Mise en évidence⟦12u^{2} - 45u - 12 = 0⟧⟦\\iff⟧⟦3(4u^{2} - 15u - 4) = 0⟧ME",
+    "titre": "Étape 2Mise en évidence"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3TâtonnementLe trinôme ⟦4u^{2} - 15u - 4⟧ n'est pas unitaire : tâtonnement.⟦\\fbox{$u = 4$}⟧ est solution de ⟦4u^{2} - 15u - 4 = 0⟧, car ⟦4 \\cdot 4^{2} - 15 \\cdot 4 - 4 = 64 - 60 - 4 = 0⟧.Donc ⟦4u^{2} - 15u - 4 = (u - 4)(4u + \\triangle)⟧ avec ⟦-4 \\cdot \\triangle = -4⟧, donc ⟦\\fbox{$\\triangle = 1$}⟧.⟦3(4u^{2} - 15u - 4) = 0⟧⟦\\iff⟧⟦3(u - 4)(4u + 1) = 0⟧",
+    "titre": "Étape 3Tâtonnement"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 4Produit nul⟦3(u - 4)(4u + 1) = 0⟧⟦\\iff⟧⟦{\\underbrace{3 = 0}_{\\text{impossible}}} \\text{ ou } \\allowbreak {u - 4 = 0} \\text{ ou } \\allowbreak {4u + 1 = 0}⟧produit nul⟦\\iff⟧⟦{u = 4} \\text{ ou } \\allowbreak {u = -\\frac{1}{4}}⟧",
+    "titre": "Étape 4Produit nul"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\{-\\frac{1}{4}\\,;\\,4\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 5 / 5",
+  "variantes": {
+   "cours": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ramener à 0⟦45u + 12 = 12u^{2}⟧⟦\\iff⟧⟦12u^{2} - 45u - 12 = 0⟧",
+      "titre": "Étape 1Ramener à 0"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Mise en évidence⟦12u^{2} - 45u - 12 = 0⟧⟦\\iff⟧⟦3(4u^{2} - 15u - 4) = 0⟧ME",
+      "titre": "Étape 2Mise en évidence"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3TâtonnementLe trinôme ⟦4u^{2} - 15u - 4⟧ n'est pas unitaire : tâtonnement.⟦\\fbox{$u = 4$}⟧ est solution de ⟦4u^{2} - 15u - 4 = 0⟧, car ⟦4 \\cdot 4^{2} - 15 \\cdot 4 - 4 = 64 - 60 - 4 = 0⟧.Donc ⟦4u^{2} - 15u - 4 = (u - 4)(4u + \\triangle)⟧ avec ⟦-4 \\cdot \\triangle = -4⟧, donc ⟦\\fbox{$\\triangle = 1$}⟧.⟦3(4u^{2} - 15u - 4) = 0⟧⟦\\iff⟧⟦3(u - 4)(4u + 1) = 0⟧",
+      "titre": "Étape 3Tâtonnement"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 4Produit nul⟦3(u - 4)(4u + 1) = 0⟧⟦\\iff⟧⟦{\\underbrace{3 = 0}_{\\text{impossible}}} \\text{ ou } \\allowbreak {u - 4 = 0} \\text{ ou } \\allowbreak {4u + 1 = 0}⟧produit nul⟦\\iff⟧⟦{u = 4} \\text{ ou } \\allowbreak {u = -\\frac{1}{4}}⟧",
+      "titre": "Étape 4Produit nul"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{-\\frac{1}{4}\\,;\\,4\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Méthodes du cours",
+    "progression_finale": "Étape 5 / 5"
+   },
+   "formule": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ramener à 0⟦45u + 12 = 12u^{2}⟧⟦\\iff⟧⟦12u^{2} - 45u - 12 = 0⟧",
+      "titre": "Étape 1Ramener à 0"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Discriminant⟦\\Delta = b^{2} - 4ac = (-45)^{2} - 4 \\cdot 12 \\cdot (-12) = 2\\text{’}025 + 576 = \\fbox{$2\\text{’}601$}⟧",
+      "titre": "Étape 2Discriminant"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Valeurs de u⟦\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 51⟧⟦x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{45 - 51}{24} = -\\frac{1}{4}⟧⟦x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{45 + 51}{24} = 4⟧",
+      "titre": "Étape 3Valeurs de u"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{-\\frac{1}{4}\\,;\\,4\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Par la formule",
+    "progression_finale": "Étape 4 / 4"
+   }
+  }
+ },
+ "48z^2-216z+243=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": true,
+    "cle": "cours",
+    "texte": "Méthodes du cours"
+   },
+   {
+    "choisi": false,
+    "cle": "formule",
+    "texte": "Par la formule"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Mise en évidence⟦48z^{2} - 216z + 243 = 0⟧⟦\\iff⟧⟦3(16z^{2} - 72z + 81) = 0⟧ME",
+    "titre": "Étape 1Mise en évidence"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Identité remarquableId. rem. ⟦A^{2} - 2AB + B^{2}⟧ avec ⟦\\fbox{$A = 4z,\\ B = 9$}⟧. Vérification : ⟦2AB = 2 \\cdot 4z \\cdot 9 = 72z⟧ ⟦\\checkmark⟧⟦3(16z^{2} - 72z + 81) = 0⟧⟦\\iff⟧⟦3(4z - 9)^{2} = 0⟧⟦\\iff⟧⟦3(4z - 9)(4z - 9) = 0⟧",
+    "titre": "Étape 2Identité remarquable"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Produit nul⟦3(4z - 9)(4z - 9) = 0⟧⟦\\iff⟧⟦{\\underbrace{3 = 0}_{\\text{impossible}}} \\text{ ou } \\allowbreak {4z - 9 = 0}⟧produit nul⟦\\iff⟧⟦z = \\frac{9}{4}⟧",
+    "titre": "Étape 3Produit nul"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\{\\frac{9}{4}\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4",
+  "variantes": {
+   "cours": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Mise en évidence⟦48z^{2} - 216z + 243 = 0⟧⟦\\iff⟧⟦3(16z^{2} - 72z + 81) = 0⟧ME",
+      "titre": "Étape 1Mise en évidence"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Identité remarquableId. rem. ⟦A^{2} - 2AB + B^{2}⟧ avec ⟦\\fbox{$A = 4z,\\ B = 9$}⟧. Vérification : ⟦2AB = 2 \\cdot 4z \\cdot 9 = 72z⟧ ⟦\\checkmark⟧⟦3(16z^{2} - 72z + 81) = 0⟧⟦\\iff⟧⟦3(4z - 9)^{2} = 0⟧⟦\\iff⟧⟦3(4z - 9)(4z - 9) = 0⟧",
+      "titre": "Étape 2Identité remarquable"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Produit nul⟦3(4z - 9)(4z - 9) = 0⟧⟦\\iff⟧⟦{\\underbrace{3 = 0}_{\\text{impossible}}} \\text{ ou } \\allowbreak {4z - 9 = 0}⟧produit nul⟦\\iff⟧⟦z = \\frac{9}{4}⟧",
+      "titre": "Étape 3Produit nul"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{\\frac{9}{4}\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Méthodes du cours",
+    "progression_finale": "Étape 4 / 4"
+   },
+   "formule": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Discriminant⟦\\Delta = b^{2} - 4ac = (-216)^{2} - 4 \\cdot 48 \\cdot 243 = 46\\text{’}656 - 46\\text{’}656 = \\fbox{$0$}⟧",
+      "titre": "Étape 1Discriminant"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Valeurs de z⟦\\Delta = 0⟧ : une seule solution.⟦z = \\frac{-b}{2a} = \\frac{216}{96} = \\frac{9}{4}⟧",
+      "titre": "Étape 2Valeurs de z"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{\\frac{9}{4}\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Par la formule",
+    "progression_finale": "Étape 3 / 3"
+   }
+  }
+ },
+ "4t^2+7t=2": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": true,
+    "cle": "cours",
+    "texte": "Méthodes du cours"
+   },
+   {
+    "choisi": false,
+    "cle": "formule",
+    "texte": "Par la formule"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ramener à 0On ramène d'abord l'équation à la forme ⟦\\ldots = 0⟧ :⟦4t^{2} + 7t = 2⟧⟦\\iff⟧⟦4t^{2} + 7t - 2 = 0⟧",
+    "titre": "Étape 1Ramener à 0"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2TâtonnementPas de ME, pas d'Id. rem. ; ⟦a = 4 \\neq 1⟧ : tâtonnement.⟦\\fbox{$t = -2$}⟧ est solution, car ⟦4 \\cdot (-2)^{2} + 7 \\cdot (-2) - 2 = 16 - 14 - 2 = 0⟧.Donc ⟦4t^{2} + 7t - 2 = (t + 2)(4t + \\triangle)⟧ avec ⟦2 \\cdot \\triangle = -2⟧, donc ⟦\\fbox{$\\triangle = -1$}⟧.⟦4t^{2} + 7t - 2 = 0⟧⟦\\iff⟧⟦(t + 2)(4t - 1) = 0⟧",
+    "titre": "Étape 2Tâtonnement"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Produit nul⟦(t + 2)(4t - 1) = 0⟧⟦\\iff⟧⟦{t + 2 = 0} \\text{ ou } \\allowbreak {4t - 1 = 0}⟧produit nul⟦\\iff⟧⟦{t = -2} \\text{ ou } \\allowbreak {t = \\frac{1}{4}}⟧",
+    "titre": "Étape 3Produit nul"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\{-2\\,;\\,\\frac{1}{4}\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4",
+  "variantes": {
+   "cours": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ramener à 0On ramène d'abord l'équation à la forme ⟦\\ldots = 0⟧ :⟦4t^{2} + 7t = 2⟧⟦\\iff⟧⟦4t^{2} + 7t - 2 = 0⟧",
+      "titre": "Étape 1Ramener à 0"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2TâtonnementPas de ME, pas d'Id. rem. ; ⟦a = 4 \\neq 1⟧ : tâtonnement.⟦\\fbox{$t = -2$}⟧ est solution, car ⟦4 \\cdot (-2)^{2} + 7 \\cdot (-2) - 2 = 16 - 14 - 2 = 0⟧.Donc ⟦4t^{2} + 7t - 2 = (t + 2)(4t + \\triangle)⟧ avec ⟦2 \\cdot \\triangle = -2⟧, donc ⟦\\fbox{$\\triangle = -1$}⟧.⟦4t^{2} + 7t - 2 = 0⟧⟦\\iff⟧⟦(t + 2)(4t - 1) = 0⟧",
+      "titre": "Étape 2Tâtonnement"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Produit nul⟦(t + 2)(4t - 1) = 0⟧⟦\\iff⟧⟦{t + 2 = 0} \\text{ ou } \\allowbreak {4t - 1 = 0}⟧produit nul⟦\\iff⟧⟦{t = -2} \\text{ ou } \\allowbreak {t = \\frac{1}{4}}⟧",
+      "titre": "Étape 3Produit nul"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{-2\\,;\\,\\frac{1}{4}\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Méthodes du cours",
+    "progression_finale": "Étape 4 / 4"
+   },
+   "formule": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ramener à 0⟦4t^{2} + 7t = 2⟧⟦\\iff⟧⟦4t^{2} + 7t - 2 = 0⟧",
+      "titre": "Étape 1Ramener à 0"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Discriminant⟦\\Delta = b^{2} - 4ac = 7^{2} - 4 \\cdot 4 \\cdot (-2) = 49 + 32 = \\fbox{$81$}⟧",
+      "titre": "Étape 2Discriminant"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Valeurs de t⟦\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 9⟧⟦x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-7 - 9}{8} = -2⟧⟦x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-7 + 9}{8} = \\frac{1}{4}⟧",
+      "titre": "Étape 3Valeurs de t"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{-2\\,;\\,\\frac{1}{4}\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Par la formule",
+    "progression_finale": "Étape 4 / 4"
+   }
+  }
+ },
+ "4x+32=x^2": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": true,
+    "cle": "cours",
+    "texte": "Méthodes du cours"
+   },
+   {
+    "choisi": false,
+    "cle": "formule",
+    "texte": "Par la formule"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ramener à 0On ramène d'abord l'équation à la forme ⟦\\ldots = 0⟧ :⟦4x + 32 = x^{2}⟧⟦\\iff⟧⟦x^{2} - 4x - 32 = 0⟧",
+    "titre": "Étape 1Ramener à 0"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Somme-ProduitPas de ME, pas d'Id. rem. ; le trinôme est unitaire (⟦a = 1⟧) : S-P.On cherche deux nombres dont le produit vaut ⟦-32⟧ et la somme vaut ⟦-4⟧ :produit ⟦= -32⟧somme⟦1⟧⟦-32⟧⟦-31⟧⟦2⟧⟦-16⟧⟦-14⟧⟦4⟧⟦-8⟧⟦-4⟧✓⟦x^{2} - 4x - 32 = 0⟧⟦\\iff⟧⟦(x + 4)(x - 8) = 0⟧",
+    "titre": "Étape 2Somme-Produit"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Produit nul⟦(x + 4)(x - 8) = 0⟧⟦\\iff⟧⟦{x + 4 = 0} \\text{ ou } \\allowbreak {x - 8 = 0}⟧produit nul⟦\\iff⟧⟦{x = -4} \\text{ ou } \\allowbreak {x = 8}⟧",
+    "titre": "Étape 3Produit nul"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\{-4\\,;\\,8\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4",
+  "variantes": {
+   "cours": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ramener à 0On ramène d'abord l'équation à la forme ⟦\\ldots = 0⟧ :⟦4x + 32 = x^{2}⟧⟦\\iff⟧⟦x^{2} - 4x - 32 = 0⟧",
+      "titre": "Étape 1Ramener à 0"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Somme-ProduitPas de ME, pas d'Id. rem. ; le trinôme est unitaire (⟦a = 1⟧) : S-P.On cherche deux nombres dont le produit vaut ⟦-32⟧ et la somme vaut ⟦-4⟧ :produit ⟦= -32⟧somme⟦1⟧⟦-32⟧⟦-31⟧⟦2⟧⟦-16⟧⟦-14⟧⟦4⟧⟦-8⟧⟦-4⟧✓⟦x^{2} - 4x - 32 = 0⟧⟦\\iff⟧⟦(x + 4)(x - 8) = 0⟧",
+      "titre": "Étape 2Somme-Produit"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Produit nul⟦(x + 4)(x - 8) = 0⟧⟦\\iff⟧⟦{x + 4 = 0} \\text{ ou } \\allowbreak {x - 8 = 0}⟧produit nul⟦\\iff⟧⟦{x = -4} \\text{ ou } \\allowbreak {x = 8}⟧",
+      "titre": "Étape 3Produit nul"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{-4\\,;\\,8\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Méthodes du cours",
+    "progression_finale": "Étape 4 / 4"
+   },
+   "formule": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ramener à 0⟦4x + 32 = x^{2}⟧⟦\\iff⟧⟦x^{2} - 4x - 32 = 0⟧",
+      "titre": "Étape 1Ramener à 0"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Discriminant⟦\\Delta = b^{2} - 4ac = (-4)^{2} - 4 \\cdot 1 \\cdot (-32) = 16 + 128 = \\fbox{$144$}⟧",
+      "titre": "Étape 2Discriminant"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Valeurs de x⟦\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 12⟧⟦x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{4 - 12}{2} = -4⟧⟦x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{4 + 12}{2} = 8⟧",
+      "titre": "Étape 3Valeurs de x"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{-4\\,;\\,8\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Par la formule",
+    "progression_finale": "Étape 4 / 4"
+   }
+  }
+ },
+ "4x^2+2x=56": {
+  "au_depart": {
+   "progression": "Étape 1 / 5",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": true,
+    "cle": "cours",
+    "texte": "Méthodes du cours"
+   },
+   {
+    "choisi": false,
+    "cle": "formule",
+    "texte": "Par la formule"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ramener à 0⟦4x^{2} + 2x = 56⟧⟦\\iff⟧⟦4x^{2} + 2x - 56 = 0⟧",
+    "titre": "Étape 1Ramener à 0"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Mise en évidence⟦4x^{2} + 2x - 56 = 0⟧⟦\\iff⟧⟦2(2x^{2} + x - 28) = 0⟧ME",
+    "titre": "Étape 2Mise en évidence"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3TâtonnementLe trinôme ⟦2x^{2} + x - 28⟧ n'est pas unitaire : tâtonnement.⟦\\fbox{$x = -4$}⟧ est solution de ⟦2x^{2} + x - 28 = 0⟧, car ⟦2 \\cdot (-4)^{2} - 4 - 28 = 32 - 4 - 28 = 0⟧.Donc ⟦2x^{2} + x - 28 = (x + 4)(2x + \\triangle)⟧ avec ⟦4 \\cdot \\triangle = -28⟧, donc ⟦\\fbox{$\\triangle = -7$}⟧.⟦2(2x^{2} + x - 28) = 0⟧⟦\\iff⟧⟦2(x + 4)(2x - 7) = 0⟧",
+    "titre": "Étape 3Tâtonnement"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 4Produit nul⟦2(x + 4)(2x - 7) = 0⟧⟦\\iff⟧⟦{\\underbrace{2 = 0}_{\\text{impossible}}} \\text{ ou } \\allowbreak {x + 4 = 0} \\text{ ou } \\allowbreak {2x - 7 = 0}⟧produit nul⟦\\iff⟧⟦{x = -4} \\text{ ou } \\allowbreak {x = \\frac{7}{2}}⟧",
+    "titre": "Étape 4Produit nul"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\{-4\\,;\\,\\frac{7}{2}\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 5 / 5",
+  "variantes": {
+   "cours": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ramener à 0⟦4x^{2} + 2x = 56⟧⟦\\iff⟧⟦4x^{2} + 2x - 56 = 0⟧",
+      "titre": "Étape 1Ramener à 0"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Mise en évidence⟦4x^{2} + 2x - 56 = 0⟧⟦\\iff⟧⟦2(2x^{2} + x - 28) = 0⟧ME",
+      "titre": "Étape 2Mise en évidence"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3TâtonnementLe trinôme ⟦2x^{2} + x - 28⟧ n'est pas unitaire : tâtonnement.⟦\\fbox{$x = -4$}⟧ est solution de ⟦2x^{2} + x - 28 = 0⟧, car ⟦2 \\cdot (-4)^{2} - 4 - 28 = 32 - 4 - 28 = 0⟧.Donc ⟦2x^{2} + x - 28 = (x + 4)(2x + \\triangle)⟧ avec ⟦4 \\cdot \\triangle = -28⟧, donc ⟦\\fbox{$\\triangle = -7$}⟧.⟦2(2x^{2} + x - 28) = 0⟧⟦\\iff⟧⟦2(x + 4)(2x - 7) = 0⟧",
+      "titre": "Étape 3Tâtonnement"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 4Produit nul⟦2(x + 4)(2x - 7) = 0⟧⟦\\iff⟧⟦{\\underbrace{2 = 0}_{\\text{impossible}}} \\text{ ou } \\allowbreak {x + 4 = 0} \\text{ ou } \\allowbreak {2x - 7 = 0}⟧produit nul⟦\\iff⟧⟦{x = -4} \\text{ ou } \\allowbreak {x = \\frac{7}{2}}⟧",
+      "titre": "Étape 4Produit nul"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{-4\\,;\\,\\frac{7}{2}\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Méthodes du cours",
+    "progression_finale": "Étape 5 / 5"
+   },
+   "formule": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ramener à 0⟦4x^{2} + 2x = 56⟧⟦\\iff⟧⟦4x^{2} + 2x - 56 = 0⟧",
+      "titre": "Étape 1Ramener à 0"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Discriminant⟦\\Delta = b^{2} - 4ac = 2^{2} - 4 \\cdot 4 \\cdot (-56) = 4 + 896 = \\fbox{$900$}⟧",
+      "titre": "Étape 2Discriminant"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Valeurs de x⟦\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 30⟧⟦x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-2 - 30}{8} = -4⟧⟦x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-2 + 30}{8} = \\frac{7}{2}⟧",
+      "titre": "Étape 3Valeurs de x"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{-4\\,;\\,\\frac{7}{2}\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Par la formule",
+    "progression_finale": "Étape 4 / 4"
+   }
+  }
+ },
+ "4x^2=9": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": true,
+    "cle": "cours",
+    "texte": "Méthodes du cours"
+   },
+   {
+    "choisi": false,
+    "cle": "formule",
+    "texte": "Par la formule"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ramener à 0⟦4x^{2} = 9⟧⟦\\iff⟧⟦4x^{2} - 9 = 0⟧",
+    "titre": "Étape 1Ramener à 0"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Identité remarquable⟦4x^{2} - 9 = 0⟧⟦\\iff⟧⟦(2x + 3)(2x - 3) = 0⟧Id. rem. ⟦A^{2} - B^{2}⟧ avec ⟦\\fbox{$A = 2x,\\ B = 3$}⟧",
+    "titre": "Étape 2Identité remarquable"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Produit nul⟦(2x + 3)(2x - 3) = 0⟧⟦\\iff⟧⟦{2x + 3 = 0} \\text{ ou } \\allowbreak {2x - 3 = 0}⟧produit nul⟦\\iff⟧⟦{x = -\\frac{3}{2}} \\text{ ou } \\allowbreak {x = \\frac{3}{2}}⟧",
+    "titre": "Étape 3Produit nul"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\{-\\frac{3}{2}\\,;\\,\\frac{3}{2}\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4",
+  "variantes": {
+   "cours": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ramener à 0⟦4x^{2} = 9⟧⟦\\iff⟧⟦4x^{2} - 9 = 0⟧",
+      "titre": "Étape 1Ramener à 0"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Identité remarquable⟦4x^{2} - 9 = 0⟧⟦\\iff⟧⟦(2x + 3)(2x - 3) = 0⟧Id. rem. ⟦A^{2} - B^{2}⟧ avec ⟦\\fbox{$A = 2x,\\ B = 3$}⟧",
+      "titre": "Étape 2Identité remarquable"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Produit nul⟦(2x + 3)(2x - 3) = 0⟧⟦\\iff⟧⟦{2x + 3 = 0} \\text{ ou } \\allowbreak {2x - 3 = 0}⟧produit nul⟦\\iff⟧⟦{x = -\\frac{3}{2}} \\text{ ou } \\allowbreak {x = \\frac{3}{2}}⟧",
+      "titre": "Étape 3Produit nul"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{-\\frac{3}{2}\\,;\\,\\frac{3}{2}\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Méthodes du cours",
+    "progression_finale": "Étape 4 / 4"
+   },
+   "formule": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ramener à 0⟦4x^{2} = 9⟧⟦\\iff⟧⟦4x^{2} - 9 = 0⟧",
+      "titre": "Étape 1Ramener à 0"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Discriminant⟦\\Delta = b^{2} - 4ac = 0^{2} - 4 \\cdot 4 \\cdot (-9) = \\fbox{$144$}⟧",
+      "titre": "Étape 2Discriminant"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Valeurs de x⟦\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 12⟧⟦x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-12}{8} = -\\frac{3}{2}⟧⟦x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{12}{8} = \\frac{3}{2}⟧",
+      "titre": "Étape 3Valeurs de x"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{-\\frac{3}{2}\\,;\\,\\frac{3}{2}\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Par la formule",
+    "progression_finale": "Étape 4 / 4"
+   }
+  }
+ },
+ "5y^2-54y-72=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": true,
+    "cle": "cours",
+    "texte": "Méthodes du cours"
+   },
+   {
+    "choisi": false,
+    "cle": "formule",
+    "texte": "Par la formule"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1TâtonnementPas de ME, pas d'Id. rem. ; ⟦a = 5 \\neq 1⟧ : tâtonnement.⟦\\fbox{$y = 12$}⟧ est solution, car ⟦5 \\cdot 12^{2} - 54 \\cdot 12 - 72 = 720 - 648 - 72 = 0⟧.Donc ⟦5y^{2} - 54y - 72 = (y - 12)(5y + \\triangle)⟧ avec ⟦-12 \\cdot \\triangle = -72⟧, donc ⟦\\fbox{$\\triangle = 6$}⟧.⟦5y^{2} - 54y - 72 = 0⟧⟦\\iff⟧⟦(y - 12)(5y + 6) = 0⟧",
+    "titre": "Étape 1Tâtonnement"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Produit nul⟦(y - 12)(5y + 6) = 0⟧⟦\\iff⟧⟦{y - 12 = 0} \\text{ ou } \\allowbreak {5y + 6 = 0}⟧produit nul⟦\\iff⟧⟦{y = 12} \\text{ ou } \\allowbreak {y = -\\frac{6}{5}}⟧",
+    "titre": "Étape 2Produit nul"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\{-\\frac{6}{5}\\,;\\,12\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3",
+  "variantes": {
+   "cours": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1TâtonnementPas de ME, pas d'Id. rem. ; ⟦a = 5 \\neq 1⟧ : tâtonnement.⟦\\fbox{$y = 12$}⟧ est solution, car ⟦5 \\cdot 12^{2} - 54 \\cdot 12 - 72 = 720 - 648 - 72 = 0⟧.Donc ⟦5y^{2} - 54y - 72 = (y - 12)(5y + \\triangle)⟧ avec ⟦-12 \\cdot \\triangle = -72⟧, donc ⟦\\fbox{$\\triangle = 6$}⟧.⟦5y^{2} - 54y - 72 = 0⟧⟦\\iff⟧⟦(y - 12)(5y + 6) = 0⟧",
+      "titre": "Étape 1Tâtonnement"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Produit nul⟦(y - 12)(5y + 6) = 0⟧⟦\\iff⟧⟦{y - 12 = 0} \\text{ ou } \\allowbreak {5y + 6 = 0}⟧produit nul⟦\\iff⟧⟦{y = 12} \\text{ ou } \\allowbreak {y = -\\frac{6}{5}}⟧",
+      "titre": "Étape 2Produit nul"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{-\\frac{6}{5}\\,;\\,12\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Méthodes du cours",
+    "progression_finale": "Étape 3 / 3"
+   },
+   "formule": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Discriminant⟦\\Delta = b^{2} - 4ac = (-54)^{2} - 4 \\cdot 5 \\cdot (-72) = 2\\text{’}916 + 1\\text{’}440 = \\fbox{$4\\text{’}356$}⟧",
+      "titre": "Étape 1Discriminant"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Valeurs de y⟦\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 66⟧⟦x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{54 - 66}{10} = -\\frac{6}{5}⟧⟦x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{54 + 66}{10} = 12⟧",
+      "titre": "Étape 2Valeurs de y"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{-\\frac{6}{5}\\,;\\,12\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Par la formule",
+    "progression_finale": "Étape 3 / 3"
+   }
+  }
+ },
+ "6x^2+16x-6=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": true,
+    "cle": "cours",
+    "texte": "Méthodes du cours"
+   },
+   {
+    "choisi": false,
+    "cle": "formule",
+    "texte": "Par la formule"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Mise en évidence⟦6x^{2} + 16x - 6 = 0⟧⟦\\iff⟧⟦2(3x^{2} + 8x - 3) = 0⟧ME",
+    "titre": "Étape 1Mise en évidence"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2TâtonnementLe trinôme ⟦3x^{2} + 8x - 3⟧ n'est pas unitaire : tâtonnement.⟦\\fbox{$x = -3$}⟧ est solution de ⟦3x^{2} + 8x - 3 = 0⟧, car ⟦3 \\cdot (-3)^{2} + 8 \\cdot (-3) - 3 = 27 - 24 - 3 = 0⟧.Donc ⟦3x^{2} + 8x - 3 = (x + 3)(3x + \\triangle)⟧ avec ⟦3 \\cdot \\triangle = -3⟧, donc ⟦\\fbox{$\\triangle = -1$}⟧.⟦2(3x^{2} + 8x - 3) = 0⟧⟦\\iff⟧⟦2(x + 3)(3x - 1) = 0⟧",
+    "titre": "Étape 2Tâtonnement"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Produit nul⟦2(x + 3)(3x - 1) = 0⟧⟦\\iff⟧⟦{\\underbrace{2 = 0}_{\\text{impossible}}} \\text{ ou } \\allowbreak {x + 3 = 0} \\text{ ou } \\allowbreak {3x - 1 = 0}⟧produit nul⟦\\iff⟧⟦{x = -3} \\text{ ou } \\allowbreak {x = \\frac{1}{3}}⟧",
+    "titre": "Étape 3Produit nul"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\{-3\\,;\\,\\frac{1}{3}\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4",
+  "variantes": {
+   "cours": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Mise en évidence⟦6x^{2} + 16x - 6 = 0⟧⟦\\iff⟧⟦2(3x^{2} + 8x - 3) = 0⟧ME",
+      "titre": "Étape 1Mise en évidence"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2TâtonnementLe trinôme ⟦3x^{2} + 8x - 3⟧ n'est pas unitaire : tâtonnement.⟦\\fbox{$x = -3$}⟧ est solution de ⟦3x^{2} + 8x - 3 = 0⟧, car ⟦3 \\cdot (-3)^{2} + 8 \\cdot (-3) - 3 = 27 - 24 - 3 = 0⟧.Donc ⟦3x^{2} + 8x - 3 = (x + 3)(3x + \\triangle)⟧ avec ⟦3 \\cdot \\triangle = -3⟧, donc ⟦\\fbox{$\\triangle = -1$}⟧.⟦2(3x^{2} + 8x - 3) = 0⟧⟦\\iff⟧⟦2(x + 3)(3x - 1) = 0⟧",
+      "titre": "Étape 2Tâtonnement"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Produit nul⟦2(x + 3)(3x - 1) = 0⟧⟦\\iff⟧⟦{\\underbrace{2 = 0}_{\\text{impossible}}} \\text{ ou } \\allowbreak {x + 3 = 0} \\text{ ou } \\allowbreak {3x - 1 = 0}⟧produit nul⟦\\iff⟧⟦{x = -3} \\text{ ou } \\allowbreak {x = \\frac{1}{3}}⟧",
+      "titre": "Étape 3Produit nul"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{-3\\,;\\,\\frac{1}{3}\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Méthodes du cours",
+    "progression_finale": "Étape 4 / 4"
+   },
+   "formule": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Discriminant⟦\\Delta = b^{2} - 4ac = 16^{2} - 4 \\cdot 6 \\cdot (-6) = 256 + 144 = \\fbox{$400$}⟧",
+      "titre": "Étape 1Discriminant"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Valeurs de x⟦\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 20⟧⟦x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-16 - 20}{12} = -3⟧⟦x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-16 + 20}{12} = \\frac{1}{3}⟧",
+      "titre": "Étape 2Valeurs de x"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{-3\\,;\\,\\frac{1}{3}\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Par la formule",
+    "progression_finale": "Étape 3 / 3"
+   }
+  }
+ },
+ "6x^2+5x+1=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1TâtonnementPas de ME, pas d'Id. rem. ; ⟦a = 6 \\neq 1⟧ : tâtonnement.On teste les diviseurs de ⟦1⟧ (⟦\\pm 1⟧) : aucun n'est solution. On utilise la formule.",
+    "titre": "Étape 1Tâtonnement"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Discriminant⟦\\Delta = b^{2} - 4ac = 5^{2} - 4 \\cdot 6 \\cdot 1 = 25 - 24 = \\fbox{$1$}⟧",
+    "titre": "Étape 2Discriminant"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Valeurs de x⟦\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 1⟧⟦x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-5 - 1}{12} = -\\frac{1}{2}⟧⟦x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-5 + 1}{12} = -\\frac{1}{3}⟧",
+    "titre": "Étape 3Valeurs de x"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\{-\\frac{1}{2}\\,;\\,-\\frac{1}{3}\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4"
+ },
+ "6x^2-6=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": true,
+    "cle": "cours",
+    "texte": "Méthodes du cours"
+   },
+   {
+    "choisi": false,
+    "cle": "formule",
+    "texte": "Par la formule"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Mise en évidence⟦6x^{2} - 6 = 0⟧⟦\\iff⟧⟦6(x^{2} - 1) = 0⟧ME",
+    "titre": "Étape 1Mise en évidence"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Identité remarquable⟦6(x^{2} - 1) = 0⟧⟦\\iff⟧⟦6(x + 1)(x - 1) = 0⟧Id. rem. ⟦A^{2} - B^{2}⟧ avec ⟦\\fbox{$A = x,\\ B = 1$}⟧",
+    "titre": "Étape 2Identité remarquable"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Produit nul⟦6(x + 1)(x - 1) = 0⟧⟦\\iff⟧⟦{\\underbrace{6 = 0}_{\\text{impossible}}} \\text{ ou } \\allowbreak {x + 1 = 0} \\text{ ou } \\allowbreak {x - 1 = 0}⟧produit nul⟦\\iff⟧⟦{x = -1} \\text{ ou } \\allowbreak {x = 1}⟧",
+    "titre": "Étape 3Produit nul"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\{-1\\,;\\,1\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4",
+  "variantes": {
+   "cours": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Mise en évidence⟦6x^{2} - 6 = 0⟧⟦\\iff⟧⟦6(x^{2} - 1) = 0⟧ME",
+      "titre": "Étape 1Mise en évidence"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Identité remarquable⟦6(x^{2} - 1) = 0⟧⟦\\iff⟧⟦6(x + 1)(x - 1) = 0⟧Id. rem. ⟦A^{2} - B^{2}⟧ avec ⟦\\fbox{$A = x,\\ B = 1$}⟧",
+      "titre": "Étape 2Identité remarquable"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Produit nul⟦6(x + 1)(x - 1) = 0⟧⟦\\iff⟧⟦{\\underbrace{6 = 0}_{\\text{impossible}}} \\text{ ou } \\allowbreak {x + 1 = 0} \\text{ ou } \\allowbreak {x - 1 = 0}⟧produit nul⟦\\iff⟧⟦{x = -1} \\text{ ou } \\allowbreak {x = 1}⟧",
+      "titre": "Étape 3Produit nul"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{-1\\,;\\,1\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Méthodes du cours",
+    "progression_finale": "Étape 4 / 4"
+   },
+   "formule": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Discriminant⟦\\Delta = b^{2} - 4ac = 0^{2} - 4 \\cdot 6 \\cdot (-6) = \\fbox{$144$}⟧",
+      "titre": "Étape 1Discriminant"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Valeurs de x⟦\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 12⟧⟦x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-12}{12} = -1⟧⟦x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{12}{12} = 1⟧",
+      "titre": "Étape 2Valeurs de x"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{-1\\,;\\,1\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Par la formule",
+    "progression_finale": "Étape 3 / 3"
+   }
+  }
+ },
+ "8x^2-112x+392=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": true,
+    "cle": "cours",
+    "texte": "Méthodes du cours"
+   },
+   {
+    "choisi": false,
+    "cle": "formule",
+    "texte": "Par la formule"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Mise en évidence⟦8x^{2} - 112x + 392 = 0⟧⟦\\iff⟧⟦8(x^{2} - 14x + 49) = 0⟧ME",
+    "titre": "Étape 1Mise en évidence"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Identité remarquableId. rem. ⟦A^{2} - 2AB + B^{2}⟧ avec ⟦\\fbox{$A = x,\\ B = 7$}⟧. Vérification : ⟦2AB = 2 \\cdot x \\cdot 7 = 14x⟧ ⟦\\checkmark⟧⟦8(x^{2} - 14x + 49) = 0⟧⟦\\iff⟧⟦8(x - 7)^{2} = 0⟧⟦\\iff⟧⟦8(x - 7)(x - 7) = 0⟧",
+    "titre": "Étape 2Identité remarquable"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Produit nul⟦8(x - 7)(x - 7) = 0⟧⟦\\iff⟧⟦{\\underbrace{8 = 0}_{\\text{impossible}}} \\text{ ou } \\allowbreak {x - 7 = 0}⟧produit nul⟦\\iff⟧⟦x = 7⟧",
+    "titre": "Étape 3Produit nul"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\{7\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4",
+  "variantes": {
+   "cours": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Mise en évidence⟦8x^{2} - 112x + 392 = 0⟧⟦\\iff⟧⟦8(x^{2} - 14x + 49) = 0⟧ME",
+      "titre": "Étape 1Mise en évidence"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Identité remarquableId. rem. ⟦A^{2} - 2AB + B^{2}⟧ avec ⟦\\fbox{$A = x,\\ B = 7$}⟧. Vérification : ⟦2AB = 2 \\cdot x \\cdot 7 = 14x⟧ ⟦\\checkmark⟧⟦8(x^{2} - 14x + 49) = 0⟧⟦\\iff⟧⟦8(x - 7)^{2} = 0⟧⟦\\iff⟧⟦8(x - 7)(x - 7) = 0⟧",
+      "titre": "Étape 2Identité remarquable"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Produit nul⟦8(x - 7)(x - 7) = 0⟧⟦\\iff⟧⟦{\\underbrace{8 = 0}_{\\text{impossible}}} \\text{ ou } \\allowbreak {x - 7 = 0}⟧produit nul⟦\\iff⟧⟦x = 7⟧",
+      "titre": "Étape 3Produit nul"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{7\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Méthodes du cours",
+    "progression_finale": "Étape 4 / 4"
+   },
+   "formule": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Discriminant⟦\\Delta = b^{2} - 4ac = (-112)^{2} - 4 \\cdot 8 \\cdot 392 = 12\\text{’}544 - 12\\text{’}544 = \\fbox{$0$}⟧",
+      "titre": "Étape 1Discriminant"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Valeurs de x⟦\\Delta = 0⟧ : une seule solution.⟦x = \\frac{-b}{2a} = \\frac{112}{16} = 7⟧",
+      "titre": "Étape 2Valeurs de x"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{7\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Par la formule",
+    "progression_finale": "Étape 3 / 3"
+   }
+  }
+ },
+ "9x^2+8x-1=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": true,
+    "cle": "cours",
+    "texte": "Méthodes du cours"
+   },
+   {
+    "choisi": false,
+    "cle": "formule",
+    "texte": "Par la formule"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1TâtonnementPas de ME, pas d'Id. rem. ; ⟦a = 9 \\neq 1⟧ : tâtonnement.⟦\\fbox{$x = -1$}⟧ est solution, car ⟦9 \\cdot (-1)^{2} + 8 \\cdot (-1) - 1 = 9 - 8 - 1 = 0⟧.Donc ⟦9x^{2} + 8x - 1 = (x + 1)(9x + \\triangle)⟧ avec ⟦1 \\cdot \\triangle = -1⟧, donc ⟦\\fbox{$\\triangle = -1$}⟧.⟦9x^{2} + 8x - 1 = 0⟧⟦\\iff⟧⟦(x + 1)(9x - 1) = 0⟧",
+    "titre": "Étape 1Tâtonnement"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Produit nul⟦(x + 1)(9x - 1) = 0⟧⟦\\iff⟧⟦{x + 1 = 0} \\text{ ou } \\allowbreak {9x - 1 = 0}⟧produit nul⟦\\iff⟧⟦{x = -1} \\text{ ou } \\allowbreak {x = \\frac{1}{9}}⟧",
+    "titre": "Étape 2Produit nul"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\{-1\\,;\\,\\frac{1}{9}\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3",
+  "variantes": {
+   "cours": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1TâtonnementPas de ME, pas d'Id. rem. ; ⟦a = 9 \\neq 1⟧ : tâtonnement.⟦\\fbox{$x = -1$}⟧ est solution, car ⟦9 \\cdot (-1)^{2} + 8 \\cdot (-1) - 1 = 9 - 8 - 1 = 0⟧.Donc ⟦9x^{2} + 8x - 1 = (x + 1)(9x + \\triangle)⟧ avec ⟦1 \\cdot \\triangle = -1⟧, donc ⟦\\fbox{$\\triangle = -1$}⟧.⟦9x^{2} + 8x - 1 = 0⟧⟦\\iff⟧⟦(x + 1)(9x - 1) = 0⟧",
+      "titre": "Étape 1Tâtonnement"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Produit nul⟦(x + 1)(9x - 1) = 0⟧⟦\\iff⟧⟦{x + 1 = 0} \\text{ ou } \\allowbreak {9x - 1 = 0}⟧produit nul⟦\\iff⟧⟦{x = -1} \\text{ ou } \\allowbreak {x = \\frac{1}{9}}⟧",
+      "titre": "Étape 2Produit nul"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{-1\\,;\\,\\frac{1}{9}\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Méthodes du cours",
+    "progression_finale": "Étape 3 / 3"
+   },
+   "formule": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Discriminant⟦\\Delta = b^{2} - 4ac = 8^{2} - 4 \\cdot 9 \\cdot (-1) = 64 + 36 = \\fbox{$100$}⟧",
+      "titre": "Étape 1Discriminant"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Valeurs de x⟦\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 10⟧⟦x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-8 - 10}{18} = -1⟧⟦x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-8 + 10}{18} = \\frac{1}{9}⟧",
+      "titre": "Étape 2Valeurs de x"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{-1\\,;\\,\\frac{1}{9}\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Par la formule",
+    "progression_finale": "Étape 3 / 3"
+   }
+  }
+ },
+ "9x^2-1/9=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": true,
+    "cle": "cours",
+    "texte": "Méthodes du cours"
+   },
+   {
+    "choisi": false,
+    "cle": "formule",
+    "texte": "Par la formule"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Identité remarquable⟦9x^{2} - \\frac{1}{9} = 0⟧⟦\\iff⟧⟦\\left(3x + \\frac{1}{3}\\right)\\left(3x - \\frac{1}{3}\\right) = 0⟧Id. rem. ⟦A^{2} - B^{2}⟧ avec ⟦\\fbox{$A = 3x,\\ B = \\frac{1}{3}$}⟧",
+    "titre": "Étape 1Identité remarquable"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Produit nul⟦\\left(3x + \\frac{1}{3}\\right)\\left(3x - \\frac{1}{3}\\right) = 0⟧⟦\\iff⟧⟦{3x + \\frac{1}{3} = 0} \\text{ ou } \\allowbreak {3x - \\frac{1}{3} = 0}⟧produit nul⟦\\iff⟧⟦{3x = -\\frac{1}{3}} \\text{ ou } \\allowbreak {3x = \\frac{1}{3}}⟧⟦\\iff⟧⟦{x = -\\frac{1}{9}} \\text{ ou } \\allowbreak {x = \\frac{1}{9}}⟧",
+    "titre": "Étape 2Produit nul"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\{-\\frac{1}{9}\\,;\\,\\frac{1}{9}\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3",
+  "variantes": {
+   "cours": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Identité remarquable⟦9x^{2} - \\frac{1}{9} = 0⟧⟦\\iff⟧⟦\\left(3x + \\frac{1}{3}\\right)\\left(3x - \\frac{1}{3}\\right) = 0⟧Id. rem. ⟦A^{2} - B^{2}⟧ avec ⟦\\fbox{$A = 3x,\\ B = \\frac{1}{3}$}⟧",
+      "titre": "Étape 1Identité remarquable"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Produit nul⟦\\left(3x + \\frac{1}{3}\\right)\\left(3x - \\frac{1}{3}\\right) = 0⟧⟦\\iff⟧⟦{3x + \\frac{1}{3} = 0} \\text{ ou } \\allowbreak {3x - \\frac{1}{3} = 0}⟧produit nul⟦\\iff⟧⟦{3x = -\\frac{1}{3}} \\text{ ou } \\allowbreak {3x = \\frac{1}{3}}⟧⟦\\iff⟧⟦{x = -\\frac{1}{9}} \\text{ ou } \\allowbreak {x = \\frac{1}{9}}⟧",
+      "titre": "Étape 2Produit nul"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{-\\frac{1}{9}\\,;\\,\\frac{1}{9}\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Méthodes du cours",
+    "progression_finale": "Étape 3 / 3"
+   },
+   "formule": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Discriminant⟦\\Delta = b^{2} - 4ac = 0^{2} - 4 \\cdot 9 \\cdot \\left(-\\frac{1}{9}\\right) = \\fbox{$4$}⟧",
+      "titre": "Étape 1Discriminant"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Valeurs de x⟦\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 2⟧⟦x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-2}{18} = -\\frac{1}{9}⟧⟦x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{2}{18} = \\frac{1}{9}⟧",
+      "titre": "Étape 2Valeurs de x"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{-\\frac{1}{9}\\,;\\,\\frac{1}{9}\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Par la formule",
+    "progression_finale": "Étape 3 / 3"
+   }
+  }
+ },
+ "t^2+11t+30=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": true,
+    "cle": "cours",
+    "texte": "Méthodes du cours"
+   },
+   {
+    "choisi": false,
+    "cle": "formule",
+    "texte": "Par la formule"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Somme-ProduitPas de ME, pas d'Id. rem. ; le trinôme est unitaire (⟦a = 1⟧) : S-P.On cherche deux nombres dont le produit vaut ⟦30⟧ et la somme vaut ⟦11⟧ :produit ⟦= 30⟧somme⟦1⟧⟦30⟧⟦31⟧⟦2⟧⟦15⟧⟦17⟧⟦3⟧⟦10⟧⟦13⟧⟦5⟧⟦6⟧⟦11⟧✓⟦t^{2} + 11t + 30 = 0⟧⟦\\iff⟧⟦(t + 5)(t + 6) = 0⟧",
+    "titre": "Étape 1Somme-Produit"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Produit nul⟦(t + 5)(t + 6) = 0⟧⟦\\iff⟧⟦{t + 5 = 0} \\text{ ou } \\allowbreak {t + 6 = 0}⟧produit nul⟦\\iff⟧⟦{t = -5} \\text{ ou } \\allowbreak {t = -6}⟧",
+    "titre": "Étape 2Produit nul"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\{-6\\,;\\,-5\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3",
+  "variantes": {
+   "cours": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Somme-ProduitPas de ME, pas d'Id. rem. ; le trinôme est unitaire (⟦a = 1⟧) : S-P.On cherche deux nombres dont le produit vaut ⟦30⟧ et la somme vaut ⟦11⟧ :produit ⟦= 30⟧somme⟦1⟧⟦30⟧⟦31⟧⟦2⟧⟦15⟧⟦17⟧⟦3⟧⟦10⟧⟦13⟧⟦5⟧⟦6⟧⟦11⟧✓⟦t^{2} + 11t + 30 = 0⟧⟦\\iff⟧⟦(t + 5)(t + 6) = 0⟧",
+      "titre": "Étape 1Somme-Produit"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Produit nul⟦(t + 5)(t + 6) = 0⟧⟦\\iff⟧⟦{t + 5 = 0} \\text{ ou } \\allowbreak {t + 6 = 0}⟧produit nul⟦\\iff⟧⟦{t = -5} \\text{ ou } \\allowbreak {t = -6}⟧",
+      "titre": "Étape 2Produit nul"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{-6\\,;\\,-5\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Méthodes du cours",
+    "progression_finale": "Étape 3 / 3"
+   },
+   "formule": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Discriminant⟦\\Delta = b^{2} - 4ac = 11^{2} - 4 \\cdot 1 \\cdot 30 = 121 - 120 = \\fbox{$1$}⟧",
+      "titre": "Étape 1Discriminant"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Valeurs de t⟦\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 1⟧⟦x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-11 - 1}{2} = -6⟧⟦x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-11 + 1}{2} = -5⟧",
+      "titre": "Étape 2Valeurs de t"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{-6\\,;\\,-5\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Par la formule",
+    "progression_finale": "Étape 3 / 3"
+   }
+  }
+ },
+ "t^2+20t+100=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": true,
+    "cle": "cours",
+    "texte": "Méthodes du cours"
+   },
+   {
+    "choisi": false,
+    "cle": "formule",
+    "texte": "Par la formule"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Identité remarquableId. rem. ⟦A^{2} + 2AB + B^{2}⟧ avec ⟦\\fbox{$A = t,\\ B = 10$}⟧. Vérification : ⟦2AB = 2 \\cdot t \\cdot 10 = 20t⟧ ⟦\\checkmark⟧⟦t^{2} + 20t + 100 = 0⟧⟦\\iff⟧⟦(t + 10)^{2} = 0⟧⟦\\iff⟧⟦(t + 10)(t + 10) = 0⟧",
+    "titre": "Étape 1Identité remarquable"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Produit nul⟦(t + 10)(t + 10) = 0⟧⟦\\iff⟧⟦t + 10 = 0⟧produit nul⟦\\iff⟧⟦t = -10⟧",
+    "titre": "Étape 2Produit nul"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\{-10\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3",
+  "variantes": {
+   "cours": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Identité remarquableId. rem. ⟦A^{2} + 2AB + B^{2}⟧ avec ⟦\\fbox{$A = t,\\ B = 10$}⟧. Vérification : ⟦2AB = 2 \\cdot t \\cdot 10 = 20t⟧ ⟦\\checkmark⟧⟦t^{2} + 20t + 100 = 0⟧⟦\\iff⟧⟦(t + 10)^{2} = 0⟧⟦\\iff⟧⟦(t + 10)(t + 10) = 0⟧",
+      "titre": "Étape 1Identité remarquable"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Produit nul⟦(t + 10)(t + 10) = 0⟧⟦\\iff⟧⟦t + 10 = 0⟧produit nul⟦\\iff⟧⟦t = -10⟧",
+      "titre": "Étape 2Produit nul"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{-10\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Méthodes du cours",
+    "progression_finale": "Étape 3 / 3"
+   },
+   "formule": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Discriminant⟦\\Delta = b^{2} - 4ac = 20^{2} - 4 \\cdot 1 \\cdot 100 = 400 - 400 = \\fbox{$0$}⟧",
+      "titre": "Étape 1Discriminant"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Valeurs de t⟦\\Delta = 0⟧ : une seule solution.⟦t = \\frac{-b}{2a} = \\frac{-20}{2} = -10⟧",
+      "titre": "Étape 2Valeurs de t"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{-10\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Par la formule",
+    "progression_finale": "Étape 3 / 3"
+   }
+  }
+ },
+ "t^2+8t-48=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": true,
+    "cle": "cours",
+    "texte": "Méthodes du cours"
+   },
+   {
+    "choisi": false,
+    "cle": "formule",
+    "texte": "Par la formule"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Somme-ProduitPas de ME, pas d'Id. rem. ; le trinôme est unitaire (⟦a = 1⟧) : S-P.On cherche deux nombres dont le produit vaut ⟦-48⟧ et la somme vaut ⟦8⟧ :produit ⟦= -48⟧somme⟦-1⟧⟦48⟧⟦47⟧⟦-2⟧⟦24⟧⟦22⟧⟦-3⟧⟦16⟧⟦13⟧⟦-4⟧⟦12⟧⟦8⟧✓⟦t^{2} + 8t - 48 = 0⟧⟦\\iff⟧⟦(t - 4)(t + 12) = 0⟧",
+    "titre": "Étape 1Somme-Produit"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Produit nul⟦(t - 4)(t + 12) = 0⟧⟦\\iff⟧⟦{t - 4 = 0} \\text{ ou } \\allowbreak {t + 12 = 0}⟧produit nul⟦\\iff⟧⟦{t = 4} \\text{ ou } \\allowbreak {t = -12}⟧",
+    "titre": "Étape 2Produit nul"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\{-12\\,;\\,4\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3",
+  "variantes": {
+   "cours": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Somme-ProduitPas de ME, pas d'Id. rem. ; le trinôme est unitaire (⟦a = 1⟧) : S-P.On cherche deux nombres dont le produit vaut ⟦-48⟧ et la somme vaut ⟦8⟧ :produit ⟦= -48⟧somme⟦-1⟧⟦48⟧⟦47⟧⟦-2⟧⟦24⟧⟦22⟧⟦-3⟧⟦16⟧⟦13⟧⟦-4⟧⟦12⟧⟦8⟧✓⟦t^{2} + 8t - 48 = 0⟧⟦\\iff⟧⟦(t - 4)(t + 12) = 0⟧",
+      "titre": "Étape 1Somme-Produit"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Produit nul⟦(t - 4)(t + 12) = 0⟧⟦\\iff⟧⟦{t - 4 = 0} \\text{ ou } \\allowbreak {t + 12 = 0}⟧produit nul⟦\\iff⟧⟦{t = 4} \\text{ ou } \\allowbreak {t = -12}⟧",
+      "titre": "Étape 2Produit nul"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{-12\\,;\\,4\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Méthodes du cours",
+    "progression_finale": "Étape 3 / 3"
+   },
+   "formule": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Discriminant⟦\\Delta = b^{2} - 4ac = 8^{2} - 4 \\cdot 1 \\cdot (-48) = 64 + 192 = \\fbox{$256$}⟧",
+      "titre": "Étape 1Discriminant"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Valeurs de t⟦\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 16⟧⟦x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-8 - 16}{2} = -12⟧⟦x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-8 + 16}{2} = 4⟧",
+      "titre": "Étape 2Valeurs de t"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{-12\\,;\\,4\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Par la formule",
+    "progression_finale": "Étape 3 / 3"
+   }
+  }
+ },
+ "t^2+t+1/4=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": true,
+    "cle": "cours",
+    "texte": "Méthodes du cours"
+   },
+   {
+    "choisi": false,
+    "cle": "formule",
+    "texte": "Par la formule"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Identité remarquableId. rem. ⟦A^{2} + 2AB + B^{2}⟧ avec ⟦\\fbox{$A = t,\\ B = \\frac{1}{2}$}⟧. Vérification : ⟦2AB = 2 \\cdot t \\cdot \\frac{1}{2} = t⟧ ⟦\\checkmark⟧⟦t^{2} + t + \\frac{1}{4} = 0⟧⟦\\iff⟧⟦\\left(t + \\frac{1}{2}\\right)^{2} = 0⟧⟦\\iff⟧⟦\\left(t + \\frac{1}{2}\\right)\\left(t + \\frac{1}{2}\\right) = 0⟧",
+    "titre": "Étape 1Identité remarquable"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Produit nul⟦\\left(t + \\frac{1}{2}\\right)\\left(t + \\frac{1}{2}\\right) = 0⟧⟦\\iff⟧⟦t + \\frac{1}{2} = 0⟧produit nul⟦\\iff⟧⟦t = -\\frac{1}{2}⟧",
+    "titre": "Étape 2Produit nul"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\{-\\frac{1}{2}\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3",
+  "variantes": {
+   "cours": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Identité remarquableId. rem. ⟦A^{2} + 2AB + B^{2}⟧ avec ⟦\\fbox{$A = t,\\ B = \\frac{1}{2}$}⟧. Vérification : ⟦2AB = 2 \\cdot t \\cdot \\frac{1}{2} = t⟧ ⟦\\checkmark⟧⟦t^{2} + t + \\frac{1}{4} = 0⟧⟦\\iff⟧⟦\\left(t + \\frac{1}{2}\\right)^{2} = 0⟧⟦\\iff⟧⟦\\left(t + \\frac{1}{2}\\right)\\left(t + \\frac{1}{2}\\right) = 0⟧",
+      "titre": "Étape 1Identité remarquable"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Produit nul⟦\\left(t + \\frac{1}{2}\\right)\\left(t + \\frac{1}{2}\\right) = 0⟧⟦\\iff⟧⟦t + \\frac{1}{2} = 0⟧produit nul⟦\\iff⟧⟦t = -\\frac{1}{2}⟧",
+      "titre": "Étape 2Produit nul"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{-\\frac{1}{2}\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Méthodes du cours",
+    "progression_finale": "Étape 3 / 3"
+   },
+   "formule": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Discriminant⟦\\Delta = b^{2} - 4ac = 1^{2} - 4 \\cdot 1 \\cdot \\frac{1}{4} = 1 - 1 = \\fbox{$0$}⟧",
+      "titre": "Étape 1Discriminant"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Valeurs de t⟦\\Delta = 0⟧ : une seule solution.⟦t = \\frac{-b}{2a} = \\frac{-1}{2} = -\\frac{1}{2}⟧",
+      "titre": "Étape 2Valeurs de t"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{-\\frac{1}{2}\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Par la formule",
+    "progression_finale": "Étape 3 / 3"
+   }
+  }
+ },
+ "x^2+1": {
+  "au_depart": {
+   "progression": "",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "err"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Écrivez une équation, avec le signe « = ».",
+    "titre": null
+   }
+  ],
+  "progression_finale": ""
+ },
+ "x^2+1000x-1=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Somme-ProduitPas de ME, pas d'Id. rem. ; le trinôme est unitaire (⟦a = 1⟧) : S-P.On cherche deux nombres dont le produit vaut ⟦-1⟧ et la somme vaut ⟦1\\text{’}000⟧ :produit ⟦= -1⟧somme⟦-1⟧⟦1⟧⟦0⟧Aucun couple ne convient : on utilise la formule.",
+    "titre": "Étape 1Somme-Produit"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Discriminant⟦\\Delta = b^{2} - 4ac = 1\\text{’}000^{2} - 4 \\cdot 1 \\cdot (-1) = 1\\text{’}000\\text{’}000 + 4 = \\fbox{$1\\text{’}000\\text{’}004$}⟧",
+    "titre": "Étape 2Discriminant"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Valeurs de x⟦\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = \\sqrt{1\\text{’}000\\text{’}004} = 106\\sqrt{89}⟧⟦x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-1\\text{’}000 - 106\\sqrt{89}}{2} = -500 - 53\\sqrt{89}⟧⟦x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-1\\text{’}000 + 106\\sqrt{89}}{2} = -500 + 53\\sqrt{89}⟧",
+    "titre": "Étape 3Valeurs de x"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\{-500 - 53\\sqrt{89}\\,;\\,-500 + 53\\sqrt{89}\\}⟧soit ⟦x_{1} \\approx -1\\text{’}000{,}001⟧ et ⟦x_{2} \\approx 1 \\times 10^{-3}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4"
+ },
+ "x^2+18x+45=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": true,
+    "cle": "cours",
+    "texte": "Méthodes du cours"
+   },
+   {
+    "choisi": false,
+    "cle": "formule",
+    "texte": "Par la formule"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Somme-ProduitPas de ME, pas d'Id. rem. ; le trinôme est unitaire (⟦a = 1⟧) : S-P.On cherche deux nombres dont le produit vaut ⟦45⟧ et la somme vaut ⟦18⟧ :produit ⟦= 45⟧somme⟦1⟧⟦45⟧⟦46⟧⟦3⟧⟦15⟧⟦18⟧✓⟦x^{2} + 18x + 45 = 0⟧⟦\\iff⟧⟦(x + 3)(x + 15) = 0⟧",
+    "titre": "Étape 1Somme-Produit"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Produit nul⟦(x + 3)(x + 15) = 0⟧⟦\\iff⟧⟦{x + 3 = 0} \\text{ ou } \\allowbreak {x + 15 = 0}⟧produit nul⟦\\iff⟧⟦{x = -3} \\text{ ou } \\allowbreak {x = -15}⟧",
+    "titre": "Étape 2Produit nul"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\{-15\\,;\\,-3\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3",
+  "variantes": {
+   "cours": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Somme-ProduitPas de ME, pas d'Id. rem. ; le trinôme est unitaire (⟦a = 1⟧) : S-P.On cherche deux nombres dont le produit vaut ⟦45⟧ et la somme vaut ⟦18⟧ :produit ⟦= 45⟧somme⟦1⟧⟦45⟧⟦46⟧⟦3⟧⟦15⟧⟦18⟧✓⟦x^{2} + 18x + 45 = 0⟧⟦\\iff⟧⟦(x + 3)(x + 15) = 0⟧",
+      "titre": "Étape 1Somme-Produit"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Produit nul⟦(x + 3)(x + 15) = 0⟧⟦\\iff⟧⟦{x + 3 = 0} \\text{ ou } \\allowbreak {x + 15 = 0}⟧produit nul⟦\\iff⟧⟦{x = -3} \\text{ ou } \\allowbreak {x = -15}⟧",
+      "titre": "Étape 2Produit nul"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{-15\\,;\\,-3\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Méthodes du cours",
+    "progression_finale": "Étape 3 / 3"
+   },
+   "formule": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Discriminant⟦\\Delta = b^{2} - 4ac = 18^{2} - 4 \\cdot 1 \\cdot 45 = 324 - 180 = \\fbox{$144$}⟧",
+      "titre": "Étape 1Discriminant"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Valeurs de x⟦\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 12⟧⟦x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-18 - 12}{2} = -15⟧⟦x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-18 + 12}{2} = -3⟧",
+      "titre": "Étape 2Valeurs de x"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{-15\\,;\\,-3\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Par la formule",
+    "progression_finale": "Étape 3 / 3"
+   }
+  }
+ },
+ "x^2+3x-18=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": true,
+    "cle": "cours",
+    "texte": "Méthodes du cours"
+   },
+   {
+    "choisi": false,
+    "cle": "formule",
+    "texte": "Par la formule"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Somme-ProduitPas de ME, pas d'Id. rem. ; le trinôme est unitaire (⟦a = 1⟧) : S-P.On cherche deux nombres dont le produit vaut ⟦-18⟧ et la somme vaut ⟦3⟧ :produit ⟦= -18⟧somme⟦-1⟧⟦18⟧⟦17⟧⟦-2⟧⟦9⟧⟦7⟧⟦-3⟧⟦6⟧⟦3⟧✓⟦x^{2} + 3x - 18 = 0⟧⟦\\iff⟧⟦(x - 3)(x + 6) = 0⟧",
+    "titre": "Étape 1Somme-Produit"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Produit nul⟦(x - 3)(x + 6) = 0⟧⟦\\iff⟧⟦{x - 3 = 0} \\text{ ou } \\allowbreak {x + 6 = 0}⟧produit nul⟦\\iff⟧⟦{x = 3} \\text{ ou } \\allowbreak {x = -6}⟧",
+    "titre": "Étape 2Produit nul"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\{-6\\,;\\,3\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3",
+  "variantes": {
+   "cours": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Somme-ProduitPas de ME, pas d'Id. rem. ; le trinôme est unitaire (⟦a = 1⟧) : S-P.On cherche deux nombres dont le produit vaut ⟦-18⟧ et la somme vaut ⟦3⟧ :produit ⟦= -18⟧somme⟦-1⟧⟦18⟧⟦17⟧⟦-2⟧⟦9⟧⟦7⟧⟦-3⟧⟦6⟧⟦3⟧✓⟦x^{2} + 3x - 18 = 0⟧⟦\\iff⟧⟦(x - 3)(x + 6) = 0⟧",
+      "titre": "Étape 1Somme-Produit"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Produit nul⟦(x - 3)(x + 6) = 0⟧⟦\\iff⟧⟦{x - 3 = 0} \\text{ ou } \\allowbreak {x + 6 = 0}⟧produit nul⟦\\iff⟧⟦{x = 3} \\text{ ou } \\allowbreak {x = -6}⟧",
+      "titre": "Étape 2Produit nul"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{-6\\,;\\,3\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Méthodes du cours",
+    "progression_finale": "Étape 3 / 3"
+   },
+   "formule": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Discriminant⟦\\Delta = b^{2} - 4ac = 3^{2} - 4 \\cdot 1 \\cdot (-18) = 9 + 72 = \\fbox{$81$}⟧",
+      "titre": "Étape 1Discriminant"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Valeurs de x⟦\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 9⟧⟦x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-3 - 9}{2} = -6⟧⟦x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-3 + 9}{2} = 3⟧",
+      "titre": "Étape 2Valeurs de x"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{-6\\,;\\,3\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Par la formule",
+    "progression_finale": "Étape 3 / 3"
+   }
+  }
+ },
+ "x^2+4=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Somme-ProduitPas de ME, pas d'Id. rem. ; le trinôme est unitaire (⟦a = 1⟧) : S-P.On cherche deux nombres dont le produit vaut ⟦4⟧ et la somme vaut ⟦0⟧ :produit ⟦= 4⟧somme⟦1⟧⟦4⟧⟦5⟧⟦2⟧⟦2⟧⟦4⟧Aucun couple ne convient : on utilise la formule.",
+    "titre": "Étape 1Somme-Produit"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Discriminant⟦\\Delta = b^{2} - 4ac = 0^{2} - 4 \\cdot 1 \\cdot 4 = \\fbox{$-16$}⟧",
+    "titre": "Étape 2Discriminant"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Valeurs de x⟦\\Delta < 0⟧ : l'équation n'a aucune solution réelle.",
+    "titre": "Étape 3Valeurs de x"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\varnothing⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4"
+ },
+ "x^2+4x+2=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Somme-ProduitPas de ME, pas d'Id. rem. ; le trinôme est unitaire (⟦a = 1⟧) : S-P.On cherche deux nombres dont le produit vaut ⟦2⟧ et la somme vaut ⟦4⟧ :produit ⟦= 2⟧somme⟦1⟧⟦2⟧⟦3⟧Aucun couple ne convient : on utilise la formule.",
+    "titre": "Étape 1Somme-Produit"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Discriminant⟦\\Delta = b^{2} - 4ac = 4^{2} - 4 \\cdot 1 \\cdot 2 = 16 - 8 = \\fbox{$8$}⟧",
+    "titre": "Étape 2Discriminant"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Valeurs de x⟦\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = \\sqrt{8} = 2\\sqrt{2}⟧⟦x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-4 - 2\\sqrt{2}}{2} = -2 - \\sqrt{2}⟧⟦x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-4 + 2\\sqrt{2}}{2} = -2 + \\sqrt{2}⟧",
+    "titre": "Étape 3Valeurs de x"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\{-2 - \\sqrt{2}\\,;\\,-2 + \\sqrt{2}\\}⟧soit ⟦x_{1} \\approx -3{,}414⟧ et ⟦x_{2} \\approx -0{,}586⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4"
+ },
+ "x^2+5x+2=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Somme-ProduitPas de ME, pas d'Id. rem. ; le trinôme est unitaire (⟦a = 1⟧) : S-P.On cherche deux nombres dont le produit vaut ⟦2⟧ et la somme vaut ⟦5⟧ :produit ⟦= 2⟧somme⟦1⟧⟦2⟧⟦3⟧Aucun couple ne convient : on utilise la formule.",
+    "titre": "Étape 1Somme-Produit"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Discriminant⟦\\Delta = b^{2} - 4ac = 5^{2} - 4 \\cdot 1 \\cdot 2 = 25 - 8 = \\fbox{$17$}⟧",
+    "titre": "Étape 2Discriminant"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Valeurs de x⟦\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = \\sqrt{17}⟧⟦x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-5 - \\sqrt{17}}{2}⟧⟦x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-5 + \\sqrt{17}}{2}⟧",
+    "titre": "Étape 3Valeurs de x"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\{\\frac{-5 - \\sqrt{17}}{2}\\,;\\,\\frac{-5 + \\sqrt{17}}{2}\\}⟧soit ⟦x_{1} \\approx -4{,}562⟧ et ⟦x_{2} \\approx -0{,}438⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4"
+ },
+ "x^2+7x+12=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": true,
+    "cle": "cours",
+    "texte": "Méthodes du cours"
+   },
+   {
+    "choisi": false,
+    "cle": "formule",
+    "texte": "Par la formule"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Somme-ProduitPas de ME, pas d'Id. rem. ; le trinôme est unitaire (⟦a = 1⟧) : S-P.On cherche deux nombres dont le produit vaut ⟦12⟧ et la somme vaut ⟦7⟧ :produit ⟦= 12⟧somme⟦1⟧⟦12⟧⟦13⟧⟦2⟧⟦6⟧⟦8⟧⟦3⟧⟦4⟧⟦7⟧✓⟦x^{2} + 7x + 12 = 0⟧⟦\\iff⟧⟦(x + 3)(x + 4) = 0⟧",
+    "titre": "Étape 1Somme-Produit"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Produit nul⟦(x + 3)(x + 4) = 0⟧⟦\\iff⟧⟦{x + 3 = 0} \\text{ ou } \\allowbreak {x + 4 = 0}⟧produit nul⟦\\iff⟧⟦{x = -3} \\text{ ou } \\allowbreak {x = -4}⟧",
+    "titre": "Étape 2Produit nul"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\{-4\\,;\\,-3\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3",
+  "variantes": {
+   "cours": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Somme-ProduitPas de ME, pas d'Id. rem. ; le trinôme est unitaire (⟦a = 1⟧) : S-P.On cherche deux nombres dont le produit vaut ⟦12⟧ et la somme vaut ⟦7⟧ :produit ⟦= 12⟧somme⟦1⟧⟦12⟧⟦13⟧⟦2⟧⟦6⟧⟦8⟧⟦3⟧⟦4⟧⟦7⟧✓⟦x^{2} + 7x + 12 = 0⟧⟦\\iff⟧⟦(x + 3)(x + 4) = 0⟧",
+      "titre": "Étape 1Somme-Produit"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Produit nul⟦(x + 3)(x + 4) = 0⟧⟦\\iff⟧⟦{x + 3 = 0} \\text{ ou } \\allowbreak {x + 4 = 0}⟧produit nul⟦\\iff⟧⟦{x = -3} \\text{ ou } \\allowbreak {x = -4}⟧",
+      "titre": "Étape 2Produit nul"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{-4\\,;\\,-3\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Méthodes du cours",
+    "progression_finale": "Étape 3 / 3"
+   },
+   "formule": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Discriminant⟦\\Delta = b^{2} - 4ac = 7^{2} - 4 \\cdot 1 \\cdot 12 = 49 - 48 = \\fbox{$1$}⟧",
+      "titre": "Étape 1Discriminant"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Valeurs de x⟦\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 1⟧⟦x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-7 - 1}{2} = -4⟧⟦x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-7 + 1}{2} = -3⟧",
+      "titre": "Étape 2Valeurs de x"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{-4\\,;\\,-3\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Par la formule",
+    "progression_finale": "Étape 3 / 3"
+   }
+  }
+ },
+ "x^2+7x+6=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": true,
+    "cle": "cours",
+    "texte": "Méthodes du cours"
+   },
+   {
+    "choisi": false,
+    "cle": "formule",
+    "texte": "Par la formule"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Somme-ProduitPas de ME, pas d'Id. rem. ; le trinôme est unitaire (⟦a = 1⟧) : S-P.On cherche deux nombres dont le produit vaut ⟦6⟧ et la somme vaut ⟦7⟧ :produit ⟦= 6⟧somme⟦1⟧⟦6⟧⟦7⟧✓⟦x^{2} + 7x + 6 = 0⟧⟦\\iff⟧⟦(x + 1)(x + 6) = 0⟧",
+    "titre": "Étape 1Somme-Produit"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Produit nul⟦(x + 1)(x + 6) = 0⟧⟦\\iff⟧⟦{x + 1 = 0} \\text{ ou } \\allowbreak {x + 6 = 0}⟧produit nul⟦\\iff⟧⟦{x = -1} \\text{ ou } \\allowbreak {x = -6}⟧",
+    "titre": "Étape 2Produit nul"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\{-6\\,;\\,-1\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3",
+  "variantes": {
+   "cours": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Somme-ProduitPas de ME, pas d'Id. rem. ; le trinôme est unitaire (⟦a = 1⟧) : S-P.On cherche deux nombres dont le produit vaut ⟦6⟧ et la somme vaut ⟦7⟧ :produit ⟦= 6⟧somme⟦1⟧⟦6⟧⟦7⟧✓⟦x^{2} + 7x + 6 = 0⟧⟦\\iff⟧⟦(x + 1)(x + 6) = 0⟧",
+      "titre": "Étape 1Somme-Produit"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Produit nul⟦(x + 1)(x + 6) = 0⟧⟦\\iff⟧⟦{x + 1 = 0} \\text{ ou } \\allowbreak {x + 6 = 0}⟧produit nul⟦\\iff⟧⟦{x = -1} \\text{ ou } \\allowbreak {x = -6}⟧",
+      "titre": "Étape 2Produit nul"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{-6\\,;\\,-1\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Méthodes du cours",
+    "progression_finale": "Étape 3 / 3"
+   },
+   "formule": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Discriminant⟦\\Delta = b^{2} - 4ac = 7^{2} - 4 \\cdot 1 \\cdot 6 = 49 - 24 = \\fbox{$25$}⟧",
+      "titre": "Étape 1Discriminant"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Valeurs de x⟦\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 5⟧⟦x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-7 - 5}{2} = -6⟧⟦x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-7 + 5}{2} = -1⟧",
+      "titre": "Étape 2Valeurs de x"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{-6\\,;\\,-1\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Par la formule",
+    "progression_finale": "Étape 3 / 3"
+   }
+  }
+ },
+ "x^2+7x=18": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": true,
+    "cle": "cours",
+    "texte": "Méthodes du cours"
+   },
+   {
+    "choisi": false,
+    "cle": "formule",
+    "texte": "Par la formule"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ramener à 0On ramène d'abord l'équation à la forme ⟦\\ldots = 0⟧ :⟦x^{2} + 7x = 18⟧⟦\\iff⟧⟦x^{2} + 7x - 18 = 0⟧",
+    "titre": "Étape 1Ramener à 0"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Somme-ProduitPas de ME, pas d'Id. rem. ; le trinôme est unitaire (⟦a = 1⟧) : S-P.On cherche deux nombres dont le produit vaut ⟦-18⟧ et la somme vaut ⟦7⟧ :produit ⟦= -18⟧somme⟦-1⟧⟦18⟧⟦17⟧⟦-2⟧⟦9⟧⟦7⟧✓⟦x^{2} + 7x - 18 = 0⟧⟦\\iff⟧⟦(x - 2)(x + 9) = 0⟧",
+    "titre": "Étape 2Somme-Produit"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Produit nul⟦(x - 2)(x + 9) = 0⟧⟦\\iff⟧⟦{x - 2 = 0} \\text{ ou } \\allowbreak {x + 9 = 0}⟧produit nul⟦\\iff⟧⟦{x = 2} \\text{ ou } \\allowbreak {x = -9}⟧",
+    "titre": "Étape 3Produit nul"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\{-9\\,;\\,2\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4",
+  "variantes": {
+   "cours": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ramener à 0On ramène d'abord l'équation à la forme ⟦\\ldots = 0⟧ :⟦x^{2} + 7x = 18⟧⟦\\iff⟧⟦x^{2} + 7x - 18 = 0⟧",
+      "titre": "Étape 1Ramener à 0"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Somme-ProduitPas de ME, pas d'Id. rem. ; le trinôme est unitaire (⟦a = 1⟧) : S-P.On cherche deux nombres dont le produit vaut ⟦-18⟧ et la somme vaut ⟦7⟧ :produit ⟦= -18⟧somme⟦-1⟧⟦18⟧⟦17⟧⟦-2⟧⟦9⟧⟦7⟧✓⟦x^{2} + 7x - 18 = 0⟧⟦\\iff⟧⟦(x - 2)(x + 9) = 0⟧",
+      "titre": "Étape 2Somme-Produit"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Produit nul⟦(x - 2)(x + 9) = 0⟧⟦\\iff⟧⟦{x - 2 = 0} \\text{ ou } \\allowbreak {x + 9 = 0}⟧produit nul⟦\\iff⟧⟦{x = 2} \\text{ ou } \\allowbreak {x = -9}⟧",
+      "titre": "Étape 3Produit nul"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{-9\\,;\\,2\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Méthodes du cours",
+    "progression_finale": "Étape 4 / 4"
+   },
+   "formule": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ramener à 0⟦x^{2} + 7x = 18⟧⟦\\iff⟧⟦x^{2} + 7x - 18 = 0⟧",
+      "titre": "Étape 1Ramener à 0"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Discriminant⟦\\Delta = b^{2} - 4ac = 7^{2} - 4 \\cdot 1 \\cdot (-18) = 49 + 72 = \\fbox{$121$}⟧",
+      "titre": "Étape 2Discriminant"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Valeurs de x⟦\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 11⟧⟦x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-7 - 11}{2} = -9⟧⟦x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-7 + 11}{2} = 2⟧",
+      "titre": "Étape 3Valeurs de x"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{-9\\,;\\,2\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Par la formule",
+    "progression_finale": "Étape 4 / 4"
+   }
+  }
+ },
+ "x^2-11x+10=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": true,
+    "cle": "cours",
+    "texte": "Méthodes du cours"
+   },
+   {
+    "choisi": false,
+    "cle": "formule",
+    "texte": "Par la formule"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Somme-ProduitPas de ME, pas d'Id. rem. ; le trinôme est unitaire (⟦a = 1⟧) : S-P.On cherche deux nombres dont le produit vaut ⟦10⟧ et la somme vaut ⟦-11⟧ :produit ⟦= 10⟧somme⟦-1⟧⟦-10⟧⟦-11⟧✓⟦x^{2} - 11x + 10 = 0⟧⟦\\iff⟧⟦(x - 1)(x - 10) = 0⟧",
+    "titre": "Étape 1Somme-Produit"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Produit nul⟦(x - 1)(x - 10) = 0⟧⟦\\iff⟧⟦{x - 1 = 0} \\text{ ou } \\allowbreak {x - 10 = 0}⟧produit nul⟦\\iff⟧⟦{x = 1} \\text{ ou } \\allowbreak {x = 10}⟧",
+    "titre": "Étape 2Produit nul"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\{1\\,;\\,10\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3",
+  "variantes": {
+   "cours": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Somme-ProduitPas de ME, pas d'Id. rem. ; le trinôme est unitaire (⟦a = 1⟧) : S-P.On cherche deux nombres dont le produit vaut ⟦10⟧ et la somme vaut ⟦-11⟧ :produit ⟦= 10⟧somme⟦-1⟧⟦-10⟧⟦-11⟧✓⟦x^{2} - 11x + 10 = 0⟧⟦\\iff⟧⟦(x - 1)(x - 10) = 0⟧",
+      "titre": "Étape 1Somme-Produit"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Produit nul⟦(x - 1)(x - 10) = 0⟧⟦\\iff⟧⟦{x - 1 = 0} \\text{ ou } \\allowbreak {x - 10 = 0}⟧produit nul⟦\\iff⟧⟦{x = 1} \\text{ ou } \\allowbreak {x = 10}⟧",
+      "titre": "Étape 2Produit nul"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{1\\,;\\,10\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Méthodes du cours",
+    "progression_finale": "Étape 3 / 3"
+   },
+   "formule": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Discriminant⟦\\Delta = b^{2} - 4ac = (-11)^{2} - 4 \\cdot 1 \\cdot 10 = 121 - 40 = \\fbox{$81$}⟧",
+      "titre": "Étape 1Discriminant"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Valeurs de x⟦\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 9⟧⟦x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{11 - 9}{2} = 1⟧⟦x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{11 + 9}{2} = 10⟧",
+      "titre": "Étape 2Valeurs de x"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{1\\,;\\,10\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Par la formule",
+    "progression_finale": "Étape 3 / 3"
+   }
+  }
+ },
+ "x^2-5=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": true,
+    "cle": "cours",
+    "texte": "Méthodes du cours"
+   },
+   {
+    "choisi": false,
+    "cle": "formule",
+    "texte": "Par la formule"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Identité remarquable⟦x^{2} - 5 = 0⟧⟦\\iff⟧⟦(x + \\sqrt{5})(x - \\sqrt{5}) = 0⟧Id. rem. ⟦A^{2} - B^{2}⟧ avec ⟦\\fbox{$A = x,\\ B = \\sqrt{5}$}⟧",
+    "titre": "Étape 1Identité remarquable"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Produit nul⟦(x + \\sqrt{5})(x - \\sqrt{5}) = 0⟧⟦\\iff⟧⟦{x + \\sqrt{5} = 0} \\text{ ou } \\allowbreak {x - \\sqrt{5} = 0}⟧produit nul⟦\\iff⟧⟦{x = -\\sqrt{5}} \\text{ ou } \\allowbreak {x = \\sqrt{5}}⟧",
+    "titre": "Étape 2Produit nul"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\{-\\sqrt{5}\\,;\\,\\sqrt{5}\\}⟧soit ⟦x \\approx -2{,}236⟧ ou ⟦x \\approx 2{,}236⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3",
+  "variantes": {
+   "cours": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Identité remarquable⟦x^{2} - 5 = 0⟧⟦\\iff⟧⟦(x + \\sqrt{5})(x - \\sqrt{5}) = 0⟧Id. rem. ⟦A^{2} - B^{2}⟧ avec ⟦\\fbox{$A = x,\\ B = \\sqrt{5}$}⟧",
+      "titre": "Étape 1Identité remarquable"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Produit nul⟦(x + \\sqrt{5})(x - \\sqrt{5}) = 0⟧⟦\\iff⟧⟦{x + \\sqrt{5} = 0} \\text{ ou } \\allowbreak {x - \\sqrt{5} = 0}⟧produit nul⟦\\iff⟧⟦{x = -\\sqrt{5}} \\text{ ou } \\allowbreak {x = \\sqrt{5}}⟧",
+      "titre": "Étape 2Produit nul"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{-\\sqrt{5}\\,;\\,\\sqrt{5}\\}⟧soit ⟦x \\approx -2{,}236⟧ ou ⟦x \\approx 2{,}236⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Méthodes du cours",
+    "progression_finale": "Étape 3 / 3"
+   },
+   "formule": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Discriminant⟦\\Delta = b^{2} - 4ac = 0^{2} - 4 \\cdot 1 \\cdot (-5) = \\fbox{$20$}⟧",
+      "titre": "Étape 1Discriminant"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Valeurs de x⟦\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = \\sqrt{20} = 2\\sqrt{5}⟧⟦x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-2\\sqrt{5}}{2} = -\\sqrt{5}⟧⟦x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{2\\sqrt{5}}{2} = \\sqrt{5}⟧",
+      "titre": "Étape 2Valeurs de x"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{-\\sqrt{5}\\,;\\,\\sqrt{5}\\}⟧soit ⟦x_{1} \\approx -2{,}236⟧ et ⟦x_{2} \\approx 2{,}236⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Par la formule",
+    "progression_finale": "Étape 3 / 3"
+   }
+  }
+ },
+ "x^2-5x-36=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": true,
+    "cle": "cours",
+    "texte": "Méthodes du cours"
+   },
+   {
+    "choisi": false,
+    "cle": "formule",
+    "texte": "Par la formule"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Somme-ProduitPas de ME, pas d'Id. rem. ; le trinôme est unitaire (⟦a = 1⟧) : S-P.On cherche deux nombres dont le produit vaut ⟦-36⟧ et la somme vaut ⟦-5⟧ :produit ⟦= -36⟧somme⟦1⟧⟦-36⟧⟦-35⟧⟦2⟧⟦-18⟧⟦-16⟧⟦3⟧⟦-12⟧⟦-9⟧⟦4⟧⟦-9⟧⟦-5⟧✓⟦x^{2} - 5x - 36 = 0⟧⟦\\iff⟧⟦(x + 4)(x - 9) = 0⟧",
+    "titre": "Étape 1Somme-Produit"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Produit nul⟦(x + 4)(x - 9) = 0⟧⟦\\iff⟧⟦{x + 4 = 0} \\text{ ou } \\allowbreak {x - 9 = 0}⟧produit nul⟦\\iff⟧⟦{x = -4} \\text{ ou } \\allowbreak {x = 9}⟧",
+    "titre": "Étape 2Produit nul"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\{-4\\,;\\,9\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3",
+  "variantes": {
+   "cours": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Somme-ProduitPas de ME, pas d'Id. rem. ; le trinôme est unitaire (⟦a = 1⟧) : S-P.On cherche deux nombres dont le produit vaut ⟦-36⟧ et la somme vaut ⟦-5⟧ :produit ⟦= -36⟧somme⟦1⟧⟦-36⟧⟦-35⟧⟦2⟧⟦-18⟧⟦-16⟧⟦3⟧⟦-12⟧⟦-9⟧⟦4⟧⟦-9⟧⟦-5⟧✓⟦x^{2} - 5x - 36 = 0⟧⟦\\iff⟧⟦(x + 4)(x - 9) = 0⟧",
+      "titre": "Étape 1Somme-Produit"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Produit nul⟦(x + 4)(x - 9) = 0⟧⟦\\iff⟧⟦{x + 4 = 0} \\text{ ou } \\allowbreak {x - 9 = 0}⟧produit nul⟦\\iff⟧⟦{x = -4} \\text{ ou } \\allowbreak {x = 9}⟧",
+      "titre": "Étape 2Produit nul"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{-4\\,;\\,9\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Méthodes du cours",
+    "progression_finale": "Étape 3 / 3"
+   },
+   "formule": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Discriminant⟦\\Delta = b^{2} - 4ac = (-5)^{2} - 4 \\cdot 1 \\cdot (-36) = 25 + 144 = \\fbox{$169$}⟧",
+      "titre": "Étape 1Discriminant"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Valeurs de x⟦\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 13⟧⟦x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{5 - 13}{2} = -4⟧⟦x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{5 + 13}{2} = 9⟧",
+      "titre": "Étape 2Valeurs de x"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{-4\\,;\\,9\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Par la formule",
+    "progression_finale": "Étape 3 / 3"
+   }
+  }
+ },
+ "x^2-8x+12=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": true,
+    "cle": "cours",
+    "texte": "Méthodes du cours"
+   },
+   {
+    "choisi": false,
+    "cle": "formule",
+    "texte": "Par la formule"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Somme-ProduitPas de ME, pas d'Id. rem. ; le trinôme est unitaire (⟦a = 1⟧) : S-P.On cherche deux nombres dont le produit vaut ⟦12⟧ et la somme vaut ⟦-8⟧ :produit ⟦= 12⟧somme⟦-1⟧⟦-12⟧⟦-13⟧⟦-2⟧⟦-6⟧⟦-8⟧✓⟦x^{2} - 8x + 12 = 0⟧⟦\\iff⟧⟦(x - 2)(x - 6) = 0⟧",
+    "titre": "Étape 1Somme-Produit"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Produit nul⟦(x - 2)(x - 6) = 0⟧⟦\\iff⟧⟦{x - 2 = 0} \\text{ ou } \\allowbreak {x - 6 = 0}⟧produit nul⟦\\iff⟧⟦{x = 2} \\text{ ou } \\allowbreak {x = 6}⟧",
+    "titre": "Étape 2Produit nul"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\{2\\,;\\,6\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3",
+  "variantes": {
+   "cours": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Somme-ProduitPas de ME, pas d'Id. rem. ; le trinôme est unitaire (⟦a = 1⟧) : S-P.On cherche deux nombres dont le produit vaut ⟦12⟧ et la somme vaut ⟦-8⟧ :produit ⟦= 12⟧somme⟦-1⟧⟦-12⟧⟦-13⟧⟦-2⟧⟦-6⟧⟦-8⟧✓⟦x^{2} - 8x + 12 = 0⟧⟦\\iff⟧⟦(x - 2)(x - 6) = 0⟧",
+      "titre": "Étape 1Somme-Produit"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Produit nul⟦(x - 2)(x - 6) = 0⟧⟦\\iff⟧⟦{x - 2 = 0} \\text{ ou } \\allowbreak {x - 6 = 0}⟧produit nul⟦\\iff⟧⟦{x = 2} \\text{ ou } \\allowbreak {x = 6}⟧",
+      "titre": "Étape 2Produit nul"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{2\\,;\\,6\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Méthodes du cours",
+    "progression_finale": "Étape 3 / 3"
+   },
+   "formule": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Discriminant⟦\\Delta = b^{2} - 4ac = (-8)^{2} - 4 \\cdot 1 \\cdot 12 = 64 - 48 = \\fbox{$16$}⟧",
+      "titre": "Étape 1Discriminant"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Valeurs de x⟦\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 4⟧⟦x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{8 - 4}{2} = 2⟧⟦x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{8 + 4}{2} = 6⟧",
+      "titre": "Étape 2Valeurs de x"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{2\\,;\\,6\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Par la formule",
+    "progression_finale": "Étape 3 / 3"
+   }
+  }
+ },
+ "x^2=16": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "boutons": [
+   {
+    "choisi": true,
+    "cle": "cours",
+    "texte": "Méthodes du cours"
+   },
+   {
+    "choisi": false,
+    "cle": "formule",
+    "texte": "Par la formule"
+   }
+  ],
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Ramener à 0⟦x^{2} = 16⟧⟦\\iff⟧⟦x^{2} - 16 = 0⟧",
+    "titre": "Étape 1Ramener à 0"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Identité remarquable⟦x^{2} - 16 = 0⟧⟦\\iff⟧⟦(x + 4)(x - 4) = 0⟧Id. rem. ⟦A^{2} - B^{2}⟧ avec ⟦\\fbox{$A = x,\\ B = 4$}⟧",
+    "titre": "Étape 2Identité remarquable"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Produit nul⟦(x + 4)(x - 4) = 0⟧⟦\\iff⟧⟦{x + 4 = 0} \\text{ ou } \\allowbreak {x - 4 = 0}⟧produit nul⟦\\iff⟧⟦{x = -4} \\text{ ou } \\allowbreak {x = 4}⟧",
+    "titre": "Étape 3Produit nul"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\{-4\\,;\\,4\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4",
+  "variantes": {
+   "cours": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ramener à 0⟦x^{2} = 16⟧⟦\\iff⟧⟦x^{2} - 16 = 0⟧",
+      "titre": "Étape 1Ramener à 0"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Identité remarquable⟦x^{2} - 16 = 0⟧⟦\\iff⟧⟦(x + 4)(x - 4) = 0⟧Id. rem. ⟦A^{2} - B^{2}⟧ avec ⟦\\fbox{$A = x,\\ B = 4$}⟧",
+      "titre": "Étape 2Identité remarquable"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Produit nul⟦(x + 4)(x - 4) = 0⟧⟦\\iff⟧⟦{x + 4 = 0} \\text{ ou } \\allowbreak {x - 4 = 0}⟧produit nul⟦\\iff⟧⟦{x = -4} \\text{ ou } \\allowbreak {x = 4}⟧",
+      "titre": "Étape 3Produit nul"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{-4\\,;\\,4\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Méthodes du cours",
+    "progression_finale": "Étape 4 / 4"
+   },
+   "formule": {
+    "cartes": [
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 1Ramener à 0⟦x^{2} = 16⟧⟦\\iff⟧⟦x^{2} - 16 = 0⟧",
+      "titre": "Étape 1Ramener à 0"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 2Discriminant⟦\\Delta = b^{2} - 4ac = 0^{2} - 4 \\cdot 1 \\cdot (-16) = \\fbox{$64$}⟧",
+      "titre": "Étape 2Discriminant"
+     },
+     {
+      "classes": [
+       "card",
+       "cond"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Étape 3Valeurs de x⟦\\Delta > 0 \\text{ : deux solutions.} \\quad \\sqrt{\\Delta} = 8⟧⟦x_{1} = \\frac{-b - \\sqrt{\\Delta}}{2a} = \\frac{-8}{2} = -4⟧⟦x_{2} = \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{8}{2} = 4⟧",
+      "titre": "Étape 3Valeurs de x"
+     },
+     {
+      "classes": [
+       "card"
+      ],
+      "listes": [],
+      "tableaux": [],
+      "texte": "Solution⟦S = \\{-4\\,;\\,4\\}⟧",
+      "titre": "Solution"
+     }
+    ],
+    "imprimee": "Méthode : Par la formule",
+    "progression_finale": "Étape 4 / 4"
+   }
+  }
+ },
+ "x^3+8x^2=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 3",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Mise en évidence⟦x^{3} + 8x^{2} = 0⟧⟦\\iff⟧⟦x^{2}(x + 8) = 0⟧ME",
+    "titre": "Étape 1Mise en évidence"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Produit nul⟦x^{2}(x + 8) = 0⟧⟦\\iff⟧⟦{x^{2} = 0} \\text{ ou } \\allowbreak {x + 8 = 0}⟧produit nul⟦\\iff⟧⟦{x = 0} \\text{ ou } \\allowbreak {x = -8}⟧",
+    "titre": "Étape 2Produit nul"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\{-8\\,;\\,0\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 3 / 3"
+ },
+ "x^3-x=0": {
+  "au_depart": {
+   "progression": "Étape 1 / 4",
+   "visibles": 1
+  },
+  "cartes": [
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 1Mise en évidence⟦x^{3} - x = 0⟧⟦\\iff⟧⟦x(x^{2} - 1) = 0⟧ME",
+    "titre": "Étape 1Mise en évidence"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 2Identité remarquable⟦x(x^{2} - 1) = 0⟧⟦\\iff⟧⟦x(x + 1)(x - 1) = 0⟧Id. rem. ⟦A^{2} - B^{2}⟧ avec ⟦\\fbox{$A = x,\\ B = 1$}⟧",
+    "titre": "Étape 2Identité remarquable"
+   },
+   {
+    "classes": [
+     "card",
+     "cond"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Étape 3Produit nul⟦x(x + 1)(x - 1) = 0⟧⟦\\iff⟧⟦{x = 0} \\text{ ou } \\allowbreak {x + 1 = 0} \\text{ ou } \\allowbreak {x - 1 = 0}⟧produit nul⟦\\iff⟧⟦{x = 0} \\text{ ou } \\allowbreak {x = -1} \\text{ ou } \\allowbreak {x = 1}⟧",
+    "titre": "Étape 3Produit nul"
+   },
+   {
+    "classes": [
+     "card"
+    ],
+    "listes": [],
+    "tableaux": [],
+    "texte": "Solution⟦S = \\{-1\\,;\\,0\\,;\\,1\\}⟧",
+    "titre": "Solution"
+   }
+  ],
+  "progression_finale": "Étape 4 / 4"
+ }
+}

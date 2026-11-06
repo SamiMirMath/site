@@ -15,9 +15,10 @@ import limites_asymptotes as la
 import resoudre_ec
 import resoudre_ed
 import resoudre_el
+import resoudre_eq
 
 import os
-from cas import CAS_LIMITES, entrees_page, entrees_factorisation
+from cas import CAS_LIMITES, entrees_equations, entrees_page, entrees_factorisation
 from cas_el import entrees_el, entrees_el_m
 
 # outil -> entrées (clés vérifiées par test_outils_du_site.py : chaque outil du manifeste) ; la filière M des exponentielles à part
@@ -27,6 +28,7 @@ OUTILS_ENTREES = {
 }
 OUTILS_ENTREES["factorisation"] = entrees_factorisation()
 OUTILS_ENTREES["exponentielles-logarithmes"] = entrees_el()
+OUTILS_ENTREES["equations-2e-degre"] = entrees_equations()
 ENTREES_FILIERE_M = {"exponentielles-logarithmes": entrees_el_m()}
 DOSSIER_INSTANTANES = os.path.join(os.path.dirname(__file__), "instantanes")
 
@@ -106,6 +108,14 @@ class TestJsonStrict(unittest.TestCase):
                 with self.subTest(f=entree, appel=appel.__name__):
                     strict(appel(entree))
             self.assertEqual(list(non_finis(resoudre_el.resoudre(entree))), [], entree)
+
+    def test_equations_2e_degre_json(self):
+        """Équations du 2e degré (P5) : resoudre_json et apercu_json, les deux appels de la page, en JSON strict ; aucun non-fini."""
+        for entree in OUTILS_ENTREES["equations-2e-degre"]:
+            for appel in (resoudre_eq.resoudre_json, resoudre_eq.apercu_json):
+                with self.subTest(f=entree, appel=appel.__name__):
+                    strict(appel(entree))
+            self.assertEqual(list(non_finis(resoudre_eq.resoudre(entree))), [], entree)
 
     def test_exercices_de_factorisation(self):
         random.seed(2026_10_29)                   # tirages reproductibles, quel que soit l'ordre des tests

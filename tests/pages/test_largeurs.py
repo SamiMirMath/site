@@ -276,6 +276,108 @@ class TestLargeurs(unittest.TestCase):
                     page.taille(1100, 800)
                 self.assertEqual(erreurs_a_signaler(page), [])
 
+    # ---------- Équations du 2e degré (chantier equations-2e-degre, P5 ; decisions.md § 6) ----------
+    def test_equations_2e_degre_chaque_exemple(self):
+        """Chaque exemple de la page (tableau S-P, étiquettes longues d'Id. rem., cadres D29, lignes de Δ, produit nul à trois
+        facteurs), chemin du cours et variante « Par la formule » : aucune faute du balayage à aucune largeur, aucune formule hors de
+        sa carte (hors d'un bloc qui défile lui-même), aucune erreur de console. Le balayage commun ne lance que le premier exemple."""
+        js = r"""
+        (async () => {
+          await new Promise(r => setTimeout(r, 150));
+          const out = [];
+          for (const k of document.querySelectorAll('#cartes .katex')) {
+            const c = k.closest('.card'); let defile = false;
+            for (let m = k.parentElement; m && m !== c; m = m.parentElement) {
+              const o = getComputedStyle(m).overflowX; if (o === 'auto' || o === 'scroll') defile = true; }
+            const r = k.getBoundingClientRect(), rc = c.getBoundingClientRect();
+            if (!defile && r.width > 0 && (r.right > rc.right + 1 || r.left < rc.left - 1)) out.push(k.textContent.slice(0, 60));
+          }
+          return out;
+        })()"""
+        if "equations-2e-degre" not in CHOISIS:
+            self.skipTest("hors de OUTILS")
+        page = self.nav.ouvrir("equations-2e-degre/index.html")
+        attendre_pret(page)
+        exemples = page.evaluer("[...document.querySelectorAll('#exemples button[data-ex]')].map(b => b.dataset.ex)")
+        self.assertEqual(len(exemples), 10)
+        variantes_vues = 0
+        for entree in exemples:
+            page.taille(1100, 800)
+            page.evaluer(f"document.querySelector('#exemples button[data-ex={json.dumps(entree)}]').click()")
+            page.attendre("document.querySelector('#cartes .card') && !document.querySelector('#calculer').disabled", 120)
+            cles = page.evaluer("document.querySelector('#variantes') && !document.querySelector('#variantes').hidden ? "
+                                "[...document.querySelectorAll('#variantes button')].map(b => b.dataset.variante) : [null]")
+            for cle in cles:
+                with self.subTest(entree=entree, variante=cle):
+                    if cle is not None:
+                        variantes_vues += 1
+                        page.evaluer(f"document.querySelector('#variantes button[data-variante={json.dumps(cle)}]').click()")
+                    page.evaluer("document.querySelector('#tout') && !document.querySelector('#tout').disabled && document.querySelector('#tout').click()")
+                    self.assertFalse(page.evaluer("!!document.querySelector('#cartes .err')"))
+                    fautes = []
+                    self.balayer(page, f"{entree} ({cle})", fautes)
+                    self.assertEqual(fautes, [], fautes[:5])
+                    try:
+                        for w in LARGEURS:
+                            page.taille(w, 800)
+                            self.assertEqual(page.evaluer(js), [], w)
+                    finally:
+                        page.taille(1100, 800)
+            if cles != [None]:
+                page.evaluer("document.querySelector('#variantes button[data-variante=\"cours\"]').click()")     # le choix est gardé
+        self.assertGreater(variantes_vues, 0)
+        self.assertEqual(erreurs_a_signaler(page), [])
+
+    def test_equations_2e_degre_r2(self):
+        """R2 (question 29) : fractions supprimées d'abord (carte « Supprimer les fractions ») et développement pas à pas (lignes
+        longues : 2(x² + 3x + x + 3), x³ − (x³ − x² − 2x² + 2x + x − 1)), chemin du cours et variante « Par la formule » : aucune faute
+        du balayage à aucune largeur (320 à 1100 px), aucune formule hors de sa carte, aucune erreur de console."""
+        js = r"""
+        (async () => {
+          await new Promise(r => setTimeout(r, 150));
+          const out = [];
+          for (const k of document.querySelectorAll('#cartes .katex')) {
+            const c = k.closest('.card'); let defile = false;
+            for (let m = k.parentElement; m && m !== c; m = m.parentElement) {
+              const o = getComputedStyle(m).overflowX; if (o === 'auto' || o === 'scroll') defile = true; }
+            const r = k.getBoundingClientRect(), rc = c.getBoundingClientRect();
+            if (!defile && r.width > 0 && (r.right > rc.right + 1 || r.left < rc.left - 1)) out.push(k.textContent.slice(0, 60));
+          }
+          return out;
+        })()"""
+        if "equations-2e-degre" not in CHOISIS:
+            self.skipTest("hors de OUTILS")
+        page = self.nav.ouvrir("equations-2e-degre/index.html")
+        attendre_pret(page)
+        for entree, badge in (("x^2/2=1+x", "Supprimer les fractions"), ("2(x+1)^2=8", "Développer"),
+                              ("x^2+1-(10-x^2)/8=(6x-3)/4", "Supprimer les fractions"), ("x^3-(x-1)^3=1", "Développer"),
+                              ("2(x+1)(x+3)=5", "Développer"), ("(x+1)^2*(x^2-4)=0", "Identité remarquable")):
+            page.taille(1100, 800)
+            page.evaluer("document.querySelector('#cartes').replaceChildren()")
+            page.evaluer(f"document.querySelector('#entree').value = {json.dumps(entree)}; document.querySelector('#calculer').click()")
+            page.attendre("document.querySelector('#cartes .card') && !document.querySelector('#calculer').disabled", 120)
+            cles = page.evaluer("document.querySelector('#variantes') && !document.querySelector('#variantes').hidden ? "
+                                "[...document.querySelectorAll('#variantes button')].map(b => b.dataset.variante) : [null]")
+            for cle in cles:
+                with self.subTest(entree=entree, variante=cle):
+                    if cle is not None:
+                        page.evaluer(f"document.querySelector('#variantes button[data-variante={json.dumps(cle)}]').click()")
+                    page.evaluer("document.querySelector('#tout') && !document.querySelector('#tout').disabled && document.querySelector('#tout').click()")
+                    self.assertFalse(page.evaluer("!!document.querySelector('#cartes .err')"))
+                    self.assertIn(badge, page.evaluer("document.querySelector('#cartes').textContent"))
+                    fautes = []
+                    self.balayer(page, f"{entree} ({cle})", fautes)
+                    self.assertEqual(fautes, [], fautes[:5])
+                    try:
+                        for w in LARGEURS:
+                            page.taille(w, 800)
+                            self.assertEqual(page.evaluer(js), [], w)
+                    finally:
+                        page.taille(1100, 800)
+            if cles != [None]:
+                page.evaluer("document.querySelector('#variantes button[data-variante=\"cours\"]').click()")
+        self.assertEqual(erreurs_a_signaler(page), [])
+
     # ---------- fonctions du corrigé (D18) et carte « Bilan de l'étude » (D20), chantier étude complète P9 ----------
     def test_corrige_et_bilan_de_l_etude(self):
         """Étude complète, Ex7 (exemple de la page) et a–d (exercices) du corrigé, corrigé complet : aucune faute du balayage à aucune

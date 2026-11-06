@@ -36,6 +36,15 @@ ARETES = {
     "expr -> nombres": "brique : notation suisse des nombres, lus et écrits par l'arbre (briques-communes, B1)",
     "chaine -> expr": "brique : les chaînes du corrigé s'écrivent avec le TeX de l'arbre (briques-communes, B2)",
     "chaine -> sortie": "brique : une chaîne donne son bloc « chaine » (bloc_chaine, constructeurs de sortie.py ; briques-communes, B3)",
+    "polynomes -> expr": "brique : les coefficients exacts se lisent sur l'arbre (pq, const ; equations-2e-degre, P1)",
+    "second_degre -> polynomes": "brique : un polynôme saisi devient ses coefficients exacts (vers_polynome sur pq ; equations-2e-degre, P1)",
+    "second_degre -> noyau": "brique : la base par sa façade (squarefree, racine_q pour p + q√m, pn, deg ; equations-2e-degre, P1)",
+    "second_degre -> expr": "brique : vers_polynome vérifie qu'il n'y a qu'une lettre dans l'arbre (variables ; equations-2e-degre, P1)",
+    "second_degre -> nombres": "brique : valeurs approchées garanties par nombres.approx (approx_garantie, E14 ; equations-2e-degre, P1)",
+    "second_degre -> chaine": "brique : la rédaction écrit chaque étape comme un segment de chaîne du corrigé (Chaine, rangees_chaine, "
+                              "bloc_rangees ; equations-2e-degre, P2b)",
+    "second_degre -> sortie": "brique : tableau S-P (tableau_essais), S encadré (resultat_lim) et ligne ≈ de la résolution (equations-2e-degre, "
+                              "P2b)",
     # outil ED : la base est son moteur
     "resoudre_ed -> ensemble_def": "adaptateur de l'outil ED, sur la base directement (légitime : rapport de la revue, § 1.2)",
     "resoudre_ed -> sortie": "adaptateur : brique de sortie",
@@ -71,11 +80,25 @@ ARETES = {
     "exp_log -> nombres": "moteur : brique des nombres",
     "exp_log -> expr": "moteur : brique des expressions (arbre, TeX, lecture), réexportée sous les mêmes noms (briques-communes, B1)",
     "exp_log -> chaine": "moteur : brique des chaînes du corrigé, réexportée sous les mêmes noms (briques-communes, B2)",
+    "exp_log -> polynomes": "moteur : brique des polynômes exacts (_Hors, _const, _padd…), réexportée sous les mêmes noms (equations-2e-degre, P1)",
     "exp_log_m -> noyau": "moteur : la base par sa façade",
+    "exp_log_m -> polynomes": "moteur : brique des polynômes exacts (_pq, _pmul_n, DEGRE_MAX), réexportée sous les mêmes noms (equations-2e-degre, P1)",
     "resoudre_el -> noyau": "adaptateur : la base par sa façade",
     "resoudre_el -> sortie": "adaptateur : brique de sortie",
     "resoudre_el -> exp_log": "adaptateur : un moteur de son outil",
     "resoudre_el -> exp_log_m": "adaptateur : un moteur de son outil (filière M)",
+    # Équations du 2e degré (equations-2e-degre, P3 pour equations.py, déclarées en P5 quand l'outil entre au manifeste)
+    "equations -> expr": "moteur : la saisie « membre = membre » est lue par la brique des expressions (Lexique, lire_membres, "
+                         "variables, a_des_decimaux)",
+    "equations -> noyau": "moteur : la base par sa façade (ErreurSaisie, l'erreur de saisie commune)",
+    "equations -> polynomes": "moteur : constantes exactes de l'arbre (const : exposant, dénominateur nul ; P3, écart au plan noté)",
+    "equations -> second_degre": "moteur : la brique du 2e degré borne la saisie (vers_polynome, HorsBornes, § 13.5)",
+    "resoudre_eq -> equations": "adaptateur : le moteur de son outil (lecture et analyse de la saisie)",
+    "resoudre_eq -> second_degre": "adaptateur : la brique du 2e degré (resoudre_equation, blocs, ecrire_enonce)",
+    "resoudre_eq -> sortie": "adaptateur : brique de sortie",
+    "resoudre_eq -> chaine": "adaptateur : le TeX de l'énoncé (tex_element de l'équation écrite par ecrire_enonce)",
+    "resoudre_eq -> expr": "adaptateur : l'aperçu syntaxique pendant la frappe (lire_membres avec le lexique de l'outil, tex)",
+    "resoudre_eq -> noyau": "adaptateur : la base par sa façade (ErreurSaisie, json_strict)",
 }
 
 # Exceptions nommées : arêtes qui violent les couches (motif « couches ») ou qui sont sur un cycle (motif « cycle ») ; chaque motif
