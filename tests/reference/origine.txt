@@ -1,6 +1,6 @@
 Référence de `python3 tests/lancer.py verifier` (et de comparer_listes.py), écrite par `python3 tests/lancer.py reference`.
-commit du lancement : b72fe2e5cf944a84df49df30d4d83de05ab3bb4f (branche equations-2e-degre)
-lancement : 2026-11-05T22:55:51+01:00 -> 2026-11-05T23:02:34+01:00 ; Python 92.1 s, pages 311.1 s
+commit du lancement : e59fb057b1e4427f59036fa91ba198634e41baf8 (branche moteur-serveur)
+lancement : 2026-11-06T23:24:24+01:00 -> 2026-11-06T23:32:04+01:00 ; Python 111.8 s, pages 348.1 s
 environnement : CORPUS=(non défini), MEMO=(non défini), OUTILS=(non défini)
-python : 1494 collectés ; 1493 passé, 1 xfail ; 106768 sous-tests
-pages : 145 collectés ; 145 passé ; 2421 sous-tests
+python : 1687 collectés ; 1686 passé, 1 xfail ; 132568 sous-tests
+pages : 158 collectés ; 158 passé ; 2529 sous-tests

@@ -20,14 +20,16 @@ tests/pages/test_clavier.py::TestClavierIntegre::test_d_calculer_suit_le_bouton_
 tests/pages/test_clavier.py::TestClavierIntegre::test_e_ordinateur_saisie_inchangee	passé	0
 tests/pages/test_clavier.py::TestClavierIntegre::test_f_touches_de_44_px_sans_defilement_horizontal_de_320_a_1100_px	passé	14
 tests/pages/test_comportement.py::TestComportement::test_bouton_etape_suivante_flottant	passé	4
+tests/pages/test_comportement.py::TestComportement::test_equations_2e_degre_deux_boutons_pour_comparer	passé	0
+tests/pages/test_comportement.py::TestComportement::test_equations_2e_degre_une_carte_par_etape	passé	0
 tests/pages/test_comportement.py::TestComportement::test_explog_3c_controle_a_390_px	passé	0
 tests/pages/test_comportement.py::TestComportement::test_limites_exemples_et_rappel_a_360_px	passé	14
 tests/pages/test_comportement.py::TestComportement::test_rendu_commun_de_l_etude_complete_egal_a_l_ancienne_page	passé	21
-tests/pages/test_comportement.py::TestComportement::test_rendu_commun_des_instantanes	passé	6
-tests/pages/test_comportement.py::TestComportement::test_saisie_et_apercu	passé	6
-tests/pages/test_comportement.py::TestComportement::test_soc04_parametre_f	passé	6
-tests/pages/test_comportement.py::TestComportement::test_soc07_etapes	passé	6
-tests/pages/test_comportement.py::TestComportement::test_soc09_pas_de_defilement_horizontal_a_360_px	passé	6
+tests/pages/test_comportement.py::TestComportement::test_rendu_commun_des_instantanes	passé	7
+tests/pages/test_comportement.py::TestComportement::test_saisie_et_apercu	passé	7
+tests/pages/test_comportement.py::TestComportement::test_soc04_parametre_f	passé	7
+tests/pages/test_comportement.py::TestComportement::test_soc07_etapes	passé	7
+tests/pages/test_comportement.py::TestComportement::test_soc09_pas_de_defilement_horizontal_a_360_px	passé	7
 tests/pages/test_comportement.py::TestComportement::test_soc13_delai_depasse_puis_relance	passé	0
 tests/pages/test_comportement.py::TestComportement::test_soc13_page_delai_depasse_puis_relance	passé	0
 tests/pages/test_comportement.py::TestComportement::test_soc22_bloc_inconnu_visible	passé	0
@@ -46,7 +48,7 @@ tests/pages/test_comportement.py::TestComportement::test_t33_el_selecteur_dans_l
 tests/pages/test_comportement.py::TestComportement::test_t33_el_selecteur_de_methode	passé	0
 tests/pages/test_comportement.py::TestComportement::test_t33_el_selecteur_sans_localstorage	passé	0
 tests/pages/test_comportement.py::TestComportement::test_t33_el_une_etape_par_ligne_sans_defilement_a_360_px	passé	583
-tests/pages/test_comportement.py::TestComportement::test_t33_selecteur_absent_des_autres_outils	passé	5
+tests/pages/test_comportement.py::TestComportement::test_t33_selecteur_absent_des_autres_outils	passé	6
 tests/pages/test_comportement.py::TestComportement::test_t35_el_exercice_au_hasard_de_la_filiere_m	passé	0
 tests/pages/test_comportement.py::TestComportement::test_t35_el_filiere_a_l_impression	passé	0
 tests/pages/test_comportement.py::TestComportement::test_t35_el_filiere_de_depart_url_accueil_puis_defaut	passé	10
@@ -57,7 +59,7 @@ tests/pages/test_comportement.py::TestComportement::test_t35_el_interrupteur_rec
 tests/pages/test_comportement.py::TestComportement::test_t40_l_apercu_ne_attend_pas_sympy	passé	4
 tests/pages/test_donnees_des_pages.py::TestDonneesDesPages::test_cles_des_donnees_propres_a_un_outil	passé	6
 tests/pages/test_donnees_des_pages.py::TestDonneesDesPages::test_outils_et_variante_de_filiere	passé	0
-tests/pages/test_donnees_des_pages.py::TestDonneesDesPages::test_une_methode_par_outil	passé	15
+tests/pages/test_donnees_des_pages.py::TestDonneesDesPages::test_une_methode_par_outil	passé	17
 tests/pages/test_donnees_des_pages.py::TestDonneesDesPages::test_une_reference_par_outil	passé	0
 tests/pages/test_graphique.py::TestGraphique::test_d15_ronds_vides_et_points_marques	passé	4
 tests/pages/test_graphique.py::TestGraphique::test_ec04_echec_de_fenetre	passé	2
@@ -79,6 +81,7 @@ tests/pages/test_katex_local.py::TestTelechargementVerifie::test_un_fichier_diff
 tests/pages/test_katex_local.py::TestTelechargementVerifie::test_un_paquet_d_une_autre_empreinte_est_refuse	passé	0
 tests/pages/test_largeurs.py::TestLargeurs::test_balayage_derivee_variations	passé	3
 tests/pages/test_largeurs.py::TestLargeurs::test_balayage_ensemble_definition	passé	3
+tests/pages/test_largeurs.py::TestLargeurs::test_balayage_equations_2e_degre	passé	3
 tests/pages/test_largeurs.py::TestLargeurs::test_balayage_etude_complete	passé	3
 tests/pages/test_largeurs.py::TestLargeurs::test_balayage_exponentielles_logarithmes	passé	3
 tests/pages/test_largeurs.py::TestLargeurs::test_balayage_exponentielles_logarithmes_M	passé	3
@@ -86,6 +89,8 @@ tests/pages/test_largeurs.py::TestLargeurs::test_balayage_factorisation	passé	3
 tests/pages/test_largeurs.py::TestLargeurs::test_balayage_limites_asymptotes	passé	3
 tests/pages/test_largeurs.py::TestLargeurs::test_balayage_simplexe	passé	3
 tests/pages/test_largeurs.py::TestLargeurs::test_corrige_et_bilan_de_l_etude	passé	5
+tests/pages/test_largeurs.py::TestLargeurs::test_equations_2e_degre_chaque_exemple	passé	17
+tests/pages/test_largeurs.py::TestLargeurs::test_equations_2e_degre_r2	passé	9
 tests/pages/test_largeurs.py::TestLargeurs::test_la_mesure_voit_un_bloc_insecable_coupe	passé	0
 tests/pages/test_largeurs.py::TestLargeurs::test_lignes_de_calcul_et_valeurs_approchees	passé	2
 tests/pages/test_largeurs.py::TestLargeurs::test_tableau_de_variations_avec_valeurs	passé	3
@@ -103,6 +108,7 @@ tests/pages/test_pyodide_local.py::TestTelechargementRobuste::test_empreinte_fau
 tests/pages/test_pyodide_local.py::TestTelechargementRobuste::test_lecture_tronquee_refusee_puis_reprise	passé	0
 tests/pages/test_rendu.py::TestRendu::test_derivee_variations	passé	33
 tests/pages/test_rendu.py::TestRendu::test_ensemble_definition	passé	41
+tests/pages/test_rendu.py::TestRendu::test_equations_2e_degre	passé	57
 tests/pages/test_rendu.py::TestRendu::test_etude_complete	passé	22
 tests/pages/test_rendu.py::TestRendu::test_exponentielles_logarithmes	passé	582
 tests/pages/test_rendu.py::TestRendu::test_exponentielles_logarithmes_filiere_m	passé	276
@@ -143,3 +149,10 @@ tests/pages/test_simplexe.py::TestSimplexe::test_g_en_3d_le_glissement_fait_tour
 tests/pages/test_simplexe.py::TestSimplexe::test_g_un_glissement_vertical_sur_une_figure_de_la_solution_geometrique_fait_defiler_la_page	passé	0
 tests/pages/test_simplexe.py::TestSimplexe::test_g_une_figure_2d_ne_garde_pas_les_gestes_d_une_scene_3d_precedente	passé	0
 tests/pages/test_simplexe.py::TestSimplexe::test_g_visualisation_graphique_sans_glisser_defile_dans_les_deux_methodes	passé	0
+tests/pages/test_tableau_essais.py::TestTableauEssais::test_carre_et_triangle_rendus	passé	0
+tests/pages/test_tableau_essais.py::TestTableauEssais::test_cartes_valides	passé	0
+tests/pages/test_tableau_essais.py::TestTableauEssais::test_coupure_seulement_apres_ou	passé	0
+tests/pages/test_tableau_essais.py::TestTableauEssais::test_largeurs_et_theme_sombre	passé	14
+tests/pages/test_tableau_essais.py::TestTableauEssais::test_ligne_ok_encadree	passé	0
+tests/pages/test_tableau_essais.py::TestTableauEssais::test_structure_des_tableaux	passé	0
+tests/pages/test_tableau_essais.py::TestTableauEssais::test_valeurs_encadrees	passé	0

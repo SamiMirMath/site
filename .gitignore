@@ -6,3 +6,5 @@ tests/outils/resultats_m.json
 docs/reference/
 # PDF de travail des chantiers (corrigés, audits) : jamais versionnés ; les corrigés vont dans docs/reference/
 docs/chantiers/**/*.pdf
+# Arbre des tâches du chantier moteur-serveur : document de travail, jamais versionné
+docs/chantiers/moteur-serveur/arbre.md

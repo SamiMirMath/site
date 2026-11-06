@@ -20,6 +20,8 @@ tests/pages/test_clavier.py::TestClavierIntegre::test_d_calculer_suit_le_bouton_
 tests/pages/test_clavier.py::TestClavierIntegre::test_e_ordinateur_saisie_inchangee
 tests/pages/test_clavier.py::TestClavierIntegre::test_f_touches_de_44_px_sans_defilement_horizontal_de_320_a_1100_px
 tests/pages/test_comportement.py::TestComportement::test_bouton_etape_suivante_flottant
+tests/pages/test_comportement.py::TestComportement::test_equations_2e_degre_deux_boutons_pour_comparer
+tests/pages/test_comportement.py::TestComportement::test_equations_2e_degre_une_carte_par_etape
 tests/pages/test_comportement.py::TestComportement::test_explog_3c_controle_a_390_px
 tests/pages/test_comportement.py::TestComportement::test_limites_exemples_et_rappel_a_360_px
 tests/pages/test_comportement.py::TestComportement::test_rendu_commun_de_l_etude_complete_egal_a_l_ancienne_page
@@ -79,6 +81,7 @@ tests/pages/test_katex_local.py::TestTelechargementVerifie::test_un_fichier_diff
 tests/pages/test_katex_local.py::TestTelechargementVerifie::test_un_paquet_d_une_autre_empreinte_est_refuse
 tests/pages/test_largeurs.py::TestLargeurs::test_balayage_derivee_variations
 tests/pages/test_largeurs.py::TestLargeurs::test_balayage_ensemble_definition
+tests/pages/test_largeurs.py::TestLargeurs::test_balayage_equations_2e_degre
 tests/pages/test_largeurs.py::TestLargeurs::test_balayage_etude_complete
 tests/pages/test_largeurs.py::TestLargeurs::test_balayage_exponentielles_logarithmes
 tests/pages/test_largeurs.py::TestLargeurs::test_balayage_exponentielles_logarithmes_M
@@ -86,6 +89,8 @@ tests/pages/test_largeurs.py::TestLargeurs::test_balayage_factorisation
 tests/pages/test_largeurs.py::TestLargeurs::test_balayage_limites_asymptotes
 tests/pages/test_largeurs.py::TestLargeurs::test_balayage_simplexe
 tests/pages/test_largeurs.py::TestLargeurs::test_corrige_et_bilan_de_l_etude
+tests/pages/test_largeurs.py::TestLargeurs::test_equations_2e_degre_chaque_exemple
+tests/pages/test_largeurs.py::TestLargeurs::test_equations_2e_degre_r2
 tests/pages/test_largeurs.py::TestLargeurs::test_la_mesure_voit_un_bloc_insecable_coupe
 tests/pages/test_largeurs.py::TestLargeurs::test_lignes_de_calcul_et_valeurs_approchees
 tests/pages/test_largeurs.py::TestLargeurs::test_tableau_de_variations_avec_valeurs
@@ -103,6 +108,7 @@ tests/pages/test_pyodide_local.py::TestTelechargementRobuste::test_empreinte_fau
 tests/pages/test_pyodide_local.py::TestTelechargementRobuste::test_lecture_tronquee_refusee_puis_reprise
 tests/pages/test_rendu.py::TestRendu::test_derivee_variations
 tests/pages/test_rendu.py::TestRendu::test_ensemble_definition
+tests/pages/test_rendu.py::TestRendu::test_equations_2e_degre
 tests/pages/test_rendu.py::TestRendu::test_etude_complete
 tests/pages/test_rendu.py::TestRendu::test_exponentielles_logarithmes
 tests/pages/test_rendu.py::TestRendu::test_exponentielles_logarithmes_filiere_m
@@ -143,3 +149,10 @@ tests/pages/test_simplexe.py::TestSimplexe::test_g_en_3d_le_glissement_fait_tour
 tests/pages/test_simplexe.py::TestSimplexe::test_g_un_glissement_vertical_sur_une_figure_de_la_solution_geometrique_fait_defiler_la_page
 tests/pages/test_simplexe.py::TestSimplexe::test_g_une_figure_2d_ne_garde_pas_les_gestes_d_une_scene_3d_precedente
 tests/pages/test_simplexe.py::TestSimplexe::test_g_visualisation_graphique_sans_glisser_defile_dans_les_deux_methodes
+tests/pages/test_tableau_essais.py::TestTableauEssais::test_carre_et_triangle_rendus
+tests/pages/test_tableau_essais.py::TestTableauEssais::test_cartes_valides
+tests/pages/test_tableau_essais.py::TestTableauEssais::test_coupure_seulement_apres_ou
+tests/pages/test_tableau_essais.py::TestTableauEssais::test_largeurs_et_theme_sombre
+tests/pages/test_tableau_essais.py::TestTableauEssais::test_ligne_ok_encadree
+tests/pages/test_tableau_essais.py::TestTableauEssais::test_structure_des_tableaux
+tests/pages/test_tableau_essais.py::TestTableauEssais::test_valeurs_encadrees
