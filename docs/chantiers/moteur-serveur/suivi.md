@@ -37,6 +37,8 @@ un document de travail **jamais commité** (`.gitignore`).
   natifs sans hausse.
 - P1, après le commit : `verifier rapports/P1` ACCEPTÉ ; `rapide --depuis HEAD~1` vert (64 tests) ; `MEMO=0` identique nom par
   nom (`rapports/P1-memo0`).
+- P1, corrections de la relecture (second commit, `rapports/P1-relecture`) : code 0 ; Python 1 722 passés + 1 xfail,
+  133 641 sous-tests ; pages 158 passés, 2 529 sous-tests.
 
 ## Questions ouvertes
 
@@ -44,8 +46,9 @@ Questions pour l'enseignant (P1, 07.11.2026 ; l'option prise est en service, rie
 1. **CLAUDE.md dit « A1–A9 »** (§ Architecture). Proposition : « A1–A10 ». Non modifié (accord nécessaire).
 2. **`rapide` ne connaît pas `serveur/`** : après le commit, une modification de `serveur/app.py` seule ne relance ni
    `test_serveur.py` ni `test_imports.py` (seulement les tests de fumée) ; de même pour `tests/outils/dump_sorties.py`, que
-   `test_serveur.py` charge par son chemin. Proposition : dans `tests/lancer.py`, relancer ces deux tests pour `serveur/*.py` et
-   `test_serveur.py` pour `tests/outils/dump_sorties.py`. `lancer.py` non modifié.
+   `test_serveur.py` charge par son chemin, et pour `tests/pages/rendu.py` (son corpus réduit, `REDUIT`), qui relance toutes les
+   pages mais pas `test_serveur.py`. Proposition : dans `tests/lancer.py`, relancer ces deux tests pour `serveur/*.py`, et
+   `test_serveur.py` pour `tests/outils/dump_sorties.py` et `tests/pages/rendu.py`. `lancer.py` non modifié.
 3. **A10 et `/api/sante`** : T1 fait faire au serveur un vrai calcul, `resoudre` du 2e degré : c'est la seule mention d'un outil
    dans `serveur/app.py` (`CALCUL_DE_SANTE`). Il passe par la liste blanche du manifeste, et `TestA10` ne la tolère que là. À
    confirmer (ligne A10 de `architecture.md`).
@@ -53,7 +56,9 @@ Questions pour l'enseignant (P1, 07.11.2026 ; l'option prise est en service, rie
    `{"certificat_expire": "<ISO 8601>", "disque_pourcent": …}`, refusé s'il date de plus de **3 h** (une écriture horaire manquée
    tolérée, pas deux). La réponse 503 dit sa raison (`{"ok": false, "raison": "disque"}`…), utile depuis le téléphone (§ 5.2) ; elle
    ne contient aucune donnée d'élève. À confirmer.
-5. **Versions au démarrage** (ajout de P1, au-delà de T3) : l'application refuse de démarrer si Python, SymPy ou mpmath n'ont pas
+5. **`MOTEUR_VERSION` absente ou mal formée → 503** (ajout de P1 : T1 ne liste que l'état et le calcul, mais demande la version
+   dans la réponse). À confirmer.
+6. **Versions au démarrage** (ajout de P1, au-delà de T3) : l'application refuse de démarrer si Python, SymPy ou mpmath n'ont pas
    la version du manifeste. La clé `pyodide` est sautée, nommée dans `app.py` ; à retirer avec elle en P5.
 
 ## À relire par l'enseignant

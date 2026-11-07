@@ -173,13 +173,39 @@ Mur du dump : 13,9 → 13,4 s.
 **`rapide` et `serveur/`** : `liste` voit `serveur/app.py`, mais ne relance `test_serveur.py` que parce qu'il est lui-même modifié.
 Après le commit, une modification de `serveur/` seule ne relancerait que les tests de fumée (question pour l'enseignant, `suivi.md`).
 
+**Relecture indépendante** (sous-agent general-purpose, opus, lecture seule ; il a reçu `git show HEAD`, CLAUDE.md et
+`decisions.md`, pas les conclusions de la session). Aucun constat bloquant ni à corriger. Il a refait le dump par HTTP dans un clone
+(4 598 sorties, `diff` code 0) et vérifié les nombres de ce journal (105 appels, 17 fichiers publics, +1 066 sous-tests, 64 tests de
+`rapide`), tous exacts. 3 mineurs et 4 remarques ; suites données :
+1. *Test faible* : la boucle sur les `<fn>_json` du module absentes du manifeste parcourait une liste vide (aucun module n'en a).
+   Remplacée par `test_404_fonction_du_module_hors_du_manifeste` : une fonction `cachee_json` ajoutée à chaque module (mock) donne
+   404 et n'est jamais appelée.
+2. *Délai* : le test ne lisait que `DELAI_CALCUL` et `delaiCalcul`. Il lit aussi les constantes `DELAI_*` de `commun/*.js` et les
+   délais écrits en nombre dans les appels `appelPy(…, <ms>)` des pages et de `commun/` (20 000 du contrôle d'ED, 5 000, 10 000),
+   chacun réclamé par une assertion.
+3. *Question 2 de `suivi.md` incomplète* : `tests/pages/rendu.py` ne relance pas non plus `test_serveur.py` : ajouté.
+4. *Docstring* : « Contrôles (T1) » couvrait aussi deux ajouts de P1 (version, fichier récent) : docstring précisée ; la version est
+   ajoutée aux questions (question 5).
+5. *400 pour un argument qui n'est pas une chaîne* (plus strict que le Worker) : aucune page n'envoie autre chose ; rien à faire.
+6. *Demi-paire isolée* (`"x\ud800"`) : 500 sur les 7 outils, journal sans la saisie ; l'appel direct lève la même erreur à
+   l'encodage. Rien de faux affiché ; rien à faire.
+7. *`?x=1` dans PATH_INFO* (cas qu'un vrai serveur ne produit pas) : retiré de la liste des 404 (remplacé par `%3F`), et
+   `test_la_requete_de_l_url_est_ignoree` vérifie qu'une requête dans `QUERY_STRING` ne change ni le chemin ni la sortie.
+Les corrections 1, 2, 4 et 7 touchent du code et des tests : second commit, « corrections de la relecture » (pas d'amend).
+
+    PROCESSUS_PAGES=4 python3 tests/lancer.py complet --rapport $W/rapports/P1-relecture      # sur b41c190 + corrections, code 0
+
+- Python : 1 723 collectés, 1 722 passés + 1 xfail, 133 641 sous-tests (108,3 s) : +2 tests (les deux nouveaux de `TestCodes`).
+- Pages : 158 passés, 2 529 sous-tests (341,9 s).
+
 ## Contrôles du chef d'orchestre
 
 | Partie | Commit | `verifier` | `rapide --depuis HEAD~1` | `MEMO=0` | Remarque |
 |---|---|---|---|---|---|
 | P0 (1re version) | d1a9ec1 | ACCEPTÉ (listes identiques à la référence nom par nom) | code 0 : 23 tests Python, 278 sous-tests, 3,6 s ; aucune page (aucun fichier de page touché) | `complet --rapport $W/rapports/P0-memo0` sur d1a9ec1, arbre propre : code 0, `comparer_listes P0 P0-memo0` identique nom par nom (Python 120,7 s, pages 345,1 s) | — |
 | P0 (refait) | 976bc7b | `rapports/P0c` ACCEPTÉ ; `rapports/P0b` REFUSÉ par construction (lancé sur d1a9ec1), ACCEPTÉ avec `--commit d1a9ec1` ; `diff --stat d1a9ec1 976bc7b` : `docs/` seulement | code 0 : 23 tests Python, 278 sous-tests, 3,4 s ; aucune page | non relancé (fait sur d1a9ec1, mêmes fichiers hors de `docs/`) | contrôles faits au début de P1, 07.11.2026 |
-| P1 | 81bf762, puis amendé (`docs/` seulement) | `rapports/P1` ACCEPTÉ (34 tests nouveaux, passés ; 2 sous-tests en hausse : gardes de `memo` et `memo_racines`, 21 → 22 et 18 → 19, un fichier à mock de plus) ; relancé après l'amend : ACCEPTÉ | code 0 : 64 tests Python (accueil, imports, manifeste, serveur, source unique), 1 487 sous-tests, 4,5 s ; aucune page | `complet --rapport $W/rapports/P1-memo0` sur 81bf762, arbre propre : code 0, `comparer_listes P1 P1-memo0` identique nom par nom (Python 150,6 s, pages 340,2 s) | — |
+| P1 | 81bf762, amendé en b41c190 (`docs/` seulement) | `rapports/P1` ACCEPTÉ (34 tests nouveaux, passés ; 2 sous-tests en hausse : gardes de `memo` et `memo_racines`, 21 → 22 et 18 → 19, un fichier à mock de plus) ; relancé après l'amend : ACCEPTÉ | code 0 : 64 tests Python (accueil, imports, manifeste, serveur, source unique), 1 487 sous-tests, 4,5 s ; aucune page | `complet --rapport $W/rapports/P1-memo0` sur 81bf762, arbre propre : code 0, `comparer_listes P1 P1-memo0` identique nom par nom (Python 150,6 s, pages 340,2 s) | — |
+| P1, corrections de la relecture | 95d7e2e, puis amendé (`docs/` seulement) | `rapports/P1-relecture` ACCEPTÉ (36 tests nouveaux depuis la référence, passés) ; relancé après l'amend : ACCEPTÉ | code 0 : 57 tests Python (accueil, manifeste, serveur, source unique), 1 334 sous-tests, 3,6 s ; aucune page | non relancé (fait sur b41c190 ; ce commit ne change que des tests du serveur et une docstring) | — |
 
 ## Vérification indépendante du P0 (sous-agent, lecture seule, 06.11.2026)
 

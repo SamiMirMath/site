@@ -11,7 +11,8 @@ Routes :
   (`fn(*arg)`), toute chaîne est passée telle quelle (`fn(arg)`), comme commun/worker-pyodide.js. Réponse 200 : la chaîne brute de
   `<module>.<fn>_json`, en UTF-8. Les fonctions « anciennes » du manifeste sont dans « fonctions » : elles restent acceptées.
 - `GET` et `HEAD /api/sante` : `{"ok": true, "version": "<commit>"}` si tout va bien, sinon 503 avec `{"ok": false, "raison": …}`.
-  Contrôles (T1) : la version (variable MOTEUR_VERSION, 7 à 40 chiffres hexadécimaux) ; l'état de la machine, lu dans le fichier
+  Contrôles (T1, plus deux ajouts de P1 : la version présente et bien formée, le fichier d'état récent) : la version (variable
+  MOTEUR_VERSION, 7 à 40 chiffres hexadécimaux) ; l'état de la machine, lu dans le fichier
   nommé par MOTEUR_ETAT (écrit chaque heure par un minuteur root, P2), un objet JSON
       {"certificat_expire": "<date et heure ISO 8601 avec fuseau>", "disque_pourcent": <nombre de 0 à 100>}
   (le certificat expire dans plus de CERTIFICAT_JOURS_MIN jours, le disque est plein à moins de DISQUE_POURCENT_MAX %, le fichier

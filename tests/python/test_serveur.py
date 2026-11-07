@@ -61,10 +61,12 @@ class Entree(io.BytesIO):
         raise AssertionError("corps lu alors qu'il devait être refusé")
 
 
-def requete(methode, chemin, corps=None, type_contenu="application/json", longueur=None, entree=None, application=None, valider=True):
+def requete(methode, chemin, corps=None, type_contenu="application/json", longueur=None, entree=None, application=None, valider=True,
+            requete_url=""):
     """(code, en-têtes {nom en minuscules: valeur}, corps en octets) d'une requête à l'application, validée par wsgiref.validate
-    (sauf `valider=False` : CONTENT_LENGTH illisible ou négatif, que le validateur refuse avant l'application)."""
-    environ = {"REQUEST_METHOD": methode, "PATH_INFO": chemin, "SCRIPT_NAME": "", "QUERY_STRING": ""}
+    (sauf `valider=False` : CONTENT_LENGTH illisible ou négatif, que le validateur refuse avant l'application) ; `requete_url` : la
+    partie après « ? » (QUERY_STRING)."""
+    environ = {"REQUEST_METHOD": methode, "PATH_INFO": chemin, "SCRIPT_NAME": "", "QUERY_STRING": requete_url}
     if corps is not None:
         brut = corps if isinstance(corps, bytes) else json.dumps(corps, ensure_ascii=False).encode("utf-8")
         environ["wsgi.input"] = io.BytesIO(brut)
@@ -218,17 +220,29 @@ class TestCodes(unittest.TestCase):
         chemins = ["/", "/api", "/api/", "/api/sante/", "/api/inconnu/resoudre", "/api/factorisation/inconnue",
                    "/api/factorisation/resoudre/", "/api/factorisation/resoudre_json", "/api/simplexe/resoudre",
                    "/api/../moteur/manifeste.json", "/moteur/manifeste.json", "/api/factorisation/__init__",
-                   "/api/Factorisation/resoudre", "/api/factorisation//resoudre", "/api/factorisation/resoudre?x=1",
+                   "/api/Factorisation/resoudre", "/api/factorisation//resoudre", "/api/factorisation/resoudre%3Fx",
                    "/factorisation/resoudre_fa.py"]
-        for outil, entree in MANIFESTE.items():                 # une fonction du module, hors de sa liste au manifeste
-            for nom in dir(module_de(outil)):
-                if nom.endswith("_json") and nom[:-5] not in entree["fonctions"] and re.fullmatch(r"[a-z_]+", nom[:-5]):
-                    chemins.append(f"/api/{outil}/{nom[:-5]}")
+        for outil, entree in MANIFESTE.items():
             if "fenetre" not in entree["fonctions"]:
                 chemins.append(f"/api/{outil}/fenetre")
         for chemin in chemins:
             with self.subTest(chemin=chemin):
                 self.verifier(404, requete("POST", chemin, "x"))
+
+    def test_404_fonction_du_module_hors_du_manifeste(self):
+        """Une fonction `<fn>_json` que le module a, mais que le manifeste ne liste pas, n'est jamais appelée."""
+        appels = []
+        for outil in MANIFESTE:
+            with self.subTest(outil=outil), mock.patch.object(module_de(outil), "cachee_json", lambda *a: appels.append(a) or "{}",
+                                                              create=True):
+                self.assertTrue(callable(module_de(outil).cachee_json))
+                self.verifier(404, poster(outil, "cachee", "x"))
+        self.assertEqual(appels, [])
+
+    def test_la_requete_de_l_url_est_ignoree(self):
+        """La requête (QUERY_STRING) ne change ni le chemin ni la sortie."""
+        code, _, corps = requete("POST", "/api/factorisation/apercu", "x", requete_url="f=x%5E2")
+        self.assertEqual((code, corps), (200, module_de("factorisation").apercu_json("x").encode("utf-8")))
 
     def test_la_liste_blanche_est_le_manifeste(self):
         """Une fonction retirée du manifeste n'est plus appelable, même si le module l'a encore."""
@@ -500,18 +514,24 @@ class TestDemarrage(unittest.TestCase):
             app.verifier_versions({"paquet_absent_p1": "1.0"})
 
     def test_delai_de_gunicorn_plus_grand_que_les_delais_des_pages(self):
-        """T3 : le serveur attend toujours plus longtemps que la page (délai par défaut de commun/outil.js, delaiCalcul des pages)."""
-        with open(os.path.join(RACINE, "commun", "outil.js"), encoding="utf-8") as f:
-            delais = [int(v) for v in re.findall(r"const DELAI_CALCUL = (\d+);", f.read())]
-        self.assertEqual(len(delais), 1, "délai par défaut introuvable dans commun/outil.js")
-        pages = 0
+        """T3 : le serveur attend toujours plus longtemps que la page. Délais lus : `delaiCalcul` des pages, constantes `DELAI_*` de
+        commun/*.js (DELAI_CALCUL par défaut, DELAI_FENETRE), et tout délai écrit en nombre dans un appel `appelPy(…, <ms>)` des
+        pages et de commun/ (contrôle d'ED, aperçu, exercice)."""
+        textes = {}
         for o in outils_du_site.registre():
             with open(os.path.join(RACINE, o["chemin"], "index.html"), encoding="utf-8") as f:
-                trouves = [int(v) for v in re.findall(r"\bdelaiCalcul\s*:\s*(\d+)", f.read())]
-            pages += bool(trouves)
-            delais += trouves
-        self.assertGreaterEqual(pages, 1, "aucun delaiCalcul lu dans les pages")
-        self.assertGreater(app.DELAI_GUNICORN_S * 1000, max(delais))
+                textes[o["chemin"] + "index.html"] = f.read()
+        for nom in sorted(os.listdir(os.path.join(RACINE, "commun"))):
+            if nom.endswith(".js"):
+                with open(os.path.join(RACINE, "commun", nom), encoding="utf-8") as f:
+                    textes["commun/" + nom] = f.read()
+        lus = {"delaiCalcul": r"\bdelaiCalcul\s*:\s*(\d+)", "DELAI_*": r"\bconst DELAI_\w+ = (\d+);",
+               "appelPy": r"appelPy\((?:[^()]|\([^()]*\))*?,\s*(\d+)\s*\)"}
+        delais = {genre: [int(v) for t in textes.values() for v in re.findall(motif, t)] for genre, motif in lus.items()}
+        self.assertIn(30000, delais["DELAI_*"], "délai par défaut (DELAI_CALCUL) introuvable dans commun/outil.js")
+        self.assertIn(45000, delais["delaiCalcul"], "delaiCalcul de l'Étude complète introuvable")
+        self.assertIn(20000, delais["appelPy"], "délai du contrôle d'ED introuvable")
+        self.assertGreater(app.DELAI_GUNICORN_S * 1000, max(v for liste in delais.values() for v in liste))
 
 
 class TestA10(unittest.TestCase):
