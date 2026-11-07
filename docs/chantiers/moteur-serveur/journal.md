@@ -72,11 +72,114 @@ Ces nombres n'avaient pas été écrits ici avant le commit, avec une justificat
 modifié après le lancement ferait refuser `verifier`. Or `verifier` ne contrôle pas `docs/` par empreinte (`IGNORES = ^docs/`,
 `tests/verifier.py:47`) : il le liste seulement comme ignoré. Ils sont ajoutés après coup.
 
+**Contrôles du commit refait (976bc7b), au début de P1 (07.11.2026)**, arbre propre, HEAD = 976bc7b, parent e59fb05 :
+- `rapports/P0b` (suite lancée sur d1a9ec1, avant le commit refait ; Python 102,9 s, pages 350,5 s) : code 0 ; Python 1 686 passés
+  + 1 xfail, 132 568 sous-tests ; pages 158 passés, 2 529 sous-tests.
+  - `verifier rapports/P0b` : **REFUSÉ**, comme prévu : 976bc7b n'est ni d1a9ec1 ni son enfant (son parent est e59fb05).
+  - `verifier rapports/P0b --commit d1a9ec1` : **ACCEPTÉ**, identique à la référence nom par nom ; ignorés : `journal.md` et
+    `suivi.md` (modifiés pendant le lancement, sous `docs/`).
+  - `git diff --stat d1a9ec1 976bc7b` : 2 fichiers, tous deux sous `docs/` (`journal.md` +45 −4, `suivi.md` +7 −2).
+- `rapports/P0c` (suite lancée sur 976bc7b, arbre propre ; Python 104,1 s, pages 349,8 s) : `verifier rapports/P0c` **ACCEPTÉ**,
+  identique à la référence nom par nom, aucun fichier ignoré.
+- `rapide --depuis HEAD~1` : code 0 ; 23 tests Python, 278 sous-tests, 3,4 s ; aucune page.
+
+## P1 — application serveur dans le dépôt (07.11.2026, PC)
+
+**Plan** (`decisions.md` § 7, ligne P1, rien d'autre ; aucune page, aucun moteur, aucun adaptateur, aucun instantané ne change, T9 ;
+rien de P2 ; aucune dépendance nouvelle, `UV` de `tests/lancer.py` inchangé).
+1. Contrôles de départ du commit P0 refait (ci-dessus, section P0).
+2. `serveur/app.py` : WSGI, bibliothèque standard seule (T1, T2, T3), `/api/sante`, journal d'erreurs (T14).
+3. `tests/outils/serveur_local.py` : serveur local sans gunicorn (`wsgiref.simple_server`, 127.0.0.1, sous `uv`, `PYTHONHASHSEED=0`).
+4. `tests/python/test_serveur.py` : tout le § 4 de P1, en processus, sans réseau, sans `memo.py`.
+5. `dump_sorties.py --serveur <URL>` (T8).
+6. `serveur/liste_publique.py` (T4) et son test ; A10 dans `architecture.md` et `test_imports.py`.
+7. Invariants, temps natif, suite complète, commit, `verifier`, `MEMO=0`, relecture.
+
+**Fichiers.**
+- `serveur/app.py` (nouveau). Points de conception :
+  - routes et codes de T1 : `POST /api/<outil>/<fn>` (404 si le couple n'est pas au manifeste, avant le contrôle de méthode ; 405
+    avec `Allow: POST`) ; `GET`/`HEAD /api/sante` (405 avec `Allow: GET, HEAD`) ; tout autre chemin 404 ;
+  - 400 : `Content-Type` autre que `application/json` (paramètres admis), `Content-Length` absent ou illisible, corps plus court,
+    UTF-8 ou JSON invalide, argument qui n'est ni une chaîne ni un tableau non vide de chaînes, nombre d'arguments refusé par la
+    signature de `<fn>_json` (`inspect.signature(...).bind`) : une page d'une autre version lit « page à recharger », pas
+    « erreur du serveur » ;
+  - 413 : `Content-Length` > 4 096 octets, corps jamais lu ; 500 : exception du moteur ou sortie qui n'est pas une chaîne ;
+  - réponse 200 : `resultat.encode("utf-8")`, sans `json.loads` ni `json.dumps` ; la fonction est relue sur le module à chaque appel ;
+  - toute réponse : `Content-Type: application/json; charset=utf-8`, `Cache-Control: no-store`, `Content-Length` ; le corps d'une
+    erreur est fixe (`{"erreur": "<code>"}`), jamais la saisie ; `HEAD` : en-têtes de `GET`, sans corps ;
+  - `/api/sante` : `MOTEUR_VERSION` (7 à 40 chiffres hexadécimaux), fichier d'état `MOTEUR_ETAT` (JSON
+    `{"certificat_expire": "<ISO 8601 avec fuseau>", "disque_pourcent": <0 à 100>}`, daté de moins de 3 h), calcul
+    `resoudre` du 2e degré sur `x^2-1=0` avec `"ok": true` ; sinon 503 `{"ok": false, "raison": …}` (version, etat_absent,
+    etat_illisible, etat_perime, certificat, disque, calcul) ;
+  - journal « serveur » (`logging`, niveau ERROR) : une ligne `erreur outil=… fonction=… type=<module>.<classe> pile=fichier:ligne:fonction > …`,
+    sans message ni saisie ; au-delà de 40 cadres (récursion), les 10 premiers et les 30 derniers ;
+  - démarrage : versions du manifeste vérifiées (Python 3.12 ; SymPy et mpmath importés, version installée = celle du manifeste ;
+    la clé `pyodide` est sautée) ; dossiers des moteurs en tête de `sys.path` dans l'ordre de `moteurs.py` ; import de chaque `.py`
+    du manifeste (`exp_log_m` compris) ; chaque fonction du manifeste doit exister, et le calcul de santé être au manifeste ;
+  - `DELAI_GUNICORN_S = 50`, constante pour P2.
+- `serveur/liste_publique.py` (nouveau) : `fichiers_publics(racine)` = `git ls-files -z` filtré : `.html`, `.css`, `.js`, dans
+  `index.html`, `commun/` et les dossiers des pages du registre ; aucun chemin par un dossier caché ou `__pycache__` ; un registre
+  qui désignerait `moteur/`, `docs/`, `tests/`, `serveur/`, `.github/` ou un dossier à deux niveaux lève `ValueError`. Sur l'arbre
+  actuel : 17 fichiers (`index.html`, 8 fichiers de `commun/`, les 8 `index.html` des pages du registre).
+- `tests/outils/serveur_local.py` (nouveau) : se remplace par `uv run … python` (`exec`, même PID : un `kill` du lanceur arrête le
+  serveur ; la première version, avec `subprocess.run`, laissait `uv` tourner après le `kill`), écrit son URL, file d'attente de 64
+  connexions, aucun journal d'accès. Hors de `serveur/` : il dépend de `tests/lancer.py` (A10 interdit cet import dans `serveur/`).
+- `tests/outils/dump_sorties.py` : `--serveur <URL>` ; tâche `(clé, outil, module, fonction, arguments)` ; `normaliser` commun aux
+  deux chemins ; « !HTTP <code> » pour une réponse non 200 ; proxy de l'environnement ignoré ; refus si une fonction du corpus n'est
+  pas dans `PAR_HTTP` ; `serveur` noté dans `temps.json` ; docstring à jour.
+- `tests/python/test_serveur.py` (nouveau, 32 tests) : `TestAOctet` (corpus réduit de `rendu.REDUIT`, variante M comprise : 105
+  appels, dont 42 exercices à graine fixée et 6 fenêtres ; deux ordres mélangés entre outils ; chaîne jamais re-sérialisée),
+  `TestCodes` (404, liste blanche = manifeste, 405, 413 sans lecture du corps, 400, 500 sans la saisie, journal, récursion, fonctions
+  anciennes), `TestSante` (GET, HEAD, chaque 503), `TestDemarrage` (processus neuf : préchargement et `sys.path` ; module ou fonction
+  absents ; versions ; délai de 50 s > plus grand délai des pages), `TestA10`, `TestListePublique` (archive tar construite depuis la
+  liste). Les appels passent par `wsgiref.validate`.
+- `tests/python/test_imports.py` : `TestServeur` (A10) : `serveur/` hors des dossiers des moteurs, butée sur ses fichiers
+  (`app.py`, `liste_publique.py`), imports dans `sys.stdlib_module_names` et hors des modules du moteur.
+- `docs/architecture.md` : ligne A10 (à relire par l'enseignant).
+
+**Invariants** (commandes d'essai sous `timeout 300`, serveur local arrêté après, aucun processus restant) :
+
+    python3 tests/outils/dump_sorties.py $W/dumps/P1                                    # 19 fichiers, 4 598 sorties, 4 s (12 processus)
+    diff -r --exclude=temps $W/dumps/depart $W/dumps/P1                                 # code 0
+    python3 tests/outils/serveur_local.py &                                             # http://127.0.0.1:<port>
+    python3 tests/outils/dump_sorties.py $W/dumps/P1-http --processus 4 --serveur http://127.0.0.1:<port>   # 4 598 sorties, 14 s
+    diff -r --exclude=temps $W/dumps/P1 $W/dumps/P1-http                                # code 0
+    python3 tests/outils/dump_sorties.py $W/dumps/P1-p1 --processus 1                   # 13,4 s ; diff avec depart : code 0
+
+Les deux dumps ont été refaits sur le code final (une vérification ajoutée ensuite à `dump_sorties.py`) : mêmes résultats.
+
+**Temps natifs** (`resoudre_json`, 1 processus, `P1-p1` comparé à `depart-p1`) : aucune hausse (les moteurs ne changent pas) :
+
+| Outil | Total départ → P1 | Plus long appel |
+|---|---|---|
+| derivee-variations | 0,274 → 0,266 s | 0,083 → 0,081 s |
+| ensemble-definition | 0,034 → 0,033 s | 0,023 → 0,022 s |
+| equations-2e-degre | 0,479 → 0,483 s | 0,008 → 0,007 s |
+| etude-complete | 2,101 → 2,003 s | 0,298 → 0,289 s |
+| exponentielles-logarithmes C / M | 0,958 / 0,797 → 0,915 / 0,773 s | 0,005 / 0,004 → 0,005 / 0,003 s |
+| factorisation | 1,919 → 1,861 s | 0,065 → 0,062 s |
+| limites-asymptotes | 6,156 → 5,838 s | 1,268 → 1,196 s |
+
+Mur du dump : 13,9 → 13,4 s.
+
+**Suite d'avant commit.**
+
+    PROCESSUS_PAGES=4 python3 tests/lancer.py complet --rapport $W/rapports/P1 > $W/rapports/P1.log 2>&1      # code 0
+
+- Python : 1 721 collectés, 1 720 passés + 1 xfail, 133 634 sous-tests (97,1 s). Par rapport à la référence : +34 tests (32 de
+  `test_serveur.py`, 2 de `TestServeur` dans `test_imports.py`), +1 066 sous-tests.
+- Pages : 158 passés, 2 529 sous-tests (339,5 s), inchangé.
+
+**`rapide` et `serveur/`** : `liste` voit `serveur/app.py`, mais ne relance `test_serveur.py` que parce qu'il est lui-même modifié.
+Après le commit, une modification de `serveur/` seule ne relancerait que les tests de fumée (question pour l'enseignant, `suivi.md`).
+
 ## Contrôles du chef d'orchestre
 
 | Partie | Commit | `verifier` | `rapide --depuis HEAD~1` | `MEMO=0` | Remarque |
 |---|---|---|---|---|---|
 | P0 (1re version) | d1a9ec1 | ACCEPTÉ (listes identiques à la référence nom par nom) | code 0 : 23 tests Python, 278 sous-tests, 3,6 s ; aucune page (aucun fichier de page touché) | `complet --rapport $W/rapports/P0-memo0` sur d1a9ec1, arbre propre : code 0, `comparer_listes P0 P0-memo0` identique nom par nom (Python 120,7 s, pages 345,1 s) | — |
+| P0 (refait) | 976bc7b | `rapports/P0c` ACCEPTÉ ; `rapports/P0b` REFUSÉ par construction (lancé sur d1a9ec1), ACCEPTÉ avec `--commit d1a9ec1` ; `diff --stat d1a9ec1 976bc7b` : `docs/` seulement | code 0 : 23 tests Python, 278 sous-tests, 3,4 s ; aucune page | non relancé (fait sur d1a9ec1, mêmes fichiers hors de `docs/`) | contrôles faits au début de P1, 07.11.2026 |
+| P1 | 81bf762, puis amendé (`docs/` seulement) | `rapports/P1` ACCEPTÉ (34 tests nouveaux, passés ; 2 sous-tests en hausse : gardes de `memo` et `memo_racines`, 21 → 22 et 18 → 19, un fichier à mock de plus) ; relancé après l'amend : ACCEPTÉ | code 0 : 64 tests Python (accueil, imports, manifeste, serveur, source unique), 1 487 sous-tests, 4,5 s ; aucune page | `complet --rapport $W/rapports/P1-memo0` sur 81bf762, arbre propre : code 0, `comparer_listes P1 P1-memo0` identique nom par nom (Python 150,6 s, pages 340,2 s) | — |
 
 ## Vérification indépendante du P0 (sous-agent, lecture seule, 06.11.2026)
 

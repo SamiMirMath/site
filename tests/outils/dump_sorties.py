@@ -28,9 +28,17 @@ Sorties dans <dossier> :
 Le hasard est fixé avant chaque appel (random.seed sur la clé de l'appel) et PYTHONHASHSEED=0 : la sortie ne dépend ni de l'ordre des
 appels ni de leur répartition entre processus. Aucun cache de test (memo.py) : les moteurs sont appelés directement.
 
+Par HTTP (`--serveur <URL>`, chantier moteur-serveur, P1, T8) : `resoudre`, `apercu` et `controle` sont demandés à l'application du
+serveur (serveur/app.py) par `POST <URL>/api/<outil>/<fonction>`, avec pour corps l'argument JSON de la page (la saisie, ou
+`[saisie, filière]`), et la réponse 200 est écrite telle quelle ; une autre réponse est écrite « !HTTP <code> ». Les exercices tirés
+restent appelés directement, avec la graine fixée : le hasard du serveur ne se fixe pas d'un autre processus (T8 : `exercice` et
+`fenetre` sont comparés en processus par tests/python/test_serveur.py). Même arborescence et mêmes fichiers que le dump direct, donc
+`diff -r --exclude=temps <dump direct> <dump HTTP>` doit donner un code 0 ; temps/temps.json note l'URL (`serveur`). Serveur local :
+`python3 tests/outils/serveur_local.py` (il écrit son URL), arrêté après le dump.
+
 Lancement, depuis n'importe où (le script se relance sous `uv` avec les dépendances de tests/lancer.py) :
 
-    python3 tests/outils/dump_sorties.py <dossier hors du dépôt, absent ou vide> [--processus N]
+    python3 tests/outils/dump_sorties.py <dossier hors du dépôt, absent ou vide> [--processus N] [--serveur <URL>]
 
 Comparaison de deux dumps (code 0 et aucune sortie = identiques) :
 
@@ -47,7 +55,9 @@ import re
 import subprocess
 import sys
 import time
+import urllib.error
 import urllib.parse
+import urllib.request
 
 ICI = os.path.dirname(os.path.abspath(__file__))
 RACINE = os.path.abspath(os.path.join(ICI, "..", ".."))
@@ -178,16 +188,36 @@ def corpus_fixe(ids):
 # ---------------------------------------------------------------- appels (processus de travail)
 
 _MODULES = {}
+_SERVEUR = {"url": None}          # --serveur : URL de l'application, fixée dans chaque processus de travail
+PAR_HTTP = ("resoudre", "apercu", "controle")      # demandées au serveur avec --serveur (T8) ; les exercices restent directs
+DELAI_HTTP_S = 120
 
 
-def initialiser():
+def initialiser(serveur=None):
+    _SERVEUR["url"] = serveur
     sys.path.insert(0, TESTS_PYTHON)
     import moteurs  # noqa: F401  (chemins des moteurs, contrôle de SymPy)
 
 
+def par_http(outil, fonction, args):
+    """Sortie brute du serveur pour un appel de la page : corps = la saisie, ou [saisie, filière] (comme appelPy)."""
+    corps = json.dumps(args[0] if len(args) == 1 else list(args), ensure_ascii=False).encode("utf-8")
+    requete = urllib.request.Request(f"{_SERVEUR['url']}/api/{outil}/{fonction}", data=corps, method="POST",
+                                     headers={"Content-Type": "application/json"})
+    ouvreur = urllib.request.build_opener(urllib.request.ProxyHandler({}))      # jamais par un proxy de l'environnement
+    try:
+        with ouvreur.open(requete, timeout=DELAI_HTTP_S) as reponse:
+            return reponse.read().decode("utf-8")
+    except urllib.error.HTTPError as e:
+        return f"!HTTP {e.code}"
+
+
 def appeler(tache):
-    """tache = (clé, module, fonction, arguments) -> (clé, sortie brute, durée en s)."""
-    cle, module, fonction, args = tache
+    """tache = (clé, outil, module, fonction, arguments) -> (clé, sortie brute, durée en s)."""
+    cle, outil, module, fonction, args = tache
+    if _SERVEUR["url"] and fonction in PAR_HTTP:
+        debut = time.perf_counter()
+        return cle, normaliser(par_http(outil, fonction, args)), time.perf_counter() - debut
     if module not in _MODULES:
         _MODULES[module] = importlib.import_module(module)
     random.seed(repr(cle))
@@ -197,11 +227,16 @@ def appeler(tache):
     except Exception as e:      # comportement figé, plantage compris
         brut = "!EXCEPTION " + type(e).__name__ + ": " + json.dumps(str(e), ensure_ascii=False)
     duree = time.perf_counter() - debut
+    return cle, normaliser(brut), duree
+
+
+def normaliser(brut):
+    """Une sortie par ligne : ce qui n'est pas une chaîne, ou contient un saut de ligne, est marqué."""
     if not isinstance(brut, str):
-        brut = "!PAS_UNE_CHAINE " + repr(brut)
+        return "!PAS_UNE_CHAINE " + repr(brut)
     if "\n" in brut:
-        brut = "!SAUT_DE_LIGNE " + json.dumps(brut, ensure_ascii=False)
-    return cle, brut, duree
+        return "!SAUT_DE_LIGNE " + json.dumps(brut, ensure_ascii=False)
+    return brut
 
 
 def lancer(pool, taches):
@@ -226,14 +261,21 @@ def ecrire(dossier, fichier, outil, filiere, fonction, lignes):
 
 
 def principal(argv):
+    usage = "<dossier hors du dépôt> [--processus N] [--serveur <URL>]"
     if not argv or argv[0].startswith("-"):
-        erreur("usage : python3 tests/outils/dump_sorties.py <dossier hors du dépôt> [--processus N]")
+        erreur("usage : python3 tests/outils/dump_sorties.py " + usage)
     dossier = dossier_de_sortie(argv[0])
-    processus = os.cpu_count() or 2
-    if len(argv) == 3 and argv[1] == "--processus" and argv[2].isdigit() and int(argv[2]) >= 1:
-        processus = int(argv[2])
-    elif len(argv) != 1:
-        erreur("arguments : <dossier> [--processus N]")
+    processus, serveur = os.cpu_count() or 2, None
+    options = argv[1:]
+    if len(options) % 2 or len(set(options[::2])) != len(options) // 2:
+        erreur("arguments : " + usage)
+    for nom, valeur in zip(options[::2], options[1::2]):
+        if nom == "--processus" and valeur.isdigit() and int(valeur) >= 1:
+            processus = int(valeur)
+        elif nom == "--serveur" and re.fullmatch(r"https?://[^/?#\s]+(/[^?#\s]*)?", valeur):
+            serveur = valeur.rstrip("/")
+        else:
+            erreur("arguments : " + usage)
     if os.environ.get("DUMP_SORTIES_UV") != "1":
         return relancer_sous_uv([dossier] + argv[1:])
 
@@ -253,10 +295,13 @@ def principal(argv):
         fonctions[o] = [f for f in appelees if f not in HORS_CORPUS]
         if "resoudre" not in fonctions[o]:
             erreur(f"{o} : pas de fonction resoudre au manifeste")
+        inconnues = sorted(set(fonctions[o]) - set(PAR_HTTP)) if serveur else []
+        if inconnues:
+            erreur(f"{o} : fonctions du corpus que --serveur ne sait pas demander (PAR_HTTP) : {inconnues}")
 
     os.makedirs(dossier, exist_ok=True)
     ctx = multiprocessing.get_context("fork" if "fork" in multiprocessing.get_all_start_methods() else "spawn")
-    with ctx.Pool(processus, initializer=initialiser) as pool:
+    with ctx.Pool(processus, initializer=initialiser, initargs=(serveur,)) as pool:
         # 1. exercices tirés par la page (niveaux de ses `poids`), graine fixe par appel
         taches = []
         for o in ids:
@@ -267,7 +312,7 @@ def principal(argv):
                     for niveau in niveaux:
                         for k in range(N_EXERCICES):
                             args = (niveau,) if filiere is None else (niveau, filiere)
-                            taches.append((("exercice", o, filiere, niveau, k), manifeste[o]["module"], "exercice", args))
+                            taches.append((("exercice", o, filiere, niveau, k), o, manifeste[o]["module"], "exercice", args))
         exercices = lancer(pool, taches)
         par_fichier = {}
         for (fonction, o, filiere, niveau, k), (brut, _) in exercices.items():
@@ -288,7 +333,7 @@ def principal(argv):
                 for filiere in (filieres_de[o] if f == "resoudre" else [None]):
                     for e in sorted(corpus[o]):
                         args = (e,) if filiere is None else (e, filiere)
-                        taches.append(((f, o, filiere, e), manifeste[o]["module"], f, args))
+                        taches.append(((f, o, filiere, e), o, manifeste[o]["module"], f, args))
         sorties = lancer(pool, taches)
 
     index, temps = [], {}
@@ -317,10 +362,12 @@ def principal(argv):
     mur = time.perf_counter() - debut
     os.makedirs(os.path.join(dossier, "temps"), exist_ok=True)
     with open(os.path.join(dossier, "temps", "temps.json"), "w", encoding="utf-8") as f:
-        json.dump({"mur_s": round(mur, 1), "processus": processus, "resoudre_json": temps}, f, ensure_ascii=False, indent=1, sort_keys=True)
+        json.dump({"mur_s": round(mur, 1), "processus": processus, "serveur": serveur, "resoudre_json": temps}, f, ensure_ascii=False,
+                  indent=1, sort_keys=True)
         f.write("\n")
     total = sum(n for *_, n in index)
-    print(f"dump_sorties : {len(index)} fichiers, {total} sorties, {mur:.0f} s de mur ({processus} processus) -> {dossier}")
+    par = f", par {serveur}" if serveur else ""
+    print(f"dump_sorties : {len(index)} fichiers, {total} sorties, {mur:.0f} s de mur ({processus} processus{par}) -> {dossier}")
     return 0
 
 

@@ -17,6 +17,7 @@ Ajouter une arête : exprès, dans ARETES avec sa raison si elle respecte les co
 accord de l'enseignant (et dans docs/architecture.md, § 5)."""
 import ast
 import os
+import sys
 import unittest
 
 from moteurs import RACINE
@@ -336,6 +337,32 @@ class TestGrapheDesImports(unittest.TestCase):
                         self.assertIsNotNone(violation(arete), "respecte les couches : motif « couches » à retirer (ou ARETES)")
                     if "cycle" in e["motifs"]:
                         self.assertIn(arete, cycles, "n'est sur aucun cycle : motif « cycle » à retirer (ou ARETES)")
+
+
+SERVEUR = "serveur"                       # l'application du moteur sur serveur (chantier moteur-serveur, P1) : hors du manifeste
+FICHIERS_DU_SERVEUR = {"app.py", "liste_publique.py"}     # butée : un fichier de plus dans serveur/ s'ajoute exprès
+
+
+class TestServeur(unittest.TestCase):
+    """Règle A10 (docs/architecture.md) : les .py de serveur/ n'importent que la bibliothèque standard (sys.stdlib_module_names),
+    donc aucun moteur ni aucune brique ; ils appellent les moteurs par le manifeste seulement (test_serveur.py). serveur/ n'est pas
+    un dossier de moteur : ce test le lit exprès, les autres de ce fichier ne lisent que les dossiers du manifeste."""
+
+    def test_serveur_hors_des_dossiers_des_moteurs(self):
+        self.assertNotIn(SERVEUR, outils_du_site.dossiers_moteurs())
+        self.assertEqual({n for n in os.listdir(os.path.join(RACINE, SERVEUR)) if n.endswith(".py")}, FICHIERS_DU_SERVEUR)
+
+    def test_bibliotheque_standard_seule(self):
+        moteur = set(modules_du_moteur())
+        for nom in sorted(FICHIERS_DU_SERVEUR):
+            chemin = f"{SERVEUR}/{nom}"
+            with open(os.path.join(RACINE, chemin), encoding="utf-8") as f:
+                imports = imports_du_source(f.read(), chemin)
+            self.assertTrue(imports, f"{chemin} : aucun import lu")
+            for cible, _, ligne in imports:
+                with self.subTest(fichier=chemin, ligne=ligne, module=cible):
+                    self.assertNotIn(cible, moteur, "le serveur n'importe aucun moteur (A10) : il passe par le manifeste")
+                    self.assertIn(cible, sys.stdlib_module_names, "le serveur n'importe que la bibliothèque standard (A10)")
 
 
 class TestExtraction(unittest.TestCase):
