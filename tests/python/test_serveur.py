@@ -220,7 +220,9 @@ class TestCodes(unittest.TestCase):
         chemins = ["/", "/api", "/api/", "/api/sante/", "/api/inconnu/resoudre", "/api/factorisation/inconnue",
                    "/api/factorisation/resoudre/", "/api/factorisation/resoudre_json", "/api/simplexe/resoudre",
                    "/api/../moteur/manifeste.json", "/moteur/manifeste.json", "/api/factorisation/__init__",
-                   "/api/Factorisation/resoudre", "/api/factorisation//resoudre", "/api/factorisation/resoudre%3Fx",
+                   "/api/Factorisation/resoudre", "/api/factorisation//resoudre",
+                   "/api/factorisation/resoudre?x=1",           # une adresse …/resoudre%3Fx=1 : le serveur décode le chemin
+                   "/api/factorisation/resoudre%3Fx",
                    "/factorisation/resoudre_fa.py"]
         for outil, entree in MANIFESTE.items():
             if "fenetre" not in entree["fonctions"]:

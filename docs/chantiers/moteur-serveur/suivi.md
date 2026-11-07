@@ -39,6 +39,8 @@ un document de travail **jamais commité** (`.gitignore`).
   nom (`rapports/P1-memo0`).
 - P1, corrections de la relecture (second commit, `rapports/P1-relecture`) : code 0 ; Python 1 722 passés + 1 xfail,
   133 641 sous-tests ; pages 158 passés, 2 529 sous-tests.
+- P1, cas de 404 rétabli (troisième commit, `rapports/P1-relecture2`) : code 0 ; Python 1 722 passés + 1 xfail, 133 642
+  sous-tests ; pages 158 passés, 2 529 sous-tests.
 
 ## Questions ouvertes
 
@@ -68,7 +70,10 @@ Questions pour l'enseignant (P1, 07.11.2026 ; l'option prise est en service, rie
 
 ## Écarts
 
-Aucun.
+- P1 a trois commits (b41c190 ; « corrections de la relecture » ; puis un cas de 404 retiré à tort, rétabli), au lieu d'un par
+  partie (méthode) : le prompt de P1 demandait un nouveau commit pour toute correction de code ou de tests issue de la relecture,
+  sans amend (le rapport de la suite, lancé sur le commit précédent, ne vaut que pour un commit enfant ; un amend hors de `docs/`
+  demanderait de relancer la suite sur son parent). CLAUDE.md permet « un commit par partie (ou par phase) ».
 
 ## Variations de sous-tests
 
