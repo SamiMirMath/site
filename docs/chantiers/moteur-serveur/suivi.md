@@ -65,6 +65,9 @@ Aucune. Les questions de P1 sont réglées (enseignant, 07.11.2026 ; chaque fois
    CLAUDE.md (§ Git), au premier commit de P2 : « Exception : un commit qui ne touche que `docs/` (jamais `docs/reference/`) se
    contente de `python3 tests/lancer.py rapide` (code 0) ; pas de suite complète ni de `verifier` pour lui. » Le commit des réponses
    ci-dessus a encore suivi l'ancienne règle (suite `rapports/P1-reponses`).
+9. ✓ **Offre du VPS** (07.11.2026, à la commande) : **2 vCPU, 2 Go, 40 Go** au lieu de 1 vCPU (M1). Commandé : Ubuntu 24.04.4,
+   IPv4 179.237.105.75 (détail : `journal.md`, « Commande du VPS »). À reporter dans `decisions.md` (M1, § 6, § 9 question 7)
+   avec l'accord de l'enseignant.
 
 ## À relire par l'enseignant
 

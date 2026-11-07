@@ -241,6 +241,26 @@ Constats et suites :
   `test_404_hors_du_manifeste`).
 - Pages : 158 passés, 2 529 sous-tests (344,3 s).
 
+## Commande du VPS (07.11.2026, enseignant, guidé par Claude Code)
+
+Début de la partie de l'enseignant de P2 (P2b), avant les scripts de P2a.
+- **Offre** : VPS Lite **2 vCPU, 2 Go, 40 Go** (et non 1 vCPU comme M1). Décision de l'enseignant le 07.11.2026, sur conseil :
+  marge sur la rafale de 30 « Calculer » (estimée de 16 à 21 s sur 1 vCPU pour un seuil de 20 s, § 6) ; une montée en cours
+  d'année aurait peut-être demandé une réinstallation (§ 9, question 7). 4 vCPU écartés (aucune mesure ne les demande).
+- **Prix** : engagement annuel ; total affiché par la boutique : 71.80 CHF TTC pour un an, Renewal Warranty comprise. Les cartes
+  de la boutique affichent des prix TTC au mois. Swiss Backup refusé (aucune donnée à sauvegarder, T11).
+- **Système** : Ubuntu 24.04.4 LTS (64 bits) ; Python 3.12.3 ; 2 CPU ; mémoire 1,9 Gio (1,6 disponible) ; **aucun swap** ;
+  disque 38 Go (5 % utilisé). Nom d'hôte attribué : `ov-826df4`.
+- **Adresses** : IPv4 179.237.105.75 ; IPv6 2001:1600:18:20d::104 (interface `ens3`).
+- **SSH** : clé ed25519 créée sous WSL (`~/.ssh/samimir_admin`, avec phrase de passe), importée à la commande ; utilisateur
+  `ubuntu`. Empreinte de la clé d'hôte : `ED25519 SHA256:SwdvEeLUja9SocClaavqmf+qxS7BEm7KxMLEDDG9n4Y` (acceptée à la première
+  connexion, non recoupée par la console du Manager). `sshd -T` : `passwordauthentication no`, `pubkeyauthentication yes`,
+  `permitrootlogin without-password` (`reconstruire.sh` le mettra à `no`, T11).
+- `sudo apt update && sudo apt -y upgrade` : terminé ; nouveau noyau 6.8.0-149 installé, redémarrage demandé. Redémarré
+  depuis le Manager d'Infomaniak (aucun `sudo reboot` n'a été lancé) : `uname -r` = 6.8.0-149-generic, uptime 2 min.
+- Pour P2 : prévoir la question du swap (aucun ; mémoire de 1,9 Gio, MemoryMax=1200M de T3) ; la clé du Mac est à ajouter
+  (seconde clé, secours si le PC tombe).
+
 ## Contrôles du chef d'orchestre
 
 | Partie | Commit | `verifier` | `rapide --depuis HEAD~1` | `MEMO=0` | Remarque |
