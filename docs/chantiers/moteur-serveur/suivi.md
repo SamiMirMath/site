@@ -44,28 +44,32 @@ un document de travail **jamais commité** (`.gitignore`).
 
 ## Questions ouvertes
 
-Questions pour l'enseignant (P1, 07.11.2026 ; l'option prise est en service, rien n'est affiché aux élèves) :
-1. **CLAUDE.md dit « A1–A9 »** (§ Architecture). Proposition : « A1–A10 ». Non modifié (accord nécessaire).
-2. **`rapide` ne connaît pas `serveur/`** : après le commit, une modification de `serveur/app.py` seule ne relance ni
-   `test_serveur.py` ni `test_imports.py` (seulement les tests de fumée) ; de même pour `tests/outils/dump_sorties.py`, que
-   `test_serveur.py` charge par son chemin, et pour `tests/pages/rendu.py` (son corpus réduit, `REDUIT`), qui relance toutes les
-   pages mais pas `test_serveur.py`. Proposition : dans `tests/lancer.py`, relancer ces deux tests pour `serveur/*.py`, et
-   `test_serveur.py` pour `tests/outils/dump_sorties.py` et `tests/pages/rendu.py`. `lancer.py` non modifié.
-3. **A10 et `/api/sante`** : T1 fait faire au serveur un vrai calcul, `resoudre` du 2e degré : c'est la seule mention d'un outil
-   dans `serveur/app.py` (`CALCUL_DE_SANTE`). Il passe par la liste blanche du manifeste, et `TestA10` ne la tolère que là. À
-   confirmer (ligne A10 de `architecture.md`).
-4. **Fichier d'état de `/api/sante`** (format choisi en P1, écrit par le minuteur de P2) : JSON
-   `{"certificat_expire": "<ISO 8601>", "disque_pourcent": …}`, refusé s'il date de plus de **3 h** (une écriture horaire manquée
-   tolérée, pas deux). La réponse 503 dit sa raison (`{"ok": false, "raison": "disque"}`…), utile depuis le téléphone (§ 5.2) ; elle
-   ne contient aucune donnée d'élève. À confirmer.
-5. **`MOTEUR_VERSION` absente ou mal formée → 503** (ajout de P1 : T1 ne liste que l'état et le calcul, mais demande la version
-   dans la réponse). À confirmer.
-6. **Versions au démarrage** (ajout de P1, au-delà de T3) : l'application refuse de démarrer si Python, SymPy ou mpmath n'ont pas
-   la version du manifeste. La clé `pyodide` est sautée, nommée dans `app.py` ; à retirer avec elle en P5.
+Aucune. Les questions de P1 sont réglées (enseignant, 07.11.2026 ; chaque fois l'option recommandée) :
+1. ✓ **CLAUDE.md « A1–A10 »** : oui, au premier commit de P2 (avec la citation de `docs/architecture.md` § 7).
+2. ✓ **`rapide` et `serveur/`** : oui, pour tout `serveur/` (scripts de P2 compris), plus `tests/outils/dump_sorties.py` et
+   `tests/pages/rendu.py` : ils relancent `test_serveur.py` et `test_imports.py`. Au début de P2 : `tests/lancer.py` (règle et
+   docstring), un test dans `test_lancer.py`, la description de `rapide` dans CLAUDE.md.
+3. ✓ **A10 et `/api/sante`** : l'exception reste telle quelle (`CALCUL_DE_SANTE`, bornée par `TestA10`).
+4. ✓ **Fichier d'état** : tel quel (JSON `certificat_expire`, `disque_pourcent` ; périmé après 3 h ; raison dans le 503). Le
+   minuteur de P2 écrit ce format.
+5. ✓ **`MOTEUR_VERSION` absente ou mal formée → 503** : oui. P2 fournit la variable au service.
+6. ✓ **Versions au démarrage** : refuser de démarrer si Python, SymPy ou mpmath diffèrent du manifeste.
+7. ✓ **Ouverture des pages** (question nouvelle, relevée en préparant les questions) : selon T6, la page interroge `/api/sante` à
+   l'ouverture ; un 503 pour le disque, le certificat ou la version bloquerait les élèves avec « Impossible de charger l'outil de
+   calcul. Vérifiez votre connexion internet… », un message inexact. Réponse : **contrôle séparé**. La page interroge une adresse qui
+   vérifie seulement qu'un calcul répond, et `/api/sante` (disque, certificat, version) ne sert qu'à la surveillance (T13). À faire
+   en P2 ou P3 : l'adresse dans `serveur/app.py`, ses tests, et T6 retouché dans `decisions.md` (accord de l'enseignant sur le
+   principe, 07.11.2026 ; texte à lui faire relire).
+8. ✓ **Commits limités à `docs/`** (question nouvelle, 07.11.2026) : la suite complète n'y protège rien, car aucun test ne lit
+   `docs/` (`tests/verifier.py`, `IGNORES`). Décision : pour un commit qui ne touche que `docs/`, `rapide` suffit. Texte proposé pour
+   CLAUDE.md (§ Git), au premier commit de P2 : « Exception : un commit qui ne touche que `docs/` (jamais `docs/reference/`) se
+   contente de `python3 tests/lancer.py rapide` (code 0) ; pas de suite complète ni de `verifier` pour lui. » Le commit des réponses
+   ci-dessus a encore suivi l'ancienne règle (suite `rapports/P1-reponses`).
 
 ## À relire par l'enseignant
 
-- P1 : `docs/architecture.md`, ligne **A10** (texte de T2, plus la phrase sur `/api/sante` de la question 3).
+- P1 : `docs/architecture.md`, ligne **A10** : exception de `/api/sante` confirmée (question 3) ; le reste de la ligne (phrase sur
+  A8, garde-fous) reste à relire.
 - Instantanés : **aucun** modifié (P1 ne touche aucun moteur ni aucun outil partagé).
 
 ## Écarts
